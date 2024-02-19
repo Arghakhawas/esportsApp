@@ -1,0 +1,114 @@
+/* Tournament.css */
+
+.tournament-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.tournament-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.tournament-box {
+  border: 1px solid var(--raisin-black-1);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  width: 200px;
+  text-align: left;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--raisin-black-2);
+  color: var(--platinum);
+  position: relative; /* Added for image overlay */
+}
+
+.tournament-box h3 {
+  margin-bottom: 10px;
+  color: var(--light-gray);
+}
+
+.tournament-box p {
+  margin: 0;
+  color: var(--roman-silver);
+}
+
+.tournament-box img {
+  width: 100%; /* Make the image fill its container */
+  border-radius: 6px; /* Optional: add border-radius to the image */
+}
+
+/* Payment Success Message Styles */
+.payment-success-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+}
+/* Sliding bar for smaller screens */
+@media screen and (max-width: 768px) {
+  .tournament-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tournament-box {
+    width: 100%;
+  }
+}
+
+.payment-success-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  z-index: 999; /* Ensure the message is above other elements */
+}
+
+.payment-success-message-content {
+  background: var(--raisin-black-3);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.payment-success-message h3 {
+  margin-bottom: 10px;
+  color: var(--light-gray);
+}
+
+.payment-success-message p {
+  margin: 0;
+  color: var(--roman-silver);
+}
+
+.payment-success-message button {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+.payment-success-message button:hover {
+  background-color: darken(var(--secondary-color), 10%);
+}

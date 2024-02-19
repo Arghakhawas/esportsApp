@@ -1,0 +1,120 @@
+/* Add responsive styles here */
+
+
+
+/*-----------------------------------*\
+  #SHOP
+\*-----------------------------------*/
+
+.shop {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .shop .section-text { margin-block: 50px 60px; }
+  
+  .shop .has-scrollbar {
+    margin-inline: -15px;
+    padding-inline: 15px;
+    scroll-padding-inline-start: 15px;
+  }
+  
+  .shop-card {
+    box-shadow: var(--shadow-4);
+    height: 100%;
+  }
+  
+  .shop-card .card-content {
+    position: relative;
+    padding: 25px;
+    padding-block-start: 40px;
+  }
+  
+  .shop-card .card-badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .shop-card .h3 { font-size: var(--fs-7); }
+  
+  .shop-card .card-title {
+    transition: var(--transition);
+    margin-block-end: 10px;
+  }
+  
+  .shop-card .card-title:is(:hover, :focus) { color: var(--marigold); }
+  
+  .shop-card .card-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--marigold);
+  }
+  
+  .shop-card .card-price {
+    font-family: var(--ff-oxanium);
+    font-weight: var(--fw-800);
+  }
+  
+  .shop-card .card-btn {
+    color: inherit;
+    font-size: 18px;
+    padding: 7px;
+    border: 1px solid var(--english-violet);
+    border-radius: 4px;
+    transition: var(--transition);
+  }
+  
+  .shop-card .card-btn:is(:hover, :focus) {
+    background-color: var(--marigold);
+    color: var(--xiketic);
+    border-color: var(--marigold);
+  }
+  @media only screen and (max-width: 768px) {
+    .shop {
+      background-size: contain;
+      background-position: center top;
+    }
+  
+    .section-text {
+      margin-block: 20px;
+    }
+  
+    .shop-card {
+      height: auto;
+      margin-block-end: 20px;
+    }
+  
+    .card-content {
+      padding-block-start: 20px;
+    }
+  
+    .card-title {
+      font-size: var(--fs-6);
+    }
+  }
+  /*-----------------------------------*\
+  #BACK TO TOP
+\*-----------------------------------*/
+
+.back-top-btn {
+    position: fixed;
+    bottom: 10px;
+    right: 15px;
+    background-color: var(--marigold);
+    padding: 12px;
+    z-index: 4;
+    transition: var(--transition);
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .back-top-btn.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-10px);
+  }
+  

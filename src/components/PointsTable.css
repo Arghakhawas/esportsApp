@@ -1,0 +1,66 @@
+/* PointsTable.css */
+
+.ptable {
+    font-family: var(--ff-poppins);
+    margin-top: 20px;
+    color: var(--raisin-black-3);
+    background-color: white; /* Set the background color to white */
+}
+
+.headin {
+    font-size: var(--fs-4);
+    color: var(--rich-black-fogra-29_95);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.col {
+    background-color: var(--raisin-black-1);
+    color: var(--white);
+}
+
+.pos, .wpos {
+    transition: background var(--transition) var(--cubic-out);
+}
+
+.pos:hover {
+    background-color: var(--light-gray-2);
+}
+
+.wpos {
+    background-color: var(--marigold_75);
+    color: var(--raisin-black-1);
+}
+
+td, th {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid var(--raisin-black-2); /* Added border for better separation */
+}
+
+tbody tr {
+    transition: background var(--transition) var(--cubic-out);
+}
+
+tbody tr:hover {
+    background-color: var(--light-gray-1);
+}
+
+td:first-child {
+    color: var(--marigold);
+    font-weight: var(--fw-700);
+}
+
+@media (max-width: 600px) {
+    .headin {
+        font-size: var(--fs-5);
+    }
+
+    td, th {
+        padding: 10px;
+    }
+}
