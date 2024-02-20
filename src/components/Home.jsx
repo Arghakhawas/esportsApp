@@ -30,9 +30,9 @@ function Home({ isAuthenticated }) {
             </>
           )}
           {isAuthenticated && (
-            <p>You are Succesfully Log in.
-            <Link to="/tournament" className="btn skewBg">Our Tournament Category</Link>
-            </p>
+                <p>
+                <Link to="/tournament" className="btn skewBg">Tournament Registraion</Link>
+                </p>
           )}
 
         </div>
@@ -40,7 +40,7 @@ function Home({ isAuthenticated }) {
       </section>
      
 
-      ( </div>
+       </div>
         </div>
     <footer className="footer">
 

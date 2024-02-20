@@ -62,47 +62,45 @@ function Navbar({  onLogout, isAuthenticated }) {
           <nav className={`navbar ${isMenuOpen ? 'active' : ''}`} data-navbar>
             <ul className="navbar-list">
               <li className="navbar-item">
-                <Link to="/" className="navbar-link skewBg" data-nav-link>
-                <AiOutlineHome />
-
-                </Link>
-              </li>
-              <li className="navbar-item">
-                <Link href="/live" className="navbar-link skewBg" data-nav-link>
-                <FiVideo />
-                </Link>
-              </li>
-              {isAuthenticated ? (
-            <>
-              <li className="navbar-item">
-              <Link to="/tournament" className="navbar-link skewBg" data-nav-link>
-              <BsFillTrophyFill />
+              <Link to="/" className="navbar-link skewBg" data-nav-link data-tooltip="Home">
+  <AiOutlineHome />
 </Link>
               </li>
-                    
-            </>
-          ) : null}
               <li className="navbar-item">
-                <Link to="/shop" className="navbar-link skewBg" data-nav-link>
-                <BsCart4 />
-                </Link>
+              <Link to="/live" className="navbar-link skewBg" data-nav-link data-tooltip="Live">
+  <FiVideo />
+</Link>
+              </li>
+              {isAuthenticated ? (
+                <>
+                  <li className="navbar-item">
+                  <Link to="/tournament" className="navbar-link skewBg" data-nav-link data-tooltip="Tournament">
+  <BsFillTrophyFill />
+</Link>
+                  </li>
+
+                </>
+              ) : null}
+              <li className="navbar-item">
+              <Link to="/shop" className="navbar-link skewBg" data-nav-link data-tooltip="Shop">
+  <BsCart4 />
+</Link>
               </li>
               <li className="navbar-item">
-              <Link to="/tournament-details" className="navbar-link skewBg" data-nav-link>
-              <GiConsoleController />
+              <Link to="/tournament-details" className="navbar-link skewBg" data-nav-link data-tooltip="Tournament Details">
+  <GiConsoleController />
 </Link>
               </li>
               <div className="header-actions">
-          {isAuthenticated ? (
-            <>
-             <Link to="/profile" className="navbar-link skewBg" data-nav-link>
-             <BiSolidIdCard />
+                {isAuthenticated ? (
+                  <>
+                   <Link to="/profile" className="navbar-link skewBg" data-nav-link data-tooltip="Profile">
+  <BiSolidIdCard />
 </Link>
 
-              <button onClick={handleLogoutClick} className="navbar-link skewBg" data-nav-link>
-          <AiOutlineLogout />
-
-              </button>
+<button onClick={handleLogoutClick} className="navbar-link skewBg" data-nav-link data-tooltip="Logout">
+  <AiOutlineLogout />
+</button>
            
             </>
           ) : null}

@@ -103,7 +103,41 @@
 .navbar-link:is(:hover, :focus) { background-color: var(--white_10); }
 
 
+/* Add this CSS to your existing styles */
+.navbar-link {
+  position: relative;
+}
 
+.navbar-link::after {
+  content: attr(data-tooltip); /* Set the content to the data-tooltip attribute */
+  position: absolute;
+  top: 50%;
+  right: 100%; /* Adjust to move the tooltip to the left */
+  transform: translateY(-50%);
+  background-color: var(--raisin-black-2); /* Background color */
+  color: var(--white); /* Text color */
+  padding: 8px 12px; /* Padding */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 14px; /* Font size */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1; /* Ensure tooltip appears above other elements */
+  white-space: nowrap; /* Prevent tooltip from breaking into multiple lines */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
+}
+
+.navbar-link:hover::after {
+  opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-link::after {
+    right: auto;
+    left: 100%; /* Adjust to move the tooltip to the right on smaller screens */
+    transform: translateY(-50%);
+  }
+}
 
 
 .search-container {
@@ -266,7 +300,7 @@ body {
   font-size: var(--fs-8);
   text-transform: uppercase;
   font-weight: var(--fw-700);
-  min-height: 55px;
+  min-height: 30px;
   padding-inline: 35px;
 }
 
