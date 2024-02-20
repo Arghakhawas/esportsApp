@@ -213,7 +213,7 @@ function Home({ isAuthenticated }) {
       </div>
 
     </footer>
-  );
+  
 
 
 
