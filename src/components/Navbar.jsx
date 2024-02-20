@@ -6,6 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineLogout } from "react-icons/ai";
 import { GiConsoleController } from "react-icons/gi";
+import { BiSolidIdCard } from "react-icons/bi";
+import { BsCart4 } from "react-icons/bs";
+import { BsFillTrophyFill } from "react-icons/bs";
+import { FiVideo } from "react-icons/fi";
 
 function Navbar({  onLogout, isAuthenticated }) {
   const navigate = useNavigate();
@@ -65,14 +69,14 @@ function Navbar({  onLogout, isAuthenticated }) {
               </li>
               <li className="navbar-item">
                 <Link href="/live" className="navbar-link skewBg" data-nav-link>
-                  Live
+                <FiVideo />
                 </Link>
               </li>
               {isAuthenticated ? (
             <>
               <li className="navbar-item">
               <Link to="/tournament" className="navbar-link skewBg" data-nav-link>
-  Tournaments
+              <BsFillTrophyFill />
 </Link>
               </li>
                     
@@ -80,7 +84,7 @@ function Navbar({  onLogout, isAuthenticated }) {
           ) : null}
               <li className="navbar-item">
                 <Link to="/shop" className="navbar-link skewBg" data-nav-link>
-                  Shop
+                <BsCart4 />
                 </Link>
               </li>
               <li className="navbar-item">
@@ -92,7 +96,7 @@ function Navbar({  onLogout, isAuthenticated }) {
           {isAuthenticated ? (
             <>
              <Link to="/profile" className="navbar-link skewBg" data-nav-link>
-  Profile
+             <BiSolidIdCard />
 </Link>
 
               <button onClick={handleLogoutClick} className="navbar-link skewBg" data-nav-link>

@@ -89,10 +89,10 @@
 
 .navbar.active {
   visibility: visible;
-  max-height: 275px;
+  max-height: 25em;
   transition-duration: 0.5s;
+  font-size: x-large;
 }
-
 .navbar-item:not(:last-child) { border-block-end: 2px solid var(--white_15); }
 
 .navbar-link {
