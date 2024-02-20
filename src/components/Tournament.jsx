@@ -17,7 +17,7 @@ const Tournament = () => {
 
   const handleFormSubmit = async (formData) => {
     try {
-      const response = await fetch('http://localhost:3000/api/tournament/join', {
+      const response = await fetch('https://esportsappbackend.onrender.com/api/tournament/join', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const Tournament = () => {
 
   const handlePaymentSubmit = async (paymentData) => {
     try {
-      const response = await fetch('http://localhost:3000/api/tournament/submitpayment', {
+      const response = await fetch('https://esportsappbackend.onrender.com/api/tournament/submitpayment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

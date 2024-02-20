@@ -7,7 +7,7 @@ const UserProfile = ({}) => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/profile', {
+        const response = await fetch('https://esportsappbackend.onrender.com/api/profile', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
