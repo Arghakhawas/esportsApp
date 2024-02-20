@@ -21,7 +21,7 @@
     border-radius: 10px;
     flex: 1;
     text-align: center;
-    z-index: 999;
+
     backdrop-filter: blur(10px);
     padding: 20px;
     flex-direction: column;

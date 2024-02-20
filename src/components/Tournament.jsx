@@ -99,10 +99,10 @@ const Tournament = () => {
     <div className="tournament-container">
       <h2>Tournaments</h2>
       <div className="game-categories">
-        <button onClick={() => setSelectedGameCategory(null)}>All Games</button>
-        <button onClick={() => setSelectedGameCategory('EA Football')}>EA Football</button>
-        <button onClick={() => setSelectedGameCategory('FreeFire')}>FreeFire</button>
-        <button onClick={() => setSelectedGameCategory('BGMI')}>BGMI</button>
+        <button className='btnall' onClick={() => setSelectedGameCategory(null)}>All Games</button>
+        <button className='btnall'  onClick={() => setSelectedGameCategory('EA Football')}>EA Football</button>
+        <button className='btnall'  onClick={() => setSelectedGameCategory('FreeFire')}>FreeFire</button>
+        <button className='btnall'  onClick={() => setSelectedGameCategory('BGMI')}>BGMI</button>
         {/* Add more buttons for other game categories */}
       </div>
       <div className="tournament-list">

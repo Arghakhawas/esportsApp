@@ -32,8 +32,9 @@
 .tournament-box p {
   margin: 0;
   color: var(--roman-silver);
+  font-weight: bolder;
+  font-size: x-large;
 }
-
 .tournament-box img {
   width: 100%; /* Make the image fill its container */
   border-radius: 6px; /* Optional: add border-radius to the image */
@@ -111,4 +112,12 @@
 
 .payment-success-message button:hover {
   background-color: darken(var(--secondary-color), 10%);
+}
+.btnall {
+  font-weight: bolder;
+  background-color: #faff00;
+  margin: 2px;
+  color: black;
+  padding: 4px;
+  font-size: medium;
 }

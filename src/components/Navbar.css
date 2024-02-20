@@ -79,7 +79,7 @@
   position: absolute;
   top: 100%;
   right: 0;
-  width: 100%;
+
   max-width: 350px;
   visibility: hidden;
   max-height: 0;
@@ -93,7 +93,7 @@
   transition-duration: 0.5s;
 }
 
-.navbar-item:not(:last-child) { border-block-end: 1px solid var(--white_15); }
+.navbar-item:not(:last-child) { border-block-end: 2px solid var(--white_15); }
 
 .navbar-link {
   padding: 10px 25px;
@@ -481,17 +481,6 @@ body {
 
 @media (min-width: 1200px) {
 
-    /**
-     * REUSED STYLE
-     */
-  
-
-  
-  
-  
-    /**
-     * HEADER
-     */
      .nav-toggle-btn.active .menu,
      .nav-toggle-btn .close { display: none; }
      
@@ -519,4 +508,3 @@ font-size: xx-large;  /* justify-content: center; */
     height: auto;
     display: block;
   }
- 

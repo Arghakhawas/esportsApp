@@ -3,6 +3,9 @@ import logo from '../assets/logo.png';
 import './Navbar.css';
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineHome } from "react-icons/ai";
+import { AiOutlineLogout } from "react-icons/ai";
+import { GiConsoleController } from "react-icons/gi";
 
 function Navbar({  onLogout, isAuthenticated }) {
   const navigate = useNavigate();
@@ -56,7 +59,8 @@ function Navbar({  onLogout, isAuthenticated }) {
             <ul className="navbar-list">
               <li className="navbar-item">
                 <Link to="/" className="navbar-link skewBg" data-nav-link>
-                  Home
+                <AiOutlineHome />
+
                 </Link>
               </li>
               <li className="navbar-item">
@@ -81,7 +85,7 @@ function Navbar({  onLogout, isAuthenticated }) {
               </li>
               <li className="navbar-item">
               <Link to="/tournament-details" className="navbar-link skewBg" data-nav-link>
-  Tournament Details
+              <GiConsoleController />
 </Link>
               </li>
               <div className="header-actions">
@@ -92,7 +96,8 @@ function Navbar({  onLogout, isAuthenticated }) {
 </Link>
 
               <button onClick={handleLogoutClick} className="navbar-link skewBg" data-nav-link>
-                Logout
+          <AiOutlineLogout />
+
               </button>
            
             </>

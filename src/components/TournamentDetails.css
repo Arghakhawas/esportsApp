@@ -1,273 +1,449 @@
+/* Reset styles for knockout stages and related components */
 .knockout-stage {
-    text-align: center;
-    width: 30%;
-    background: #ececec;
-    padding-bottom: 50px;
-    border-left: 0.5px dashed #888;
-    position: relative;
-  }
-  
-  .knockout-stage::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 2px;
-    height: 100%;
-    background: #888;
-    transform: translateX(-50%);
-  }
-  
-  .knockout-stage:first-child::before {
-    display: none;
-  }
-  
-  .knockout-stage h2 {
-    font-size: 18px;
-    font-weight: 700;
-    padding: 10px 0;
-  }
-  
-  .knockout-match {
-    font-family: 'Montserrat', arial, sans-serif;
-    font-size: 20px;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    background: #eee;
-    padding: 5px 10px;
-    margin: 10px 5px 0px;
-    text-align: center;
-    min-height: 30px;
-    z-index: 20;
-    box-shadow: 0px 0px 10px 3px #aaa;
-  }
-  
-  .knockout-match:nth-child(2n) {
-    margin: 0 5px 10px;
-  }
-  
-  .team-name {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  
-  .team-radio {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .bracket-team::before {
-    content: '';
-    position: absolute;
-    height: 1px;
-    width: 11%;
-    left: -11%;
-    top: 50%;
-    border-top: 3px solid #444;
-  }
-  
-  .bracket-team::after {
-    content: '';
-    position: absolute;
-    display: block;
-    width: 10px;
-    right: -12.5px;
-    border-color: #444;
-    border-width: 3px;
-  }
-  
-  .bracket-team:nth-of-type(odd)::after {
-    height: 100%;
-    top: 50%;
-    border-right-style: solid;
-    border-top-style: solid;
-  }
-  
-  .bracket-team:nth-of-type(even)::after {
-    height: 100%;
-    top: -50%;
-    border-right-style: solid;
-    border-bottom-style: solid;
-  }
-  
-  .bracket-1 .bracket-team::before {
-    display: none;
-  }
-  
-  .bracket-2 .bracket-team:nth-of-type(odd)::after {
-    height: 200%;
-    top: 50%;
-  }
-  
-  .bracket-2 .bracket-team:nth-of-type(even)::after {
-    height: 200%;
-    top: -150%;
-  }
-  
-  .bracket-3 .bracket-team:nth-of-type(odd)::after {
-    height: 350%;
-    top: 50%;
-  }
-  
-  .bracket-3 .bracket-team:nth-of-type(even)::after {
-    height: 350%;
-    top: -300%;
-  }
-  
-  .bracket-4 .bracket-team::after {
-    display: none;
-  }
-  
-  @media (max-width: 768px) {
-    .knockout-stages {
-      flex-direction: column;
-    }
-  
-    .knockout-stage {
-      width: 100%;
-      border-left: none;
-    }
-  
-    .knockout-stage:nth-of-type(4) {
-      padding-bottom: 50px;
-    }
-  }
-  /* Additional styles for football knockout stages */
+  text-align: center;
+  width: 30%;
+  background: #ececec;
+  padding-bottom: 50px;
+  border-left: 0.5px dashed #888;
+  position: relative;
+}
 
-/* Styling for knockout stage headings */
+.knockout-stage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: #888;
+  transform: translateX(-50%);
+}
+
+.knockout-stages .knockout-stage:first-child::before {
+  display: none;
+}
+
+
 .knockout-stage h2 {
-    color: #333; /* Text color for knockout stage headings */
-  }
-  
-  /* Styling for team names in knockout matches */
-  .knockout-match .team-name {
-    font-weight: bold;
-    color: #555; /* Text color for team names */
-  }
-  
-  /* Styling for team radio button container */
-  .knockout-match .team-radio {
-    margin-top: 10px;
-  }
-  
-  /* Styling for bracket lines */
-  .bracket-team::before,
-  .bracket-team::after {
-    background-color: #666; /* Color for bracket lines */
-  }
-  
-  /* Hover effect for knockout matches */
-  .knockout-match:hover {
-    background-color: #f5f5f5; /* Background color on hover */
-  }
-  
-  /* Responsive styles for smaller screens */
-  @media (max-width: 768px) {
-    .knockout-stage {
-      width: 100%;
-    }
-  
-    .knockout-match {
-      font-size: 16px; /* Adjust font size for smaller screens */
-    }
-  }
-  /* TournamentDetails.css */
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px 0;
+  color: #333; /* Text color for knockout stage headings */
+}
 
+.knockout-match {
+  font-family: 'Montserrat', arial, sans-serif;
+  font-size: 20px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  background: #eee;
+  padding: 5px 10px;
+  margin: 10px 5px 0px;
+  text-align: center;
+  min-height: 30px;
+  z-index: 20;
+  box-shadow: 0px 0px 10px 3px #aaa;
+}
+
+.knockout-match:nth-child(2n) {
+  margin: 0 5px 10px;
+}
+
+.team-name {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.team-radio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bracket-team::before {
+  content: '';
+  position: absolute;
+  height: 1px;
+  width: 11%;
+  left: -11%;
+  top: 50%;
+  border-top: 3px solid #444;
+}
+
+.bracket-team::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 10px;
+  right: -12.5px;
+  border-color: #444;
+  border-width: 3px;
+}
+
+.bracket-team:nth-of-type(odd)::after {
+  height: 100%;
+  top: 50%;
+  border-right-style: solid;
+  border-top-style: solid;
+}
+
+.bracket-team:nth-of-type(even)::after {
+  height: 100%;
+  top: -50%;
+  border-right-style: solid;
+  border-bottom-style: solid;
+}
+
+.bracket-1 .bracket-team::before {
+  display: none;
+}
+
+.bracket-2 .bracket-team:nth-of-type(odd)::after {
+  height: 200%;
+  top: 50%;
+}
+
+.bracket-2 .bracket-team:nth-of-type(even)::after {
+  height: 200%;
+  top: -150%;
+}
+
+.bracket-3 .bracket-team:nth-of-type(odd)::after {
+  height: 350%;
+  top: 50%;
+}
+
+.bracket-3 .bracket-team:nth-of-type(even)::after {
+  height: 350%;
+  top: -300%;
+}
+
+.bracket-4 .bracket-team::after {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .knockout-stages {
+    flex-direction: column;
+  }
+
+  .knockout-stage {
+    width: 100%;
+    border-left: none;
+  }
+
+  .knockout-stage:nth-of-type(4) {
+    padding-bottom: 50px;
+  }
+}
+
+/* Additional styles for football knockout stages */
+.knockout-match .team-name {
+  font-weight: bold;
+  color: #555; /* Text color for team names */
+}
+
+.knockout-match .team-radio {
+  margin-top: 10px;
+}
+
+.bracket-team::before,
+.bracket-team::after {
+  background-color: #666; /* Color for bracket lines */
+}
+
+.knockout-match:hover {
+  background-color: #f5f5f5; /* Background color on hover */
+}
+
+@media (max-width: 768px) {
+  .knockout-match {
+    font-size: 16px; /* Adjust font size for smaller screens */
+  }
+}
+
+/* TournamentDetails.css */
 .tournament-details {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .tournament-details h2 {
-    color: #333;
-  }
-  
-  .tournament-details p {
-    color: #666;
-  }
-  
-  .button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    text-align: center;
-    text-decoration: none;
-    background-color: #3498db;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .button:hover {
-    background-color: #207bb5;
-  }
-  
-  .knockout-stages,
-  .points-table,
-  .live-match,
-  .fixtures {
-    margin-top: 20px;
-  }
-  
-  /* Adjustments for better spacing */
-  .knockout-stages h3,
-  .points-table h3,
-  .live-match h3,
-  .fixtures h3 {
-    margin-bottom: 10px;
-  }
-  
-  /* Styling for the button inside the components */
-  .knockout-stages button,
-  .points-table button,
-  .live-match button,
-  .fixtures button {
-    margin-left: 10px;
-    font-size: 14px;
-    padding: 5px 10px;
-    background-color: #2ecc71;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .knockout-stages button:hover,
-  .points-table button:hover,
-  .live-match button:hover,
-  .fixtures button:hover {
-    background-color: #27ae60;
-  }
-  
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tournament-details h2 {
+  color: #333;
+}
+
+.tournament-details p {
+  color: #666;
+}
+
+/* Styling for section buttons */
+.section-buttons {
+  margin-top: 20px;
+}
+
+.section-buttons button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.section-buttons button:hover {
+  background-color: #207bb5;
+}
+
+/* Unique class names for each component */
+.knockout-stages,
+.points-table,
+.live-match,
+.fixtures {
+  margin-top: 20px;
+}
+
+/* Adjustments for better spacing */
+.knockout-stages h3,
+.points-table h3,
+.live-match h3,
+.fixtures h3 {
+  margin-bottom: 10px;
+}
+
 /* Adjustments for the fixtures */
 .fixtures ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .fixtures li {
-    background-color: #fff;
-    margin-bottom: 10px;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .fixtures li span {
-    font-weight: bold;
-  }
-  
-  .fixtures li p {
-    margin: 0;
-  }
+  list-style: none;
+  padding: 0;
+}
+
+.fixtures li {
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.fixtures li span {
+  font-weight: bold;
+}
+
+.fixtures li p {
+  margin: 0;
+}
+
+:root {
+  --primary-color: var(--orange);
+  --background-color: var(--raisin-black-1);
+  --text-color: var(--platinum);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Styles for 100 Team Box */
+.hundred-team-box {
+  border: 2px solid var(--raisin-black-3);
+  padding: 15px;
+  margin: 10px;
+  background-color: var(--raisin-black-2);
+  border-radius: 8px;
+}
+
+/* Styles for 4 vs 4 Box */
+.tdm-box {
+  border: 2px solid var(--orange);
+  padding: 15px;
+  margin: 10px;
+  background-color: var(--platinum);
+  border-radius: 8px;
+}
+
+/* Styles for 2 Teams vs Box */
+.two-teams-vs-box {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.team-vs {
+  flex: 0 0 48%;
+  border: 2px solid var(--raisin-black-3);
+  padding: 10px;
+  background-color: var(--raisin-black-2);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.team-vs h4 {
+  margin-bottom: 5px;
+  color: var(--orange);
+}
+
+.team-players {
+  list-style-type: none;
+  padding: 0;
+}
+
+.team-players li {
+  margin-bottom: 5px;
+}
+
+/* TournamentDetails.css */
+.tournament-details {
+  font-family: var(--ff-poppins), sans-serif;
+  background-color: var(--raisin-black-2);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-2);
+}
+
+.tournament-details h2 {
+  color: var(--platinum);
+}
+
+.tournament-details p {
+  color: var(--platinum);
+}
+
+/* Game category buttons */
+.game-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.game-category-button {
+  background-color: var(--orange);
+  color: var(--white);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: var(--fs-7);
+  font-weight: var(--fw-500);
+  transition: background-color var(--transition) var(--cubic-out);
+}
+
+.game-category-button:hover {
+  background-color: var(--raisin-black-1);
+}
+
+/* Add the following styles for tournament-details */
+.tournament-details button {
+  background-color: var(--orange);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color var(--transition);
+  margin-right: 10px;
+}
+
+.tournament-details button:hover {
+  background-color: var(--raisin-black-1);
+}
+
+.tournament-details .back-button {
+  background-color: var(--orange);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.tournament-details .back-button:hover {
+  background-color: var(--raisin-black-1);
+}
+
+/* Update the game-categories and game-category-button styles */
+.game-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.game-category {
+  position: relative;
+  background-color: var(--raisin-black-3);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: var(--shadow-1);
+  transition: transform 0.3s ease;
+}
+
+.game-category:hover {
+  transform: scale(1.05);
+}
+
+.game-category img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.category-details {
+  color: var(--platinum);
+}
+
+.game-category button {
+  background-color: var(--orange);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.game-category button:hover {
+  background-color: var(--raisin-black-1);
+}
+.knockout-stages {
+  display: flex;
+  justify-content: space-between;
+}
+/* Add the following styles for tournament-types */
+.tournament-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.tournament-types h3 {
+  color: var(--platinum);
+  margin-bottom: 10px;
+}
+
+.tournament-types button {
+  background-color: var(--orange);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color var(--transition);
+  margin-right: 10px;
+}
+
+.tournament-types button:hover {
+  background-color: var(--raisin-black-1);
+}
+

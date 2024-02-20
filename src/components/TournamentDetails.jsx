@@ -1,54 +1,240 @@
 import React, { useEffect, useState } from 'react';
 import PointsTable from './PointsTable';
 import './TournamentDetails.css'; // Import the CSS file
+import { BiLeftArrowCircle } from "react-icons/bi";
 
 const TournamentDetails = ({ tournament }) => {
   const [knockoutStages, setKnockoutStages] = useState([]);
   const [pointTable, setPointTable] = useState([]);
   const [fixtures, setFixtures] = useState([]);
-  const [isLiveMatch, setIsLiveMatch] = useState(false);
-  const [isKnockoutStagesOpen, setIsKnockoutStagesOpen] = useState(true);
-  const [isPointsTableOpen, setIsPointsTableOpen] = useState(true);
-  const [isLiveMatchOpen, setIsLiveMatchOpen] = useState(true);
-  const [isFixturesOpen, setIsFixturesOpen] = useState(true);
+  const [activeSection, setActiveSection] = useState(null);
+  const [activeGameCategory, setActiveGameCategory] = useState(null);
+  const [activeTournamentType, setActiveTournamentType] = useState(null);
 
   useEffect(() => {
-    // Fetch knockout stages
-    // Fetch point table
-    // Fetch fixtures
-    // Fetch live match status
-
     // Mock data for demonstration purposes
     const mockKnockoutStages = ["Round 1", "Quarterfinals", "Semifinals", "Final"];
-    const mockPointTable = [
+    const mockPointTable = [  
       { team: "Team A", points: 3 },
       { team: "Team B", points: 1 },
-      // ... other teams
     ];
     const generatedKnockoutFixtures = generateKnockoutFixtures();
 
     setKnockoutStages(mockKnockoutStages);
     setPointTable(mockPointTable);
-    setFixtures(generatedKnockoutFixtures); // Set to the generated fixtures
-    setIsLiveMatch(true); // Set to actual live match status
-  }, []); // Empty dependearray means this effect runs once on mount
+    setFixtures(generatedKnockoutFixtures); 
+   
+  }, []); 
 
-  const toggleKnockoutStages = () => {
-    setIsKnockoutStagesOpen(!isKnockoutStagesOpen);
+  const handleBackButtonClick = () => {
+    if (activeTournamentType) {
+      setActiveTournamentType(null);
+    } else if (activeGameCategory) {
+      setActiveGameCategory(null);
+    } else {
+      setActiveSection(null);
+    }
   };
 
-  const togglePointsTable = () => {
-    setIsPointsTableOpen(!isPointsTableOpen);
+  const handleGameCategoryClick = (gameCategory) => {
+    setActiveGameCategory(gameCategory);
+    setActiveTournamentType(null);
+    setActiveSection('tournamentTypes');
   };
 
-  const toggleLiveMatch = () => {
-    setIsLiveMatchOpen(!isLiveMatchOpen);
+  const handleTournamentTypeClick = (tournamentType) => {
+    setActiveTournamentType(tournamentType);
+    setActiveSection('tournamentDetails');
   };
 
-  const toggleFixtures = () => {
-    setIsFixturesOpen(!isFixturesOpen);
-  };
 
+  const renderGameCategories = () => {
+    
+    const gameCategories = [
+      {
+        name: "Ea-football",
+        image: "src/assets/efootball1.jpg",
+        prizePool: "$100,000",
+        timing: "Every Saturday at 3:00 PM",
+        rules: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+      },
+      {
+        name: "Bgmi",
+        image: "src/assets/bgmi.png",
+        prizePool: "$100,000",
+        timing: "Every Saturday at 3:00 PM",
+        rules: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+      },
+  
+      {
+        name: "Call of Duty",
+        image: "src/assets/cod.jpg",
+        prizePool: "$100,000",
+        timing: "Every Saturday at 3:00 PM",
+        rules: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+      },
+  
+      {
+        name: "FreeFire",
+        image: "src/assets/ffgarena.jpg",
+        prizePool: "$100,000",
+        timing: "Every Saturday at 3:00 PM",
+        rules: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+      },
+  
+  
+    ];
+  
+    return (
+      <div className="game-categories">
+        <h3>Game Categories</h3>
+        {gameCategories.map((category) => (
+          <div key={category.name} className="game-category">
+            <img src={category.image} alt={category.name} />
+            <div className="category-details">
+              <h4>{category.name}</h4>
+              <p>Prize Pool: {category.prizePool}</p>
+              <p>Timing: {category.timing}</p>
+              <p>Rules: {category.rules}</p>
+              <button onClick={() => handleGameCategoryClick(category.name)}>
+                Select
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
+  
+  const renderTournamentTypes = () => {
+    // Replace this with your actual tournament types for each game category
+    const tournamentTypes = {
+      "Ea-football": ["Knockout", "League"],
+      "Bgmi": ["Battle Ground", "TDM"],
+      "Call of Duty": ["Battle Ground", "TDM"],
+      "FreeFire": ["Battle Ground", "TDM"],
+    };
+
+    if (activeGameCategory) {
+      return (
+        <div className="tournament-types">
+          <h3>Tournament Types</h3>
+          {tournamentTypes[activeGameCategory].map((type) => (
+            <button key={type} onClick={() => handleTournamentTypeClick(type)}>
+              {type}
+            </button>
+          ))}
+        </div>
+      );
+    }
+
+    return null;
+  };
+// ...
+const renderHundredTeamBox = () => {
+  return (
+    <div className="hundred-team-box">
+      <h3>Battle Ground Tournament - 100 Teams</h3>
+      <p>Room ID: [Your Room ID]</p>
+      <p>Other relevant information for Battle Ground Tournament</p>
+    </div>
+  );
+};
+
+const renderTDMBox = (teamSize, numTeams) => {
+  return (
+    <div className={`tdm-box team-size-${teamSize}`}>
+      <h3>TDM Tournament - {teamSize} Player Teams</h3>
+      <p>Room ID: [Your Room ID]</p>
+      <p>Other relevant information for TDM Tournament</p>
+      {renderTwoTeamsVsBox(numTeams, teamSize)}
+    </div>
+  );
+};
+
+const renderTwoTeamsVsBox = (numTeams, teamSize) => {
+  const teams = Array.from({ length: numTeams }, (_, index) => `Team ${index + 1}`);
+  return (
+    <div className="two-teams-vs-box">
+      {teams.map((team, index) => (
+        <div key={index} className="team-vs">
+          <h4>{team} vs {teams[index + numTeams]}</h4>
+          <p>Room ID: [Your Room ID]</p>
+          <p>Other relevant information for the match</p>
+          {renderTeamPlayers(teamSize)}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const renderTeamPlayers = (teamSize) => {
+  const players = Array.from({ length: teamSize }, (_, index) => `Player ${index + 1}`);
+  return (
+    <ul className="team-players">
+      {players.map((player, index) => (
+        <li key={index}>{player}</li>
+      ))}
+    </ul>
+  );
+};
+
+const renderTournamentDetails = () => {
+  switch (activeGameCategory) {
+    case "Ea-football":
+      if (activeTournamentType === "Knockout") {
+        return (
+          <>
+            {renderKnockoutStages()}
+            {renderFixtures()} {/* Render fixtures for Ea-football Knockout */}
+          </>
+        );
+      } else if (activeTournamentType === "League") {
+        return (
+          <>
+            {renderPointsTable()}
+            {renderFixtures()} {/* Render fixtures for Ea-football League */}
+          </>
+        );
+      }
+      break;
+    case "Bgmi":
+      if (activeTournamentType === "Battle Ground") {
+        return (
+          <>
+            {renderHundredTeamBox()}
+          </>
+        );
+      } else if (activeTournamentType === "TDM") {
+        return renderTDMBox(4, 2); {/* Render TDM box with 4-player teams and 2 teams */}
+      }
+      break;
+    case "Call of Duty":
+      if (activeTournamentType === "Battle Ground") {
+        return (
+          <>
+            {renderHundredTeamBox()}
+          </>
+        );
+      } else if (activeTournamentType === "TDM") {
+        return renderTDMBox(5, 2); {/* Render TDM box with 5-player teams and 2 teams */}
+      }
+      break;
+    case "FreeFire":
+      if (activeTournamentType === "Battle Ground") {
+        return (
+          <>
+            {renderHundredTeamBox()}
+          </>
+        );
+      } else if (activeTournamentType === "TDM") {
+        return renderTDMBox(4, 2); {/* Render TDM box with 4-player teams and 2 teams */}
+      }
+      break;
+    default:
+      return null;
+  }
+};
 
   const generateKnockoutFixtures = () => {
     const teams = [
@@ -82,6 +268,7 @@ const TournamentDetails = ({ tournament }) => {
 
     return fixtures;
   };
+
   const generateKnockoutBrackets = () => {
     const teams = [
       "Team 1", "Team 2", "Team 3", "Team 4", "Team 5", "Team 6", "Team 7", "Team 8",
@@ -119,18 +306,12 @@ const TournamentDetails = ({ tournament }) => {
   
     return brackets;
   };
-  
 
   const renderKnockoutStages = () => {
     return (
       <div className="knockout-stages">
-        <h3>
-          Knockout Stages
-          <button onClick={toggleKnockoutStages}>
-            {isKnockoutStagesOpen ? 'Hide' : 'Show'}
-          </button>
-        </h3>
-        {isKnockoutStagesOpen && generateKnockoutBrackets()}
+        <h3>Knockout Stages</h3>
+        {generateKnockoutBrackets()}
       </div>
     );
   };
@@ -138,82 +319,68 @@ const TournamentDetails = ({ tournament }) => {
   const renderPointsTable = () => {
     return (
       <div className="points-table">
-        <h3>
-          Points Table
-          <button onClick={togglePointsTable}>
-            {isPointsTableOpen ? 'Hide' : 'Show'}
-          </button>
-        </h3>
-        {isPointsTableOpen && <PointsTable />}
+        <h3>Points Table</h3>
+        <PointsTable />
       </div>
     );
   };
 
-  const renderLiveMatchOption = () => {
-    return (
-      <div className="live-match">
-        <h3>
-          Live Match Option
-          <button onClick={toggleLiveMatch}>
-            {isLiveMatchOpen ? 'Hide' : 'Show'}
-          </button>
-        </h3>
-        {isLiveMatchOpen && (isLiveMatch ? <p>There is a live match happening now!</p> : <p>No live matches at the moment.</p>)}
-      </div>
-    );
-  };
-
+  
   const renderFixtures = () => {
     const generatedKnockoutFixtures = generateKnockoutFixtures();
 
     return (
       <div className="fixtures">
-        <h3>
-          Fixtures
-          <button onClick={toggleFixtures}>
-            {isFixturesOpen ? 'Hide' : 'Show'}
-          </button>
-        </h3>
-        {isFixturesOpen && (
-          <ul>
-            {generatedKnockoutFixtures.map((round, roundIndex) => (
-              <li key={roundIndex}>
-                {roundIndex === 0 ? ( // Display only matches for the first round
-                  <>
-                    <strong>Round {round.round}:</strong>
-                    <ul>
-                      {round.matches.map((fixture, index) => (
-                        <li key={index}>
-                          {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                ) : (
-                  // Display only rounds' names and backgrounds for other rounds
-                  <div key={roundIndex} className={`round-${round.round}`}>
-                    <strong>{knockoutStages[roundIndex]}</strong>
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
+        <h3>Fixtures</h3>
+        <ul>
+          {generatedKnockoutFixtures.map((round, roundIndex) => (
+            <li key={roundIndex}>
+              {roundIndex === 0 ? (
+                <>
+                  <strong>Round {round.round}:</strong>
+                  <ul>
+                    {round.matches.map((fixture, index) => (
+                      <li key={index}>
+                        {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <div key={roundIndex} className={`round-${round.round}`}>
+                  <strong>{knockoutStages[roundIndex]}</strong>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
     );
+  };
+
+  const renderContent = () => {
+    if (!activeGameCategory && !activeTournamentType) {
+      // Display game categories
+      return renderGameCategories();
+    } else if (activeGameCategory && !activeTournamentType) {
+      // Display tournament types for the selected game category
+      return renderTournamentTypes();
+    } else if (activeGameCategory && activeTournamentType) {
+      // Display tournament details for the selected game category and tournament type
+      return renderTournamentDetails();
+    }
+
+    return null;
   };
 
   return (
     <div className="tournament-details">
       <h2>{tournament ? tournament.category : ''} Details</h2>
-      <p>Tournament Schedules, Matches, Boards, Points, Rounds, etc.</p>
-
-      {renderKnockoutStages()}
-      {renderPointsTable()}
-      {renderLiveMatchOption()}
-      {renderFixtures()}
+      <button className="back-button" onClick={() => handleBackButtonClick()}>
+      <BiLeftArrowCircle />
+      </button>{renderContent()}
+    
     </div>
   );
 };
-
 export default TournamentDetails;
