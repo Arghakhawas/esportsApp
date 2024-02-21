@@ -5,7 +5,7 @@ import './Loader.css';
 
 const Loader = () => {
   return (
-    <div className='bdoy'>     <div className="bolt animate">
+    <div className="bdoy">     <div className="bolt animate">
       <svg viewBox="0 0 170 57" className="white left">
       <path d="M36.2701759,17.9733192 C-0.981139498,45.4810755 -7.86361824,57.6618438 15.6227397,54.5156241 C50.8522766,49.7962945 201.109341,31.1461782 161.361488,2"></path>
       </svg>
