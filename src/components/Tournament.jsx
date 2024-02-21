@@ -86,7 +86,7 @@ const Tournament = () => {
       prize: '₹400',
       joiningFee: '₹25',
       rules: 'Game rules for BGMI Entry Fee ₹25...',
-      image: 'src/assets/bgmi.png', // Add image path here
+      image: 'bgmi.png', // Add image path here
     },
   ];
 
