@@ -42,7 +42,7 @@
     };
     return (
       <div className="login-container">
-    {loading && <div className="blur-background"></div>}
+  
     {loading && <Loader/> } 
         <h2>Login</h2>
         {error && <p className="error-message">{error}</p>}
