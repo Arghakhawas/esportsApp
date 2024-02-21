@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef,useEffect } from 'react';
 import Webcam from 'react-webcam';
 import { ScreenCapture } from "react-screen-capture";
 
