@@ -65,14 +65,14 @@ const Tournament = () => {
       prize: '₹150',
       joiningFee: '₹10',
       rules: 'Game rules for EA Football Knockout...',
-      image: 'assets/efootball.png', // Add image path here
+      image: '/assets/efootball.png', // Add image path here
     },
     {
       category: 'EA Football 2024 - Group Stages Cup',
       prize: '₹1000',
       joiningFee: '₹50',
       rules: 'Game rules for EA Football Group Stages Cup...',
-      image: 'assets/efootball1.jpg', // Add image path here
+      image: '/assets/efootball1.jpg', // Add image path here
     },
     {
       category: 'FreeFire - Entry Fee ₹10',
@@ -86,7 +86,7 @@ const Tournament = () => {
       prize: '₹400',
       joiningFee: '₹25',
       rules: 'Game rules for BGMI Entry Fee ₹25...',
-      image: 'bgmi.png', // Add image path here
+      image: '/assets/bgmi.png', // Add image path here
     },
   ];
 
