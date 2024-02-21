@@ -179,11 +179,13 @@ small {
     transform: translateX(-50%);
 }
 .bdoy{
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #0C0F17;
+    backdrop-filter: blur(10px);
+  
+  background-color: rgba(0, 0, 0, 0.7);
     .dribbble {
         position: fixed;
         display: block;
