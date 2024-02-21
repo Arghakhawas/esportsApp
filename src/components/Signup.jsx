@@ -60,7 +60,7 @@ const Signup = ({ onSignup }) => {
       <button onClick={handleSignup}>Signup</button>
       {loading && (
         <div className="BoltLoader-container">
-        <div className="blur-background"></div>
+     
         </div>
       )}
       <div>
