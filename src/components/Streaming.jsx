@@ -10,7 +10,10 @@ const Streaming = () => {
   const [isLive, setIsLive] = useState(false);
 
   useEffect(() => {
-    socket.current = io('https://esportsappbackend.onrender.com/api/livestreming');
+    socket.current = io('https://esportsappbackend.onrender.com/api/livestreming', {
+        transports: ['websocket'],
+      });
+      
 
     socket.current.on('connect_error', (error) => {
       console.error('Socket connection error:', error);
