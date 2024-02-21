@@ -192,6 +192,10 @@ const renderTournamentDetails = () => {
           <>
             {renderKnockoutStages()}
             {renderFixtures()} {/* Render fixtures for Ea-football Knockout */}
+            <div className="streaming-section">
+              <h3>Live Streaming</h3>
+              <Streaming />
+            </div>
           </>
         );
       } else if (activeTournamentType === "League") {
@@ -202,6 +206,7 @@ const renderTournamentDetails = () => {
           </>
         );
       }
+    
       break;
     case "Bgmi":
       if (activeTournamentType === "Battle Ground") {
@@ -367,7 +372,7 @@ const renderTournamentDetails = () => {
   const renderContent = () => {
     if (!activeGameCategory && !activeTournamentType) {
       // Display game categories
-      return renderGameCategories();
+      return renderGameCategories(); 
     } else if (activeGameCategory && !activeTournamentType) {
       // Display tournament types for the selected game category
       return renderTournamentTypes();
