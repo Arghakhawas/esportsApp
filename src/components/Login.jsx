@@ -3,15 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
+import { BoltLoader } from "react-awesome-loaders";
 const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false); // New state for loading
+
   const navigate = useNavigate();
 
   const handleLoginSuccess = async () => {
     try {
+      setLoading(true); 
       const response = await fetch('https://esportsappbackend.onrender.com/api/login', {
         method: 'POST',
         headers: {
@@ -31,11 +34,13 @@ const Login = ({ onLoginSuccess }) => {
       navigate('/'); // Navigate to home page after successful login
     } catch (error) {
       setError(error.message);
+    } finally {
+      setLoading(false); // Set loading to false when login process completes (success or failure)
     }
   };
-
   return (
     <div className="login-container">
+   {loading && <div className="blur-background"></div>}
       <h2>Login</h2>
       {error && <p className="error-message">{error}</p>}
       <label>Email:</label>
@@ -43,7 +48,22 @@ const Login = ({ onLoginSuccess }) => {
       <label>Password:</label>
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
       <button onClick={handleLoginSuccess}>Login</button>
-      <div>  <p>not a member?</p>    <Link to="/signup" className="btnlogin ">Signup/Register</Link></div>
+      {loading && (
+        <div className="BoltLoader-container">
+         <BoltLoader
+        className={"loaderbolt"}
+        boltColor={"#e5f108"}
+      
+        backgroundBlurColor={"#E0E7FF"}
+      />
+        </div>
+      )}
+      <div>
+        <p>not a member?</p>
+        <Link to="/signup" className="btnlogin">
+          Signup/Register
+        </Link>
+      </div>
     </div>
   );
 };
