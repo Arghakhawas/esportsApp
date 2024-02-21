@@ -43,7 +43,7 @@
     return (
       <div className="login-container">
   
-    {loading && <Loader/> } 
+    {loading && } 
         <h2>Login</h2>
         {error && <p className="error-message">{error}</p>}
         <label>Email:</label>
@@ -53,7 +53,7 @@
         <button onClick={handleLoginSuccess}>Login</button>
         {loading && (
           <div className="BoltLoader-container">
- 
+ <Loader/> 
           </div>
         )}
         <div>
