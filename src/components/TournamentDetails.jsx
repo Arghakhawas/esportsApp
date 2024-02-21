@@ -15,7 +15,7 @@ const TournamentDetails = ({ tournament }) => {
   const [activeSection, setActiveSection] = useState(null);
   const [activeGameCategory, setActiveGameCategory] = useState(null);
   const [activeTournamentType, setActiveTournamentType] = useState(null);
-
+  const [isLive, setIsLive] = useState(false);
   useEffect(() => {
     // Mock data for demonstration purposes
     const mockKnockoutStages = ["Round 1", "Quarterfinals", "Semifinals", "Final"];
@@ -49,9 +49,12 @@ const TournamentDetails = ({ tournament }) => {
 
   const handleTournamentTypeClick = (tournamentType) => {
     setActiveTournamentType(tournamentType);
-    setActiveSection('tournamentDetails');
+    setActiveSection('streaming');
   };
-
+  const stopLiveStream = () => {
+    socket.current.emit('stopStream');
+    setIsLive(false);
+  };
 
   const renderGameCategories = () => {
     
@@ -379,6 +382,9 @@ const renderTournamentDetails = () => {
     } else if (activeGameCategory && activeTournamentType) {
       // Display tournament details for the selected game category and tournament type
       return renderTournamentDetails();
+    } else if (activeSection === 'streaming') {
+      // Display the Streaming component
+      return <Streaming isLive={isLive} startLiveStream={startLiveStream} stopLiveStream={stopLiveStream} />;
     }
 
     return null;
@@ -390,8 +396,9 @@ const renderTournamentDetails = () => {
       <button className="back-button" onClick={() => handleBackButtonClick()}>
       <BiLeftArrowCircle />
       </button>{renderContent()}
-    
+      {isLive && <button onClick={stopLiveStream}>Stop Live</button>}
     </div>
+    
   );
 };
 export default TournamentDetails;
