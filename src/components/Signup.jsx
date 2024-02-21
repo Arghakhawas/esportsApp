@@ -3,7 +3,7 @@ import './Signup.css';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+import Loader from './loader';
 
 const Signup = ({ onSignup }) => {
   const [username, setUsername] = useState('');
@@ -46,7 +46,7 @@ const Signup = ({ onSignup }) => {
     <div className="custom-signup-container">
       <h2>Signup</h2>
       {error && <p className="error-message">{error}</p>}
-      {loading && <div className="blur-background"></div>}
+      {loading && <Loader/> } 
       <label>Username:</label>
       <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
       <label>Email:</label>
@@ -60,7 +60,7 @@ const Signup = ({ onSignup }) => {
       <button onClick={handleSignup}>Signup</button>
       {loading && (
         <div className="BoltLoader-container">
-        
+        <div className="blur-background"></div>
         </div>
       )}
       <div>
