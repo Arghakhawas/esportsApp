@@ -396,7 +396,7 @@ const renderTournamentDetails = () => {
       <button className="back-button" onClick={() => handleBackButtonClick()}>
       <BiLeftArrowCircle />
       </button>{renderContent()}
-      {isLive && <button onClick={stopLiveStream}>Stop Live</button>}
+
     </div>
     
   );

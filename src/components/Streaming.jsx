@@ -4,10 +4,10 @@ import { ScreenCapture } from 'react-screen-capture';
 
 import io from 'socket.io-client';
 
-const Streaming = ({ isLive, startLiveStream, stopLiveStream }) => {
+const Streaming = ({  startLiveStream, stopLiveStream }) => {
     const webcamRef = useRef(null);
   const socket = useRef(null);
-  const [isLive, setIsLive] = useState(false);
+ 
 
   useEffect(() => {
     socket.current = io('https://esportsappbackend.onrender.com/api/livestreming', {
