@@ -4,8 +4,7 @@ import './Login.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { BoltLoader } from 'react-awesome-loaders';
-import "react-awesome-loaders/dist/styles.css";
+
 
 const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
@@ -53,12 +52,8 @@ const Login = ({ onLoginSuccess }) => {
       <button onClick={handleLoginSuccess}>Login</button>
       {loading && (
         <div className="BoltLoader-container">
-         <BoltLoader
-        className={"loaderbolt"}
-        boltColor={"#e5f108"}
-      
-        backgroundBlurColor={"#E0E7FF"}
-      />
+    wait
+    
         </div>
       )}
       <div>

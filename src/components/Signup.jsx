@@ -3,8 +3,6 @@ import './Signup.css';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { BoltLoader } from 'react-awesome-loaders';
-import "react-awesome-loaders/dist/styles.css";
 
 const Signup = ({ onSignup }) => {
   const [username, setUsername] = useState('');
@@ -61,17 +59,13 @@ const Signup = ({ onSignup }) => {
       <button onClick={handleSignup}>Signup</button>
       {loading && (
         <div className="BoltLoader-container">
-         <BoltLoader
-        className={"loaderbolt"}
-        boltColor={"#e5f108"}
-        boltsize= {90}
-        backgroundBlurColor={"#E0E7FF"}
-      />
+     Wait
         </div>
       )}
       <div>
         <Link to="/login" className="btnsignup">
           Login
+          
         </Link>
       </div>
     </div>
