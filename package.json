@@ -25,6 +25,7 @@
     "react-share": "^5.1.0",
     "react-spinners": "^0.13.8",
     "react-webcam": "^7.2.0",
+    "socket.io": "^4.7.4",
     "socket.io-client": "^4.7.4",
     "styled-components": "^6.1.8",
     "useparams": "^0.0.2",
