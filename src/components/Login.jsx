@@ -4,7 +4,7 @@ import './Login.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { BoltLoader } from "react-awesome-loaders";
+import { BoltLoader } from 'react-awesome-loaders';
 
 const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');

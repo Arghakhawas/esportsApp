@@ -3,7 +3,7 @@ import './Signup.css';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { BoltLoader } from "react-awesome-loaders";
+import { BoltLoader } from 'react-awesome-loaders';
 
 const Signup = ({ onSignup }) => {
   const [username, setUsername] = useState('');
