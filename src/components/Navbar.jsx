@@ -67,7 +67,7 @@ function Navbar({  onLogout, isAuthenticated }) {
 </Link>
               </li>
               <li className="navbar-item">
-              <Link to="/live" className="navbar-link skewBg" data-nav-link data-tooltip="Live">
+              <Link to="/liveviewer" className="navbar-link skewBg" data-nav-link data-tooltip="Live">
   <FiVideo />
 </Link>
               </li>
