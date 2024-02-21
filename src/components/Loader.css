@@ -186,6 +186,7 @@ small {
     align-items: center;
     backdrop-filter: blur(10px);
 height: 100%;
+width: fit-content;
   background-color: rgba(0, 0, 0, 0.7);
     .dribbble {
         position: fixed;
