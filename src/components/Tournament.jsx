@@ -3,8 +3,8 @@ import TournamentForm from './TournamentForm';
 import { useNavigate } from 'react-router-dom';
 import './Tournament.css';
 import efootball from "../assets/efootball.png";
-import efootball1 from "../assets/efootball1.png";
-import ffgarena from "../assets/ffgarena.png";
+import efootball1 from "../assets/efootball1.jpg";
+import ffgarena from "../assets/ffgarena.jpg";
 import bgmi from "../assets/bgmi.png";
 
 const Tournament = () => {
@@ -94,7 +94,7 @@ const Tournament = () => {
     },
   ];
 
-  // Filter tournaments based on selected game category
+
   const filteredTournaments = selectedGameCategory
     ? tournaments.filter((tournament) => tournament.category.includes(selectedGameCategory))
     : tournaments;
@@ -107,7 +107,7 @@ const Tournament = () => {
         <button className='btnall'  onClick={() => setSelectedGameCategory('EA Football')}>EA Football</button>
         <button className='btnall'  onClick={() => setSelectedGameCategory('FreeFire')}>FreeFire</button>
         <button className='btnall'  onClick={() => setSelectedGameCategory('BGMI')}>BGMI</button>
-        {/* Add more buttons for other game categories */}
+        
       </div>
       <div className="tournament-list">
         {filteredTournaments.map((tournament, index) => (
