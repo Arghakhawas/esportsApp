@@ -7,6 +7,7 @@ import efootball1 from "../assets/efootball1.jpg";
 import ffgarena from "../assets/ffgarena.jpg";
 import bgmi from "../assets/bgmi.png";
 
+import Streaming from './Streaming';
 const TournamentDetails = ({ tournament }) => {
   const [knockoutStages, setKnockoutStages] = useState([]);
   const [pointTable, setPointTable] = useState([]);
