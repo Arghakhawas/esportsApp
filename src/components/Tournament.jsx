@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TournamentForm from './TournamentForm';
 import { useNavigate } from 'react-router-dom';
 import './Tournament.css';
-
+import efootball from "../assets/efootball.png";
 const Tournament = () => {
   const [step, setStep] = useState(1);
   const [selectedTournament, setSelectedTournament] = useState(null);
@@ -65,7 +65,7 @@ const Tournament = () => {
       prize: '₹150',
       joiningFee: '₹10',
       rules: 'Game rules for EA Football Knockout...',
-      image: '/assets/efootball.png', // Add image path here
+      image: 'efootball.png', // Add image path here
     },
     {
       category: 'EA Football 2024 - Group Stages Cup',
