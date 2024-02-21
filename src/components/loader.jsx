@@ -25,7 +25,8 @@ const Loader = () => {
       <path transform="translate(-2.000000, 0.000000)" d="M2,1.5 L70,1.5"></path>
       </svg>
       <a className="dribbble" href="https://dribbble.com/shots/7134825-Lightning-bolt-loader" target="_blank">
-  <img src="https://dribbble.com/assets/logo-small-2x-9fe74d2ad7b25fba0f50168523c15fda4c35534f9ea0b1011179275383035439.png" alt="" />
+      <img src="http://dribbble.com/assets/logo-small-2x-9fe74d2ad7b25fba0f50168523c15fda4c35534f9ea0b1011179275383035439.png" alt="" />
+
 </a>
 
     </div>

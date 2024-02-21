@@ -109,31 +109,3 @@
 .login-container {
   position: relative;
 }
-
-/* Style for background blur */
-.blur-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3); /* Adjust the background color and opacity for the blur */
-  backdrop-filter: blur(8px); /* Adjust the blur intensity */
-  z-index: 999; /* Ensure it's below the loader but above other elements */
-}
-
-/* Style for RingLoader */
-.BoltLoader-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000; /* Ensure it's above other elements */
-}
-
-/* Style for RingLoader color and size */
-.BoltLoader {
-  display: block;
-  margin: 0 auto;
-
-}
