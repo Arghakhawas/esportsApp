@@ -3,7 +3,7 @@ import './Signup.css';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { BoltLoader } from 'react-awesome-loaders'; // Import the BoltLoader component
+import { BoltLoader } from 'react-awesome-loaders'; 
 
 const Signup = ({ onSignup }) => {
   const [username, setUsername] = useState('');
@@ -12,12 +12,12 @@ const Signup = ({ onSignup }) => {
   const [referId, setReferId] = useState('');
   const [number, setNumber] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false); // New state for loading
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSignup = async () => {
     try {
-      setLoading(true); // Set loading to true when signup process starts
+      setLoading(true); 
 
       const response = await fetch('https://esportsappbackend.onrender.com/api/signup', {
         method: 'POST',
@@ -63,7 +63,7 @@ const Signup = ({ onSignup }) => {
          <BoltLoader
         className={"loaderbolt"}
         boltColor={"#e5f108"}
-        boltsize= {90}
+       
         backgroundBlurColor={"#E0E7FF"}
       />
         </div>
