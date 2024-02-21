@@ -21,8 +21,11 @@
     "react-loader-spinner": "^6.1.6",
     "react-qr-code": "^2.0.12",
     "react-router-dom": "^6.22.0",
+    "react-screen-capture": "^1.1.1",
     "react-share": "^5.1.0",
     "react-spinners": "^0.13.8",
+    "react-webcam": "^7.2.0",
+    "socket.io-client": "^4.7.4",
     "styled-components": "^6.1.8",
     "useparams": "^0.0.2",
     "usestate": "^1.1.3"

@@ -262,6 +262,7 @@ const renderTournamentDetails = () => {
           team2,
           date: "2024-02-20", // Update with actual date
           time: "15:00", // Update with actual time
+          live:<Streaming />,
         });
       }
       fixtures.push({
