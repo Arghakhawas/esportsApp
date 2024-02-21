@@ -3,7 +3,7 @@ import './Signup.css';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { BoltLoader } from 'react-awesome-loaders'; 
+import { BoltLoader } from "react-awesome-loaders";
 
 const Signup = ({ onSignup }) => {
   const [username, setUsername] = useState('');
@@ -12,12 +12,12 @@ const Signup = ({ onSignup }) => {
   const [referId, setReferId] = useState('');
   const [number, setNumber] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // New state for loading
   const navigate = useNavigate();
 
   const handleSignup = async () => {
     try {
-      setLoading(true); 
+      setLoading(true); // Set loading to true when signup process starts
 
       const response = await fetch('https://esportsappbackend.onrender.com/api/signup', {
         method: 'POST',
@@ -45,8 +45,8 @@ const Signup = ({ onSignup }) => {
   return (
     <div className="custom-signup-container">
       <h2>Signup</h2>
-      {loading && <div className="blur-background"></div>}
       {error && <p className="error-message">{error}</p>}
+      {loading && <div className="blur-background"></div>}
       <label>Username:</label>
       <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
       <label>Email:</label>
@@ -63,7 +63,7 @@ const Signup = ({ onSignup }) => {
          <BoltLoader
         className={"loaderbolt"}
         boltColor={"#e5f108"}
-       
+        boltsize= {90}
         backgroundBlurColor={"#E0E7FF"}
       />
         </div>
