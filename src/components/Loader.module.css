@@ -178,20 +178,21 @@ small {
     left: 50%;
     transform: translateX(-50%);
 }
-body {
+.bdoy{
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #0C0F17;
-    .dribbble {
-        position: fixed;
-        display: block;
-        right: 24px;
-        bottom: 24px;
-        img {
-            display: block;
-            width: 76px;
-        }
-    }
+ 
+}
+.dribbble {
+    position: fixed;
+    display: block;
+    right: 24px;
+    bottom: 24px;
+  
+}  img {
+    display: block;
+    width: 76px;
 }
