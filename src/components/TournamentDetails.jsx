@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import PointsTable from './PointsTable';
 import './TournamentDetails.css'; // Import the CSS file
 import { BiLeftArrowCircle } from "react-icons/bi";
+import cod from "../assets/cod.jpg";
+import efootball1 from "../assets/efootball1.jpg";
+import ffgarena from "../assets/ffgarena.jpg";
+import bgmi from "../assets/bgmi.png";
 
 const TournamentDetails = ({ tournament }) => {
   const [knockoutStages, setKnockoutStages] = useState([]);
@@ -53,14 +57,14 @@ const TournamentDetails = ({ tournament }) => {
     const gameCategories = [
       {
         name: "Ea-football",
-        image: "src/assets/efootball1.jpg",
+        image: efootball1,
         prizePool: "$100,000",
         timing: "Every Saturday at 3:00 PM",
         rules: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
       },
       {
         name: "Bgmi",
-        image: "src/assets/bgmi.png",
+        image: bgmi,
         prizePool: "$100,000",
         timing: "Every Saturday at 3:00 PM",
         rules: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
@@ -68,7 +72,7 @@ const TournamentDetails = ({ tournament }) => {
   
       {
         name: "Call of Duty",
-        image: "src/assets/cod.jpg",
+        image: cod,
         prizePool: "$100,000",
         timing: "Every Saturday at 3:00 PM",
         rules: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
@@ -76,7 +80,7 @@ const TournamentDetails = ({ tournament }) => {
   
       {
         name: "FreeFire",
-        image: "src/assets/ffgarena.jpg",
+        image: ffgarena,
         prizePool: "$100,000",
         timing: "Every Saturday at 3:00 PM",
         rules: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
