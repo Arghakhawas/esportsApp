@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import Webcam from 'react-webcam';
-import ScreenCapture from 'react-screen-capture';
+import { ScreenCapture } from "react-screen-capture";
+
 import io from 'socket.io-client';
 
 const Streaming = () => {
