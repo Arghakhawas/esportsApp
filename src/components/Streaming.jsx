@@ -4,7 +4,7 @@ import { ScreenCapture } from 'react-screen-capture';
 
 import io from 'socket.io-client';
 
-const Streaming = ({  startLiveStream, stopLiveStream }) => {
+const Streaming = ({   }) => {
     const webcamRef = useRef(null);
   const socket = useRef(null);
  
