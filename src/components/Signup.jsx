@@ -59,13 +59,16 @@ const Signup = ({ onSignup }) => {
       <button onClick={handleSignup}>Signup</button>
       {loading && (
         <div className="BoltLoader-container">
-     Wait
+   <div class="loader">
+  <div class="inner">
+  </div>
+</div>
         </div>
       )}
       <div>
         <Link to="/login" className="btnsignup">
           Login
-          
+
         </Link>
       </div>
     </div>

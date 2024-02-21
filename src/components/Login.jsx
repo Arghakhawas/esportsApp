@@ -52,8 +52,10 @@ const Login = ({ onLoginSuccess }) => {
       <button onClick={handleLoginSuccess}>Login</button>
       {loading && (
         <div className="BoltLoader-container">
-    wait
-    
+    <div class="loader">
+  <div class="inner">
+  </div>
+</div>
         </div>
       )}
       <div>
