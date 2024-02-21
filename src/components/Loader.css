@@ -179,7 +179,7 @@ small {
     transform: translateX(-50%);
 }
 .bdoy{
-    height: 100vh;
+    
     display: flex;
     justify-content: center;
     align-items: center;
