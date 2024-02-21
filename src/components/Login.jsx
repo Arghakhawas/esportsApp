@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { BoltLoader } from 'react-awesome-loaders';
+import "react-awesome-loaders/dist/styles.css";
 
 const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { BoltLoader } from 'react-awesome-loaders';
+import "react-awesome-loaders/dist/styles.css";
 
 const Signup = ({ onSignup }) => {
   const [username, setUsername] = useState('');
