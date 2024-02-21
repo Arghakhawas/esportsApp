@@ -3,7 +3,7 @@ import './Signup.css';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import Loader from 'react-loader-spinner';
+import { BoltLoader } from "react-awesome-loaders";
 
 const Signup = ({ onSignup }) => {
   const [username, setUsername] = useState('');
@@ -12,12 +12,12 @@ const Signup = ({ onSignup }) => {
   const [referId, setReferId] = useState('');
   const [number, setNumber] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // New state for loading
   const navigate = useNavigate();
 
   const handleSignup = async () => {
     try {
-      setLoading(true);
+      setLoading(true); // Set loading to true when signup process starts
 
       const response = await fetch('https://esportsappbackend.onrender.com/api/signup', {
         method: 'POST',
@@ -38,7 +38,7 @@ const Signup = ({ onSignup }) => {
     } catch (error) {
       setError(error.message);
     } finally {
-      setLoading(false);
+      setLoading(false); // Set loading to false when signup process completes (success or failure)
     }
   };
 
@@ -59,8 +59,13 @@ const Signup = ({ onSignup }) => {
       <input type="number" value={referId} onChange={(e) => setReferId(e.target.value)} />
       <button onClick={handleSignup}>Signup</button>
       {loading && (
-        <div className="loader-container">
-          <Loader type="TailSpin" color="#e5f108" height={90} width={90} />
+        <div className="BoltLoader-container">
+         <BoltLoader
+        className={"loaderbolt"}
+        boltColor={"#e5f108"}
+        boltsize= {90}
+        backgroundBlurColor={"#E0E7FF"}
+      />
         </div>
       )}
       <div>
