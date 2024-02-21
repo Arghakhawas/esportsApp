@@ -65,7 +65,7 @@ const Tournament = () => {
       prize: '₹150',
       joiningFee: '₹10',
       rules: 'Game rules for EA Football Knockout...',
-      image: 'efootball.png', // Add image path here
+      image: efootball, // Add image path here
     },
     {
       category: 'EA Football 2024 - Group Stages Cup',
