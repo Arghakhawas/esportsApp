@@ -3,6 +3,10 @@ import TournamentForm from './TournamentForm';
 import { useNavigate } from 'react-router-dom';
 import './Tournament.css';
 import efootball from "../assets/efootball.png";
+import efootball1 from "../assets/efootball1.png";
+import ffgarena from "../assets/ffgarena.png";
+import bgmi from "../assets/bgmi.png";
+
 const Tournament = () => {
   const [step, setStep] = useState(1);
   const [selectedTournament, setSelectedTournament] = useState(null);
@@ -65,28 +69,28 @@ const Tournament = () => {
       prize: '₹150',
       joiningFee: '₹10',
       rules: 'Game rules for EA Football Knockout...',
-      image: efootball, // Add image path here
+      image: efootball,
     },
     {
       category: 'EA Football 2024 - Group Stages Cup',
       prize: '₹1000',
       joiningFee: '₹50',
       rules: 'Game rules for EA Football Group Stages Cup...',
-      image: '/assets/efootball1.jpg', // Add image path here
+      image: efootball1, 
     },
     {
       category: 'FreeFire - Entry Fee ₹10',
       prize: '₹150',
       joiningFee: '₹10',
       rules: 'Game rules for BGMI Entry Fee ₹10...',
-      image: 'dist/assets/ffgarena.jpg', // Add image path here
+      image: ffgarena, 
     },
     {
       category: 'BGMI - Entry Fee ₹25',
       prize: '₹400',
       joiningFee: '₹25',
       rules: 'Game rules for BGMI Entry Fee ₹25...',
-      image: '/assets/bgmi.png', // Add image path here
+      image: bgmi, 
     },
   ];
 
