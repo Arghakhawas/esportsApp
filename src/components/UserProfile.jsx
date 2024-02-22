@@ -33,6 +33,9 @@ const UserProfile = () => {
   const handleAvatarSelection = (avatar) => {
     setSelectedAvatar(avatar);
   };
+  const generateProfileAvatar = (name) => {
+    return name.slice(0, 10);
+  };
 
   const handleOpenChangePasswordModal = () => {
     setShowChangePasswordModal(true);
