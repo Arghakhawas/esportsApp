@@ -20,7 +20,9 @@ const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [showAvatarSelection, setShowAvatarSelection] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState(null);
+ 
+  const [selectedAvatar, setSelectedAvatar] = useState(profileData?.avatar || avatarOptions[0]);
+
 
   const avatarOptions = [
     { src: bgmi, alt: 'BGMI AVATAR', id: 'bgmi' },
