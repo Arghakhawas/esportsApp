@@ -9,6 +9,14 @@ const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const [avatarOptions, setAvatarOptions] = useState([
+    { src: bgmi, alt: 'BGMI Avatar', id: 'bgmi' },
+    { src: 'avatar_url_2.jpg', alt: 'Avatar 2', id: 'avatar2' },
+    { src: bgmi, alt: 'BGMI Avatar', id: 'bgmi' },
+    { src: 'avatar_url_2.jpg', alt: 'Avatar 2', id: 'avatar2' },  
+      { src: bgmi, alt: 'BGMI Avatar', id: 'bgmi' },
+    { src: 'avatar_url_2.jpg', alt: 'Avatar 2', id: 'avatar2' },
+  ]);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -55,7 +63,7 @@ const UserProfile = () => {
       {profileData && (
         <div className="profile-details">
        
-       <img
+          <img
             src={selectedAvatar || `https://ui-avatars.com/api/?name=${generateProfileAvatar(profileData.username)}&background=random`}
             alt="Profile"
             className="profile-picture"
@@ -65,17 +73,19 @@ const UserProfile = () => {
           <div className="avatar-selection">
             <h3>Choose Avatar</h3>
             <div className="avatar-options">
-              <img
-                src={bgmi}
-                alt="BGMI Avatar"
-                onClick={() => handleAvatarSelection("bgmi.png")}
-              />
-              <img
-                src="avatar_url_2.jpg"
-                alt="Avatar 2"
-                onClick={() => handleAvatarSelection("avatar_url_2.jpg")}
-              />
-              {/* Add more avatars as needed */}
+              {avatarOptions.map((avatar) => (
+                <img
+                  key={avatar.id}
+                  src={avatar.src}
+                  alt={avatar.alt}
+                  className={`small-avatar ${selectedAvatar === avatar.src ? 'selected' : ''}`}
+                  onClick={() => handleAvatarSelection(avatar.src)}
+                />
+              ))}
+            </div>
+            <div className="avatar-buttons">
+              <button onClick={handleOpenChangePasswordModal}>Change Password</button>
+              <button onClick={handleCloseChangePasswordModal}>Cancel</button>
             </div>
           </div>
 
