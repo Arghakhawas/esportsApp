@@ -8,13 +8,13 @@ import bgmi from "../assets/bgmi.png";
 const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const [selectedAvatarIndex, setSelectedAvatarIndex] = useState(null);
   const [avatarOptions, setAvatarOptions] = useState([
     { src: bgmi, alt: 'BGMI Avatar', id: 'bgmi' },
     { src: 'avatar_url_2.jpg', alt: 'Avatar 2', id: 'avatar2' },
     { src: bgmi, alt: 'BGMI Avatar', id: 'bgmi' },
     { src: 'avatar_url_2.jpg', alt: 'Avatar 2', id: 'avatar2' },  
-      { src: bgmi, alt: 'BGMI Avatar', id: 'bgmi' },
+    { src: bgmi, alt: 'BGMI Avatar', id: 'bgmi' },
     { src: 'avatar_url_2.jpg', alt: 'Avatar 2', id: 'avatar2' },
   ]);
 
@@ -41,8 +41,8 @@ const UserProfile = () => {
     fetchUserProfile();
   }, []);
 
-  const handleAvatarSelection = (avatar) => {
-    setSelectedAvatar(avatar);
+  const handleAvatarSelection = (index) => {
+    setSelectedAvatarIndex(index);
   };
 
   const generateProfileAvatar = (name) => {
@@ -64,7 +64,7 @@ const UserProfile = () => {
         <div className="profile-details">
        
           <img
-            src={selectedAvatar || `https://ui-avatars.com/api/?name=${generateProfileAvatar(profileData.username)}&background=random`}
+            src={avatarOptions[selectedAvatarIndex]?.src || `https://ui-avatars.com/api/?name=${generateProfileAvatar(profileData.username)}&background=random`}
             alt="Profile"
             className="profile-picture"
           />
@@ -73,13 +73,13 @@ const UserProfile = () => {
           <div className="avatar-selection">
             <h3>Choose Avatar</h3>
             <div className="avatar-options">
-              {avatarOptions.map((avatar) => (
+              {avatarOptions.map((avatar, index) => (
                 <img
                   key={avatar.id}
                   src={avatar.src}
                   alt={avatar.alt}
-                  className={`small-avatar ${selectedAvatar === avatar.src ? 'selected' : ''}`}
-                  onClick={() => handleAvatarSelection(avatar.src)}
+                  className={`small-avatar ${selectedAvatarIndex === index ? 'selected' : ''}`}
+                  onClick={() => handleAvatarSelection(index)}
                 />
               ))}
             </div>

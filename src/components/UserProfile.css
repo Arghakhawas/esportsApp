@@ -55,3 +55,64 @@
     }
   }
 }
+/* UserProfile.css */
+
+.user-profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.profile-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.avatar-selection {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.avatar-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.small-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.small-avatar.selected {
+  border: 2px solid #007BFF;
+  transform: scale(1.1);
+}
+
+.avatar-buttons {
+  margin-top: 10px;
+}
+
+button {
+  padding: 8px 16px;
+  margin-right: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Add media queries for responsiveness if needed */
