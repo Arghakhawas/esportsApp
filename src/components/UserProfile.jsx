@@ -7,7 +7,7 @@ import bgmi from "../assets/bgmi.png";
 import Cute from "../assets/Cute.png";
 import deathking from "../assets/deathking.png";
 import Itachiuchiha  from "../assets/Itachiuchiha.png";
-import Naruto from "../assets/naruto.png";
+import Naruto from "../assets/Naruto.png";
 import narutoteacher from "../assets/narutoteacher.png";
 import onepiece from "../assets/onepiece.png";
 import sauske from "../assets/sauske.png";s
