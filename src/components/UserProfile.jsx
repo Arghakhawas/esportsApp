@@ -4,18 +4,19 @@ import React, { useEffect, useState } from 'react';
 import './UserProfile.css';
 import ChangePasswordModal from './ChangePasswordModel';
 import bgmi from "../assets/bgmi.png";
+import cute from "../assets/cute.png";
+import deathking from "../assets/deathking.png";
 
 const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  const [showAvatarSelection, setShowAvatarSelection] = useState(false);
   const [selectedAvatarIndex, setSelectedAvatarIndex] = useState(null);
   const [avatarOptions, setAvatarOptions] = useState([
     { src: bgmi, alt: 'BGMI Avatar', id: 'bgmi' },
-    { src: 'avatar_url_2.jpg', alt: 'Avatar 2', id: 'avatar2' },
-    { src: bgmi, alt: 'BGMI Avatar', id: 'bgmi' },
-    { src: 'avatar_url_2.jpg', alt: 'Avatar 2', id: 'avatar2' },  
-    { src: bgmi, alt: 'BGMI Avatar', id: 'bgmi' },
-    { src: 'avatar_url_2.jpg', alt: 'Avatar 2', id: 'avatar2' },
+    { src: cute, alt: 'cute avtar', id: 'cute' },
+    { src: deathking, alt: 'deathking Avatar', id: 'deathking' },
+    // Add more avatars as needed
   ]);
 
   useEffect(() => {
@@ -57,12 +58,15 @@ const UserProfile = () => {
     setShowChangePasswordModal(false);
   };
 
+  const handleToggleAvatarSelection = () => {
+    setShowAvatarSelection(!showAvatarSelection);
+  };
+
   return (
     <div className="user-profile-container">
       <h2 className="profile-heading">User Profile</h2>
       {profileData && (
         <div className="profile-details">
-       
           <img
             src={avatarOptions[selectedAvatarIndex]?.src || `https://ui-avatars.com/api/?name=${generateProfileAvatar(profileData.username)}&background=random`}
             alt="Profile"
@@ -71,22 +75,20 @@ const UserProfile = () => {
 
           {/* Avatar selection section */}
           <div className="avatar-selection">
-            <h3>Choose Avatar</h3>
-            <div className="avatar-options">
-              {avatarOptions.map((avatar, index) => (
-                <img
-                  key={avatar.id}
-                  src={avatar.src}
-                  alt={avatar.alt}
-                  className={`small-avatar ${selectedAvatarIndex === index ? 'selected' : ''}`}
-                  onClick={() => handleAvatarSelection(index)}
-                />
-              ))}
-            </div>
-            <div className="avatar-buttons">
-              <button onClick={handleOpenChangePasswordModal}>Change Password</button>
-              <button onClick={handleCloseChangePasswordModal}>Cancel</button>
-            </div>
+            <button onClick={handleToggleAvatarSelection}>Choose Avatar</button>
+            {showAvatarSelection && (
+              <div className="avatar-options">
+                {avatarOptions.map((avatar, index) => (
+                  <img
+                    key={avatar.id}
+                    src={avatar.src}
+                    alt={avatar.alt}
+                    className={`small-avatar ${selectedAvatarIndex === index ? 'selected' : ''}`}
+                    onClick={() => handleAvatarSelection(index)}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           <p className="profile-info">Name: {profileData.username}</p>
@@ -95,8 +97,10 @@ const UserProfile = () => {
           <p className="profile-info">Number: {profileData.number}</p>
           <p className="profile-info">Tournament Matches Played: {profileData.tournamentMatchesPlayed}</p>
 
-          {/* Add a button to trigger the change password modal */}
-          <button onClick={handleOpenChangePasswordModal}>Change Password</button>
+          <div className="avatar-buttons">
+            <button onClick={handleOpenChangePasswordModal}>Change Password</button>
+            <button onClick={handleCloseChangePasswordModal}>Cancel</button>
+          </div>
         </div>
       )}
 

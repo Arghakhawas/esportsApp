@@ -80,6 +80,8 @@
   margin-bottom: 20px;
 }
 
+/* UserProfile.css */
+
 .avatar-selection {
   text-align: center;
   margin-bottom: 20px;
@@ -88,6 +90,7 @@
 .avatar-options {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -104,15 +107,9 @@
   transform: scale(1.1);
 }
 
-.avatar-buttons {
-  margin-top: 10px;
-}
-
 button {
   padding: 8px 16px;
-  margin-right: 10px;
+  margin-top: 10px;
   font-size: 14px;
   cursor: pointer;
 }
-
-
