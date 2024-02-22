@@ -66,8 +66,8 @@ const Tournament = () => {
   const tournaments = [
     {
       category: 'EA Football 2024 - Knockout',
-      prize: '₹150',
-      joiningFee: '₹10',
+      prize: '₹200',
+      joiningFee: '₹15',
       rules: 'Game rules for EA Football Knockout...',
       image: efootball,
     },

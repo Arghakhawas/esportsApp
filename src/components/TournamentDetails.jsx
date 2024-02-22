@@ -62,32 +62,32 @@ const TournamentDetails = ({ tournament }) => {
       {
         name: "Ea-football",
         image: efootball1,
-        prizePool: "$100,000",
+        prizePool: "200",
         timing: "Every Saturday at 3:00 PM",
-        rules: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        rules: "show in 24 feb",
       },
       {
         name: "Bgmi",
         image: bgmi,
-        prizePool: "$100,000",
+        prizePool: "400",
         timing: "Every Saturday at 3:00 PM",
-        rules: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        rules: "show in 24 feb",
       },
   
       {
         name: "Call of Duty",
         image: cod,
-        prizePool: "$100,000",
+        prizePool: "1000",
         timing: "Every Saturday at 3:00 PM",
-        rules: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        rules: "show in 24 feb",
       },
   
       {
         name: "FreeFire",
         image: ffgarena,
-        prizePool: "$100,000",
+        prizePool: "1000",
         timing: "Every Saturday at 3:00 PM",
-        rules: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+        rules: "show in 24 feb",
       },
   
   
