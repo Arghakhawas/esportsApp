@@ -1,8 +1,10 @@
+// UserProfile.js
 
 import React, { useEffect, useState } from 'react';
 import './UserProfile.css';
 import ChangePasswordModal from './ChangePasswordModel';
 import bgmi from "../assets/bgmi.png";
+
 const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
@@ -30,9 +32,11 @@ const UserProfile = () => {
 
     fetchUserProfile();
   }, []);
+
   const handleAvatarSelection = (avatar) => {
     setSelectedAvatar(avatar);
   };
+
   const generateProfileAvatar = (name) => {
     return name.slice(0, 10);
   };
@@ -62,8 +66,8 @@ const UserProfile = () => {
             <h3>Choose Avatar</h3>
             <div className="avatar-options">
               <img
-                src="bgmi"
-                alt="Avatar 1"
+                src={bgmi}
+                alt="BGMI Avatar"
                 onClick={() => handleAvatarSelection("bgmi.png")}
               />
               <img
@@ -75,7 +79,6 @@ const UserProfile = () => {
             </div>
           </div>
 
-          
           <p className="profile-info">Name: {profileData.username}</p>
           <p className="profile-info">Email: {profileData.email}</p>
           <p className="profile-info">Refer id: {profileData.referId}</p>
