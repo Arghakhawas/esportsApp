@@ -1,7 +1,7 @@
 /* UserProfile.css */
 
 .user-profile-container {
-  background-color: var(--raisin-black-1);
+  background-color: hsl(234deg 29.82% 40.23%);
   color: var(--platinum);
   padding: var(--section-padding);
   border-radius: 10px;
@@ -32,7 +32,7 @@
 
   p {
     font-family: var(--ff-oswald);
-    font-size: var(--fs-4);
+    font-size: var(--fs-5);
     margin-bottom: 10px;
     color: var(--platinum);
 
