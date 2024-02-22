@@ -18,7 +18,7 @@ const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [showAvatarSelection, setShowAvatarSelection] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState(profileData?.avatar || avatarOptions[0]);
+  const [selectedAvatar, setSelectedAvatar] = useState(profileData?.avatar || bgmi); // Set a default avatar
 
   const avatarOptions = [
     { src: bgmi, alt: 'BGMI AVATAR', id: 'bgmi' },
@@ -85,12 +85,9 @@ const UserProfile = () => {
     }
   }, [selectedAvatar]);
 
-  const generateProfileAvatar = (name) => {
-    return name.slice(0, 12);
-  };
-
   const handleAvatarSelection = (avatar) => {
     setSelectedAvatar(avatar);
+    setShowAvatarSelection(false);
   };
 
   const handleOpenChangePasswordModal = () => {
@@ -101,38 +98,32 @@ const UserProfile = () => {
     setShowChangePasswordModal(false);
   };
 
-  const handleToggleAvatarSelection = () => {
-    setShowAvatarSelection(!showAvatarSelection);
-  };
-
   return (
     <div className="user-profile-container">
       <h2 className="profile-heading">User Profile</h2>
       {profileData && (
         <div className="profile-details">
           <img
-           src={selectedAvatar?.src}
-           alt="Profile"
-           className="profile-picture"
+            src={selectedAvatar.src}
+            alt="Profile"
+            className="profile-picture"
+            onClick={() => setShowAvatarSelection(true)}
           />
 
           {/* Avatar selection section */}
-          <div className="avatar-selection">
-            <button onClick={handleToggleAvatarSelection}>Choose Avatar</button>
-            {showAvatarSelection && (
-              <div className="avatar-options">
-                {avatarOptions.map((avatar) => (
-                  <img
-                    key={avatar.id}
-                    src={avatar.src}
-                    alt={avatar.alt}
-                    className={`small-avatar ${selectedAvatar === avatar ? 'selected' : ''}`}
-                    onClick={() => handleAvatarSelection(avatar)}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
+          {showAvatarSelection && (
+            <div className="avatar-options">
+              {avatarOptions.map((avatar) => (
+                <img
+                  key={avatar.id}
+                  src={avatar.src}
+                  alt={avatar.alt}
+                  className="small-avatar"
+                  onClick={() => handleAvatarSelection(avatar)}
+                />
+              ))}
+            </div>
+          )}
 
           <p className="profile-info">Name: {profileData.username}</p>
           <p className="profile-info">Email: {profileData.email}</p>
