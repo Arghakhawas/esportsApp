@@ -6,7 +6,13 @@ import ChangePasswordModal from './ChangePasswordModel';
 import bgmi from "../assets/bgmi.png";
 import Cute from "../assets/Cute.png";
 import deathking from "../assets/deathking.png";
-
+import itachiuchiha from "../assets/itachiuchiha.png";
+import Naruto from "../assets/naruto.png";
+import narutoteacher from "../assets/narutoteacher.png";
+import onepiece from "../assets/onepiece.png";
+import sauske from "../assets/sauske.png";
+import sexy from "../assets/sexy.png";
+import sexy2 from "../assets/sexy2.png";
 const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
@@ -16,7 +22,15 @@ const UserProfile = () => {
     { src: bgmi, alt: 'BGMI Avatar', id: 'bgmi' },
     { src: Cute, alt: 'CUTE Avatar', id: 'Cute' },
     { src: deathking, alt: 'DEATHKING AVATAR', id: 'deathking' },
-    // Add more avatars as needed
+    { src: itachiuchiha, alt: 'ITACHI Avatar', id: 'itachi' },
+    { src: Naruto, alt: 'NARUTO Avatar', id: 'Naruto' },
+    { src: narutoteacher, alt: 'NARUTOTEACHER AVATAR', id: 'narutoteacher' },
+    { src: onepiece, alt: 'ONCEPIECE AVATAR', id: 'onepiece' },
+    { src: sauske, alt: 'SAUSKE AVATAR', id: 'sauske' },
+    { src: sexy, alt: 'SEXY AVATAR', id: 'sexy' },
+    { src: sexy2, alt: 'SEXY2 AVATAR', id: 'sexy2' },
+    { src: sukuna, alt: 'SUKUNA AVATAR', id: 'sukuna' },
+    { src: sukunaevil, alt: 'SUKUNAEVIL AVATAR', id: 'sukuna' },
   ]);
 
   useEffect(() => {
