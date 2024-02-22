@@ -10,7 +10,7 @@ import Itachiuchiha  from "../assets/Itachiuchiha.png";
 import Naruto from "../assets/Naruto.png";
 import narutoteacher from "../assets/narutoteacher.png";
 import onepiece from "../assets/onepiece.png";
-import sauske from "../assets/sauske.png";s
+import sauske from "../assets/sauske.png";
 import sexy from "../assets/sexy.png";
 import sexy2 from "../assets/sexy2.png";
 import sukuna from "../assets/sukuna.png";
