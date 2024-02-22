@@ -1,13 +1,5 @@
 /* UserProfile.css */
 
-.user-profile-container {
-  background-color: hsl(234deg 29.82% 40.23%);
-  color: var(--platinum);
-  padding: var(--section-padding);
-  border-radius: 10px;
-  box-shadow: var(--shadow-3);
-  transition: background-color var(--transition);
-}
 
 .user-profile-container h2 {
   font-family: var(--ff-poppins);
@@ -57,10 +49,6 @@
 }
 /* UserProfile.css */
 
-.user-profile-container {
-  max-width: 600px;
-  margin: 0 auto;
-}
 
 .profile-heading {
   font-size: 24px;
