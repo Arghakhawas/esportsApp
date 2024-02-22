@@ -33,7 +33,7 @@
   margin: 0;
   color: var(--roman-silver);
   font-weight: bolder;
-  font-size: x-large;
+  font-size: large;
 }
 .tournament-box img {
   width: 100%; /* Make the image fill its container */
