@@ -1,6 +1,6 @@
 // ChangePasswordModal.js
 import React, { useState } from 'react';
-import './ChangePasswordmodal.css';
+import './Changepassword.css';
 
 const ChangePasswordModal = ({ userId, onClose }) => {
   const [oldPassword, setOldPassword] = useState('');
