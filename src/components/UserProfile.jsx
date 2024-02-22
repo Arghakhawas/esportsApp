@@ -122,9 +122,9 @@ const UserProfile = () => {
 
           <div className="avatar-buttons">
             <button onClick={() => setShowAvatarSelection(true)}>Change Picture</button>
-            <button onClick={handleOpenChangePasswordModal}>Change Password</button>
+       
             <button onClick={saveSelectedAvatar}>Save Avatar</button> {/* Added Save Avatar button */}
-            <button onClick={handleCloseChangePasswordModal}>Cancel</button>
+         
           </div>
 
           <p className="profile-info">Name: {profileData.username}</p>
@@ -134,7 +134,10 @@ const UserProfile = () => {
           <p className="profile-info">Tournament Matches Played: {profileData.tournamentMatchesPlayed}</p>
         </div>
       )}
-
+      
+      <div className="avatar-buttons">
+     <button onClick={handleOpenChangePasswordModal}>Change Password</button>
+     <button onClick={handleCloseChangePasswordModal}>Cancel</button> </div>
       {/* Render the ChangePasswordModal when needed */}
       {showChangePasswordModal && (
         <ChangePasswordModal userId={profileData?._id} onClose={handleCloseChangePasswordModal} />
