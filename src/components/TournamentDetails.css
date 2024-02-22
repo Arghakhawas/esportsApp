@@ -372,17 +372,12 @@ body {
   background-color: var(--raisin-black-1);
 }
 
-/* Update the game-categories and game-category-button styles */
-.game-categories {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
+
 
 .game-category {
   position: relative;
   background-color: var(--raisin-black-3);
-  padding: 15px;
+  padding: 30px;
   border-radius: 8px;
   box-shadow: var(--shadow-1);
   transition: transform 0.3s ease;

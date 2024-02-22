@@ -15,7 +15,7 @@ const TournamentDetails = ({ tournament }) => {
   const [activeSection, setActiveSection] = useState(null);
   const [activeGameCategory, setActiveGameCategory] = useState(null);
   const [activeTournamentType, setActiveTournamentType] = useState(null);
-  const [isLive, setIsLive] = useState(false);
+
   useEffect(() => {
     // Mock data for demonstration purposes
     const mockKnockoutStages = ["Round 1", "Quarterfinals", "Semifinals", "Final"];
@@ -384,7 +384,7 @@ const renderTournamentDetails = () => {
       return renderTournamentDetails();
     } else if (activeSection === 'streaming') {
       // Display the Streaming component
-      return <Streaming isLive={isLive} startLiveStream={startLiveStream} stopLiveStream={stopLiveStream} />;
+      return <Streaming  />;
     }
 
     return null;
