@@ -6,7 +6,7 @@ import ChangePasswordModal from './ChangePasswordModel';
 import bgmi from "../assets/bgmi.png";
 import Cute from "../assets/Cute.png";
 import deathking from "../assets/deathking.png";
-import itachiuchiha  from "../assets/itachiuchiha.png";
+import Itachiuchiha  from "../assets/Itachiuchiha.png";
 import Naruto from "../assets/naruto.png";
 import narutoteacher from "../assets/narutoteacher.png";
 import onepiece from "../assets/onepiece.png";
@@ -24,7 +24,7 @@ const UserProfile = () => {
     { src: bgmi, alt: 'BGMI AVATAR', id: 'bgmi' },
     { src: Cute, alt: 'CUTE AVATAR', id: 'Cute' },
     { src: deathking, alt: 'DEATHKING AVATAR', id: 'deathking' },
-    { src: itachiuchiha, alt: 'ITACHI AVATAR', id: 'itachiuchiha' },
+    { src: Itachiuchiha, alt: 'ITACHI AVATAR', id: 'Itachiuchiha' },
     { src: Naruto, alt: 'NARUTO AVATAR', id: 'Naruto' },
     { src: narutoteacher, alt: 'NARUTOTEACHER AVATAR', id: 'narutoteacher' },
     { src: onepiece, alt: 'ONCEPIECE AVATAR', id: 'onepiece' },
