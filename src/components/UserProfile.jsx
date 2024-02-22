@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import './UserProfile.css';
 import ChangePasswordModal from './ChangePasswordModel';
 import bgmi from "../assets/bgmi.png";
-import cute from "../assets/cute.png";
+import Cute from "../assets/Cute.png";
 import deathking from "../assets/deathking.png";
 
 const UserProfile = () => {
@@ -14,8 +14,8 @@ const UserProfile = () => {
   const [selectedAvatarIndex, setSelectedAvatarIndex] = useState(null);
   const [avatarOptions, setAvatarOptions] = useState([
     { src: bgmi, alt: 'BGMI Avatar', id: 'bgmi' },
-    { src: cute, alt: 'cute avtar', id: 'cute' },
-    { src: deathking, alt: 'deathking Avatar', id: 'deathking' },
+    { src: Cute, alt: 'CUTE Avatar', id: 'Cute' },
+    { src: deathking, alt: 'DEATHKING AVATAR', id: 'deathking' },
     // Add more avatars as needed
   ]);
 
