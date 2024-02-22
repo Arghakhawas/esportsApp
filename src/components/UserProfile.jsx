@@ -1,5 +1,3 @@
-// UserProfile.js
-
 import React, { useEffect, useState } from 'react';
 import './UserProfile.css';
 import ChangePasswordModal from './ChangePasswordModel';
@@ -20,9 +18,7 @@ const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [showAvatarSelection, setShowAvatarSelection] = useState(false);
- 
   const [selectedAvatar, setSelectedAvatar] = useState(profileData?.avatar || avatarOptions[0]);
-
 
   const avatarOptions = [
     { src: bgmi, alt: 'BGMI AVATAR', id: 'bgmi' },
@@ -115,7 +111,7 @@ const UserProfile = () => {
       {profileData && (
         <div className="profile-details">
           <img
-           src={avatarOptions[selectedAvatarIndex]?.src}
+           src={selectedAvatar?.src}
            alt="Profile"
            className="profile-picture"
           />
@@ -125,13 +121,13 @@ const UserProfile = () => {
             <button onClick={handleToggleAvatarSelection}>Choose Avatar</button>
             {showAvatarSelection && (
               <div className="avatar-options">
-                {avatarOptions.map((avatar, index) => (
+                {avatarOptions.map((avatar) => (
                   <img
                     key={avatar.id}
                     src={avatar.src}
                     alt={avatar.alt}
                     className={`small-avatar ${selectedAvatar === avatar ? 'selected' : ''}`}
-                    onClick={() => handleAvatarSelection(index)}
+                    onClick={() => handleAvatarSelection(avatar)}
                   />
                 ))}
               </div>
