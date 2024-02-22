@@ -18,7 +18,7 @@ const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [showAvatarSelection, setShowAvatarSelection] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState(profileData?.avatar || bgmi); // Set a default avatar
+  const [selectedAvatar, setSelectedAvatar] = useState(null); // Set a default avatar
 
   const avatarOptions = [
     { src: bgmi, alt: 'BGMI AVATAR', id: 'bgmi' },
@@ -50,6 +50,7 @@ const UserProfile = () => {
 
         const data = await response.json();
         setProfileData(data.user);
+        setSelectedAvatar(data.user.avatar); // Set selected avatar from profile data
       } catch (error) {
         console.error(error);
       }
@@ -78,12 +79,6 @@ const UserProfile = () => {
       console.error('Error saving avatar:', error);
     }
   };
-
-  useEffect(() => {
-    if (selectedAvatar) {
-      saveSelectedAvatar();
-    }
-  }, [selectedAvatar]);
 
   const handleAvatarSelection = (avatar) => {
     setSelectedAvatar(avatar);
@@ -128,6 +123,7 @@ const UserProfile = () => {
           <div className="avatar-buttons">
             <button onClick={() => setShowAvatarSelection(true)}>Change Picture</button>
             <button onClick={handleOpenChangePasswordModal}>Change Password</button>
+            <button onClick={saveSelectedAvatar}>Save Avatar</button> {/* Added Save Avatar button */}
             <button onClick={handleCloseChangePasswordModal}>Cancel</button>
           </div>
 
