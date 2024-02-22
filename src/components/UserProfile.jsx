@@ -63,7 +63,7 @@ const UserProfile = () => {
   };
 
   const generateProfileAvatar = (name) => {
-    return name.slice(0, 10);
+    return name.slice(0, 12);
   };
 
   const handleOpenChangePasswordModal = () => {
