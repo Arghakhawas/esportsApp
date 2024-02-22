@@ -12,6 +12,7 @@ import TournamentDetails from './components/TournamentDetails';
 
 import UserProfile from './components/UserProfile';
 import LiveViewer from './components/LiveViewer';
+import ChangePasswordModal from './components/ChangePasswordModel';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -46,7 +47,7 @@ function App() {
               <Route path="/profile" element= {<UserProfile />} />
           
 <Route path="/tournament" element={<Tournament />} />
-
+<Route path="/ChangePasswordModel" element={<ChangePasswordModal />} />
               <Route path="/tournament-details" element={<TournamentDetails/>} />
               <Route path="/liveviewer" element={<LiveViewer/>} />
             

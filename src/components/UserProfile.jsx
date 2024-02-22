@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import './UserProfile.css';
-import ChangePasswordModal from './ChangePasswordModal'; // Import the modal component for changing password
+import ChangePasswordModal from './ChangePasswordModel';
 
 const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
