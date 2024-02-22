@@ -133,7 +133,7 @@ const Tournament = () => {
         <div className="payment-success-message">
           <div className="payment-success-message-content">
             <h3>Payment successful!</h3>
-            <p>Thank you for your payment.</p>
+            <p>Thank you for participent.please check 25th Feb Tournament Informaition. Fixures and knock-stages </p>
             <button onClick={handlePaymentSuccessClose}>Go to Home</button>
           </div>
         </div>
@@ -141,5 +141,4 @@ const Tournament = () => {
     </div>
   );
 };
-
 export default Tournament;
