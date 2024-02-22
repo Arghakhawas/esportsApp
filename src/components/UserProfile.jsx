@@ -24,7 +24,7 @@ const UserProfile = () => {
     { src: bgmi, alt: 'BGMI AVATAR', id: 'bgmi' },
     { src: Cute, alt: 'CUTE AVATAR', id: 'Cute' },
     { src: deathking, alt: 'DEATHKING AVATAR', id: 'deathking' },
-    { src: Itachiuchiha, alt: 'ITACHI AVATAR', id: 'Itachiuchiha' },
+    { src: Itachiuchiha, alt: 'ITACHIUCHIHA AVATAR', id: 'Itachiuchiha' },
     { src: Naruto, alt: 'NARUTO AVATAR', id: 'Naruto' },
     { src: narutoteacher, alt: 'NARUTOTEACHER AVATAR', id: 'narutoteacher' },
     { src: onepiece, alt: 'ONCEPIECE AVATAR', id: 'onepiece' },
