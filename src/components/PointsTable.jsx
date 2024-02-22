@@ -2,8 +2,7 @@
 import React from 'react';
 import './PointsTable.css'; 
 const teamsData = [
-  // List of teams with their data
-  // Example:
+ 
   { name: 'Warriors FC', gp: 2, w: 2, d: 0, l: 0, gd: 5, pts: 6 },
   { name: 'YOLO FC', gp: 2, w: 2, d: 0, l: 0, gd: 4, pts: 6 },
   { name: 'Majestic A', gp: 2, w: 1, d: 1, l: 0, gd: 4, pts: 4 },
