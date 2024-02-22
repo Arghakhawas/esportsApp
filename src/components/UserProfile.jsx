@@ -6,7 +6,7 @@ import ChangePasswordModal from './ChangePasswordModel';
 import bgmi from "../assets/bgmi.png";
 import Cute from "../assets/Cute.png";
 import deathking from "../assets/deathking.png";
-import Itachiuchiha  from "../assets/Itachiuchiha.png";
+import Itachiuchiha from "../assets/Itachiuchiha.png";
 import Naruto from "../assets/Naruto.png";
 import narutoteacher from "../assets/narutoteacher.png";
 import onepiece from "../assets/onepiece.png";
@@ -15,12 +15,14 @@ import sexy from "../assets/sexy.png";
 import sexy2 from "../assets/sexy2.png";
 import sukuna from "../assets/sukuna.png";
 import sukunaevil from "../assets/sukunaevil.png";
+
 const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [showAvatarSelection, setShowAvatarSelection] = useState(false);
-  const [selectedAvatarIndex, setSelectedAvatarIndex] = useState(null);
-  const [avatarOptions, setAvatarOptions] = useState([
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
+
+  const avatarOptions = [
     { src: bgmi, alt: 'BGMI AVATAR', id: 'bgmi' },
     { src: Cute, alt: 'CUTE AVATAR', id: 'Cute' },
     { src: deathking, alt: 'DEATHKING AVATAR', id: 'deathking' },
@@ -32,9 +34,8 @@ const UserProfile = () => {
     { src: sexy, alt: 'SEXY AVATAR', id: 'sexy' },
     { src: sexy2, alt: 'SEXY2 AVATAR', id: 'sexy2' },
     { src: sukuna, alt: 'SUKUNA AVATAR', id: 'sukuna' },
-    { src: sukunaevil, alt: 'SUKUNAEVIL AVATAR', id: 'sukuna' },
-  ]);
-  const [selectedAvatar, setSelectedAvatar] = useState(profileData?.avatar || null);
+    { src: sukunaevil, alt: 'SUKUNAEVIL AVATAR', id: 'sukunaevil' },
+  ];
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -67,33 +68,33 @@ const UserProfile = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-        body: JSON.stringify({ avatar: selectedAvatar }),
+        body: JSON.stringify({ avatar: selectedAvatar.id }), // Send the avatar id
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to save avatar');
       }
-  
+
       // Avatar saved successfully
     } catch (error) {
       console.error('Error saving avatar:', error);
     }
   };
-  
-  // Call saveSelectedAvatar when user selects an avatar
+
   useEffect(() => {
     if (selectedAvatar) {
       saveSelectedAvatar();
     }
   }, [selectedAvatar]);
-  
 
   const generateProfileAvatar = (name) => {
     return name.slice(0, 12);
   };
-  const handleAvatarSelection = (index) => {
-    setSelectedAvatar(avatarOptions[index]);
+
+  const handleAvatarSelection = (avatar) => {
+    setSelectedAvatar(avatar);
   };
+
   const handleOpenChangePasswordModal = () => {
     setShowChangePasswordModal(true);
   };
@@ -112,7 +113,7 @@ const UserProfile = () => {
       {profileData && (
         <div className="profile-details">
           <img
-            src={avatarOptions[selectedAvatarIndex]?.src || `https://ui-avatars.com/api/?name=${generateProfileAvatar(profileData.username)}&background=random`}
+            src={selectedAvatar?.src || `https://ui-avatars.com/api/?name=${generateProfileAvatar(profileData.username)}&background=random`}
             alt="Profile"
             className="profile-picture"
           />
@@ -122,15 +123,15 @@ const UserProfile = () => {
             <button onClick={handleToggleAvatarSelection}>Choose Avatar</button>
             {showAvatarSelection && (
               <div className="avatar-options">
-                {avatarOptions.map((avatar, index) => (
-  <img
-    key={avatar.id}
-    src={avatar.src}
-    alt={avatar.alt}
-    className={`small-avatar ${selectedAvatar === avatar ? 'selected' : ''}`}
-    onClick={() => handleAvatarSelection(index)}
-  />
-))}
+                {avatarOptions.map((avatar) => (
+                  <img
+                    key={avatar.id}
+                    src={avatar.src}
+                    alt={avatar.alt}
+                    className={`small-avatar ${selectedAvatar === avatar ? 'selected' : ''}`}
+                    onClick={() => handleAvatarSelection(avatar)}
+                  />
+                ))}
               </div>
             )}
           </div>
@@ -150,10 +151,7 @@ const UserProfile = () => {
 
       {/* Render the ChangePasswordModal when needed */}
       {showChangePasswordModal && (
-        <ChangePasswordModal
-          userId={profileData._id} // Pass the user ID to the modal component
-          onClose={handleCloseChangePasswordModal}
-        />
+        <ChangePasswordModal userId={profileData?._id} onClose={handleCloseChangePasswordModal} />
       )}
     </div>
   );
