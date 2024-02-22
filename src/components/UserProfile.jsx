@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import './UserProfile.css';
 import ChangePasswordModal from './ChangePasswordModel';
-
+import bgmi from "../assets/bgmi.png";
 const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
@@ -62,9 +62,9 @@ const UserProfile = () => {
             <h3>Choose Avatar</h3>
             <div className="avatar-options">
               <img
-                src="avatar_url_1.jpg"
+                src="bgmi"
                 alt="Avatar 1"
-                onClick={() => handleAvatarSelection("avatar_url_1.jpg")}
+                onClick={() => handleAvatarSelection("bgmi.png")}
               />
               <img
                 src="avatar_url_2.jpg"
