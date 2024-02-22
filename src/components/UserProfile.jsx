@@ -59,26 +59,28 @@ const UserProfile = () => {
     fetchUserProfile();
   }, []);
 
-  const saveSelectedAvatar = async () => {
-    try {
-      const response = await fetch('https://esportsappbackend.onrender.com/api/profile/avatar', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-        body: JSON.stringify({ avatar: selectedAvatar.id }), // Send the avatar id
-      });
+ // Modify the saveSelectedAvatar function
+const saveSelectedAvatar = async () => {
+  try {
+    const response = await fetch('https://esportsappbackend.onrender.com/api/profile/avatar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({ avatar: selectedAvatar }), // Save the whole avatar object
+    });
 
-      if (!response.ok) {
-        throw new Error('Failed to save avatar');
-      }
-
-      // Avatar saved successfully
-    } catch (error) {
-      console.error('Error saving avatar:', error);
+    if (!response.ok) {
+      throw new Error('Failed to save avatar');
     }
-  };
+
+    // Avatar saved successfully
+  } catch (error) {
+    console.error('Error saving avatar:', error);
+  }
+};
+
 
   const handleAvatarSelection = (avatar) => {
     setSelectedAvatar(avatar);
