@@ -1,14 +1,12 @@
 .custom-signup-container {
-  width: 100%;
-  padding: 40px 30px;
+  width: 96%;
+  padding: 3px 41px;
   background: #dde1e7;
   border-radius: 10px;
-  box-shadow: -3px -3px 7px #ffffff73,
-              2px 2px 5px rgba(94, 104, 121, 0.288);
+  box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px #5e687949;
   margin: 10px;
   text-align: center;
 }
-
 .custom-signup-container h2 {
   font-size: 33px;
   font-weight: 600;
