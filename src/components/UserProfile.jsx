@@ -113,9 +113,9 @@ const UserProfile = () => {
       {profileData && (
         <div className="profile-details">
           <img
-            src={selectedAvatar?.src || `https://ui-avatars.com/api/?name=${generateProfileAvatar(profileData.username)}&background=random`}
-            alt="Profile"
-            className="profile-picture"
+           src={avatarOptions[selectedAvatarIndex]?.src}
+           alt="Profile"
+           className="profile-picture"
           />
 
           {/* Avatar selection section */}
@@ -123,13 +123,13 @@ const UserProfile = () => {
             <button onClick={handleToggleAvatarSelection}>Choose Avatar</button>
             {showAvatarSelection && (
               <div className="avatar-options">
-                {avatarOptions.map((avatar) => (
+                {avatarOptions.map((avatar, index) => (
                   <img
                     key={avatar.id}
                     src={avatar.src}
                     alt={avatar.alt}
                     className={`small-avatar ${selectedAvatar === avatar ? 'selected' : ''}`}
-                    onClick={() => handleAvatarSelection(avatar)}
+                    onClick={() => handleAvatarSelection(index)}
                   />
                 ))}
               </div>
