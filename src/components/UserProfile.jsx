@@ -34,6 +34,7 @@ const UserProfile = () => {
     { src: sukuna, alt: 'SUKUNA AVATAR', id: 'sukuna' },
     { src: sukunaevil, alt: 'SUKUNAEVIL AVATAR', id: 'sukuna' },
   ]);
+  const [selectedAvatar, setSelectedAvatar] = useState(profileData?.avatar || null);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -58,14 +59,41 @@ const UserProfile = () => {
     fetchUserProfile();
   }, []);
 
-  const handleAvatarSelection = (index) => {
-    setSelectedAvatarIndex(index);
+  const saveSelectedAvatar = async () => {
+    try {
+      const response = await fetch('https://esportsappbackend.onrender.com/api/profile/avatar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({ avatar: selectedAvatar }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to save avatar');
+      }
+  
+      // Avatar saved successfully
+    } catch (error) {
+      console.error('Error saving avatar:', error);
+    }
   };
+  
+  // Call saveSelectedAvatar when user selects an avatar
+  useEffect(() => {
+    if (selectedAvatar) {
+      saveSelectedAvatar();
+    }
+  }, [selectedAvatar]);
+  
 
   const generateProfileAvatar = (name) => {
     return name.slice(0, 12);
   };
-
+  const handleAvatarSelection = (index) => {
+    setSelectedAvatar(avatarOptions[index]);
+  };
   const handleOpenChangePasswordModal = () => {
     setShowChangePasswordModal(true);
   };
@@ -95,14 +123,14 @@ const UserProfile = () => {
             {showAvatarSelection && (
               <div className="avatar-options">
                 {avatarOptions.map((avatar, index) => (
-                  <img
-                    key={avatar.id}
-                    src={avatar.src}
-                    alt={avatar.alt}
-                    className={`small-avatar ${selectedAvatarIndex === index ? 'selected' : ''}`}
-                    onClick={() => handleAvatarSelection(index)}
-                  />
-                ))}
+  <img
+    key={avatar.id}
+    src={avatar.src}
+    alt={avatar.alt}
+    className={`small-avatar ${selectedAvatar === avatar ? 'selected' : ''}`}
+    onClick={() => handleAvatarSelection(index)}
+  />
+))}
               </div>
             )}
           </div>
