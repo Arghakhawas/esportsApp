@@ -125,16 +125,17 @@ const UserProfile = () => {
             </div>
           )}
 
+          <div className="avatar-buttons">
+            <button onClick={() => setShowAvatarSelection(true)}>Change Picture</button>
+            <button onClick={handleOpenChangePasswordModal}>Change Password</button>
+            <button onClick={handleCloseChangePasswordModal}>Cancel</button>
+          </div>
+
           <p className="profile-info">Name: {profileData.username}</p>
           <p className="profile-info">Email: {profileData.email}</p>
           <p className="profile-info">Refer id: {profileData.referId}</p>
           <p className="profile-info">Number: {profileData.number}</p>
           <p className="profile-info">Tournament Matches Played: {profileData.tournamentMatchesPlayed}</p>
-
-          <div className="avatar-buttons">
-            <button onClick={handleOpenChangePasswordModal}>Change Password</button>
-            <button onClick={handleCloseChangePasswordModal}>Cancel</button>
-          </div>
         </div>
       )}
 
