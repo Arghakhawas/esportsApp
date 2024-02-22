@@ -19,12 +19,23 @@ const LiveViewer = () => {
       }
     });
 
+    // Listen for the 'stopStream' event to stop the live stream
+    socket.current.on('stopStream', () => {
+      stopLiveStream();
+    });
+
     return () => {
       if (socket.current) {
         socket.current.disconnect();
       }
     };
   }, []);
+
+  const stopLiveStream = () => {
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
+    }
+  };
 
   return (
     <div>

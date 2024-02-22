@@ -23,25 +23,23 @@ const Streaming = () => {
     };
   }, []);
 
-  const startScreenCapture = () => {
-    navigator.mediaDevices
-      .getDisplayMedia({ video: true })
-      .then((screenStream) => {
-        socket.current.emit('stream', screenStream);
-        setIsLive(true);
-        setIsScreenCapturing(true);
-      })
-      .catch((error) => {
-        console.error('Error capturing screen:', error);
-      });
-  };
+    // Timer logic
+    const timerRef = useRef(null);
 
-  const stopScreenCapture = () => {
-    const screenStream = new MediaStream();
-    socket.current.emit('stopStream');
-    setIsLive(false);
-    setIsScreenCapturing(false);
-  };
+    const startTimer = () => {
+      setIsLive(true);
+      setIsScreenCapturing(true);
+      timerRef.current = setInterval(() => {
+        setRecordingTime((prevTime) => prevTime + 1);
+      }, 1000);
+    };
+  
+    const stopTimer = () => {
+      clearInterval(timerRef.current);
+      setRecordingTime(0);
+      setIsLive(false);
+      setIsScreenCapturing(false);
+    };
 
   return (
     <div>
@@ -61,3 +59,4 @@ const Streaming = () => {
 };
 
 export default Streaming;
+
