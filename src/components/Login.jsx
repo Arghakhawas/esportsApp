@@ -48,7 +48,7 @@
         {error && <p className="error-message">{error}</p>}
       <div>  <label>Email:</label>
         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} /></div>
-     <div>   <label>Password:</label> <span class="password-toggle-icon"><i class="fas fa-eye"></i></span>
+     <div>  
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /> </div>
         <button onClick={handleLoginSuccess}>Login</button>
         {loading && (

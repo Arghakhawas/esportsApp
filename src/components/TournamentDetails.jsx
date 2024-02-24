@@ -62,32 +62,32 @@ const TournamentDetails = ({ tournament }) => {
       {
         name: "Ea-football",
         image: efootball1,
-        prizePool: "200",
-        timing: "Every Saturday at 3:00 PM",
+        prizePool: "200-1000",
+        timing: "Every Saturday at 4:00 PM to 10 pm",
         rules: "show in 24 feb",
       },
       {
         name: "Bgmi",
         image: bgmi,
-        prizePool: "400",
+        prizePool: "400-1000",
         timing: "Every Saturday at 3:00 PM",
-        rules: "show in 24 feb",
+        rules: "show in 28 feb",
       },
   
       {
         name: "Call of Duty",
         image: cod,
-        prizePool: "1000",
-        timing: "Every Saturday at 3:00 PM",
-        rules: "show in 24 feb",
+        prizePool: "200-1000",
+        timing: "Every Saturday at 4:00 PM to 10 pm",
+        rules: "show in 27 feb",
       },
   
       {
         name: "FreeFire",
         image: ffgarena,
-        prizePool: "1000",
-        timing: "Every Saturday at 3:00 PM",
-        rules: "show in 24 feb",
+        prizePool: "200-1000",
+        timing: "Every Saturday at 4:00 PM to 10 pm",
+        rules: "show in 26 feb",
       },
   
   
@@ -255,7 +255,7 @@ const renderTournamentDetails = () => {
       "Team 9", "Team 10", "Team 11", "Team 12", "Team 13", "Team 14", "Team 15", "Team 16",
       "Team 17", "Team 18", "Team 19", "Team 20", "Team 21", "Team 22", "Team 23", "Team 24",
       "Team 25", "Team 26", "Team 27", "Team 28", "Team 29", "Team 30", "Team 31", "Team 32",
-      "Team 33", "Team 34", "Team 35", "Team 36",
+      
     ];
 
     const rounds = Math.ceil(Math.log2(teams.length));

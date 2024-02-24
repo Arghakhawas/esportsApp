@@ -13,11 +13,12 @@ const Signup = ({ onSignup }) => {
   const [number, setNumber] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false); // New state for loading
+  const [showPassword, setShowPassword] = useState(false); // New state for password toggle
   const navigate = useNavigate();
 
   const handleSignup = async () => {
     try {
-      setLoading(true); // Set loading to true when signup process starts
+      setLoading(true);
 
       const response = await fetch('https://esportsappbackend.onrender.com/api/signup', {
         method: 'POST',
@@ -38,7 +39,7 @@ const Signup = ({ onSignup }) => {
     } catch (error) {
       setError(error.message);
     } finally {
-      setLoading(false); // Set loading to false when signup process completes (success or failure)
+      setLoading(false);
     }
   };
 
@@ -46,7 +47,7 @@ const Signup = ({ onSignup }) => {
     <div className="custom-signup-container">
       <h2>Signup</h2>
       {error && <p className="error-message">{error}</p>}
-      {loading && <Loader/> } 
+      {loading && <Loader/>}
       <label>Username:</label>
       <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
       <label>Email:</label>
@@ -54,7 +55,14 @@ const Signup = ({ onSignup }) => {
       <label>Number:</label>
       <input type="number" value={number} onChange={(e) => setNumber(e.target.value)} />
       <label>Password:</label>
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <input
+        type={showPassword ? 'text' : 'password'}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button onClick={() => setShowPassword(!showPassword)}>
+        {showPassword ? 'Hide' : 'Show'}
+      </button>
       <label>Refer id:</label>
       <input type="number" value={referId} onChange={(e) => setReferId(e.target.value)} />
       <button onClick={handleSignup}>Signup</button>
