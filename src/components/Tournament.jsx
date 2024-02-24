@@ -6,6 +6,7 @@ import efootball from "../assets/efootball.png";
 import efootball1 from "../assets/efootball1.jpg";
 import ffgarena from "../assets/ffgarena.jpg";
 import bgmi from "../assets/bgmi.png";
+import cod from "../assets/cod.jpg"
 
 const Tournament = () => {
   const [step, setStep] = useState(1);
@@ -31,7 +32,7 @@ const Tournament = () => {
       });
 
       if (response.ok) {
-        setStep(2); // Move to step 2 (payment)
+        setStep(2); 
       }
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -71,6 +72,7 @@ const Tournament = () => {
       rules: 'Game rules for EA Football Knockout...',
       image: efootball,
     },
+    
     {
       category: 'EA Football 2024 - Group Stages Cup',
       prize: '₹1000',
@@ -79,18 +81,86 @@ const Tournament = () => {
       image: efootball1, 
     },
     {
-      category: 'FreeFire - Entry Fee ₹10',
-      prize: '₹150',
-      joiningFee: '₹10',
-      rules: 'Game rules for BGMI Entry Fee ₹10...',
+      category: 'EA Football 2024 - Single Match',
+      prize: '₹90',
+      joiningFee: '₹50',
+      rules: 'Game rules for EA Football Singnal match...',
+      image: efootball,
+    },
+    {
+      category: 'FreeFire - Single - BR',
+      prize: '₹200',
+      joiningFee: '₹15',
+      rules: 'Game rules for BGMI Entry Fee ...',
       image: ffgarena, 
     },
     {
-      category: 'BGMI - Entry Fee ₹25',
+      category: 'FreeFire - multiply BR  ',
+      prize: '₹450',
+      joiningFee: '₹25',
+      rules: 'Game rules for BGMI Entry Fee ...',
+      image: ffgarena, 
+    },
+    {
+      category: 'FreeFire - Multiply BR',
+      prize: '₹1000',
+      joiningFee: '₹50',
+      rules: 'Game rules for BGMI Entry Fee ...',
+      image: ffgarena, 
+    },
+    {
+      category: 'FreeFire - Multiply Knockout  (4v4) - TDM Room',
+      prize: '₹1000',
+      joiningFee: '₹50',
+      rules: 'Game rules for Freefire Entry Fee ...',
+      image: ffgarena, 
+    },
+    {
+      category: 'FreeFire - Single match(4v4) - TDM Room',
+      prize: '₹90',
+      joiningFee: '₹50',
+      rules: 'Game rules for Freefire Entry Fee ...',
+      image: ffgarena, 
+    },
+    {
+      category: 'BGMI - Knockout TDM',
+      prize: '₹2000',
+      joiningFee: '₹100',
+      rules: 'Game rules for BGMI Entry Fee ₹25...',
+      image: bgmi, 
+    },
+    {
+      category: 'BGMI - Battle Ground',
       prize: '₹400',
       joiningFee: '₹25',
       rules: 'Game rules for BGMI Entry Fee ₹25...',
       image: bgmi, 
+    },
+    {
+      category: 'BGMI - Tdm Single Match(4v4)',
+      prize: '₹190',
+      joiningFee: '₹100',
+      rules: 'Game rules for BGMI Entry Fee ₹25...',
+      image: bgmi, 
+    },
+    {
+      category: 'COD - Tdm Single Match(4v4)',
+      prize: '₹190',
+      joiningFee: '₹100',
+      rules: 'Game rules for BGMI Entry Fee ₹25...',
+      image: cod, 
+    },   {
+      category: 'COD - Tdm Single Match(4v4)',
+      prize: '₹190',
+      joiningFee: '₹100',
+      rules: 'Game rules for BGMI Entry Fee ₹25...',
+      image: cod, 
+    },   {
+      category: 'COD - Tdm Single Match(4v4)',
+      prize: '₹190',
+      joiningFee: '₹100',
+      rules: 'Game rules for BGMI Entry Fee ₹25...',
+      image: cod, 
     },
   ];
 
@@ -127,7 +197,7 @@ const Tournament = () => {
           onPaymentSubmit={handlePaymentSubmit}
           selectedTournament={selectedTournament}
 
-          
+
           onClose={() => setStep(1)}
         />
       )}
