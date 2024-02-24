@@ -1,4 +1,3 @@
-// TournamentForm.js
 import React, { useState } from 'react';
 import './TournamentForm.css';
 import QRCode from 'react-qr-code';
@@ -44,39 +43,41 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
     <div className="tournament-form my-custom-form-class">
       <h2>Tournament Registration</h2>
       {step === 1 && (
-        <form onSubmit={handleFormSubmit}>
-          <label>
-            Game ID:
-            <input
-              type="text"
-              name="gameId"
-              value={gameId}
-              onChange={(e) => setGameId(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            User Name:
-            <input
-              type="text"
-              name="userName"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Phone Number:
-            <input
-              type="tel"
-              name="phoneNumber"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              required
-            />
-          </label>
-          {selectedTournament && selectedTournament.Player === 'Multiple' && (
-            <div>
+  <form onSubmit={handleFormSubmit}>
+    <label>
+      Game ID:
+      <input
+        type="text"
+        name="gameId"
+        value={gameId}
+        onChange={(e) => setGameId(e.target.value)}
+        required
+      />
+    </label>
+    <label>
+      User Name:
+      <input
+        type="text"
+        name="userName"
+        value={userName}
+        onChange={(e) => setUserName(e.target.value)}
+        required
+      />
+    </label>
+    <label>
+      Phone Number:
+      <input
+        type="tel"
+        name="phoneNumber"
+        value={phoneNumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
+        required
+      />
+    </label>
+    {selectedTournament && (
+      <>
+        {selectedTournament.Player === 'Multiple' && (
+          <div>
 
           <label>
             Game ID P1:
@@ -138,7 +139,8 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
               {/* Add more fields as needed for Multiply Player */}
             </div>
           )}
-          {selectedTournament && selectedTournament.Player === 'COD' && (
+         {selectedTournament.Player === 'COD' && (
+         
             <div>
                      <label>
             Game ID P1:
@@ -180,6 +182,16 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
               required
             />
           </label>
+          <label>
+            Game ID P5:
+            <input
+              type="text"
+              name="gameId"
+              value={gameId}
+              onChange={(e) => setGameId(e.target.value)}
+              required
+            />
+          </label>
    
           <label>
            Leader Phone Number:
@@ -195,13 +207,13 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
                 Team Name:
                 <input type="text" name="teamName" required />
               </label>
-              {/* Add more fields as needed for COD Player */}
-            </div>
-          )}
-          <button type="submit">Submit</button>
-        </form>
-      )}
-
+              </div>
+        )}
+      </>
+    )}
+    <button type="submit">Submit</button>
+  </form>
+)}
       {step === 2 && (
         <form onSubmit={handlePaymentSubmit}>
           <div>
