@@ -20,6 +20,7 @@ const Tournament = () => {
     setStep(2); // Move to step 2 (join form)
   };
 
+
   const handleFormSubmit = async (formData) => {
     try {
       const response = await fetch('https://esportsappbackend.onrender.com/api/tournament/join', {
@@ -57,7 +58,6 @@ const Tournament = () => {
       console.error('Error submitting payment:', error);
     }
   };
-
   const handlePaymentSuccessClose = () => {
     setStep(1);
     setPaymentSuccess(false);

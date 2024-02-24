@@ -1,7 +1,3 @@
-import React, { useState } from 'react';
-import './TournamentForm.css';
-import QRCode from 'react-qr-code';
-
 const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament }) => {
   const [gameId, setGameId] = useState('');
   const [userName, setUserName] = useState('');
@@ -9,18 +5,27 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
   const [utrNo, setUtrNo] = useState('');
   const [entryFee, setEntryFee] = useState(selectedTournament ? selectedTournament.joiningFee : '');
   const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    player1: '',
+    player2: '',
+    player3: '',
+    player4: '',
+    player5: '',
+    teamName: '',
+  });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = {
+    const playerData = {
       gameId,
       userName,
       phoneNumber,
+      ...formData,
     };
 
     try {
-      await onSubmit(formData);
+      await onSubmit(playerData);
       setStep(2); // Move to step 2 (payment)
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -37,6 +42,70 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
     } catch (error) {
       console.error('Error submitting payment:', error);
     }
+  };
+
+  const renderAdditionalInputs = () => {
+    if (selectedTournament && selectedTournament.Player === 'Multiple') {
+      return (
+        <div>
+          {/* Additional inputs for Multiply Player */}
+          {[1, 2, 3, 4, 5].map((index) => (
+            <label key={index}>
+              Player {index}:
+              <input
+                type="text"
+                name={`player${index}`}
+                value={formData[`player${index}`]}
+                onChange={(e) => setFormData({ ...formData, [`player${index}`]: e.target.value })}
+                required
+              />
+            </label>
+          ))}
+          <label>
+            Team Name:
+            <input
+              type="text"
+              name="teamName"
+              value={formData.teamName}
+              onChange={(e) => setFormData({ ...formData, teamName: e.target.value })}
+              required
+            />
+          </label>
+        </div>
+      );
+    }
+
+    if (selectedTournament && selectedTournament.Player === 'COD') {
+      return (
+        <div>
+          {/* Additional inputs for COD Player */}
+          {[1, 2, 3, 4, 5].map((index) => (
+            <label key={index}>
+              Player {index}:
+              <input
+                type="text"
+                name={`player${index}`}
+                value={formData[`player${index}`]}
+                onChange={(e) => setFormData({ ...formData, [`player${index}`]: e.target.value })}
+                required
+              />
+            </label>
+          ))}
+          <label>
+            Team Name:
+            <input
+              type="text"
+              name="teamName"
+              value={formData.teamName}
+              onChange={(e) => setFormData({ ...formData, teamName: e.target.value })}
+              required
+            />
+          </label>
+        </div>
+      );
+    }
+
+    return null;
   };
 
   return (
@@ -74,102 +143,7 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
               required
             />
           </label>
-          {selectedTournament && selectedTournament.Player === 'Multiple' && (
-            <div>
-              {/* Form for Multiple Players (4 teams) */}
-              <label>
-                Game ID Team 1:
-                <input
-                  type="text"
-                  name="gameIdTeam1"
-                  value={gameId}
-                  onChange={(e) => setGameId(e.target.value)}
-                  required
-                />
-              </label>
-
-              <label>
-                Game ID Team 1:
-                <input
-                  type="text"
-                  name="gameIdTeam1"
-                  value={gameId}
-                  onChange={(e) => setGameId(e.target.value)}
-                  required
-                />
-              </label>              <label>
-                Game ID Team 1:
-                <input
-                  type="text"
-                  name="gameIdTeam1"
-                  value={gameId}
-                  onChange={(e) => setGameId(e.target.value)}
-                  required
-                />
-              </label>
-              {/* Add similar fields for Game IDs of Team 2, 3, and 4 */}
-              {/* ... */}
-              <label>
-                Leader Phone Number:
-                <input
-                  type="tel"
-                  name="phoneNumber"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Team Name:
-                <input
-                  type="text"
-                  name="teamName"
-                  onChange={(e) => setUserName(e.target.value)}
-                  required
-                />
-              </label>
-            </div>
-          )}
-          {selectedTournament && selectedTournament.Player === 'COD' && (
-            <div>
-              {/* Form for COD Players (5 players) */}
-              <label>
-                Game ID Player 1:
-                <input
-                  type="text"
-                  name="gameIdPlayer1"
-                  value={gameId}
-                  onChange={(e) => setGameId(e.target.value)}
-                  required
-                />
-              </label>              <label>
-                Game ID Team 1:
-                <input
-                  type="text"
-                  name="gameIdTeam1"
-                  value={gameId}
-                  onChange={(e) => setGameId(e.target.value)}
-                  required
-                />
-              </label>
-              {/* Add similar fields for Game IDs of Player 2 to 5 */}
-              {/* ... */}
-              <label>
-                Leader Phone Number:
-                <input
-                  type="tel"
-                  name="phoneNumber"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Team Name:
-                <input type="text" name="teamName" required />
-              </label>
-            </div>
-          )}
+          {renderAdditionalInputs()}
           <button type="submit">Submit</button>
         </form>
       )}
