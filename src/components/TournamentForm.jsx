@@ -8,7 +8,7 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
   const [userName, setUserName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [utrNo, setUtrNo] = useState('');
-  const [userUpi, setUserUpi] = useState('');
+  // const [userUpi, setUserUpi] = useState('');
   const [entryFee, setEntryFee] = useState(selectedTournament ? selectedTournament.joiningFee : '');
   const [step, setStep] = useState(1);
 
@@ -18,7 +18,7 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
     const formData = {
       gameId,
       userName,
-      userUpi,
+     
       phoneNumber,
     };
 
@@ -78,16 +78,7 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
               required
             />
           </label>
-          <label>
-            User UPI ID:
-            <input
-              type="text"
-              name="userUpi"
-              value={userUpi}
-              onChange={(e) => setUserUpi(e.target.value)}
-              required
-            />
-          </label>
+    
           <button type="submit">Submit</button>
         </form>
       )}
@@ -99,10 +90,11 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
 
             <label>Entry Fee: {entryFee}</label>
             <QRCode value="9073357827-2@ybl" size={256} />
-            <h3>our Upi Id- 9073357827-2@ybl</h3>
-            <label>UTR No:</label>
+            <h3>Upi Id Phone pay- 9073357827-2@ybl</h3>
+            <h3>Gpay- argha820@oksbi</h3>
+            <label>Trasection Id / UTR No:</label>
             <input
-              type="text"
+              type="text" 
               name="utrNo"
               value={utrNo}
               onChange={(e) => setUtrNo(e.target.value)}
