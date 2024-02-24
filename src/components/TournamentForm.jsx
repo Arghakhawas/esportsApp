@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+import './TournamentForm.css';
+import QRCode from 'react-qr-code';
 const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament }) => {
   const [gameId, setGameId] = useState('');
   const [userName, setUserName] = useState('');
