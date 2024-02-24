@@ -64,7 +64,7 @@ const Login = ({ onLoginSuccess }) => {
   </button>
 </div>
 
-      <button onClick={handleLoginSuccess}>Login</button>
+      <button className='btnl' onClick={handleLoginSuccess}>Login</button>
       {loading && <div className="BoltLoader-container"></div>}
       <div>
         <p>not a member?</p>

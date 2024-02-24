@@ -65,7 +65,7 @@ const Signup = ({ onSignup }) => {
       </button>
       <label>Refer id:</label>
       <input type="number" value={referId} onChange={(e) => setReferId(e.target.value)} />
-      <button onClick={handleSignup}>Signup</button>
+      <button className='buttons' onClick={handleSignup}>Signup</button>
       {loading && (
         <div className="BoltLoader-container">
      
