@@ -43,44 +43,9 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
     <div className="tournament-form my-custom-form-class">
       <h2>Tournament Registration</h2>
       {step === 1 && (
-  <form onSubmit={handleFormSubmit}>
-    <label>
-      Game ID:
-      <input
-        type="text"
-        name="gameId"
-        value={gameId}
-        onChange={(e) => setGameId(e.target.value)}
-        required
-      />
-    </label>
-    <label>
-      User Name:
-      <input
-        type="text"
-        name="userName"
-        value={userName}
-        onChange={(e) => setUserName(e.target.value)}
-        required
-      />
-    </label>
-    <label>
-      Phone Number:
-      <input
-        type="tel"
-        name="phoneNumber"
-        value={phoneNumber}
-        onChange={(e) => setPhoneNumber(e.target.value)}
-        required
-      />
-    </label>
-    {selectedTournament && (
-      <>
-        {selectedTournament.Player === 'Multiple' && (
-          <div>
-
+        <form onSubmit={handleFormSubmit}>
           <label>
-            Game ID P1:
+            Game ID:
             <input
               type="text"
               name="gameId"
@@ -90,38 +55,17 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
             />
           </label>
           <label>
-            Game ID P2:
+            User Name:
             <input
               type="text"
-              name="gameId"
-              value={gameId}
-              onChange={(e) => setGameId(e.target.value)}
+              name="userName"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
               required
             />
           </label>
           <label>
-            Game ID P3:
-            <input
-              type="text"
-              name="gameId"
-              value={gameId}
-              onChange={(e) => setGameId(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Game ID P4:
-            <input
-              type="text"
-              name="gameId"
-              value={gameId}
-              onChange={(e) => setGameId(e.target.value)}
-              required
-            />
-          </label>
-   
-          <label>
-           Leader Phone Number:
+            Phone Number:
             <input
               type="tel"
               name="phoneNumber"
@@ -130,90 +74,106 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
               required
             />
           </label>
+          {selectedTournament && selectedTournament.Player === 'Multiple' && (
+            <div>
+              {/* Form for Multiple Players (4 teams) */}
+              <label>
+                Game ID Team 1:
+                <input
+                  type="text"
+                  name="gameIdTeam1"
+                  value={gameId}
+                  onChange={(e) => setGameId(e.target.value)}
+                  required
+                />
+              </label>
+
+              <label>
+                Game ID Team 1:
+                <input
+                  type="text"
+                  name="gameIdTeam1"
+                  value={gameId}
+                  onChange={(e) => setGameId(e.target.value)}
+                  required
+                />
+              </label>              <label>
+                Game ID Team 1:
+                <input
+                  type="text"
+                  name="gameIdTeam1"
+                  value={gameId}
+                  onChange={(e) => setGameId(e.target.value)}
+                  required
+                />
+              </label>
+              {/* Add similar fields for Game IDs of Team 2, 3, and 4 */}
+              {/* ... */}
+              <label>
+                Leader Phone Number:
+                <input
+                  type="tel"
+                  name="phoneNumber"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                />
+              </label>
               <label>
                 Team Name:
-                <input type="text" name="teamName" 
-                onChange={ (e) => setUserName(e.target.value)}
-                required />
+                <input
+                  type="text"
+                  name="teamName"
+                  onChange={(e) => setUserName(e.target.value)}
+                  required
+                />
               </label>
-              {/* Add more fields as needed for Multiply Player */}
             </div>
           )}
-         {selectedTournament.Player === 'COD' && (
-         
+          {selectedTournament && selectedTournament.Player === 'COD' && (
             <div>
-                     <label>
-            Game ID P1:
-            <input
-              type="text"
-              name="gameId"
-              value={gameId}
-              onChange={(e) => setGameId(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Game ID P2:
-            <input
-              type="text"
-              name="gameId"
-              value={gameId}
-              onChange={(e) => setGameId(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Game ID P3:
-            <input
-              type="text"
-              name="gameId"
-              value={gameId}
-              onChange={(e) => setGameId(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Game ID P4:
-            <input
-              type="text"
-              name="gameId"
-              value={gameId}
-              onChange={(e) => setGameId(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Game ID P5:
-            <input
-              type="text"
-              name="gameId"
-              value={gameId}
-              onChange={(e) => setGameId(e.target.value)}
-              required
-            />
-          </label>
-   
-          <label>
-           Leader Phone Number:
-            <input
-              type="tel"
-              name="phoneNumber"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              required
-            />
-          </label>
+              {/* Form for COD Players (5 players) */}
+              <label>
+                Game ID Player 1:
+                <input
+                  type="text"
+                  name="gameIdPlayer1"
+                  value={gameId}
+                  onChange={(e) => setGameId(e.target.value)}
+                  required
+                />
+              </label>              <label>
+                Game ID Team 1:
+                <input
+                  type="text"
+                  name="gameIdTeam1"
+                  value={gameId}
+                  onChange={(e) => setGameId(e.target.value)}
+                  required
+                />
+              </label>
+              {/* Add similar fields for Game IDs of Player 2 to 5 */}
+              {/* ... */}
+              <label>
+                Leader Phone Number:
+                <input
+                  type="tel"
+                  name="phoneNumber"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                />
+              </label>
               <label>
                 Team Name:
                 <input type="text" name="teamName" required />
               </label>
-              </div>
-        )}
-      </>
-    )}
-    <button type="submit">Submit</button>
-  </form>
-)}
+            </div>
+          )}
+          <button type="submit">Submit</button>
+        </form>
+      )}
+
       {step === 2 && (
         <form onSubmit={handlePaymentSubmit}>
           <div>
