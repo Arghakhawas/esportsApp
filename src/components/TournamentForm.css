@@ -5,7 +5,7 @@
   top: 58%;
   left: 50%;
   width: 87vw;
-  height: 73vh;
+  height: 78vh;
   flex-direction: column;
   display: flex;
   transform: translate(-50%, -50%);
@@ -13,6 +13,7 @@
   border-radius: 8px;
   box-shadow: 0 0 10px #0003;
   z-index: 1000;
+  background: chocolate;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
@@ -20,17 +21,23 @@
   /* Style for the form header */
   .tournament-form h2 {
     text-align: center;
+    text-decoration: underline;
+    color: black;
   }
   
   /* Style for the form sections (Payment and Registration) */
   .tournament-form > div {
     margin-top: 20px;
   }
-  
+  .upi{
+    color: black;
+  }
   /* Style for the form labels and inputs */
   .tournament-form label {
     display: block;
     margin-bottom: 8px;
+    color: aqua;
+    font-size: larger;
   }
   .tournament-form input {
     width: 100%;

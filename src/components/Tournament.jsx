@@ -126,6 +126,8 @@ const Tournament = () => {
           onSubmit={handleFormSubmit}
           onPaymentSubmit={handlePaymentSubmit}
           selectedTournament={selectedTournament}
+
+          
           onClose={() => setStep(1)}
         />
       )}

@@ -90,8 +90,8 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
 
             <label>Entry Fee: {entryFee}</label>
             <QRCode value="9073357827-2@ybl" size={256} />
-            <h3>Upi Id Phone pay- 9073357827-2@ybl</h3>
-            <h3>Gpay- argha820@oksbi</h3>
+           <div className='upi'>  <h3>Upi Id Phone pay- 9073357827-2@ybl</h3>
+            <h3>Gpay- argha820@oksbi</h3></div>
             <label>Trasection Id / UTR No:</label>
             <input
               type="text" 

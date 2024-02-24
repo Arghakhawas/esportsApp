@@ -13,12 +13,12 @@
 
 .tournament-box {
   border: 9px solid var(--marigold);
-  border-radius: 8px;
-  padding: 20px;
+  border-radius: 28px;
+  padding: 9px;
   margin: 10px;
   width: 200px;
-  text-align: left;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  box-shadow: 0 0 10px #0000001a;
   background-color: var(--raisin-black-2);
   color: var(--platinum);
   position: relative; /* Added for image overlay */
