@@ -112,4 +112,6 @@
   background: none;
   border: none;
   cursor: pointer;
+  font-size: 14px; /* Adjust the font size */
+  padding: 5px;
 }
