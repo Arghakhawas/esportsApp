@@ -9,7 +9,7 @@ import bgmi from "../assets/bgmi.png";
 
 import Streaming from './Streaming';
 const TournamentDetails = ({ tournament }) => {
-
+ 
   const [pointTable, setPointTable] = useState([]);
   const [fixtures, setFixtures] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
@@ -218,7 +218,7 @@ const renderTournamentDetails = () => {
           </>
         );
       } else if (activeTournamentType === "TDM") {
-        return renderTDMBox(4, 2);
+        return renderTDMBox(4, 2); {/* Render TDM box with 4-player teams and 2 teams */}
       }
       break;
     case "Call of Duty":
@@ -229,7 +229,7 @@ const renderTournamentDetails = () => {
           </>
         );
       } else if (activeTournamentType === "TDM") {
-        return renderTDMBox(5, 2); 
+        return renderTDMBox(5, 2); {/* Render TDM box with 5-player teams and 2 teams */}
       }
       break;
     case "FreeFire":
@@ -295,7 +295,7 @@ const renderTournamentDetails = () => {
   
   const renderFixtures = () => {
     const generatedKnockoutFixtures = generateKnockoutFixtures();
-
+  
     return (
       <div className="fixtures">
         <h3>Fixtures</h3>
@@ -313,17 +313,14 @@ const renderTournamentDetails = () => {
                     ))}
                   </ul>
                 </>
-              ) : (
-                <div key={roundIndex} className={`round-${round.round}`}>
-                  <strong>{knockoutStages[roundIndex]}</strong>
-                </div>
-              )}
+              ) : null}
             </li>
           ))}
         </ul>
       </div>
     );
   };
+  
 
   const renderContent = () => {
     if (!activeGameCategory && !activeTournamentType) {
