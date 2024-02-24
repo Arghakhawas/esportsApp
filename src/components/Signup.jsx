@@ -60,7 +60,7 @@ const Signup = ({ onSignup }) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={() => setShowPassword(!showPassword)}>
+      <button className='toggleb'  onClick={() => setShowPassword(!showPassword)}>
         {showPassword ? 'Hide' : 'Show'}
       </button>
       <label>Refer id:</label>
