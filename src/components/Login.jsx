@@ -51,6 +51,7 @@ const Login = ({ onLoginSuccess }) => {
         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
       <div>
+      <label>Password:</label>
   <input
     type={showPassword ? 'text' : 'password'}
     value={password}
@@ -61,7 +62,7 @@ const Login = ({ onLoginSuccess }) => {
     onClick={() => setShowPassword(!showPassword)}
   >
     {showPassword ? 'Hide' : 'Show'}
-  </button>
+  </button> 
 </div>
 
       <button className='btnl' onClick={handleLoginSuccess}>Login</button>
