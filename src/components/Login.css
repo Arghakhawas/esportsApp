@@ -108,12 +108,12 @@
   position: relative;
 }
 .login-container .toggle-password-btn {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-8%);
   background: none;
-  border: none;
+  border: 2px solid black;
   cursor: pointer;
-  font-size: 14px; /* Adjust the font size */
-  padding: 5px; /* Adjust the padding */}
+  border-radius: 10em;
+  color: black;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 5px}
