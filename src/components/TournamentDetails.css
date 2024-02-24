@@ -1,168 +1,3 @@
-/* Reset styles for knockout stages and related components */
-.knockout-stage {
-  text-align: center;
-  width: 30%;
-  background: #ececec;
-  padding-bottom: 50px;
-  border-left: 0.5px dashed #888;
-  position: relative;
-}
-
-.knockout-stage::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 2px;
-  height: 100%;
-  background: #888;
-  transform: translateX(-50%);
-}
-
-.knockout-stages .knockout-stage:first-child::before {
-  display: none;
-}
-
-
-.knockout-stage h2 {
-  font-size: 18px;
-  font-weight: 700;
-  padding: 10px 0;
-  color: #333; /* Text color for knockout stage headings */
-}
-
-.knockout-match {
-  font-family: 'Montserrat', arial, sans-serif;
-  font-size: 20px;
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  background: #eee;
-  padding: 5px 10px;
-  margin: 10px 5px 0px;
-  text-align: center;
-  min-height: 30px;
-  z-index: 20;
-  box-shadow: 0px 0px 10px 3px #aaa;
-}
-
-.knockout-match:nth-child(2n) {
-  margin: 0 5px 10px;
-}
-
-.team-name {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.team-radio {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.bracket-team::before {
-  content: '';
-  position: absolute;
-  height: 1px;
-  width: 11%;
-  left: -11%;
-  top: 50%;
-  border-top: 3px solid #444;
-}
-
-.bracket-team::after {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 10px;
-  right: -12.5px;
-  border-color: #444;
-  border-width: 3px;
-}
-
-.bracket-team:nth-of-type(odd)::after {
-  height: 100%;
-  top: 50%;
-  border-right-style: solid;
-  border-top-style: solid;
-}
-
-.bracket-team:nth-of-type(even)::after {
-  height: 100%;
-  top: -50%;
-  border-right-style: solid;
-  border-bottom-style: solid;
-}
-
-.bracket-1 .bracket-team::before {
-  display: none;
-}
-
-.bracket-2 .bracket-team:nth-of-type(odd)::after {
-  height: 200%;
-  top: 50%;
-}
-
-.bracket-2 .bracket-team:nth-of-type(even)::after {
-  height: 200%;
-  top: -150%;
-}
-
-.bracket-3 .bracket-team:nth-of-type(odd)::after {
-  height: 350%;
-  top: 50%;
-}
-
-.bracket-3 .bracket-team:nth-of-type(even)::after {
-  height: 350%;
-  top: -300%;
-}
-
-.bracket-4 .bracket-team::after {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .knockout-stages {
-    flex-direction: column;
-  }
-
-  .knockout-stage {
-    width: 100%;
-    border-left: none;
-  }
-
-  .knockout-stage:nth-of-type(4) {
-    padding-bottom: 50px;
-  }
-}
-
-/* Additional styles for football knockout stages */
-.knockout-match .team-name {
-  font-weight: bold;
-  color: #555; /* Text color for team names */
-}
-
-.knockout-match .team-radio {
-  margin-top: 10px;
-}
-
-.bracket-team::before,
-.bracket-team::after {
-  background-color: #666; /* Color for bracket lines */
-}
-
-.knockout-match:hover {
-  background-color: #f5f5f5; /* Background color on hover */
-}
-
-@media (max-width: 768px) {
-  .knockout-match {
-    font-size: 16px; /* Adjust font size for smaller screens */
-  }
-}
 
 /* TournamentDetails.css */
 .tournament-details {
@@ -203,7 +38,7 @@
 }
 
 /* Unique class names for each component */
-.knockout-stages,
+
 .points-table,
 .live-match,
 .fixtures {
@@ -211,7 +46,7 @@
 }
 
 /* Adjustments for better spacing */
-.knockout-stages h3,
+
 .points-table h3,
 .live-match h3,
 .fixtures h3 {

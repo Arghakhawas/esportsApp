@@ -9,7 +9,7 @@ import bgmi from "../assets/bgmi.png";
 
 import Streaming from './Streaming';
 const TournamentDetails = ({ tournament }) => {
-  const [knockoutStages, setKnockoutStages] = useState([]);
+
   const [pointTable, setPointTable] = useState([]);
   const [fixtures, setFixtures] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
@@ -17,15 +17,14 @@ const TournamentDetails = ({ tournament }) => {
   const [activeTournamentType, setActiveTournamentType] = useState(null);
 
   useEffect(() => {
-    // Mock data for demonstration purposes
-    const mockKnockoutStages = ["Round 1", "Quarterfinals", "Semifinals", "Final"];
+  
     const mockPointTable = [  
       { team: "Team A", points: 3 },
       { team: "Team B", points: 1 },
     ];
     const generatedKnockoutFixtures = generateKnockoutFixtures();
 
-    setKnockoutStages(mockKnockoutStages);
+  
     setPointTable(mockPointTable);
     setFixtures(generatedKnockoutFixtures); 
    
@@ -193,7 +192,7 @@ const renderTournamentDetails = () => {
       if (activeTournamentType === "Knockout") {
         return (
           <>
-            {renderKnockoutStages()}
+           
             {renderFixtures()} {/* Render fixtures for Ea-football Knockout */}
             <div className="streaming-section">
               <h3>Live Streaming</h3>
@@ -219,7 +218,7 @@ const renderTournamentDetails = () => {
           </>
         );
       } else if (activeTournamentType === "TDM") {
-        return renderTDMBox(4, 2); {/* Render TDM box with 4-player teams and 2 teams */}
+        return renderTDMBox(4, 2);
       }
       break;
     case "Call of Duty":
@@ -230,7 +229,7 @@ const renderTournamentDetails = () => {
           </>
         );
       } else if (activeTournamentType === "TDM") {
-        return renderTDMBox(5, 2); {/* Render TDM box with 5-player teams and 2 teams */}
+        return renderTDMBox(5, 2); 
       }
       break;
     case "FreeFire":
@@ -270,7 +269,7 @@ const renderTournamentDetails = () => {
           team1,
           team2,
           date: "2024-02-20", // Update with actual date
-          time: "15:00", // Update with actual time
+          time: "16:00-22:00pm", // Update with actual time
           live:<Streaming />,
         });
       }
@@ -283,52 +282,6 @@ const renderTournamentDetails = () => {
     return fixtures;
   };
 
-  const generateKnockoutBrackets = () => {
-    const teams = [
-      "Team 1", "Team 2", "Team 3", "Team 4", "Team 5", "Team 6", "Team 7", "Team 8",
-      "Team 9", "Team 10", "Team 11", "Team 12", "Team 13", "Team 14", "Team 15", "Team 16",
-      "Team 17", "Team 18", "Team 19", "Team 20", "Team 21", "Team 22", "Team 23", "Team 24",
-      "Team 25", "Team 26", "Team 27", "Team 28", "Team 29", "Team 30", "Team 31", "Team 32",
-      "Team 33", "Team 34", "Team 35", "Team 36",
-    ];
-  
-    const brackets = [];
-    for (let i = 0; i < knockoutStages.length; i++) {
-      const stageBrackets = [];
-      const numMatches = teams.length / Math.pow(2, i + 1);
-  
-      for (let j = 0; j < numMatches; j++) {
-        const team1 = teams[j * 2];
-        const team2 = teams[j * 2 + 1];
-  
-        stageBrackets.push(
-          <div key={j} className="knockout-match">
-            <div className="team-name">
-              {i === 0 ? `Match ${j + 1}: ${team1} vs ${team2}` : ''}
-            </div>
-          </div>
-        );
-      }
-  
-      brackets.push(
-        <div key={i} className={`knockout-stage bracket-${i + 1}`}>
-          <h2>{knockoutStages[i]}</h2>
-          {stageBrackets}
-        </div>
-      );
-    }
-  
-    return brackets;
-  };
-
-  const renderKnockoutStages = () => {
-    return (
-      <div className="knockout-stages">
-        <h3>Knockout Stages</h3>
-        {generateKnockoutBrackets()}
-      </div>
-    );
-  };
 
   const renderPointsTable = () => {
     return (
