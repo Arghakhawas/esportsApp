@@ -69,6 +69,7 @@ const Tournament = () => {
       category: 'EA Football 2024 - Knockout',
       prize: '₹200',
       joiningFee: '₹15',
+      Player:'Single',
       rules: 'Game rules for EA Football Knockout...',
       image: efootball,
     },
@@ -77,6 +78,7 @@ const Tournament = () => {
       category: 'EA Football 2024 - Group Stages Cup',
       prize: '₹1000',
       joiningFee: '₹50',
+      Player:'Single',
       rules: 'Game rules for EA Football Group Stages Cup...',
       image: efootball1, 
     },
@@ -84,6 +86,7 @@ const Tournament = () => {
       category: 'EA Football 2024 - Single Match',
       prize: '₹90',
       joiningFee: '₹50',
+      Player:'Single',
       rules: 'Game rules for EA Football Singnal match...',
       image: efootball,
     },
@@ -91,19 +94,22 @@ const Tournament = () => {
       category: 'FreeFire - Single - BR',
       prize: '₹200',
       joiningFee: '₹15',
+      Player:'Single',
       rules: 'Game rules for BGMI Entry Fee ...',
       image: ffgarena, 
     },
     {
       category: 'FreeFire - multiply BR  ',
       prize: '₹450',
-      joiningFee: '₹25',
+      joiningFee: '₹25'
+      , Player:'Multiple',
       rules: 'Game rules for BGMI Entry Fee ...',
       image: ffgarena, 
     },
     {
       category: 'FreeFire - Multiply BR',
       prize: '₹1000',
+      Player:'Multiple',
       joiningFee: '₹50',
       rules: 'Game rules for BGMI Entry Fee ...',
       image: ffgarena, 
@@ -112,6 +118,7 @@ const Tournament = () => {
       category: 'FreeFire - Multiply Knockout  (4v4) - TDM Room',
       prize: '₹1000',
       joiningFee: '₹50',
+      Player:'Multiple',
       rules: 'Game rules for Freefire Entry Fee ...',
       image: ffgarena, 
     },
@@ -126,6 +133,7 @@ const Tournament = () => {
       category: 'BGMI - Knockout TDM',
       prize: '₹2000',
       joiningFee: '₹100',
+      Player:'Multiple',
       rules: 'Game rules for BGMI Entry Fee ₹25...',
       image: bgmi, 
     },
@@ -133,32 +141,37 @@ const Tournament = () => {
       category: 'BGMI - Battle Ground',
       prize: '₹400',
       joiningFee: '₹25',
+      Player:'Multiple',
       rules: 'Game rules for BGMI Entry Fee ₹25...',
       image: bgmi, 
     },
     {
-      category: 'BGMI - Tdm Single Match(4v4)',
+      category: 'BGMI - Tdm Single Match(5v5)',
       prize: '₹190',
       joiningFee: '₹100',
+      Player:'Multiple',
       rules: 'Game rules for BGMI Entry Fee ₹25...',
       image: bgmi, 
     },
     {
-      category: 'COD - Tdm Single Match(4v4)',
+      category: 'COD - Tdm Single Match(5v5)',
       prize: '₹190',
+      Player:'Multiple',
       joiningFee: '₹100',
       rules: 'Game rules for BGMI Entry Fee ₹25...',
       image: cod, 
     },   {
-      category: 'COD - Tdm Single Match(4v4)',
-      prize: '₹190',
-      joiningFee: '₹100',
+      category: 'COD - Tdm knockout Single Match(5v5)',
+      prize: '₹1000',
+      joiningFee: '₹50',
+      Player:'Multiple',
       rules: 'Game rules for BGMI Entry Fee ₹25...',
       image: cod, 
     },   {
-      category: 'COD - Tdm Single Match(4v4)',
-      prize: '₹190',
-      joiningFee: '₹100',
+      category: 'COD - Battle Ground Match',
+      prize: '₹450',
+      joiningFee: '₹25',
+      Player:'Multiple',
       rules: 'Game rules for BGMI Entry Fee ₹25...',
       image: cod, 
     },
@@ -177,7 +190,7 @@ const Tournament = () => {
         <button className='btnall'  onClick={() => setSelectedGameCategory('EA Football')}>EA Football</button>
         <button className='btnall'  onClick={() => setSelectedGameCategory('FreeFire')}>FreeFire</button>
         <button className='btnall'  onClick={() => setSelectedGameCategory('BGMI')}>BGMI</button>
-        
+        <button className='btnall'  onClick={() => setSelectedGameCategory('COD')}>Call of Duty </button>
       </div>
       <div className="tournament-list">
         {filteredTournaments.map((tournament, index) => (
@@ -196,8 +209,6 @@ const Tournament = () => {
           onSubmit={handleFormSubmit}
           onPaymentSubmit={handlePaymentSubmit}
           selectedTournament={selectedTournament}
-
-
           onClose={() => setStep(1)}
         />
       )}
