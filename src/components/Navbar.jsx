@@ -78,7 +78,11 @@ function Navbar({  onLogout, isAuthenticated }) {
   <BsFillTrophyFill />
 </Link>
                   </li>
-
+                  <li className="navbar-item">
+              <Link to="/tournament-details" className="navbar-link skewBg" data-nav-link data-tooltip="Tournament Details">
+  <GiConsoleController />
+</Link>
+              </li>
                 </>
               ) : null}
               <li className="navbar-item">
@@ -86,11 +90,7 @@ function Navbar({  onLogout, isAuthenticated }) {
   <BsCart4 />
 </Link>
               </li>
-              <li className="navbar-item">
-              <Link to="/tournament-details" className="navbar-link skewBg" data-nav-link data-tooltip="Tournament Details">
-  <GiConsoleController />
-</Link>
-              </li>
+          
               <div className="header-actions">
                 {isAuthenticated ? (
                   <>
