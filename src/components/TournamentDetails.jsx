@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-const socket = io('https://esportsappbackend.onrender.com:10000');
+
 import PointsTable from './PointsTable';
 import './TournamentDetails.css'; // Import the CSS file
 import { BiLeftArrowCircle } from "react-icons/bi";
@@ -7,11 +7,12 @@ import cod from "../assets/cod.jpg";
 import efootball1 from "../assets/efootball1.jpg";
 import ffgarena from "../assets/ffgarena.jpg";
 import bgmi from "../assets/bgmi.png";
+import { io } from 'socket.io-client';
 
 import Streaming from './Streaming';
 const TournamentDetails = ({ tournament }) => {
   const [sharedRoomIds, setSharedRoomIds] = useState([]);
-
+  const socket = io('https://esportsappbackend.onrender.com');
 
   const [pointTable, setPointTable] = useState([]);
   const [fixtures, setFixtures] = useState([]);
