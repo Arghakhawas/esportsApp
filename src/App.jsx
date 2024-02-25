@@ -7,8 +7,8 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Shop from './components/Shop';
 import Tournament from './components/Tournament';
-import AdminDashboard from './components/AdminDashboard';
-import AdminRoute from './components/AdminRoute'; // Import the AdminRoute component
+// import AdminDashboard from './components/AdminDashboard';
+// import AdminRoute from './components/AdminRoute'; 
 
 import TournamentDetails from './components/TournamentDetails';
 
@@ -47,11 +47,11 @@ function App() {
           {isAuthenticated && (
             <>
               <Route path="/profile" element={<UserProfile />} />
-              <AdminRoute
+              {/* <AdminRoute
                 path="/admin"
                 element={<AdminDashboard />}
                 isAuthenticated={isAuthenticated}
-              />
+              /> */}
               <Route path="/tournament" element={<Tournament />} />
               <Route path="/ChangePasswordModel" element={<ChangePasswordModal />} />
               <Route path="/tournament-details" element={<TournamentDetails />} />
