@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+const socket = io('https://esportsappbackend.onrender.com:10000');
 import PointsTable from './PointsTable';
 import './TournamentDetails.css'; // Import the CSS file
 import { BiLeftArrowCircle } from "react-icons/bi";
@@ -17,7 +18,21 @@ const TournamentDetails = ({ tournament }) => {
   const [activeSection, setActiveSection] = useState(null);
   const [activeGameCategory, setActiveGameCategory] = useState(null);
   const [activeTournamentType, setActiveTournamentType] = useState(null);
+ // Update the useEffect hook to listen for shared room IDs
+ useEffect(() => {
+  // Listen for shared room IDs from other users
+  socket.on('sharedRoomId', ({ roomId, team1, team2 }) => {
+    setSharedRoomIds((prevSharedRoomIds) => ({
+      ...prevSharedRoomIds,
+      [team1]: roomId,
+    }));
+  });
 
+  // Clean up the event listener when the component unmounts
+  return () => {
+    socket.off('sharedRoomId');
+  };
+}, []);
   useEffect(() => {
 
     const mockPointTable = [
@@ -292,9 +307,8 @@ const TournamentDetails = ({ tournament }) => {
     );
   };
 
-
   const handleShareRoomId = (team1, team2) => {
-    const sharedRoomId = globalRoomIds[team1];
+    const sharedRoomId = sharedRoomIds[team1];
     if (sharedRoomId) {
       // Emit an event to the server to share the room ID
       socket.emit('shareRoomId', sharedRoomId, team1, team2);
@@ -304,24 +318,8 @@ const TournamentDetails = ({ tournament }) => {
       alert(`Room ID for ${team1} is not available`);
     }
   };
-  
-  // Update the useEffect hook to listen for shared room IDs
-useEffect(() => {
-  // Listen for shared room IDs from other users
-  socket.on('sharedRoomId', ({ roomId, team1, team2 }) => {
-    setSharedRoomIds((prevSharedRoomIds) => ({
-      ...prevSharedRoomIds,
-      [team1]: roomId,
-    }));
-  });
+ 
 
-  // Clean up the event listener when the component unmounts
-  return () => {
-    socket.off('sharedRoomId');
-  };
-}, []);
-
-// Update the renderFixtures function to display shared room IDs
 const renderFixtures = () => {
   const generatedKnockoutFixtures = generateKnockoutFixtures();
 
@@ -365,7 +363,6 @@ const renderFixtures = () => {
     </div>
   );
 };
-
   
   
   const renderContent = () => {
