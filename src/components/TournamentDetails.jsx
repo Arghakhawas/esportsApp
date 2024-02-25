@@ -277,7 +277,7 @@ const generateKnockoutFixtures = () => {
   const rounds = Math.ceil(Math.log2(teams.length));
 
   const fixtures = [];
-  const startTime = new Date("2024-02-25T18:30:00"); // Initial start time for the matches
+  const startTime = new Date("2024-02-25T21:00:00"); // Initial start time for the matches
 
   for (let round = 1; round <= rounds; round++) {
     const matches = [];
