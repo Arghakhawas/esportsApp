@@ -10,6 +10,7 @@ import bgmi from "../assets/bgmi.png";
 import { io } from 'socket.io-client';
 
 import Streaming from './Streaming';
+
 const TournamentDetails = ({ tournament }) => {
   const [sharedRoomIds, setSharedRoomIds] = useState([]);
   const socket = io('https://esportsappbackend.onrender.com');
@@ -19,33 +20,33 @@ const TournamentDetails = ({ tournament }) => {
   const [activeSection, setActiveSection] = useState(null);
   const [activeGameCategory, setActiveGameCategory] = useState(null);
   const [activeTournamentType, setActiveTournamentType] = useState(null);
- // Update the useEffect hook to listen for shared room IDs
- useEffect(() => {
-  // Listen for shared room IDs from other users
-  socket.on('sharedRoomId', ({ roomId, team1, team2 }) => {
-    setSharedRoomIds((prevSharedRoomIds) => ({
-      ...prevSharedRoomIds,
-      [team1]: roomId,
-    }));
-  });
+  const [gameResults, setGameResults] = useState({});
 
-  // Clean up the event listener when the component unmounts
-  return () => {
-    socket.off('sharedRoomId');
-  };
-}, []);
+  // Update the useEffect hook to listen for shared room IDs
   useEffect(() => {
+    // Listen for shared room IDs from other users
+    socket.on('sharedRoomId', ({ roomId, team1, team2 }) => {
+      setSharedRoomIds((prevSharedRoomIds) => ({
+        ...prevSharedRoomIds,
+        [team1]: roomId,
+      }));
+    });
 
+    // Clean up the event listener when the component unmounts
+    return () => {
+      socket.off('sharedRoomId');
+    };
+  }, []);
+
+  useEffect(() => {
     const mockPointTable = [
       { team: "Team A", points: 3 },
       { team: "Team B", points: 1 },
     ];
     const generatedKnockoutFixtures = generateKnockoutFixtures();
 
-
     setPointTable(mockPointTable);
     setFixtures(generatedKnockoutFixtures);
-
   }, []);
 
   const handleBackButtonClick = () => {
@@ -68,13 +69,13 @@ const TournamentDetails = ({ tournament }) => {
     setActiveTournamentType(tournamentType);
     setActiveSection('streaming');
   };
+
   const stopLiveStream = () => {
     socket.current.emit('stopStream');
     setIsLive(false);
   };
 
   const renderGameCategories = () => {
-
     const gameCategories = [
       {
         name: "Ea-football",
@@ -90,7 +91,6 @@ const TournamentDetails = ({ tournament }) => {
         timing: "Every Saturday at 3:00 PM",
         rules: "show in 28 feb",
       },
-
       {
         name: "Call of Duty",
         image: cod,
@@ -98,7 +98,6 @@ const TournamentDetails = ({ tournament }) => {
         timing: "Every Saturday at 4:00 PM to 10 pm",
         rules: "show in 27 feb",
       },
-
       {
         name: "FreeFire",
         image: ffgarena,
@@ -106,8 +105,6 @@ const TournamentDetails = ({ tournament }) => {
         timing: "Every Saturday at 4:00 PM to 10 pm",
         rules: "show in 26 feb",
       },
-
-
     ];
 
     return (
@@ -155,7 +152,7 @@ const TournamentDetails = ({ tournament }) => {
 
     return null;
   };
-  // ...
+
   const renderHundredTeamBox = () => {
     return (
       <div className="hundred-team-box">
@@ -209,56 +206,54 @@ const TournamentDetails = ({ tournament }) => {
       case "Ea-football":
         if (activeTournamentType === "Knockout") {
           return (
-            <>
-
+            <div>
               {renderFixtures()} {/* Render fixtures for Ea-football Knockout */}
               <div className="streaming-section">
                 <h3>Live Streaming</h3>
                 <Streaming />
               </div>
-            </>
+            </div>
           );
         } else if (activeTournamentType === "League") {
           return (
-            <>
+            <div>
               {renderPointsTable()}
               {renderFixtures()} {/* Render fixtures for Ea-football League */}
-            </>
+            </div>
           );
         }
-
         break;
       case "Bgmi":
         if (activeTournamentType === "Battle Ground") {
           return (
-            <>
+            <div>
               {renderHundredTeamBox()}
-            </>
+            </div>
           );
         } else if (activeTournamentType === "TDM") {
-          return renderTDMBox(4, 2); {/* Render TDM box with 4-player teams and 2 teams */ }
+          return <div>{renderTDMBox(4, 2)}</div>; {/* Render TDM box with 4-player teams and 2 teams */}
         }
         break;
       case "Call of Duty":
         if (activeTournamentType === "Battle Ground") {
           return (
-            <>
+            <div>
               {renderHundredTeamBox()}
-            </>
+            </div>
           );
         } else if (activeTournamentType === "TDM") {
-          return renderTDMBox(5, 2); {/* Render TDM box with 5-player teams and 2 teams */ }
+          return <div>{renderTDMBox(5, 2)}</div>; {/* Render TDM box with 5-player teams and 2 teams */}
         }
         break;
       case "FreeFire":
         if (activeTournamentType === "Battle Ground") {
           return (
-            <>
+            <div>
               {renderHundredTeamBox()}
-            </>
+            </div>
           );
         } else if (activeTournamentType === "TDM") {
-          return renderTDMBox(4, 2); {/* Render TDM box with 4-player teams and 2 teams */ }
+          return <div>{renderTDMBox(4, 2)}</div>; {/* Render TDM box with 4-player teams and 2 teams */}
         }
         break;
       default:
@@ -266,54 +261,48 @@ const TournamentDetails = ({ tournament }) => {
     }
   };
 
-  // ... (Previous code remains unchanged)
+  const generateKnockoutFixtures = () => {
+    const teams = [
+      "Arijit Seal", "Akash khawas", "Sourav Rj", "D beast", "Kenifer", "Aghori g", "Akash Chaterjee", "Akash Karmakar",
+      "Koushik P", "Prithvi Debnath", "Mursad Sarder", "Ujjal Deb roy", "Souvik kar", "Gorden op", "AVay", "Aditya Karn",
+    ];
 
-const generateKnockoutFixtures = () => {
-  const teams = [
-    "Arijit Seal", "Akash khawas", "Sourav Rj", "D beast", "Kenifer", "Aghori g", "Akash Chaterjee", "Akash Karmakar",
-    "Koushik P", "Prithvi Debnath", "Mursad Sarder", "Ujjal Deb roy", "Souvik kar", "Gorden op", "AVay", "Aditya Karn",
-  ];
+    const rounds = Math.ceil(Math.log2(teams.length));
 
-  const rounds = Math.ceil(Math.log2(teams.length));
+    const fixtures = [];
+    const startTime = new Date("2024-02-25T16:15:00"); // Initial start time for the matches
 
-  const fixtures = [];
-  const startTime = new Date("2024-02-25T16:15:00"); // Initial start time for the matches
+    for (let round = 1; round <= rounds; round++) {
+      const matches = [];
+      const roundStartTime = new Date(startTime);
 
-  for (let round = 1; round <= rounds; round++) {
-    const matches = [];
-    const roundStartTime = new Date(startTime);
-    
-    for (let match = 1; match <= teams.length / Math.pow(2, round); match++) {
-      const team1 = teams[(match - 1) * 2];
-      const team2 = teams[(match - 1) * 2 + 1];
+      for (let match = 1; match <= teams.length / Math.pow(2, round); match++) {
+        const team1 = teams[(match - 1) * 2];
+        const team2 = teams[(match - 1) * 2 + 1];
 
-      const matchTime = new Date(roundStartTime);
-      matchTime.setMinutes(matchTime.getMinutes() + (match - 1) * 15); // Add 15 minutes for each match
+        const matchTime = new Date(roundStartTime);
+        matchTime.setMinutes(matchTime.getMinutes() + (match - 1) * 15); // Add 15 minutes for each match
 
-      matches.push({
-        team1,
-        team2,
-        date: "2024-02-25", // Update with actual date
-        time: `${matchTime.getHours()}:${matchTime.getMinutes()}`,
-        live: <Streaming />,
+        matches.push({
+          team1,
+          team2,
+          date: "2024-02-25", // Update with actual date
+          time: `${matchTime.getHours()}:${matchTime.getMinutes()}`,
+          live: <Streaming />,
+        });
+      }
+
+      fixtures.push({
+        round,
+        matches,
       });
+
+      // Add 30 minutes break after each round
+      startTime.setMinutes(startTime.getMinutes() + (teams.length / Math.pow(2, round)) * 15 + 30);
     }
-    
-    fixtures.push({
-      round,
-      matches,
-    });
 
-    // Add 30 minutes break after each round
-    startTime.setMinutes(startTime.getMinutes() + (teams.length / Math.pow(2, round)) * 15 + 30);
-  }
-
-  return fixtures;
-};
-
-// ... (Rest of the code remains unchanged)
-
-
+    return fixtures;
+  };
 
   const renderPointsTable = () => {
     return (
@@ -335,35 +324,47 @@ const generateKnockoutFixtures = () => {
       alert(`Room ID for ${team1} is not available`);
     }
   };
- const handleRoomIdChange = (team, value) => {
-  // Update the room ID input for the specific team
-  setRoomIdInput((prevRoomIdInput) => ({
-    ...prevRoomIdInput,
-    [team]: value,
-  }));
-};
 
+  // Update the handleRoomIdChange function to save room IDs for both players
+  const handleRoomIdChange = (team, value) => {
+    // Update the room ID input for the specific team
+    setRoomIdInput((prevRoomIdInput) => ({
+      ...prevRoomIdInput,
+      [team]: value,
+    }));
+  };
 
+  const handleGameResultUpdate = (team1, team2, result) => {
+    setGameResults((prevResults) => ({
+      ...prevResults,
+      [`${team1} vs ${team2}`]: result,
+    }));
+  };
 
-const renderFixtures = () => {
-  const generatedKnockoutFixtures = generateKnockoutFixtures();
+  const handleGameResultSubmit = () => {
+    // You can implement logic to submit game results to the server or perform any additional actions.
+    console.log("Game results submitted:", gameResults);
+  };
 
-  return (
-    <div className="fixtures">
-      <h3>Fixtures</h3>
-      <ul>
-        {generatedKnockoutFixtures.map((round, roundIndex) => (
-          <li key={roundIndex}>
-            {roundIndex === 0 ? (
-              <>
-                <strong>Round {round.round}:</strong>
-                <ul>
-                  {round.matches.map((fixture, index) => (
-                    <li key={index}>
-                      {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
-                      <br />
+  const renderFixtures = () => {
+    const generatedKnockoutFixtures = generateKnockoutFixtures();
+
+    return (
+      <div className="fixtures">
+        <h3>Fixtures</h3>
+        <ul>
+          {generatedKnockoutFixtures.map((round, roundIndex) => (
+            <li key={roundIndex}>
+              <strong>Round {round.round}:</strong>
+              <ul>
+                {round.matches.map((fixture, index) => (
+                  <li key={index}>
+                    {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
+                    <br />
+
+                    <div>
                       <label>
-                        Room ID:
+                        Room ID for {fixture.team1}:
                         <input
                           type="text"
                           value={roomIdInput[fixture.team1] || ''}
@@ -373,23 +374,37 @@ const renderFixtures = () => {
                       <button onClick={() => handleShareRoomId(fixture.team1, fixture.team2)}>
                         Share room ID
                       </button>
-                      {/* Show Room ID if it's shared by other users */}
-                      {sharedRoomIds[fixture.team1] && (
-                        <span>Shared Room ID: {sharedRoomIds[fixture.team1]}</span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </>
-            ) : null}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-  
-  
+                    </div>
+
+                    <div>
+                      <label>
+                        Game Result:
+                        <input
+                          type="text"
+                          value={gameResults[`${fixture.team1} vs ${fixture.team2}`] || ''}
+                          onChange={(e) => handleGameResultUpdate(fixture.team1, fixture.team2, e.target.value)}
+                        />
+                      </label>
+                      <button onClick={handleGameResultSubmit}>Submit Game Results</button>
+                    </div>
+
+                    {/* Show Room IDs if they're shared by other users */}
+                    {sharedRoomIds[fixture.team1] && (
+                      <span>Shared Room ID for {fixture.team1}: {sharedRoomIds[fixture.team1]}</span>
+                    )}
+                    {gameResults[`${fixture.team1} vs ${fixture.team2}`] && (
+                      <span>Game Result: {gameResults[`${fixture.team1} vs ${fixture.team2}`]}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
   const renderContent = () => {
     if (!activeGameCategory && !activeTournamentType) {
       // Display game categories
@@ -413,10 +428,10 @@ const renderFixtures = () => {
       <h2>{tournament ? tournament.category : ''} Details</h2>
       <button className="back-button" onClick={() => handleBackButtonClick()}>
         <BiLeftArrowCircle />
-      </button>{renderContent()}
-
+      </button>
+      {renderContent()}
     </div>
-
   );
 };
+
 export default TournamentDetails;
