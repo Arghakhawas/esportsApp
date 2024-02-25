@@ -10,7 +10,7 @@ import bgmi from "../assets/bgmi.png";
 import Streaming from './Streaming';
 const TournamentDetails = ({ tournament }) => {
   const [roomIds, setRoomIds] = useState({});
-
+  const [showRoomId, setShowRoomId] = useState({});
   const [pointTable, setPointTable] = useState([]);
   const [fixtures, setFixtures] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
