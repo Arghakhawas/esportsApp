@@ -13,7 +13,7 @@ import Streaming from './Streaming';
 const TournamentDetails = ({ tournament }) => {
   const [sharedRoomIds, setSharedRoomIds] = useState([]);
   const socket = io('https://esportsappbackend.onrender.com');
-
+  const [roomIdInput, setRoomIdInput] = useState('');
   const [pointTable, setPointTable] = useState([]);
   const [fixtures, setFixtures] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
@@ -335,7 +335,15 @@ const generateKnockoutFixtures = () => {
       alert(`Room ID for ${team1} is not available`);
     }
   };
- 
+  const handleRoomIdChange = (team, value) => {
+    // Update the room ID input for the specific team
+    setRoomIdInput((prevRoomIdInput) => ({
+      ...prevRoomIdInput,
+      [team]: value,
+    }));
+  };
+
+
 
 const renderFixtures = () => {
   const generatedKnockoutFixtures = generateKnockoutFixtures();
@@ -358,7 +366,7 @@ const renderFixtures = () => {
                         Room ID:
                         <input
                           type="text"
-                          value={sharedRoomIds[fixture.team1] || ''}
+                          value={roomIdInput[fixture.team1] || ''}
                           onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
                         />
                       </label>
