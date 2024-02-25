@@ -1,6 +1,6 @@
-
 /* Tournament Details Container */
 
+/* Styles for the container of tournament details */
 .tournament-details {
   font-family: var(--ff-poppins), sans-serif;
   background-color: var(--raisin-black-2);
@@ -10,20 +10,24 @@
   color: var(--platinum);
 }
 
+/* Styles for the heading inside the tournament details */
 .tournament-details h2 {
   color: var(--platinum);
 }
 
+/* Styles for paragraphs inside the tournament details */
 .tournament-details p {
   color: var(--platinum);
 }
 
 /* Section Buttons */
 
+/* Styles for section buttons */
 .section-buttons {
   margin-top: 20px;
 }
 
+/* Styles for individual buttons */
 .section-buttons button {
   margin-right: 10px;
   padding: 10px 20px;
@@ -36,18 +40,21 @@
   transition: background-color 0.3s ease;
 }
 
+/* Hover effect for buttons */
 .section-buttons button:hover {
   background-color: var(--raisin-black-1);
 }
 
 /* Game Categories */
 
+/* Styles for the container of game categories */
 .game-categories {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
+/* Styles for individual game categories */
 .game-category {
   position: relative;
   background-color: var(--raisin-black-3);
@@ -57,20 +64,24 @@
   transition: transform 0.3s ease;
 }
 
+/* Hover effect for game categories */
 .game-category:hover {
   transform: scale(1.05);
 }
 
+/* Styles for images inside game categories */
 .game-category img {
   width: 100%;
   border-radius: 8px;
   margin-bottom: 10px;
 }
 
+/* Styles for details in game categories */
 .category-details {
   color: var(--platinum);
 }
 
+/* Styles for buttons inside game categories */
 .game-category button {
   background-color: var(--primary-color);
   color: var(--white);
@@ -81,12 +92,14 @@
   transition: background-color 0.3s ease;
 }
 
+/* Hover effect for buttons inside game categories */
 .game-category button:hover {
   background-color: var(--raisin-black-1);
 }
 
 /* Tournament Types */
 
+/* Styles for the container of tournament types */
 .tournament-types {
   display: flex;
   flex-wrap: wrap;
@@ -94,11 +107,13 @@
   margin-top: 20px;
 }
 
+/* Styles for heading in tournament types */
 .tournament-types h3 {
   color: var(--platinum);
   margin-bottom: 10px;
 }
 
+/* Styles for buttons inside tournament types */
 .tournament-types button {
   background-color: var(--primary-color);
   color: var(--white);
@@ -110,27 +125,31 @@
   margin-right: 10px;
 }
 
+/* Hover effect for buttons inside tournament types */
 .tournament-types button:hover {
   background-color: var(--raisin-black-1);
 }
 
 /* Fixtures */
-/* Fixtures */
 
+/* Styles for fixtures */
 .fixtures {
   margin-top: 20px;
 }
 
+/* Styles for heading in fixtures */
 .fixtures h3 {
   font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
+/* Styles for the grid in fixtures */
 .fixtures ul {
   list-style: none;
   padding: 0;
 }
 
+/* Styles for individual items in the grid */
 .fixtures .grid {
   list-style-type: none;
   margin: 1rem;
@@ -139,25 +158,30 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust grid layout based on screen size */
 }
 
+/* Styles for individual items in the grid */
 .fixtures .grid li {
   padding: 15px;
   border-radius: 5px;
   background-color: #f0f0f0;
 }
 
+/* Styles for strong text in fixtures */
 .fixtures .grid li strong {
   color: #e44d26;
 }
 
+/* Styles for div inside grid items */
 .fixtures .grid li div {
   margin-top: 10px;
 }
 
+/* Styles for label in grid items */
 .fixtures .grid li label {
   font-weight: bold;
   margin-right: 10px;
 }
 
+/* Styles for input in grid items */
 .fixtures .grid li input {
   padding: 5px;
   width: 50px;
@@ -165,12 +189,14 @@
 
 /* Media Queries */
 
+/* Media query for screens up to 768px */
 @media only screen and (max-width: 768px) {
   .fixtures .grid li {
     padding: 10px; /* Adjust padding for smaller screens */
   }
 }
 
+/* Media query for screens up to 480px */
 @media only screen and (max-width: 480px) {
   .fixtures .grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Further adjust grid layout for smaller screens */
@@ -185,10 +211,9 @@
   }
 }
 
-
-
 /* Media Queries */
 
+/* Media query for screens up to 768px */
 @media only screen and (max-width: 768px) {
   .game-category {
     padding: 20px; /* Adjust padding for smaller screens */
@@ -209,6 +234,7 @@
   }
 }
 
+/* Media query for screens up to 480px */
 @media only screen and (max-width: 480px) {
   .game-category {  
     padding: 15px; /* Further adjust padding for even smaller screens */

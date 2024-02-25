@@ -13,7 +13,7 @@
     const TournamentDetails = ({ tournament }) => {
       const [fixtureResults, setFixtureResults] = useState({});
       const [sharedRoomIds, setSharedRoomIds] = useState([]);
-      const socket = io('https://esportsappbackend.onrender.com');
+      const socket = io('https://esportsappbackend.onrender.com:10000');
       const [roomIdInput, setRoomIdInput] = useState('');
       const [pointTable, setPointTable] = useState([]);
       const [fixtures, setFixtures] = useState([]);
@@ -221,7 +221,7 @@
               return (
                 <>
                   {renderPointsTable()}
-                  {renderFixtures()} 
+                  {renderFixtures()} {/* Render fixtures for Ea-football League */}
                 </>
               );
             }
@@ -352,7 +352,7 @@
 
       const renderFixtures = () => {
         const generatedKnockoutFixtures = generateKnockoutFixtures();
-      
+    
         return (
           <div className="fixtures">
             <h3>Fixtures</h3>
@@ -366,15 +366,21 @@
                         {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
                       </div>
                       <div>
-                        {/* ... existing code ... */}
                         <label>
-                          Result:
+                          Room ID:
                           <input
                             type="text"
-                            value={fixtureResults[`${fixture.team1}-${fixture.team2}`] || ''}
-                            onChange={(e) => handleResultChange(`${fixture.team1}-${fixture.team2}`, e.target.value)}
+                            value={roomIdInput[fixture.team1] || ''}
+                            onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
                           />
                         </label>
+                        <button onClick={() => handleShareRoomId(fixture.team1, fixture.team2)}>
+                          Share room ID
+                        </button>
+                        {/* Show Room ID if it's shared by other users */}
+                        {sharedRoomIds.find((item) => item.team === fixture.team1) && (
+                          <span>Shared Room ID: {sharedRoomIds.find((item) => item.team === fixture.team1).roomId}</span>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -383,12 +389,6 @@
             </ul>
           </div>
         );
-      };
-      const handleResultChange = (fixtureKey, result) => {
-        setFixtureResults((prevResults) => ({
-          ...prevResults,
-          [fixtureKey]: result,
-        }));
       };
       
       const renderContent = () => {
