@@ -9,8 +9,9 @@ import bgmi from "../assets/bgmi.png";
 
 import Streaming from './Streaming';
 const TournamentDetails = ({ tournament }) => {
-  const [roomIds, setRoomIds] = useState({});
-  const [showRoomId, setShowRoomId] = useState({});
+  const [globalRoomIds, setGlobalRoomIds] = useState({});
+
+
   const [pointTable, setPointTable] = useState([]);
   const [fixtures, setFixtures] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
@@ -293,85 +294,71 @@ const TournamentDetails = ({ tournament }) => {
     );
   };
 
-  const renderFixtures = () => {
-    const generatedKnockoutFixtures = generateKnockoutFixtures();
-  
-    const handleShareRoomId = (team1, team2, gameId) => {
-      // Implement the logic to share the game ID (e.g., through a modal, notification, etc.)
-      alert(`Share Room ID for ${team1} vs ${team2}: ${gameId}`);
+
+    const handleShareRoomId = (team1, team2) => {
+      const sharedRoomId = globalRoomIds[team1];
+      if (sharedRoomId) {
+        // Implement the logic to share the game ID (e.g., through a modal, notification, etc.)
+        alert(`Share Room ID for ${team1} vs ${team2}: ${sharedRoomId}`);
+      } else {
+        alert(`Room ID for ${team1} is not available`);
+      }
     };
-  
-    const handleShowRoomId = (team) => {
-      // Implement logic to toggle visibility of Room ID for other users
-      setShowRoomId((prevShowRoomId) => ({
-        ...prevShowRoomId,
-        [team]: !prevShowRoomId[team],
-      }));
-    };
+    
   
     const handleRoomIdChange = (team, value) => {
-      // Save the Room ID for all users
-      setRoomIds((prevRoomIds) => ({
+      // Save the Room ID globally
+      setGlobalRoomIds((prevRoomIds) => ({
         ...prevRoomIds,
         [team]: value,
       }));
     };
+    
+    const renderFixtures = () => {
+      const generatedKnockoutFixtures = generateKnockoutFixtures();
   
-    return (
-      <div className="fixtures">
-        <h3>Fixtures</h3>
-        <ul>
-          {generatedKnockoutFixtures.map((round, roundIndex) => (
-            <li key={roundIndex}>
-              {roundIndex === 0 ? (
-                <>
-                  <strong>Round {round.round}:</strong>
-                  <ul>
-                    {round.matches.map((fixture, index) => (
-                      <li key={index}>
-                        {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
-                        <br />
-                        {showRoomId[fixture.team1] ? (
-                          <>
-                            <label>
-                              Room ID:
-                              <input
-                                type="text"
-                                value={roomIds[fixture.team1] || ''}
-                                onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
-                              />
-                            </label>
-                            <button
-                              onClick={() =>
-                                handleShareRoomId(fixture.team1, fixture.team2, roomIds[fixture.team1])
-                              }
-                            >
-                              Share room ID
-                            </button>
-                          </>
-                        ) : (
-                          <>
-                            {/* Button to show/hide Room ID for other users */}
-                            <button onClick={() => handleShowRoomId(fixture.team1)}>
-                              Show Room ID
-                            </button>
-                            {/* Show Room ID if it's visible */}
-                            {roomIds[fixture.team1] && (
-                              <span>Room ID: {roomIds[fixture.team1]}</span>
-                            )}
-                          </>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              ) : null}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  };
+      return (
+        <div className="fixtures">
+          <h3>Fixtures</h3>
+          <ul>
+            {generatedKnockoutFixtures.map((round, roundIndex) => (
+              <li key={roundIndex}>
+                {roundIndex === 0 ? (
+                  <>
+                    <strong>Round {round.round}:</strong>
+                    <ul>
+                      {round.matches.map((fixture, index) => (
+                        <li key={index}>
+                          {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
+                          <br />
+                          <label>
+                            Room ID:
+                            <input
+                              type="text"
+                              value={globalRoomIds[fixture.team1] || ''}
+                              onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
+                            />
+                          </label>
+                          <button
+                            onClick={() => handleShareRoomId(fixture.team1, fixture.team2)}
+                          >
+                            Share room ID
+                          </button>
+                          {/* Show Room ID if it's visible */}
+                          {globalRoomIds[fixture.team1] && (
+                            <span>Room ID: {globalRoomIds[fixture.team1]}</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    };
   
   
   const renderContent = () => {
