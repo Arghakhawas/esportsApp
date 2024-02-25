@@ -107,7 +107,14 @@ function Navbar({  onLogout, isAuthenticated }) {
         </div>
 
             </ul>
-           
+            {isAuthenticated && (
+        <>
+          {/* ... existing links */}
+          <Link to="/admin" className="nav-link">
+            Admin Dashboard
+          </Link>
+        </>
+      )}
           </nav>
           <div className="header-actions">
             <button className="cart-btn" aria-label="cart">
