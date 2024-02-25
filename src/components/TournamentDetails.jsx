@@ -325,7 +325,7 @@ const generateKnockoutFixtures = () => {
   };
 
   const handleShareRoomId = (team1, team2) => {
-    const sharedRoomId = sharedRoomIds[team1];
+    const sharedRoomId = roomIdInput[team1];
     if (sharedRoomId) {
       // Emit an event to the server to share the room ID
       socket.emit('shareRoomId', sharedRoomId, team1, team2);
@@ -342,7 +342,7 @@ const generateKnockoutFixtures = () => {
       [team]: value,
     }));
   };
-
+  
 
 
 const renderFixtures = () => {
@@ -358,27 +358,27 @@ const renderFixtures = () => {
               <>
                 <strong>Round {round.round}:</strong>
                 <ul>
-                  {round.matches.map((fixture, index) => (
-                    <li key={index}>
-                      {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
-                      <br />
-                      <label>
-                        Room ID:
-                        <input
-                          type="text"
-                          value={roomIdInput[fixture.team1] || ''}
-                          onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
-                        />
-                      </label>
-                      <button onClick={() => handleShareRoomId(fixture.team1, fixture.team2)}>
-                        Share room ID
-                      </button>
-                      {/* Show Room ID if it's shared by other users */}
-                      {sharedRoomIds[fixture.team1] && (
-                        <span>Shared Room ID: {sharedRoomIds[fixture.team1]}</span>
-                      )}
-                    </li>
-                  ))}
+                {round.matches.map((fixture, index) => (
+  <li key={index}>
+    {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
+    <br />
+    <label>
+      Room ID:
+      <input
+        type="text"
+        value={roomIdInput[fixture.team1] || ''}
+        onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
+      />
+    </label>
+    <button onClick={() => handleShareRoomId(fixture.team1, fixture.team2)}>
+      Share room ID
+    </button>
+    {/* Show Room ID if it's shared by other users */}
+    {sharedRoomIds[fixture.team1] && (
+      <span>Shared Room ID: {sharedRoomIds[fixture.team1]}</span>
+    )}
+  </li>
+))}
                 </ul>
               </>
             ) : null}
