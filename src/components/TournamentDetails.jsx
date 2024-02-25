@@ -251,7 +251,7 @@ const renderTournamentDetails = () => {
   const generateKnockoutFixtures = () => {
     const teams = [
       "Arijit Seal", "Akash khawas", "Sourav Rj", "D beast", "Kenifer", "Aghori g", "", "Akash Karmakar",
-      "Chanda naskar", "Prithvi Debnath", "Mursad Sarder","Ujjal Deb roy" , "Souvik kar", "Gorden op", "AVay", "Team 16",
+      "Chanda naskar", "Prithvi Debnath", "Mursad Sarder","Ujjal Deb roy" , "Souvik kar", "Gorden op", "AVay", "Aditya Karn",
       "Team 17", "Team 18", "Team 19", "Team 20", "Team 21", "Team 22", "Team 23", "Team 24",
       "Team 25", "Team 26", "Team 27", "Team 28", "Team 29", "Team 30", "Team 31", "Team 32",
       
