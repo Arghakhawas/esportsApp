@@ -9,7 +9,7 @@ import bgmi from "../assets/bgmi.png";
 
 import Streaming from './Streaming';
 const TournamentDetails = ({ tournament }) => {
-  const [globalRoomIds, setGlobalRoomIds] = useState({});
+  const [sharedRoomIds, setSharedRoomIds] = useState([]);
 
 
   const [pointTable, setPointTable] = useState([]);
@@ -252,11 +252,9 @@ const TournamentDetails = ({ tournament }) => {
 
   const generateKnockoutFixtures = () => {
     const teams = [
-      "Arijit Seal", "Akash khawas", "Sourav Rj", "D beast", "Kenifer", "Aghori g", "", "Akash Karmakar",
+      "Arijit Seal", "Akash khawas", "Sourav Rj", "D beast", "Kenifer", "Aghori g", "Akash Chaterjee", "Akash Karmakar",
       "Chanda naskar", "Prithvi Debnath", "Mursad Sarder", "Ujjal Deb roy", "Souvik kar", "Gorden op", "AVay", "Aditya Karn",
-      "Team 17", "Team 18", "Team 19", "Team 20", "Team 21", "Team 22", "Team 23", "Team 24",
-      "Team 25", "Team 26", "Team 27", "Team 28", "Team 29", "Team 30", "Team 31", "Team 32",
-
+      
     ];
 
     const rounds = Math.ceil(Math.log2(teams.length));
@@ -270,7 +268,7 @@ const TournamentDetails = ({ tournament }) => {
         matches.push({
           team1,
           team2,
-          date: "2024-02-20", // Update with actual date
+          date: "2024-02-25", // Update with actual date
           time: "16:00-22:00pm", // Update with actual time
           live: <Streaming />,
         });
@@ -295,70 +293,79 @@ const TournamentDetails = ({ tournament }) => {
   };
 
 
-    const handleShareRoomId = (team1, team2) => {
-      const sharedRoomId = globalRoomIds[team1];
-      if (sharedRoomId) {
-        // Implement the logic to share the game ID (e.g., through a modal, notification, etc.)
-        alert(`Share Room ID for ${team1} vs ${team2}: ${sharedRoomId}`);
-      } else {
-        alert(`Room ID for ${team1} is not available`);
-      }
-    };
-    
+  const handleShareRoomId = (team1, team2) => {
+    const sharedRoomId = globalRoomIds[team1];
+    if (sharedRoomId) {
+      // Emit an event to the server to share the room ID
+      socket.emit('shareRoomId', sharedRoomId, team1, team2);
+      // Implement the logic to share the game ID (e.g., through a modal, notification, etc.)
+      alert(`Share Room ID for ${team1} vs ${team2}: ${sharedRoomId}`);
+    } else {
+      alert(`Room ID for ${team1} is not available`);
+    }
+  };
   
-    const handleRoomIdChange = (team, value) => {
-      // Save the Room ID globally
-      setGlobalRoomIds((prevRoomIds) => ({
-        ...prevRoomIds,
-        [team]: value,
-      }));
-    };
-    
-    const renderFixtures = () => {
-      const generatedKnockoutFixtures = generateKnockoutFixtures();
-  
-      return (
-        <div className="fixtures">
-          <h3>Fixtures</h3>
-          <ul>
-            {generatedKnockoutFixtures.map((round, roundIndex) => (
-              <li key={roundIndex}>
-                {roundIndex === 0 ? (
-                  <>
-                    <strong>Round {round.round}:</strong>
-                    <ul>
-                      {round.matches.map((fixture, index) => (
-                        <li key={index}>
-                          {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
-                          <br />
-                          <label>
-                            Room ID:
-                            <input
-                              type="text"
-                              value={globalRoomIds[fixture.team1] || ''}
-                              onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
-                            />
-                          </label>
-                          <button
-                            onClick={() => handleShareRoomId(fixture.team1, fixture.team2)}
-                          >
-                            Share room ID
-                          </button>
-                          {/* Show Room ID if it's visible */}
-                          {globalRoomIds[fixture.team1] && (
-                            <span>Room ID: {globalRoomIds[fixture.team1]}</span>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                ) : null}
-              </li>
-            ))}
-          </ul>
-        </div>
-      );
-    };
+  // Update the useEffect hook to listen for shared room IDs
+useEffect(() => {
+  // Listen for shared room IDs from other users
+  socket.on('sharedRoomId', ({ roomId, team1, team2 }) => {
+    setSharedRoomIds((prevSharedRoomIds) => ({
+      ...prevSharedRoomIds,
+      [team1]: roomId,
+    }));
+  });
+
+  // Clean up the event listener when the component unmounts
+  return () => {
+    socket.off('sharedRoomId');
+  };
+}, []);
+
+// Update the renderFixtures function to display shared room IDs
+const renderFixtures = () => {
+  const generatedKnockoutFixtures = generateKnockoutFixtures();
+
+  return (
+    <div className="fixtures">
+      <h3>Fixtures</h3>
+      <ul>
+        {generatedKnockoutFixtures.map((round, roundIndex) => (
+          <li key={roundIndex}>
+            {roundIndex === 0 ? (
+              <>
+                <strong>Round {round.round}:</strong>
+                <ul>
+                  {round.matches.map((fixture, index) => (
+                    <li key={index}>
+                      {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
+                      <br />
+                      <label>
+                        Room ID:
+                        <input
+                          type="text"
+                          value={sharedRoomIds[fixture.team1] || ''}
+                          onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
+                        />
+                      </label>
+                      <button onClick={() => handleShareRoomId(fixture.team1, fixture.team2)}>
+                        Share room ID
+                      </button>
+                      {/* Show Room ID if it's shared by other users */}
+                      {sharedRoomIds[fixture.team1] && (
+                        <span>Shared Room ID: {sharedRoomIds[fixture.team1]}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
   
   
   const renderContent = () => {
