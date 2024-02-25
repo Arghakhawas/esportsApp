@@ -9,7 +9,8 @@ import bgmi from "../assets/bgmi.png";
 
 import Streaming from './Streaming';
 const TournamentDetails = ({ tournament }) => {
- 
+  const [roomIds, setRoomIds] = useState({});
+
   const [pointTable, setPointTable] = useState([]);
   const [fixtures, setFixtures] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
@@ -17,18 +18,18 @@ const TournamentDetails = ({ tournament }) => {
   const [activeTournamentType, setActiveTournamentType] = useState(null);
 
   useEffect(() => {
-  
-    const mockPointTable = [  
+
+    const mockPointTable = [
       { team: "Team A", points: 3 },
       { team: "Team B", points: 1 },
     ];
     const generatedKnockoutFixtures = generateKnockoutFixtures();
 
-  
+
     setPointTable(mockPointTable);
-    setFixtures(generatedKnockoutFixtures); 
-   
-  }, []); 
+    setFixtures(generatedKnockoutFixtures);
+
+  }, []);
 
   const handleBackButtonClick = () => {
     if (activeTournamentType) {
@@ -56,7 +57,7 @@ const TournamentDetails = ({ tournament }) => {
   };
 
   const renderGameCategories = () => {
-    
+
     const gameCategories = [
       {
         name: "Ea-football",
@@ -72,7 +73,7 @@ const TournamentDetails = ({ tournament }) => {
         timing: "Every Saturday at 3:00 PM",
         rules: "show in 28 feb",
       },
-  
+
       {
         name: "Call of Duty",
         image: cod,
@@ -80,7 +81,7 @@ const TournamentDetails = ({ tournament }) => {
         timing: "Every Saturday at 4:00 PM to 10 pm",
         rules: "show in 27 feb",
       },
-  
+
       {
         name: "FreeFire",
         image: ffgarena,
@@ -88,10 +89,10 @@ const TournamentDetails = ({ tournament }) => {
         timing: "Every Saturday at 4:00 PM to 10 pm",
         rules: "show in 26 feb",
       },
-  
-  
+
+
     ];
-  
+
     return (
       <div className="game-categories">
         <h3>Game Categories</h3>
@@ -112,7 +113,7 @@ const TournamentDetails = ({ tournament }) => {
       </div>
     );
   };
-  
+
   const renderTournamentTypes = () => {
     // Replace this with your actual tournament types for each game category
     const tournamentTypes = {
@@ -137,124 +138,124 @@ const TournamentDetails = ({ tournament }) => {
 
     return null;
   };
-// ...
-const renderHundredTeamBox = () => {
-  return (
-    <div className="hundred-team-box">
-      <h3>Battle Ground Tournament - 100 Teams</h3>
-      <p>Room ID: [Your Room ID]</p>
-      <p>Other relevant information for Battle Ground Tournament</p>
-    </div>
-  );
-};
+  // ...
+  const renderHundredTeamBox = () => {
+    return (
+      <div className="hundred-team-box">
+        <h3>Battle Ground Tournament - 100 Teams</h3>
+        <p>Room ID: [Your Room ID]</p>
+        <p>Other relevant information for Battle Ground Tournament</p>
+      </div>
+    );
+  };
 
-const renderTDMBox = (teamSize, numTeams) => {
-  return (
-    <div className={`tdm-box team-size-${teamSize}`}>
-      <h3>TDM Tournament - {teamSize} Player Teams</h3>
-      <p>Room ID: [Your Room ID]</p>
-      <p>Other relevant information for TDM Tournament</p>
-      {renderTwoTeamsVsBox(numTeams, teamSize)}
-    </div>
-  );
-};
+  const renderTDMBox = (teamSize, numTeams) => {
+    return (
+      <div className={`tdm-box team-size-${teamSize}`}>
+        <h3>TDM Tournament - {teamSize} Player Teams</h3>
+        <p>Room ID: [Your Room ID]</p>
+        <p>Other relevant information for TDM Tournament</p>
+        {renderTwoTeamsVsBox(numTeams, teamSize)}
+      </div>
+    );
+  };
 
-const renderTwoTeamsVsBox = (numTeams, teamSize) => {
-  const teams = Array.from({ length: numTeams }, (_, index) => `Team ${index + 1}`);
-  return (
-    <div className="two-teams-vs-box">
-      {teams.map((team, index) => (
-        <div key={index} className="team-vs">
-          <h4>{team} vs {teams[index + numTeams]}</h4>
-          <p>Room ID: [Your Room ID]</p>
-          <p>Other relevant information for the match</p>
-          {renderTeamPlayers(teamSize)}
-        </div>
-      ))}
-    </div>
-  );
-};
+  const renderTwoTeamsVsBox = (numTeams, teamSize) => {
+    const teams = Array.from({ length: numTeams }, (_, index) => `Team ${index + 1}`);
+    return (
+      <div className="two-teams-vs-box">
+        {teams.map((team, index) => (
+          <div key={index} className="team-vs">
+            <h4>{team} vs {teams[index + numTeams]}</h4>
+            <p>Room ID: [Your Room ID]</p>
+            <p>Other relevant information for the match</p>
+            {renderTeamPlayers(teamSize)}
+          </div>
+        ))}
+      </div>
+    );
+  };
 
-const renderTeamPlayers = (teamSize) => {
-  const players = Array.from({ length: teamSize }, (_, index) => `Player ${index + 1}`);
-  return (
-    <ul className="team-players">
-      {players.map((player, index) => (
-        <li key={index}>{player}</li>
-      ))}
-    </ul>
-  );
-};
+  const renderTeamPlayers = (teamSize) => {
+    const players = Array.from({ length: teamSize }, (_, index) => `Player ${index + 1}`);
+    return (
+      <ul className="team-players">
+        {players.map((player, index) => (
+          <li key={index}>{player}</li>
+        ))}
+      </ul>
+    );
+  };
 
-const renderTournamentDetails = () => {
-  switch (activeGameCategory) {
-    case "Ea-football":
-      if (activeTournamentType === "Knockout") {
-        return (
-          <>
-           
-            {renderFixtures()} {/* Render fixtures for Ea-football Knockout */}
-            <div className="streaming-section">
-              <h3>Live Streaming</h3>
-              <Streaming />
-            </div>
-          </>
-        );
-      } else if (activeTournamentType === "League") {
-        return (
-          <>
-            {renderPointsTable()}
-            {renderFixtures()} {/* Render fixtures for Ea-football League */}
-          </>
-        );
-      }
-    
-      break;
-    case "Bgmi":
-      if (activeTournamentType === "Battle Ground") {
-        return (
-          <>
-            {renderHundredTeamBox()}
-          </>
-        );
-      } else if (activeTournamentType === "TDM") {
-        return renderTDMBox(4, 2); {/* Render TDM box with 4-player teams and 2 teams */}
-      }
-      break;
-    case "Call of Duty":
-      if (activeTournamentType === "Battle Ground") {
-        return (
-          <>
-            {renderHundredTeamBox()}
-          </>
-        );
-      } else if (activeTournamentType === "TDM") {
-        return renderTDMBox(5, 2); {/* Render TDM box with 5-player teams and 2 teams */}
-      }
-      break;
-    case "FreeFire":
-      if (activeTournamentType === "Battle Ground") {
-        return (
-          <>
-            {renderHundredTeamBox()}
-          </>
-        );
-      } else if (activeTournamentType === "TDM") {
-        return renderTDMBox(4, 2); {/* Render TDM box with 4-player teams and 2 teams */}
-      }
-      break;
-    default:
-      return null;
-  }
-};
+  const renderTournamentDetails = () => {
+    switch (activeGameCategory) {
+      case "Ea-football":
+        if (activeTournamentType === "Knockout") {
+          return (
+            <>
+
+              {renderFixtures()} {/* Render fixtures for Ea-football Knockout */}
+              <div className="streaming-section">
+                <h3>Live Streaming</h3>
+                <Streaming />
+              </div>
+            </>
+          );
+        } else if (activeTournamentType === "League") {
+          return (
+            <>
+              {renderPointsTable()}
+              {renderFixtures()} {/* Render fixtures for Ea-football League */}
+            </>
+          );
+        }
+
+        break;
+      case "Bgmi":
+        if (activeTournamentType === "Battle Ground") {
+          return (
+            <>
+              {renderHundredTeamBox()}
+            </>
+          );
+        } else if (activeTournamentType === "TDM") {
+          return renderTDMBox(4, 2); {/* Render TDM box with 4-player teams and 2 teams */ }
+        }
+        break;
+      case "Call of Duty":
+        if (activeTournamentType === "Battle Ground") {
+          return (
+            <>
+              {renderHundredTeamBox()}
+            </>
+          );
+        } else if (activeTournamentType === "TDM") {
+          return renderTDMBox(5, 2); {/* Render TDM box with 5-player teams and 2 teams */ }
+        }
+        break;
+      case "FreeFire":
+        if (activeTournamentType === "Battle Ground") {
+          return (
+            <>
+              {renderHundredTeamBox()}
+            </>
+          );
+        } else if (activeTournamentType === "TDM") {
+          return renderTDMBox(4, 2); {/* Render TDM box with 4-player teams and 2 teams */ }
+        }
+        break;
+      default:
+        return null;
+    }
+  };
 
   const generateKnockoutFixtures = () => {
     const teams = [
       "Arijit Seal", "Akash khawas", "Sourav Rj", "D beast", "Kenifer", "Aghori g", "", "Akash Karmakar",
-      "Chanda naskar", "Prithvi Debnath", "Mursad Sarder","Ujjal Deb roy" , "Souvik kar", "Gorden op", "AVay", "Aditya Karn",
+      "Chanda naskar", "Prithvi Debnath", "Mursad Sarder", "Ujjal Deb roy", "Souvik kar", "Gorden op", "AVay", "Aditya Karn",
       "Team 17", "Team 18", "Team 19", "Team 20", "Team 21", "Team 22", "Team 23", "Team 24",
       "Team 25", "Team 26", "Team 27", "Team 28", "Team 29", "Team 30", "Team 31", "Team 32",
-      
+
     ];
 
     const rounds = Math.ceil(Math.log2(teams.length));
@@ -270,7 +271,7 @@ const renderTournamentDetails = () => {
           team2,
           date: "2024-02-20", // Update with actual date
           time: "16:00-22:00pm", // Update with actual time
-          live:<Streaming />,
+          live: <Streaming />,
         });
       }
       fixtures.push({
@@ -294,21 +295,22 @@ const renderTournamentDetails = () => {
 
   const renderFixtures = () => {
     const generatedKnockoutFixtures = generateKnockoutFixtures();
-  
+
     const [roomIds, setRoomIds] = useState({});
-  
-    const handleShareGameId = (team1, team2, gameId) => {
+
+    const handleShareRoomId = (team1, team2, gameId) => {
       // Implement the logic to share the game ID (e.g., through a modal, notification, etc.)
-      alert(`Share Game ID for ${team1} vs ${team2}: ${gameId}`);
+      alert(`Share Room ID for ${team1} vs ${team2}: ${gameId}`);
     };
-  
+
     const handleRoomIdChange = (team, value) => {
       setRoomIds((prevRoomIds) => ({
         ...prevRoomIds,
         [team]: value,
       }));
     };
-  
+
+
     return (
       <div className="fixtures">
         <h3>Fixtures</h3>
@@ -331,13 +333,12 @@ const renderTournamentDetails = () => {
                             onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
                           />
                         </label>
-                        {/* Add a button or link to share the game ID */}
                         <button
                           onClick={() =>
-                            handleShareGameId(fixture.team1, fixture.team2, roomIds[fixture.team1])
+                            handleShareRoomId(fixture.team1, fixture.team2, roomIds[fixture.team1])
                           }
                         >
-                          Share Game ID
+                          Share room ID
                         </button>
                       </li>
                     ))}
@@ -354,7 +355,7 @@ const renderTournamentDetails = () => {
   const renderContent = () => {
     if (!activeGameCategory && !activeTournamentType) {
       // Display game categories
-      return renderGameCategories(); 
+      return renderGameCategories();
     } else if (activeGameCategory && !activeTournamentType) {
       // Display tournament types for the selected game category
       return renderTournamentTypes();
@@ -363,7 +364,7 @@ const renderTournamentDetails = () => {
       return renderTournamentDetails();
     } else if (activeSection === 'streaming') {
       // Display the Streaming component
-      return <Streaming  />;
+      return <Streaming />;
     }
 
     return null;
@@ -373,11 +374,11 @@ const renderTournamentDetails = () => {
     <div className="tournament-details">
       <h2>{tournament ? tournament.category : ''} Details</h2>
       <button className="back-button" onClick={() => handleBackButtonClick()}>
-      <BiLeftArrowCircle />
+        <BiLeftArrowCircle />
       </button>{renderContent()}
 
     </div>
-    
+
   );
 };
 export default TournamentDetails;
