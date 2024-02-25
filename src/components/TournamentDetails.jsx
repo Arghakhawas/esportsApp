@@ -250,8 +250,8 @@ const renderTournamentDetails = () => {
 
   const generateKnockoutFixtures = () => {
     const teams = [
-      "Team 1", "Team 2", "Team 3", "Team 4", "Team 5", "Team 6", "Team 7", "Team 8",
-      "Team 9", "Team 10", "Team 11", "Team 12", "Team 13", "Team 14", "Team 15", "Team 16",
+      "Arijit Seal", "Akash khawas", "Sourav Rj", "D beast", "Kenifer", "Aghori g", "", "Akash Karmakar",
+      "Chanda naskar", "Prithvi Debnath", "Mursad Sarder","Ujjal Deb roy" , "Souvik kar", "Gorden op", "AVay", "Team 16",
       "Team 17", "Team 18", "Team 19", "Team 20", "Team 21", "Team 22", "Team 23", "Team 24",
       "Team 25", "Team 26", "Team 27", "Team 28", "Team 29", "Team 30", "Team 31", "Team 32",
       
@@ -292,13 +292,21 @@ const renderTournamentDetails = () => {
     );
   };
 
-  
   const renderFixtures = () => {
     const generatedKnockoutFixtures = generateKnockoutFixtures();
+  
+    const [roomIds, setRoomIds] = useState({});
   
     const handleShareGameId = (team1, team2, gameId) => {
       // Implement the logic to share the game ID (e.g., through a modal, notification, etc.)
       alert(`Share Game ID for ${team1} vs ${team2}: ${gameId}`);
+    };
+  
+    const handleRoomIdChange = (team, value) => {
+      setRoomIds((prevRoomIds) => ({
+        ...prevRoomIds,
+        [team]: value,
+      }));
     };
   
     return (
@@ -314,8 +322,21 @@ const renderTournamentDetails = () => {
                     {round.matches.map((fixture, index) => (
                       <li key={index}>
                         {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
+                        <br />
+                        <label>
+                          Room ID:
+                          <input
+                            type="text"
+                            value={roomIds[fixture.team1] || ''}
+                            onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
+                          />
+                        </label>
                         {/* Add a button or link to share the game ID */}
-                        <button onClick={() => handleShareGameId(fixture.team1, fixture.team2, fixture.gameId)}>
+                        <button
+                          onClick={() =>
+                            handleShareGameId(fixture.team1, fixture.team2, roomIds[fixture.team1])
+                          }
+                        >
                           Share Game ID
                         </button>
                       </li>
@@ -330,8 +351,6 @@ const renderTournamentDetails = () => {
     );
   };
   
-  
-
   const renderContent = () => {
     if (!activeGameCategory && !activeTournamentType) {
       // Display game categories
