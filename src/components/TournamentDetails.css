@@ -1,79 +1,4 @@
-
-/* TournamentDetails.css */
-.tournament-details {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.tournament-details h2 {
-  color: #333;
-}
-
-.tournament-details p {
-  color: #666;
-}
-
-/* Styling for section buttons */
-.section-buttons {
-  margin-top: 20px;
-}
-
-.section-buttons button {
-  margin-right: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.section-buttons button:hover {
-  background-color: #207bb5;
-}
-
-/* Unique class names for each component */
-
-.points-table,
-.live-match,
-.fixtures {
-  margin-top: 20px;
-}
-
-/* Adjustments for better spacing */
-
-.points-table h3,
-.live-match h3,
-.fixtures h3 {
-  margin-bottom: 10px;
-}
-
-/* Adjustments for the fixtures */
-.fixtures ul {
-  list-style: none;
-  padding: 0;
-}
-
-.fixtures li {
-  margin-bottom: 10px;
-  padding: 15px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.fixtures li span {
-  font-weight: bold;
-}
-
-.fixtures li p {
-  margin: 0;
-}
+/* Common Styles */
 
 :root {
   --primary-color: var(--orange);
@@ -89,61 +14,15 @@ body {
   color: var(--text-color);
 }
 
-/* Styles for 100 Team Box */
-.hundred-team-box {
-  border: 2px solid var(--raisin-black-3);
-  padding: 15px;
-  margin: 10px;
-  background-color: var(--raisin-black-2);
-  border-radius: 8px;
-}
+/* Tournament Details Container */
 
-/* Styles for 4 vs 4 Box */
-.tdm-box {
-  border: 2px solid var(--orange);
-  padding: 15px;
-  margin: 10px;
-  background-color: var(--platinum);
-  border-radius: 8px;
-}
-
-/* Styles for 2 Teams vs Box */
-.two-teams-vs-box {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-.team-vs {
-  flex: 0 0 48%;
-  border: 2px solid var(--raisin-black-3);
-  padding: 10px;
-  background-color: var(--raisin-black-2);
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-.team-vs h4 {
-  margin-bottom: 5px;
-  color: var(--orange);
-}
-
-.team-players {
-  list-style-type: none;
-  padding: 0;
-}
-
-.team-players li {
-  margin-bottom: 5px;
-}
-
-/* TournamentDetails.css */
 .tournament-details {
   font-family: var(--ff-poppins), sans-serif;
   background-color: var(--raisin-black-2);
   padding: 20px;
   border-radius: 10px;
   box-shadow: var(--shadow-2);
+  color: var(--platinum);
 }
 
 .tournament-details h2 {
@@ -154,60 +33,35 @@ body {
   color: var(--platinum);
 }
 
-/* Game category buttons */
+/* Section Buttons */
+
+.section-buttons {
+  margin-top: 20px;
+}
+
+.section-buttons button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.section-buttons button:hover {
+  background-color: var(--raisin-black-1);
+}
+
+/* Game Categories */
+
 .game-categories {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
-
-.game-category-button {
-  background-color: var(--orange);
-  color: var(--white);
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: var(--fs-7);
-  font-weight: var(--fw-500);
-  transition: background-color var(--transition) var(--cubic-out);
-}
-
-.game-category-button:hover {
-  background-color: var(--raisin-black-1);
-}
-
-/* Add the following styles for tournament-details */
-.tournament-details button {
-  background-color: var(--orange);
-  color: var(--white);
-  border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  cursor: pointer;
-  transition: background-color var(--transition);
-  margin-right: 10px;
-}
-
-.tournament-details button:hover {
-  background-color: var(--raisin-black-1);
-}
-
-.tournament-details .back-button {
-  background-color: var(--orange);
-  color: var(--white);
-  border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  cursor: pointer;
-  transition: background-color var(--transition);
-}
-
-.tournament-details .back-button:hover {
-  background-color: var(--raisin-black-1);
-}
-
-
 
 .game-category {
   position: relative;
@@ -233,23 +87,21 @@ body {
 }
 
 .game-category button {
-  background-color: var(--orange);
+  background-color: var(--primary-color);
   color: var(--white);
   border: none;
   border-radius: 5px;
   padding: 10px 15px;
   cursor: pointer;
-  transition: background-color var(--transition);
+  transition: background-color 0.3s ease;
 }
 
 .game-category button:hover {
   background-color: var(--raisin-black-1);
 }
-.knockout-stages {
-  display: flex;
-  justify-content: space-between;
-}
-/* Add the following styles for tournament-types */
+
+/* Tournament Types */
+
 .tournament-types {
   display: flex;
   flex-wrap: wrap;
@@ -263,13 +115,13 @@ body {
 }
 
 .tournament-types button {
-  background-color: var(--orange);
+  background-color: var(--primary-color);
   color: var(--white);
   border: none;
   border-radius: 5px;
   padding: 10px 15px;
   cursor: pointer;
-  transition: background-color var(--transition);
+  transition: background-color 0.3s ease;
   margin-right: 10px;
 }
 
@@ -277,7 +129,7 @@ body {
   background-color: var(--raisin-black-1);
 }
 
-/* Add these styles to your TournamentDetails.css */
+/* Fixtures */
 
 .fixtures {
   margin-top: 20px;
@@ -295,6 +147,18 @@ body {
 
 .fixtures li {
   margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.fixtures li span {
+  font-weight: bold;
+}
+
+.fixtures li p {
+  margin: 0;
 }
 
 .fixture-item {
@@ -321,4 +185,42 @@ body {
   width: 50px;
 }
 
-/* You can customize these styles according to your design preferences */
+
+/* Media Queries */
+
+@media only screen and (max-width: 768px) {
+  .game-category {
+    padding: 20px; /* Adjust padding for smaller screens */
+  }
+
+  .game-category img {
+    margin-bottom: 5px; /* Adjust margin for smaller screens */
+  }
+
+  .tournament-types button,
+  .game-category button,
+  .section-buttons button {
+    padding: 8px 15px; /* Adjust padding for smaller screens */
+  }
+
+  .fixtures li {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .game-category {
+    padding: 15px; /* Further adjust padding for even smaller screens */
+  }
+
+  .tournament-types button,
+  .game-category button,
+  .section-buttons button {
+    font-size: 14px; /* Adjust font size for smaller screens */
+    padding: 8px 12px; /* Further adjust padding for smaller screens */
+  }
+
+  .fixtures li {
+    padding: 8px; /* Further adjust padding for smaller screens */
+  }
+}
