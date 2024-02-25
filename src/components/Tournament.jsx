@@ -84,7 +84,7 @@ const Tournament = () => {
     },
     {
       category: 'EA Football 2024 - Single Match',
-      prize: '₹90',
+      prize: '₹97',
       joiningFee: '₹50',
       Player:'Single',
       rules: 'Game rules for EA Football Singnal match...',
@@ -124,7 +124,7 @@ const Tournament = () => {
     },
     {
       category: 'FreeFire - Single match(4v4) - TDM Room',
-      prize: '₹90',
+      prize: '₹97',
       joiningFee: '₹50',
       rules: 'Game rules for Freefire Entry Fee ...',
       image: ffgarena, 
@@ -155,7 +155,7 @@ const Tournament = () => {
     },
     {
       category: 'COD - Tdm Single Match(5v5)',
-      prize: '₹190',
+      prize: '₹195',
       Player:'Multiple',
       joiningFee: '₹100',
       rules: 'Game rules for BGMI Entry Fee ₹25...',

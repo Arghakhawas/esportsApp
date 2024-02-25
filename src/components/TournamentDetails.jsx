@@ -296,6 +296,11 @@ const renderTournamentDetails = () => {
   const renderFixtures = () => {
     const generatedKnockoutFixtures = generateKnockoutFixtures();
   
+    const handleShareGameId = (team1, team2, gameId) => {
+      // Implement the logic to share the game ID (e.g., through a modal, notification, etc.)
+      alert(`Share Game ID for ${team1} vs ${team2}: ${gameId}`);
+    };
+  
     return (
       <div className="fixtures">
         <h3>Fixtures</h3>
@@ -309,6 +314,10 @@ const renderTournamentDetails = () => {
                     {round.matches.map((fixture, index) => (
                       <li key={index}>
                         {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
+                        {/* Add a button or link to share the game ID */}
+                        <button onClick={() => handleShareGameId(fixture.team1, fixture.team2, fixture.gameId)}>
+                          Share Game ID
+                        </button>
                       </li>
                     ))}
                   </ul>
@@ -320,6 +329,7 @@ const renderTournamentDetails = () => {
       </div>
     );
   };
+  
   
 
   const renderContent = () => {
