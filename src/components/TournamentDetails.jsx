@@ -296,7 +296,7 @@ const TournamentDetails = ({ tournament }) => {
   const renderFixtures = () => {
     const generatedKnockoutFixtures = generateKnockoutFixtures();
 
-    const [roomIds, setRoomIds] = useState({});
+  
 
     const handleShareRoomId = (team1, team2, gameId) => {
       // Implement the logic to share the game ID (e.g., through a modal, notification, etc.)
