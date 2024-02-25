@@ -27,7 +27,7 @@
       socket.on('sharedRoomId', ({ roomId, team1 }) => {
         setSharedRoomIds((prevSharedRoomIds) => [...prevSharedRoomIds, { team: team1, roomId }]);
       });
-
+      
       // Clean up the event listener when the component unmounts
       return () => {
         socket.off('sharedRoomId');
@@ -329,30 +329,33 @@
         );
       };
 
-      const handleShareRoomId = (team1, team2) => {
-        const sharedRoomId = roomIdInput[team1];
+      const handleRoomIdChange = (matchId, team, value) => {
+        // Update the room ID input for the specific match and team
+        setRoomIdInputs((prevRoomIdInputs) => ({
+          ...prevRoomIdInputs,
+          [matchId]: {
+            ...prevRoomIdInputs[matchId],
+            [team]: value,
+          },
+        }));
+      };
+      
+      const handleShareRoomId = (matchId, team1, team2) => {
+        const sharedRoomId = roomIdInputs[matchId] && roomIdInputs[matchId][team1];
         if (sharedRoomId) {
           // Emit an event to the server to share the room ID
-          socket.emit('shareRoomId', sharedRoomId, team1, team2);
+          socket.emit('shareRoomId', sharedRoomId, team1, team2, matchId);
           // Implement the logic to share the game ID (e.g., through a modal, notification, etc.)
           alert(`Share Room ID for ${team1} vs ${team2}: ${sharedRoomId}`);
         } else {
           alert(`Room ID for ${team1} is not available`);
         }
       };
-      const handleRoomIdChange = (team, value) => {
-        // Update the room ID input for the specific team
-        setRoomIdInput((prevRoomIdInput) => ({
-          ...prevRoomIdInput,
-          [team]: value,
-        }));
-      };
       
-
-
+      
       const renderFixtures = () => {
         const generatedKnockoutFixtures = generateKnockoutFixtures();
-    
+      
         return (
           <div className="fixtures">
             <h3>Fixtures</h3>
@@ -366,31 +369,30 @@
                         {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
                       </div>
                       <div>
-                        <label>
-                          Room ID:
-                          <input
-                            type="text"
-                            value={roomIdInput[fixture.team1] || ''}
-                            onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
-                          />
-                        </label>
-                        <button onClick={() => handleShareRoomId(fixture.team1, fixture.team2)}>
-                          Share room ID
-                        </button>
-                        {/* Show Room ID if it's shared by other users */}
-                        {sharedRoomIds.find((item) => item.team === fixture.team1) && (
-                          <span>Shared Room ID: {sharedRoomIds.find((item) => item.team === fixture.team1).roomId}</span>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </li>
-              ))}
-            </ul>
-          </div>
-        );
-      };
-      
+                      <label>
+                    Room ID:
+                    <input
+                      type="text"
+                      value={roomIdInputs[`${roundIndex}-${index}`]?.[fixture.team1] || ''}
+                      onChange={(e) => handleRoomIdChange(`${roundIndex}-${index}`, fixture.team1, e.target.value)}
+                    />
+                  </label>
+                  <button onClick={() => handleShareRoomId(`${roundIndex}-${index}`, fixture.team1, fixture.team2)}>
+                    Share room ID
+                  </button>
+                  {/* Show Room ID if it's shared by other users */}
+                  {sharedRoomIds.find((item) => item.matchId === `${roundIndex}-${index}` && item.team === fixture.team1) && (
+                    <span>Shared Room ID: {sharedRoomIds.find((item) => item.matchId === `${roundIndex}-${index}` && item.team === fixture.team1).roomId}</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
       const renderContent = () => {
         if (!activeGameCategory && !activeTournamentType) {
           // Display game categories
