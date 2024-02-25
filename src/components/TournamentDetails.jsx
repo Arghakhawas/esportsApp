@@ -270,8 +270,8 @@ const TournamentDetails = ({ tournament }) => {
 
 const generateKnockoutFixtures = () => {
   const teams = [
-    "Arijit Seal", "D beast","Aghori g",  "Akash Karmakar",
-    "Koushik P",  "Mursad Sarder",   "Gorden op", "AVay", 
+    "Arijit Seal",   "Akash Karmakar",
+    "Mursad Sarder",   "Gorden op",
   ];
 
   const rounds = Math.ceil(Math.log2(teams.length));
@@ -356,7 +356,7 @@ const renderFixtures = () => {
           <li key={roundIndex}>
             {roundIndex === 0 ? (
               <>
-                <strong>Round {round.round}:</strong>
+                <strong>semifinal{round.round}:</strong>
                 <ul>
                 {round.matches.map((fixture, index) => (
   <li key={index}>
