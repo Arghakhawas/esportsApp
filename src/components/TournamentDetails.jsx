@@ -270,8 +270,8 @@ const TournamentDetails = ({ tournament }) => {
 
 const generateKnockoutFixtures = () => {
   const teams = [
-    "Arijit Seal", "Akash khawas", "Sourav Rj", "D beast", "Kenifer", "Aghori g", "Akash Chaterjee", "Akash Karmakar",
-    "Koushik P", "Prithvi Debnath", "Mursad Sarder", "Ujjal Deb roy", "Souvik kar", "Gorden op", "AVay", "Aditya Karn",
+    "Arijit Seal", "D beast","Aghori g",  "Akash Karmakar",
+    "Koushik P",  "Mursad Sarder",   "Gorden op", "AVay", 
   ];
 
   const rounds = Math.ceil(Math.log2(teams.length));
