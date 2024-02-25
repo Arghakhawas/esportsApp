@@ -19,14 +19,12 @@
     const [activeSection, setActiveSection] = useState(null);
     const [activeGameCategory, setActiveGameCategory] = useState(null);
     const [activeTournamentType, setActiveTournamentType] = useState(null);
+    const [isLive, setIsLive] = useState(false);
   // Update the useEffect hook to listen for shared room IDs
   useEffect(() => {
     // Listen for shared room IDs from other users
-    socket.on('sharedRoomId', ({ roomId, team1, team2 }) => {
-      setSharedRoomIds((prevSharedRoomIds) => ({
-        ...prevSharedRoomIds,
-        [team1]: roomId,
-      }));
+    socket.on('sharedRoomId', ({ roomId, team1 }) => {
+      setSharedRoomIds((prevSharedRoomIds) => [...prevSharedRoomIds, { team: team1, roomId }]);
     });
 
     // Clean up the event listener when the component unmounts
@@ -345,50 +343,46 @@
     
 
 
-  const renderFixtures = () => {
-    const generatedKnockoutFixtures = generateKnockoutFixtures();
-
-    return (
-      <div className="fixtures">
-        <h3>Fixtures</h3>
-        <ul>
-          {generatedKnockoutFixtures.map((round, roundIndex) => (
-            <li key={roundIndex}>
-              {roundIndex === 0 ? (
-                <>
-                  <strong>Final{round.round}:</strong>
-                  <ul>
-                  {round.matches.map((fixture, index) => (
-    <li key={index}>
-      {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
-      <br />
-      <label>
-        Room ID:
-        <input
-          type="text"
-          value={roomIdInput[fixture.team1] || ''}
-          onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
-        />
-      </label>
-      <button onClick={() => handleShareRoomId(fixture.team1, fixture.team2)}>
-        Share room ID
-      </button>
-      {/* Show Room ID if it's shared by other users */}
-      {sharedRoomIds[fixture.team1] && (
-        <span>Shared Room ID: {sharedRoomIds[fixture.team1]}</span>
-      )}
-    </li>
-  ))}
-                  </ul>
-                </>
-              ) : null}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  };
-    
+    const renderFixtures = () => {
+      const generatedKnockoutFixtures = generateKnockoutFixtures();
+  
+      return (
+        <div className="fixtures">
+          <h3>Fixtures</h3>
+          <ul>
+            {generatedKnockoutFixtures.map((round, roundIndex) => (
+              <li key={roundIndex}>
+                {round.matches.map((fixture, index) => (
+                  <div key={index} className="fixture-item">
+                    {roundIndex === 0 && <strong>Final {round.round}:</strong>}
+                    <div>
+                      {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
+                    </div>
+                    <div>
+                      <label>
+                        Room ID:
+                        <input
+                          type="text"
+                          value={roomIdInput[fixture.team1] || ''}
+                          onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
+                        />
+                      </label>
+                      <button onClick={() => handleShareRoomId(fixture.team1, fixture.team2)}>
+                        Share room ID
+                      </button>
+                      {/* Show Room ID if it's shared by other users */}
+                      {sharedRoomIds.find((item) => item.team === fixture.team1) && (
+                        <span>Shared Room ID: {sharedRoomIds.find((item) => item.team === fixture.team1).roomId}</span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    };
     
     const renderContent = () => {
       if (!activeGameCategory && !activeTournamentType) {
