@@ -1,14 +1,15 @@
+// LiveViewer.js
 import React, { useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 
-const LiveViewer = () => {
+const LiveViewer = ({ tournamentId }) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    const socket = io('https://esportsappbackend.onrender.com');
+    const socket = io('https://esportsappbackend.onrender.com/api/livestreaming');
 
-    socket.on('stream', (stream) => {
-      if (videoRef.current) {
+    socket.on('stream', (stream, id) => {
+      if (videoRef.current && id === tournamentId) {
         videoRef.current.srcObject = stream;
       }
     });
@@ -16,7 +17,7 @@ const LiveViewer = () => {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [tournamentId]);
 
   return (
     <div>

@@ -50,6 +50,27 @@ const TournamentDetails = ({ tournament }) => {
     setPointTable(mockPointTable);
     setFixtures(generatedKnockoutFixtures);
   }, []);
+const saveResults = async (team1, team2, roomId, gameResult) => {
+  try {
+    const response = await fetch("https://esportsappbackend.onrender.com/api/tournament/save-results", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Include any necessary headers, such as authentication headers
+      },
+      body: JSON.stringify({ team1, team2, roomId, gameResult }),
+    });
+
+    if (response.ok) {
+      console.log("Results saved successfully");
+      // Update your component state or perform any necessary actions
+    } else {
+      console.error("Failed to save results:", response.statusText);
+    }
+  } catch (error) {
+    console.error("Error saving results:", error);
+  }
+};
 
   const handleBackButtonClick = () => {
     if (activeTournamentType) {
@@ -199,17 +220,16 @@ const TournamentDetails = ({ tournament }) => {
       </ul>
     );
   };
-
   const renderTournamentDetails = () => {
     switch (activeGameCategory) {
       case "Ea-football":
         if (activeTournamentType === "Knockout") {
           return (
             <div>
-              {renderFixtures()} {/* Render fixtures for Ea-football Knockout */}
+              {renderFixtures()}
               <div className="streaming-section">
                 <h3>Live Streaming</h3>
-                <Streaming />
+                <Streaming tournamentId={tournament.id} />
               </div>
             </div>
           );
@@ -217,7 +237,7 @@ const TournamentDetails = ({ tournament }) => {
           return (
             <div>
               {renderPointsTable()}
-              {renderFixtures()} {/* Render fixtures for Ea-football League */}
+              {renderFixtures()}
             </div>
           );
         }
@@ -345,6 +365,7 @@ const TournamentDetails = ({ tournament }) => {
     console.log("Game results submitted:", gameResults);
   };
 
+ 
   const renderFixtures = () => {
     const generatedKnockoutFixtures = generateKnockoutFixtures();
 
@@ -403,7 +424,7 @@ const TournamentDetails = ({ tournament }) => {
       </div>
     );
   };
-
+  
   const renderContent = () => {
     if (!activeGameCategory && !activeTournamentType) {
       // Display game categories
