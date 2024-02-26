@@ -22,7 +22,6 @@ const TournamentDetails = ({ tournament }) => {
   const [activeTournamentType, setActiveTournamentType] = useState(null);
   const [gameResults, setGameResults] = useState({});
 
-  // Update the useEffect hook to listen for shared room IDs
   useEffect(() => {
     // Listen for shared room IDs from other users
     socket.on('sharedRoomId', ({ roomId, team1, team2 }) => {

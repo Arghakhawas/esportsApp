@@ -15,6 +15,7 @@ import TournamentDetails from './components/TournamentDetails';
 import UserProfile from './components/UserProfile';
 import LiveViewer from './components/LiveViewer';
 import ChangePasswordModal from './components/ChangePasswordModel';
+import ShoppingCart from './components/ShoppingCart';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -46,6 +47,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           {isAuthenticated && (
             <>
+               <Route path="/shopping-cart" element={<ShoppingCart />} />
               <Route path="/profile" element={<UserProfile />} />
               {/* <AdminRoute
                 path="/admin"

@@ -68,7 +68,7 @@ const saveSelectedAvatar = async () => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
-      body: JSON.stringify({ avatar: selectedAvatar }), // Save the whole avatar object
+      body: JSON.stringify({ avatar: selectedAvatar }), 
     });
 
     if (!response.ok) {
