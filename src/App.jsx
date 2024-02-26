@@ -60,7 +60,7 @@ function App() {
             </>
           )}
         </Routes>
-        </div>
+      </div>
       </AppContextProvider>
     </BrowserRouter>
   );
