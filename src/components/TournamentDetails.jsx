@@ -72,10 +72,7 @@ const TournamentDetails = ({ tournament }) => {
     setActiveSection('streaming');
   };
 
-  const stopLiveStream = () => {
-    socket.current.emit('stopStream');
-    setIsLive(false);
-  };
+
 
   const renderGameCategories = () => {
     const gameCategories = [

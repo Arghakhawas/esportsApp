@@ -1,8 +1,9 @@
-  // Streaming.js
+
 
   import React, { useState, useRef, useEffect } from 'react';
   import { ScreenCapture } from 'react-screen-capture';
   import io from 'socket.io-client';
+  
 
   const Streaming = () => {
     const socket = useRef(null);
@@ -54,12 +55,16 @@
     };
 
     const startScreenCapture = () => {
+      setIsLive(true);
+      setIsScreenCapturing(true); // Set isScreenCapturing to true
       socket.current.emit('stream');
     };
-
+    
     const stopScreenCapture = () => {
+      setIsScreenCapturing(false); // Set isScreenCapturing to false
       socket.current.emit('stopStream');
     };
+    
 
     return (
       <div>
