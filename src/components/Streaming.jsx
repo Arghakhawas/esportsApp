@@ -4,10 +4,10 @@ import { ScreenCapture } from 'react-screen-capture';
 import io from 'socket.io-client';
 import ConfirmationDialog from './ConfirmationDialog'; // New component for confirmation dialog
 import ErrorIndicator from './ErrorIndicator'; // New component for error handling
-import { useAppContext } from '../context/AppContext'; // New context hook
+
 
 const Streaming = () => {
-  const { setError } = useAppContext(); // New context hook usage
+  
   const socket = useRef(null);
   const [isLive, setIsLive] = useState(false);
   const [isScreenCapturing, setIsScreenCapturing] = useState(false);

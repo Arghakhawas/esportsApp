@@ -2,10 +2,10 @@
 import React, { useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import ErrorIndicator from './ErrorIndicator'; // New component for error handling
-import { useAppContext } from '../context/AppContext'; // New context hook
+
 
 const LiveViewer = () => {
-  const { setError } = useAppContext(); // New context hook usage
+
   const videoRef = useRef(null);
 
   useEffect(() => {
