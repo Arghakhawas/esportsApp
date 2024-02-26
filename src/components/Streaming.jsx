@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import ConfirmationDialog from './ConfirmationDialog'; // New component for confirmation dialog
 
-const Streaming = ({ setError }) => {
+const Streaming = () => {
   const socket = useRef(null);
   const [isLive, setIsLive] = useState(false);
   const [isScreenCapturing, setIsScreenCapturing] = useState(false);
@@ -15,8 +15,8 @@ const Streaming = ({ setError }) => {
   useEffect(() => {
     socket.current = io('https://esportsappbackend.onrender.com/api/livestreaming');
 
-    socket.current.on('connect_error', (error) => {
-      setError('Socket connection error: ' + error.message);
+    socket.current.on('connect_error', () => {
+      console.error('Socket connection error');
     });
 
     socket.current.on('stream', (stream) => {
@@ -35,7 +35,7 @@ const Streaming = ({ setError }) => {
         socket.current.disconnect();
       }
     };
-  }, [setError]);
+  }, []);
 
   const timerRef = useRef(null);
 
@@ -95,7 +95,6 @@ const Streaming = ({ setError }) => {
           onNo={handleConfirmationNo}
         />
       )}
-      {/* ErrorIndicator component should be imported and used appropriately */}
     </div>
   );
 };

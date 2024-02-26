@@ -2,10 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 
-
-
 const LiveViewer = () => {
-
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -17,20 +14,19 @@ const LiveViewer = () => {
       }
     });
 
-    socket.on('connect_error', (error) => {
-      setError('Socket connection error: ' + error.message);
+    socket.on('connect_error', () => {
+      console.error('Socket connection error');
     });
 
     return () => {
       socket.disconnect();
     };
-  }, [setError]);
+  }, []);
 
   return (
     <div>
       <h1>Live Screen</h1>
       <video ref={videoRef} autoPlay playsInline width="640" height="480" />
-      <ErrorIndicator /> {/* New component for displaying errors */}
     </div>
   );
 };
