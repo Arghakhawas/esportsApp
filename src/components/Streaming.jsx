@@ -1,13 +1,9 @@
 // Streaming.js
 import React, { useState, useEffect, useRef } from 'react';
-import { ScreenCapture } from 'react-screen-capture';
 import io from 'socket.io-client';
 import ConfirmationDialog from './ConfirmationDialog'; // New component for confirmation dialog
 
-
-
-const Streaming = () => {
-  
+const Streaming = ({ setError }) => {
   const socket = useRef(null);
   const [isLive, setIsLive] = useState(false);
   const [isScreenCapturing, setIsScreenCapturing] = useState(false);
@@ -99,7 +95,7 @@ const Streaming = () => {
           onNo={handleConfirmationNo}
         />
       )}
-      <ErrorIndicator /> {/* New component for displaying errors */}
+      {/* ErrorIndicator component should be imported and used appropriately */}
     </div>
   );
 };
