@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './TournamentForm.css';
 import QRCode from 'react-qr-code';
+
 const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament }) => {
   const [gameId, setGameId] = useState('');
   const [userName, setUserName] = useState('');
@@ -78,7 +79,7 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
       );
     }
 
-    if (selectedTournament && selectedTournament.Player === 'COD') {
+    if (selectedTournament && selectedTournament.category.includes('COD')) {
       return (
         <div>
           {/* Additional inputs for COD Player */}
@@ -116,26 +117,30 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
       <h2>Tournament Registration</h2>
       {step === 1 && (
         <form onSubmit={handleFormSubmit}>
-          <label>
-            Game ID:
-            <input
-              type="text"
-              name="gameId"
-              value={gameId}
-              onChange={(e) => setGameId(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            User Name:
-            <input
-              type="text"
-              name="userName"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-              required
-            />
-          </label>
+          {selectedTournament && selectedTournament.Player !== 'Multiple' && (
+            <>
+              <label>
+                Game ID:
+                <input
+                  type="text"
+                  name="gameId"
+                  value={gameId}
+                  onChange={(e) => setGameId(e.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                User Name:
+                <input
+                  type="text"
+                  name="userName"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  required
+                />
+              </label>
+            </>
+          )}
           <label>
             Phone Number:
             <input
