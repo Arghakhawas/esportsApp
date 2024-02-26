@@ -13,7 +13,10 @@ import Streaming from './Streaming';
 
 const TournamentDetails = ({ tournament }) => {
   const [sharedRoomIds, setSharedRoomIds] = useState([]);
-  const socket = io('https://esportsappbackend.onrender.com');
+  const socket = io('https://esportsappbackend.onrender.com', {
+    withCredentials: true,
+  });
+  
   const [roomIdInput, setRoomIdInput] = useState('');
   const [pointTable, setPointTable] = useState([]);
   const [fixtures, setFixtures] = useState([]);

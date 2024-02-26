@@ -53,7 +53,7 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
       return (
         <div>
           {/* Additional inputs for Multiply Player */}
-          {[1, 2, 3, 4, 5].map((index) => (
+          {[1, 2, 3, 4].map((index) => (
             <label key={index}>
               Player {index}:
               <input
