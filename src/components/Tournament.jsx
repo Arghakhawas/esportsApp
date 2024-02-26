@@ -196,7 +196,8 @@ const Tournament = () => {
         {filteredTournaments.map((tournament, index) => (
           <div className="tournament-box" key={index}>
             <h3>{tournament.category}</h3>
-            <img className=".tournament-box img" src={tournament.image} alt={`${tournament.category} Image`} />
+            <img className="tournament-box-img" src={tournament.image} alt={`${tournament.category} Image`} />
+
             <p>Prize Money: {tournament.prize}</p>
             <p>Joining Fee: {tournament.joiningFee}</p>
             <button onClick={() => handleJoinClick(tournament)}>Join Tournament</button>

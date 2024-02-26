@@ -12,7 +12,8 @@ import  io  from 'socket.io-client';
 import Streaming from './Streaming';
 
 const TournamentDetails = ({ tournament }) => {
-  const [sharedRoomIds, setSharedRoomIds] = useState([]);
+  const [sharedRoomIds, setSharedRoomIds] = useState({});
+
   const socket = io('https://esportsappbackend.onrender.com', {
     withCredentials: true,
   });
@@ -300,7 +301,8 @@ const saveResults = async (team1, team2, roomId, gameResult) => {
         const team2 = teams[(match - 1) * 2 + 1];
 
         const matchTime = new Date(roundStartTime);
-        matchTime.setMinutes(matchTime.getMinutes() + (match - 1) * 15); // Add 15 minutes for each match
+        matchTime.setMinutes(matchTime.getMinutes() + (index - 1) * 15); 
+        // Add 15 minutes for each match
 
         matches.push({
           team1,
@@ -336,13 +338,14 @@ const saveResults = async (team1, team2, roomId, gameResult) => {
     const sharedRoomId = roomIdInput[team1];
     if (sharedRoomId) {
       // Emit an event to the server to share the room ID
-      socket.emit('shareRoomId', sharedRoomId, team1, team2);
+      socket.emit('shareRoomId', { roomId: sharedRoomId, team1, team2 });
       // Implement the logic to share the game ID (e.g., through a modal, notification, etc.)
       alert(`Share Room ID for ${team1} vs ${team2}: ${sharedRoomId}`);
     } else {
       alert(`Room ID for ${team1} is not available`);
     }
   };
+  
 
   // Update the handleRoomIdChange function to save room IDs for both players
   const handleRoomIdChange = (team, value) => {
@@ -405,7 +408,12 @@ const saveResults = async (team1, team2, roomId, gameResult) => {
                           onChange={(e) => handleGameResultUpdate(fixture.team1, fixture.team2, e.target.value)}
                         />
                       </label>
-                      <button onClick={handleGameResultSubmit}>Submit Game Results</button>
+                      <button
+  onClick={() => handleGameResultSubmit(fixture.team1, fixture.team2, gameResults[`${fixture.team1} vs ${fixture.team2}`])}
+>
+  Submit Game Results
+</button>
+
                     </div>
 
                     {/* Show Room IDs if they're shared by other users */}
@@ -437,11 +445,12 @@ const saveResults = async (team1, team2, roomId, gameResult) => {
       return renderTournamentDetails();
     } else if (activeSection === 'streaming') {
       // Display the Streaming component
-      return <Streaming />;
+      return <Streaming tournamentId={tournament.id} />;
     }
-
+  
     return null;
   };
+  
 
   return (
     <div className="tournament-details">
