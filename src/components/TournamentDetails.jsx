@@ -7,7 +7,7 @@ import cod from "../assets/cod.jpg";
 import efootball1 from "../assets/efootball1.jpg";
 import ffgarena from "../assets/ffgarena.jpg";
 import bgmi from "../assets/bgmi.png";
-import { io } from 'socket.io-client';
+import  io  from 'socket.io-client';
 
 import Streaming from './Streaming';
 
