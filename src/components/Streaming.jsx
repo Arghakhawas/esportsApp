@@ -12,7 +12,7 @@
     const videoRef = useRef(null);
 
     useEffect(() => {
-      socket.current = io('https://esportsappbackend.onrender.com');
+      socket.current = io('https://esportsappbackend.onrender.com/api/livestreaming');
 
       socket.current.on('connect_error', (error) => {
         console.error('Socket connection error:', error);
