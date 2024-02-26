@@ -301,7 +301,8 @@ const saveResults = async (team1, team2, roomId, gameResult) => {
         const team2 = teams[(match - 1) * 2 + 1];
 
         const matchTime = new Date(roundStartTime);
-        matchTime.setMinutes(matchTime.getMinutes() + (index - 1) * 15); 
+        matchTime.setMinutes(matchTime.getMinutes() + (match - 1) * 15);
+
         // Add 15 minutes for each match
 
         matches.push({
