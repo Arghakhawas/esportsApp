@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ScreenCapture } from 'react-screen-capture';
 import io from 'socket.io-client';
 import ConfirmationDialog from './ConfirmationDialog'; // New component for confirmation dialog
-import ErrorIndicator from './ErrorIndicator'; // New component for error handling
+
 
 
 const Streaming = () => {

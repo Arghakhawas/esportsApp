@@ -1,7 +1,7 @@
 // LiveViewer.js
 import React, { useEffect, useRef } from 'react';
 import io from 'socket.io-client';
-import ErrorIndicator from './ErrorIndicator'; // New component for error handling
+
 
 
 const LiveViewer = () => {
