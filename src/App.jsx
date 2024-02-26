@@ -1,3 +1,4 @@
+// App.js
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -7,15 +8,12 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Shop from './components/Shop';
 import Tournament from './components/Tournament';
-// import AdminDashboard from './components/AdminDashboard';
-// import AdminRoute from './components/AdminRoute'; 
-
 import TournamentDetails from './components/TournamentDetails';
-
 import UserProfile from './components/UserProfile';
 import LiveViewer from './components/LiveViewer';
 import ChangePasswordModal from './components/ChangePasswordModel';
 import ShoppingCart from './components/ShoppingCart';
+import { AppContextProvider } from './context/AppContext'; // New context provider
 
 function App() {
   const [user, setUser] = useState(null);
@@ -38,9 +36,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
-        <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
-        <Routes>
+      <AppContextProvider>
+        <div>
+          <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
+          <Routes>
           <Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
           <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
           <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
@@ -61,7 +60,8 @@ function App() {
             </>
           )}
         </Routes>
-      </div>
+        </div>
+      </AppContextProvider>
     </BrowserRouter>
   );
 }
