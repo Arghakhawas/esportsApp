@@ -126,7 +126,7 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
                   name="gameId"
                   value={gameId}
                   onChange={(e) => setGameId(e.target.value)}
-                  required
+                  
                 />
               </label>
               <label>
@@ -136,7 +136,7 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
                   name="userName"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
-                  required
+                  
                 />
               </label>
             </>
@@ -148,7 +148,7 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
               name="phoneNumber"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              required
+              
             />
           </label>
           {renderAdditionalInputs()}
