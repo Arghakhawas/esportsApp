@@ -20,7 +20,9 @@ const Streaming = () => {
       navigator.mediaDevices
         .getDisplayMedia({ video: true })
         .then((stream) => {
-          videoRef.current.srcObject = stream;
+          if (videoRef.current) {
+            videoRef.current.srcObject = stream;
+          }
 
           const sendStreamWithDelay = () => {
             const canvas = document.createElement("canvas");
