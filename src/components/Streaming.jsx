@@ -1,7 +1,7 @@
 // Streaming.js
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
-import ConfirmationDialog from "./ConfirmationDialog"; // New component for confirmation dialog
+import ConfirmationDialog from "./ConfirmationDialog";
 
 const Streaming = () => {
   const socket = useRef(null);
@@ -12,9 +12,7 @@ const Streaming = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   useEffect(() => {
-    socket.current = io(
-      "https://esportsappbackend.onrender.com/api/livestreaming"
-    );
+    socket.current = io("https://esportsappbackend.onrender.com/api/livestreaming");
 
     if (isScreenCapturing && isLive) {
       navigator.mediaDevices
@@ -40,7 +38,7 @@ const Streaming = () => {
 
               const imageDataUrl = canvas.toDataURL("image/jpeg");
 
-              socket.emit("videoStream", imageDataUrl);
+              socket.current.emit("videoStream", imageDataUrl);
 
               setTimeout(sendStreamWithDelay, 40);
             };
@@ -54,32 +52,10 @@ const Streaming = () => {
     }
 
     return () => {
-      // Cleanup: Disconnect socket and stop webcam stream
-      if (socket) {
-        socket.disconnect();
+      if (socket.current) {
+        socket.current.disconnect();
       }
     };
-
-    // socket.current.on("connect_error", () => {
-    //   console.error("Socket connection error");
-    // });
-
-    // socket.current.on("stream", (stream) => {
-    //   if (videoRef.current) {
-    //     videoRef.current.srcObject = stream;
-    //     startTimer();
-    //   }
-    // });
-
-    // socket.current.on("stopStream", () => {
-    //   stopTimer();
-    // });
-
-    // return () => {
-    //   if (socket.current) {
-    //     socket.current.disconnect();
-    //   }
-    // };
   }, [isLive, isScreenCapturing]);
 
   const timerRef = useRef(null);
@@ -101,7 +77,6 @@ const Streaming = () => {
 
   const startScreenCapture = () => {
     startTimer();
-    // socket.current.emit("stream"); // You need to emit the 'stream' event without additional data
   };
 
   const stopScreenCapture = () => {
@@ -111,7 +86,6 @@ const Streaming = () => {
   const handleConfirmationYes = () => {
     setShowConfirmation(false);
     stopTimer();
-    // socket.current.emit("stopStream");
   };
 
   const handleConfirmationNo = () => {
