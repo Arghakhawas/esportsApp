@@ -25,10 +25,12 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLoginSuccess = (userData) => {
+    console.log(userData); // Check the structure of userData
     setUser(userData.user);
     setIsAuthenticated(true);
     setIsAdmin(userData.user?.isAdmin || false);
   };
+  
 
   const handleLogout = () => {
     setUser(null);
