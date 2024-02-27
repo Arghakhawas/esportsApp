@@ -16,7 +16,8 @@ import Live from "./components/Live/Stream";
 import Preview from "./components/Live/Preview";
 
 // Import the AdminPanel component
-import AdminPanel from "./components/AdminPanel";
+import AdminPanel from "./components/Admin/AdminPanel";
+import AdminLogin from "./components/Admin/Adminlogin";
 
 function App() {
   const [user, setUser] = useState(null);
