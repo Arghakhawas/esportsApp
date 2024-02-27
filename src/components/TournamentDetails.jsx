@@ -22,7 +22,7 @@ const TournamentDetails = ({ tournament }) => {
   const [gameResults, setGameResults] = useState({});
   const [showConfirmation, setShowConfirmation] = useState(false);
   
-  const socket = useRef(io('https://esportsappbackend.onrender.com', {
+  const socket = useRef(io('https://esportsappbackend.onrender.com/api/tournament/save-results', {
     withCredentials: true,
   }));
 
@@ -330,28 +330,34 @@ const TournamentDetails = ({ tournament }) => {
       </div>
     );
   };
-
   const handleShareRoomId = (team1, team2) => {
     const sharedRoomId = roomIdInput[team1];
+    const gameResult = gameResults[`${team1} vs ${team2}`];
+  
     if (sharedRoomId) {
       // Emit an event to the server to share the room ID
-      socket.emit('shareRoomId', sharedRoomId, team1, team2);
+      socket.current.emit('shareRoomId', { roomId: sharedRoomId, team1, team2 });
+  
+      // Save game results
+      if (gameResult) {
+        saveResults(team1, team2, sharedRoomId, gameResult);
+      }
+  
       // Implement the logic to share the game ID (e.g., through a modal, notification, etc.)
       alert(`Share Room ID for ${team1} vs ${team2}: ${sharedRoomId}`);
     } else {
       alert(`Room ID for ${team1} is not available`);
     }
   };
-
   
   const handleRoomIdChange = (team, value) => {
     // Update the room ID input for the specific team
     setRoomIdInput((prevRoomIdInput) => ({
       ...prevRoomIdInput,
       [team]: value,
-      [`${team} vs ${fixtures[0].matches[0].team2}`]: value, // Assuming there's at least one fixture in the first round
     }));
   };
+  
 
   const handleGameResultUpdate = (team1, team2, result) => {
     setGameResults((prevResults) => ({
@@ -359,11 +365,27 @@ const TournamentDetails = ({ tournament }) => {
       [`${team1} vs ${team2}`]: result,
     }));
   };
-
-  const handleGameResultSubmit = () => {
-    // You can implement logic to submit game results to the server or perform any additional actions.
-    console.log("Game results submitted:", gameResults);
+  const handleGameResultSubmit = async () => {
+    try {
+      const response = await fetch("https://esportsappbackend.onrender.com/api/tournament/save-results", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ team1: "TeamA", team2: "TeamB", roomId: "123", gameResult: "TeamA Wins" }),
+      });
+  
+      if (response.ok) {
+        console.log("Game results submitted successfully");
+        // Update your component state or perform any necessary actions
+      } else {
+        console.error("Failed to submit game results:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error submitting game results:", error);
+    }
   };
+  
 
   const renderFixtures = () => {
     const generatedKnockoutFixtures = generateKnockoutFixtures();
@@ -371,38 +393,58 @@ const TournamentDetails = ({ tournament }) => {
     return (
       <div className="fixtures">
         <h3>Fixtures</h3>
-        {generatedKnockoutFixtures.map((round, index) => (
-          <div key={index} className="round">
-            <h4>Round {round.round}</h4>
-            {round.matches.map((match) => (
-              <div key={`${match.team1} vs ${match.team2}`} className="match">
-                <div className="teams">
-                  <span>{match.team1}</span>
-                  <span>vs</span>
-                  <span>{match.team2}</span>
-                </div>
-                <div className="date-time">
-                  <span>Date: {match.date}</span>
-                  <span>Time: {match.time}</span>
-                </div>
-                <div className="result">
-                  <input
-                    type="text"
-                    placeholder="Enter result"
-                    onChange={(e) => handleGameResultUpdate(match.team1, match.team2, e.target.value)}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        ))}
-        <div className="submit-results">
-          <button onClick={handleGameResultSubmit}>Submit Results</button>
-        </div>
+        <ul>
+          {generatedKnockoutFixtures.map((round, roundIndex) => (
+            <li key={roundIndex}>
+              <strong>Round {round.round}:</strong>
+              <ul>
+                {round.matches.map((fixture, index) => (
+                  <li key={index}>
+                    {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
+                    <br />
+
+                    <div>
+                      <label>
+                        Room ID for {fixture.team1}:
+                        <input
+                          type="text"
+                          value={roomIdInput[fixture.team1] || ''}
+                          onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
+                        />
+                      </label>
+                      <button onClick={() => handleShareRoomId(fixture.team1, fixture.team2)}>
+                        Share room ID
+                      </button>
+                    </div>
+
+                    <div>
+                      <label>
+                        Game Result:
+                        <input
+                          type="text"
+                          value={gameResults[`${fixture.team1} vs ${fixture.team2}`] || ''}
+                          onChange={(e) => handleGameResultUpdate(fixture.team1, fixture.team2, e.target.value)}
+                        />
+                      </label>
+                      <button onClick={handleGameResultSubmit}>Submit Game Results</button>
+                    </div>
+
+                    {/* Show Room IDs if they're shared by other users */}
+                    {sharedRoomIds[fixture.team1] && (
+                      <span>Shared Room ID for {fixture.team1}: {sharedRoomIds[fixture.team1]}</span>
+                    )}
+                    {gameResults[`${fixture.team1} vs ${fixture.team2}`] && (
+                      <span>Game Result: {gameResults[`${fixture.team1} vs ${fixture.team2}`]}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   };
-
   return (
     <div className="tournament-details">
       <div className="back-button" onClick={handleBackButtonClick}>

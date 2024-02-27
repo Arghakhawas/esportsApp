@@ -1,4 +1,3 @@
-// VideoStream.js
 import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 
@@ -67,7 +66,7 @@ const VideoStream = () => {
   return (
     <div>
       {isMobile && (
-        <button onClick={handleStartScreenSharing}>Start Screen Sharing</button>
+        <button onClick={handleStartScreenSharing}>Start Screen Sharing</button> 
       )}
       <video ref={videoRef} autoPlay playsInline width="640px" height="480px" className="responsive-video" />
     </div>

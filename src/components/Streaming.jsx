@@ -1,5 +1,3 @@
-
-// Streaming.js
 import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import ConfirmationDialog from "./ConfirmationDialog";
@@ -12,6 +10,7 @@ const Streaming = () => {
   const [isScreenCapturing, setIsScreenCapturing] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);  
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); // Detect if the device is mobile
 
   useEffect(() => {
     socket.current = io("https://esportsappbackend.onrender.com/api/livestreaming");
@@ -94,17 +93,25 @@ const Streaming = () => {
     setShowConfirmation(false);
   };
 
+  const handleStopLive = () => {
+    stopScreenCapture(); // This function prompts the confirmation dialog
+  };
+
   return (
     <div>
       <h1>Live Streaming</h1>
       {isLive ? (
         <div>
           <div>Recording Time: {recordingTime} seconds</div>
-          <button onClick={stopScreenCapture}>Stop Live</button>
+          <button onClick={handleStopLive}>Stop Live</button> {/* Use handleStopLive to trigger stop action */}
         </div>
       ) : (
         <div>
-          <button onClick={startScreenCapture}>Start Live</button>
+          {isMobile ? (
+            <button onClick={startScreenCapture}>Start Live</button> 
+          ) : (
+            <div>Live streaming is not available on this device.</div>
+          )}
         </div>
       )}
       <video ref={videoRef} autoPlay playsInline width="640" height="480" />

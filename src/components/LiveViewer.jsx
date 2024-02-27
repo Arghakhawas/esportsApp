@@ -1,23 +1,23 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 
 const LiveViewer = () => {
   const [videoData, setVideoData] = useState(null);
-  const socket = useRef(null);
+  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const socket = useRef(io('https://esportsappbackend.onrender.com/api/livestreaming'));
+    const socketInstance = io('https://esportsappbackend.onrender.com/api/livestreaming');
+    setSocket(socketInstance);
 
-
-    socket.current.on('videoStream', (dataUrl) => {
+    socketInstance.on('videoStream', (dataUrl) => {
       setVideoData(dataUrl);
     });
 
     return () => {
-      if (socket.current) {
-        socket.current.disconnect();
+      if (socketInstance) {
+        socketInstance.disconnect();
       }
-    };  
+    };
   }, []);
 
   return (
