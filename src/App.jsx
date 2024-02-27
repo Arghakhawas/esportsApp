@@ -17,8 +17,7 @@ import Preview from "./components/Live/Preview";
 
 // Import the AdminPanel and AdminLogin components
 import AdminPanel from "./components/Admin/AdminPanel";
-import AdminLogin from "./components/Admin/AdminLogin"; 
-
+import AdminLogin from "./components/Admin/Adminlogin";
 function App() {
   const [isAdmin, setIsAdmin] = useState(false); // Add isAdmin state
   const [user, setUser] = useState(null);
