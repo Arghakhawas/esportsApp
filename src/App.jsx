@@ -1,5 +1,5 @@
-import React, { useState,Navigate } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
@@ -15,10 +15,10 @@ import ShoppingCart from "./components/ShoppingCart";
 import Live from "./components/Live/Stream";
 import Preview from "./components/Live/Preview";
 
-
 // Import the AdminPanel and AdminLogin components
 import AdminPanel from "./components/Admin/AdminPanel";
 import AdminLogin from "./components/Admin/Adminlogin";
+
 function App() {
   const [isAdmin, setIsAdmin] = useState(false); // Add isAdmin state
   const [user, setUser] = useState(null);
@@ -29,10 +29,11 @@ function App() {
     setIsAuthenticated(true);
     setIsAdmin(userData.user.isAdmin || false);
   };
-  
+
   const handleLogout = () => {
     setUser(null);
     setIsAuthenticated(false);
+    setIsAdmin(false); // Reset isAdmin on logout
   };
 
   const handleSignup = (userData) => {
@@ -43,13 +44,14 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        <Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} onLogout={handleLogout} />
-       
+        <Navbar
+          isAuthenticated={isAuthenticated}
+          isAdmin={isAdmin}
+          onLogout={handleLogout}
+        />
+
         <Routes>
-          <Route
-            path="/"
-            element={<Home isAuthenticated={isAuthenticated} />}
-          />
+          <Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
           <Route
             path="/login"
             element={<Login onLoginSuccess={handleLoginSuccess} />}
@@ -62,11 +64,6 @@ function App() {
             <>
               <Route path="/shopping-cart" element={<ShoppingCart />} />
               <Route path="/profile" element={<UserProfile />} />
-            
-                <Route path="/admin" element={isAdmin ? <AdminPanel /> : <Navigate to="/" />} />
-
-                <Route path="/admin/login" element={<AdminLogin />} />
-              
               <Route path="/tournament" element={<Tournament />} />
               <Route
                 path="/ChangePasswordModel"
@@ -79,6 +76,22 @@ function App() {
               <Route path="/liveviewer" element={<LiveViewer />} />
             </>
           )}
+
+          {/* Admin Routes */}
+          <Route
+            path="/admin/login"
+            element={<AdminLogin onLoginSuccess={handleLoginSuccess} />}
+          />
+          <Route
+            path="/admin"
+            element={
+              isAdmin ? (
+                <AdminPanel />
+              ) : (
+                <Navigate to="/admin/login" />
+              )
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>
