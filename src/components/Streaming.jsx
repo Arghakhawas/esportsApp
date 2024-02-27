@@ -22,31 +22,31 @@ const Streaming = () => {
         .then((stream) => {
           if (videoRef.current) {
             videoRef.current.srcObject = stream;
+
+            const sendStreamWithDelay = () => {
+              const canvas = document.createElement("canvas");
+              const context = canvas.getContext("2d");
+
+              canvas.width = videoRef.current.videoWidth;
+              canvas.height = videoRef.current.videoHeight;
+
+              context.drawImage(
+                videoRef.current,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+              );
+
+              const imageDataUrl = canvas.toDataURL("image/jpeg");
+
+              socket.emit("videoStream", imageDataUrl);
+
+              setTimeout(sendStreamWithDelay, 40);
+            };
+
+            sendStreamWithDelay();
           }
-
-          const sendStreamWithDelay = () => {
-            const canvas = document.createElement("canvas");
-            const context = canvas.getContext("2d");
-
-            canvas.width = videoRef.current.videoWidth;
-            canvas.height = videoRef.current.videoHeight;
-
-            context.drawImage(
-              videoRef.current,
-              0,
-              0,
-              canvas.width,
-              canvas.height
-            );
-
-            const imageDataUrl = canvas.toDataURL("image/jpeg");
-
-            socket.emit("videoStream", imageDataUrl);
-
-            setTimeout(sendStreamWithDelay, 40);
-          };
-
-          sendStreamWithDelay();
         })
         .catch((error) => {
           console.error("Error accessing webcam", error);
