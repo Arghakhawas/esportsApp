@@ -14,19 +14,17 @@ const VideoReceiver = () => {
       setVideoData(dataUrl);
     });
 
-    return cleanupSocket;
+    return () => {
+      if (socket.current) {
+        socket.current.disconnect();
+      }
+    };
   }, []);
-
-  const cleanupSocket = () => {
-    if (socket.current) {
-      socket.current.disconnect();
-    }
-  };
 
   return (
     <div>
       {videoData && (
-        <img src={`${videoData}`} alt="Base64 Image" width="640px" height="480px" className="responsive-video"/>
+        <img src={`${videoData}`} alt="Base64 Image" width="640px" height="480px" className="responsive-video" />
       )}
     </div>
   );
