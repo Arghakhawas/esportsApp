@@ -44,7 +44,7 @@ function App() {
     <BrowserRouter>
       <div>
         <Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} onLogout={handleLogout} />
-
+       
         <Routes>
           <Route
             path="/"
@@ -64,8 +64,8 @@ function App() {
               <Route path="/profile" element={<UserProfile />} />
             
                 <Route path="/admin" element={isAdmin ? <AdminPanel /> : <Navigate to="/" />} />
-<Route path="/admin/login" element={<AdminLogin />} />
 
+                <Route path="/admin/login" element={<AdminLogin />} />
               
               <Route path="/tournament" element={<Tournament />} />
               <Route
