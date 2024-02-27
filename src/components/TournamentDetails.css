@@ -247,8 +247,11 @@
     padding: 8px 12px; /* Further adjust padding for smaller screens */
   }
 
+  
   .fixtures li {
-    padding: 8px; /* Further adjust padding for smaller screens */
+      padding: 8px;
+      border: 2px solid tomato;
+      background: black;
   }
 }
 /* Add responsive styling for mobile screens */
