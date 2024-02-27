@@ -56,7 +56,7 @@ const VideoStream = () => {
 
   return (
     <div>
-      <video ref={videoRef} autoPlay playsInline width="640px" height="480px" />
+      <video ref={videoRef} autoPlay playsInline width="640px" height="480px" className="responsive-video" />
     </div>
   );
 };

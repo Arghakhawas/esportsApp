@@ -251,3 +251,10 @@
     padding: 8px; /* Further adjust padding for smaller screens */
   }
 }
+/* Add responsive styling for mobile screens */
+@media only screen and (max-width: 600px) {
+  /* Adjust styles for smaller screens */
+  .video-container {
+    width: 100%;
+  }
+}

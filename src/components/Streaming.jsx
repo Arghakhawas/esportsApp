@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import ConfirmationDialog from "./ConfirmationDialog";
+import './Streaming.css';
 
 const Streaming = () => {
   const socket = useRef(null);
