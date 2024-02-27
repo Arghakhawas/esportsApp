@@ -17,7 +17,7 @@ const LiveViewer = () => {
       if (socket.current) {
         socket.current.disconnect();
       }
-    };
+    };  
   }, []);
 
   return (

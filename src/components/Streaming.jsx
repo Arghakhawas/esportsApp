@@ -1,3 +1,4 @@
+
 // Streaming.js
 import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
@@ -9,7 +10,7 @@ const Streaming = () => {
   const videoRef = useRef(null);
   const [isLive, setIsLive] = useState(false);
   const [isScreenCapturing, setIsScreenCapturing] = useState(false);
-  const [recordingTime, setRecordingTime] = useState(0);
+  const [recordingTime, setRecordingTime] = useState(0);  
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   useEffect(() => {
