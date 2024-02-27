@@ -23,7 +23,7 @@ const LiveViewer = () => {
   return (
     <div>
       <h1>Live Screen</h1>
-      {videoData && <img src={`${videoData}`} alt="Base64 Image" />}
+      <img src={`${videoData}`} alt="Base64 Image" />
     </div>
   );
 };
