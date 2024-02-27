@@ -1,62 +1,42 @@
-import { useEffect, useRef } from "react";
-import io from "socket.io-client";
+import React, { useEffect, useRef } from "react";
+import AgoraRTC from "agora-rtc-sdk";
+import "agora-rtc-sdk-ng";
 
 const VideoStream = () => {
   const videoRef = useRef(null);
-  const socket = useRef(null);
+  const agoraEngine = useRef(null);
 
   useEffect(() => {
-    const socket = useRef(io('https://esportsappbackend.onrender.com/api/livestreaming'));
+    const initAgoraEngine = async () => {
+      agoraEngine.current = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
+      agoraEngine.current.setClientRole("host");
 
+      try {
+        await agoraEngine.current.join("<b81631fa57a64971bad1125c459150e9>", "<esports Empries>", "<Your token>", 1);
 
-    navigator.mediaDevices
-      .getDisplayMedia({ video: true })
-      .then((stream) => {
-        videoRef.current.srcObject = stream;
+        const localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
+        const localVideoTrack = await AgoraRTC.createCameraVideoTrack();
 
-        const sendStreamWithDelay = () => {
-          const canvas = document.createElement("canvas");
-          const context = canvas.getContext("2d");
+        await agoraEngine.current.publish([localAudioTrack, localVideoTrack]);
 
-          canvas.width = videoRef.current.videoWidth;
-          canvas.height = videoRef.current.videoHeight;
+        localVideoTrack.play(videoRef.current);
+      } catch (error) {
+        console.error("Agora RTC initialization error:", error);
+      }
+    };
 
-          context.drawImage(
-            videoRef.current,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-          );
-
-          const imageDataUrl = canvas.toDataURL("image/jpeg");
-
-          socket.current.emit("videoStream", imageDataUrl);
-
-          setTimeout(sendStreamWithDelay, 40);
-        };
-
-        sendStreamWithDelay();
-      })
-      .catch((error) => {
-        console.error("Error accessing webcam:", error);
-      });
+    initAgoraEngine();
 
     return () => {
-      if (socket.current) {
-        socket.current.disconnect();
-      }
-
-      const tracks = videoRef.current?.srcObject?.getTracks();
-      if (tracks) {
-        tracks.forEach((track) => track.stop());
+      if (agoraEngine.current) {
+        agoraEngine.current.leave();
       }
     };
   }, []);
 
   return (
     <div>
-      <video ref={videoRef} autoPlay playsInline width="640px" height="480px" className="responsive-video" />
+      <video ref={videoRef} autoPlay playsInline width="100%" height="auto" className="responsive-video" />
     </div>
   );
 };
