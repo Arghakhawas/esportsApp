@@ -17,7 +17,7 @@ import Preview from "./components/Live/Preview";
 
 // Import the AdminPanel and AdminLogin components
 import AdminPanel from "./components/Admin/AdminPanel";
-import AdminLogin from "./components/Admin/Adminlogin";
+import AdminLogin from "./components/Admin/AdminLogin"; 
 
 function App() {
   const [isAdmin, setIsAdmin] = useState(false); // Add isAdmin state
@@ -65,7 +65,6 @@ function App() {
               {isAdmin && (
                 <>
                   <Route path="/admin" element={<AdminPanel />} />
-                  {/* Route for AdminLogin */}
                   <Route path="/admin/login" element={<AdminLogin />} />
                 </>
               )}
