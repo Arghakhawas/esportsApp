@@ -27,7 +27,7 @@ function App() {
   const handleLoginSuccess = (userData) => {
     setUser(userData.user);
     setIsAuthenticated(true);
-    setIsAdmin(userData.user.isAdmin || false);
+    setIsAdmin(userData.user?.isAdmin || false);
   };
 
   const handleLogout = () => {
