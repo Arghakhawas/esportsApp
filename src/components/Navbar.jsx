@@ -104,7 +104,14 @@ function Navbar({  onLogout, isAuthenticated }) {
            
             </>
           ) : null}
+
         </div>
+        {isAuthenticated && isAdmin && (
+  <NavLink to="/admin" className="nav-link">
+    Admin Panel
+  </NavLink>
+)}
+
 
             </ul>
            

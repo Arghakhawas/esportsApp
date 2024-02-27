@@ -61,12 +61,11 @@ function App() {
             <>
               <Route path="/shopping-cart" element={<ShoppingCart />} />
               <Route path="/profile" element={<UserProfile />} />
-              {isAdmin && (
-                <>
-                  <Route path="/admin" element={<AdminPanel />} />
-                  <Route path="/admin/login" element={<AdminLogin />} />
-                </>
-              )}
+            
+                <Route path="/admin" element={isAdmin ? <AdminPanel /> : <Navigate to="/" />} />
+<Route path="/admin/login" element={<AdminLogin />} />
+
+              
               <Route path="/tournament" element={<Tournament />} />
               <Route
                 path="/ChangePasswordModel"
