@@ -1,39 +1,35 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import './App.css';
-import Navbar from './components/Navbar';
-import Home from './components/Home';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Shop from './components/Shop';
-import Tournament from './components/Tournament';
-import TournamentDetails from './components/TournamentDetails';
-import UserProfile from './components/UserProfile';
-import LiveViewer from './components/LiveViewer';
-import ChangePasswordModal from './components/ChangePasswordModel';
-import ShoppingCart from './components/ShoppingCart';
-import Live from './components/Live/Stream';
-import Preview from './components/Live/Preview';
+import React, { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Shop from "./components/Shop";
+import Tournament from "./components/Tournament";
+import TournamentDetails from "./components/TournamentDetails";
+import UserProfile from "./components/UserProfile";
+import LiveViewer from "./components/LiveViewer";
+import ChangePasswordModal from "./components/ChangePasswordModel";
+import ShoppingCart from "./components/ShoppingCart";
+import Live from "./components/Live/Stream";
+import Preview from "./components/Live/Preview";
 
-// Import the AdminPanel and AdminLogin components
-import AdminPanel from './components/Admin/AdminPanel';
-import AdminLogin from './components/Admin/Adminlogin';
+// Import the AdminPanel component
+import AdminPanel from "./components/AdminPanel";
 
 function App() {
-  const [isAdmin, setIsAdmin] = useState(false);
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLoginSuccess = (userData) => {
     setUser(userData.user);
     setIsAuthenticated(true);
-    setIsAdmin(userData.user?.isAdmin || false);
   };
 
   const handleLogout = () => {
     setUser(null);
     setIsAuthenticated(false);
-    setIsAdmin(false);
   };
 
   const handleSignup = (userData) => {
@@ -44,14 +40,12 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        <Navbar
-          isAuthenticated={isAuthenticated}
-          isAdmin={isAdmin}
-          onLogout={handleLogout}
-        />
-
+        <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
         <Routes>
-          <Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
+          <Route
+            path="/"
+            element={<Home isAuthenticated={isAuthenticated} />}
+          />
           <Route
             path="/login"
             element={<Login onLoginSuccess={handleLoginSuccess} />}
@@ -64,6 +58,21 @@ function App() {
             <>
               <Route path="/shopping-cart" element={<ShoppingCart />} />
               <Route path="/profile" element={<UserProfile />} />
+              <Route
+            path="/admin"
+            element={
+              isAuthenticated ? (
+                <AdminPanel />
+              ) : (
+                // Redirect to login if not authenticated
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/admin-login"
+            element={<AdminLogin onLoginSuccess={handleLoginSuccess} />}
+          />
               <Route path="/tournament" element={<Tournament />} />
               <Route
                 path="/ChangePasswordModel"
@@ -75,21 +84,6 @@ function App() {
               />
               <Route path="/liveviewer" element={<LiveViewer />} />
             </>
-          )}
-
-          {/* Admin Routes */}
-          {isAuthenticated && isAdmin && (
-            <>
-             <Route
-  path="/admin/login"
-  element={<AdminLogin onLoginSuccess={handleLoginSuccess} />}
-/>
-
-              <Route path="/admin" element={<AdminPanel />} />
-            </>
-          )}
-          {isAuthenticated && !isAdmin && (
-            <Route path="/admin" element={<Navigate to="/admin/login" />} />
           )}
         </Routes>
       </div>
