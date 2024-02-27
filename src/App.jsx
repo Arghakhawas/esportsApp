@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -7,11 +7,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Shop from "./components/Shop";
 import Tournament from "./components/Tournament";
-// import AdminDashboard from './components/AdminDashboard';
-// import AdminRoute from './components/AdminRoute';
-
 import TournamentDetails from "./components/TournamentDetails";
-
 import UserProfile from "./components/UserProfile";
 import LiveViewer from "./components/LiveViewer";
 import ChangePasswordModal from "./components/ChangePasswordModel";
@@ -19,15 +15,21 @@ import ShoppingCart from "./components/ShoppingCart";
 import Live from "./components/Live/Stream";
 import Preview from "./components/Live/Preview";
 
+// Import the AdminPanel and AdminLogin components
+import AdminPanel from "./components/Admin/AdminPanel";
+import AdminLogin from "./components/Admin/Adminlogin";
+
 function App() {
+  const [isAdmin, setIsAdmin] = useState(false); // Add isAdmin state
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLoginSuccess = (userData) => {
     setUser(userData.user);
     setIsAuthenticated(true);
+    setIsAdmin(userData.user.isAdmin || false);
   };
-
+  
   const handleLogout = () => {
     setUser(null);
     setIsAuthenticated(false);
@@ -41,7 +43,8 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
+        <Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} onLogout={handleLogout} />
+
         <Routes>
           <Route
             path="/"
@@ -59,11 +62,13 @@ function App() {
             <>
               <Route path="/shopping-cart" element={<ShoppingCart />} />
               <Route path="/profile" element={<UserProfile />} />
-              {/* <AdminRoute
-                path="/admin"
-                element={<AdminDashboard />}
-                isAuthenticated={isAuthenticated}
-              /> */}
+              {isAdmin && (
+                <>
+                  <Route path="/admin" element={<AdminPanel />} />
+                  {/* Route for AdminLogin */}
+                  <Route path="/admin/login" element={<AdminLogin />} />
+                </>
+              )}
               <Route path="/tournament" element={<Tournament />} />
               <Route
                 path="/ChangePasswordModel"
