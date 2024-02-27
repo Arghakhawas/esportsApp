@@ -258,3 +258,71 @@
     width: 100%;
   }
 }
+/* Fixtures */
+
+.fixtures .grid {
+  list-style: none;
+  padding: 0;
+}
+
+.fixtures .grid li {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: var(--raisin-black-3);
+  box-shadow: var(--shadow-1);
+  margin: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.fixtures .grid li strong {
+  color: var(--primary-color);
+}
+
+.fixtures .grid li div {
+  margin-top: 10px;
+}
+
+.fixtures .grid li label {
+  font-weight: bold;
+  margin-right: 10px;
+  color: var(--platinum);
+}
+
+.fixtures .grid li input {
+  padding: 10px;
+  width: 80px;
+}
+
+/* Live Component */
+
+/* Add responsive styling for mobile screens */
+@media only screen and (max-width: 600px) {
+  .fixtures .grid li {
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
+
+  .fixtures .grid li input {
+    width: 60px; /* Further adjust input width for smaller screens */
+  }
+
+  /* Add specific styles for the Live component in smaller screens */
+  .live-component {
+    padding: 15px;
+    border-radius: 8px;
+    background-color: var(--raisin-black-3);
+    box-shadow: var(--shadow-1);
+    margin: 1rem;
+  }
+
+  .live-component h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+  }
+
+  .live-component button {
+    font-size: 14px; /* Adjust font size for smaller screens */
+    padding: 8px 12px; /* Further adjust padding for smaller screens */
+  }
+}
