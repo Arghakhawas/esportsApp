@@ -4,24 +4,29 @@ import io from 'socket.io-client';
 
 const LiveViewer = () => {
   const videoRef = useRef(null);
+  const socket = useRef(null);
 
   useEffect(() => {
-    const socket = io('https://esportsappbackend.onrender.com/api/livestreaming');
+    socket.current = io('https://esportsappbackend.onrender.com/api/livestreaming');
 
-    socket.on('stream', (stream) => {
+    socket.current.on('stream', (stream) => {
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
     });
 
-    socket.on('connect_error', () => {
+    socket.current.on('connect_error', () => {
       console.error('Socket connection error');
     });
 
-    return () => {
-      socket.disconnect();
-    };
+    return cleanupSocket;
   }, []);
+
+  const cleanupSocket = () => {
+    if (socket.current) {
+      socket.current.disconnect();
+    }
+  };
 
   return (
     <div>

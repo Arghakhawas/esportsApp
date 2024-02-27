@@ -12,7 +12,8 @@ import  io  from 'socket.io-client';
 import Streaming from './Streaming';
 
 const TournamentDetails = ({ tournament }) => {
-  const [sharedRoomIds, setSharedRoomIds] = useState([]);
+  const [sharedRoomIds, setSharedRoomIds] = useState({});
+
   const socket = io('https://esportsappbackend.onrender.com', {
     withCredentials: true,
   });
@@ -340,15 +341,13 @@ const saveResults = async (team1, team2, roomId, gameResult) => {
       alert(`Room ID for ${team1} is not available`);
     }
   };
-
-  // Update the handleRoomIdChange function to save room IDs for both players
   const handleRoomIdChange = (team, value) => {
-    // Update the room ID input for the specific team
     setRoomIdInput((prevRoomIdInput) => ({
       ...prevRoomIdInput,
       [team]: value,
     }));
   };
+  
 
   const handleGameResultUpdate = (team1, team2, result) => {
     setGameResults((prevResults) => ({
@@ -358,10 +357,13 @@ const saveResults = async (team1, team2, roomId, gameResult) => {
   };
 
   const handleGameResultSubmit = () => {
-    // You can implement logic to submit game results to the server or perform any additional actions.
-    console.log("Game results submitted:", gameResults);
+    Object.keys(gameResults).forEach((match) => {
+      const [team1, team2] = match.split(' vs ');
+      const result = gameResults[match];
+      saveResults(team1, team2, sharedRoomIds[team1], result);
+    });
   };
-
+  
  
   const renderFixtures = () => {
     const generatedKnockoutFixtures = generateKnockoutFixtures();

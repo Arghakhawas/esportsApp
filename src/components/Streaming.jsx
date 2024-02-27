@@ -1,16 +1,17 @@
 // Streaming.js
 import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
-import ConfirmationDialog from './ConfirmationDialog'; // New component for confirmation dialog
+import ConfirmationDialog from './ConfirmationDialog'; // Assuming this component is available
 
 const Streaming = () => {
   const socket = useRef(null);
+  const videoRef = useRef(null);
+  const timerRef = useRef(null);
+
   const [isLive, setIsLive] = useState(false);
   const [isScreenCapturing, setIsScreenCapturing] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
   const [showConfirmation, setShowConfirmation] = useState(false);
-
-  const videoRef = useRef(null);
 
   useEffect(() => {
     socket.current = io('https://esportsappbackend.onrender.com/api/livestreaming');
@@ -30,14 +31,14 @@ const Streaming = () => {
       stopTimer();
     });
 
-    return () => {
-      if (socket.current) {
-        socket.current.disconnect();
-      }
-    };
+    return cleanupSocket;
   }, []);
 
-  const timerRef = useRef(null);
+  const cleanupSocket = () => {
+    if (socket.current) {
+      socket.current.disconnect();
+    }
+  };
 
   const startTimer = () => {
     setIsLive(true);
@@ -54,14 +55,18 @@ const Streaming = () => {
     setIsScreenCapturing(false);
   };
 
+  const handleStartStopButtonClick = () => {
+    if (isLive) {
+      setShowConfirmation(true);
+    } else {
+      startScreenCapture();
+    }
+  };
+
   const startScreenCapture = () => {
     setIsLive(true);
     setIsScreenCapturing(true);
-    socket.current.emit('stream'); // You need to emit the 'stream' event without additional data
-  };
-
-  const stopScreenCapture = () => {
-    setShowConfirmation(true);
+    socket.current.emit('stream');
   };
 
   const handleConfirmationYes = () => {
@@ -80,11 +85,11 @@ const Streaming = () => {
       {isLive ? (
         <div>
           <div>Recording Time: {recordingTime} seconds</div>
-          <button onClick={stopScreenCapture}>Stop Live</button>
+          <button onClick={handleStartStopButtonClick}>Stop Live</button>
         </div>
       ) : (
         <div>
-          <button onClick={startScreenCapture}>Start Live</button>
+          <button onClick={handleStartStopButtonClick}>Start Live</button>
         </div>
       )}
       <video ref={videoRef} autoPlay playsInline width="640" height="480" />
