@@ -1,40 +1,83 @@
 // Streaming.js
-import React, { useState, useEffect, useRef } from 'react';
-import io from 'socket.io-client';
-import ConfirmationDialog from './ConfirmationDialog'; // New component for confirmation dialog
+import React, { useState, useEffect, useRef } from "react";
+import io from "socket.io-client";
+import ConfirmationDialog from "./ConfirmationDialog"; // New component for confirmation dialog
 
 const Streaming = () => {
   const socket = useRef(null);
+  const videoRef = useRef(null);
   const [isLive, setIsLive] = useState(false);
   const [isScreenCapturing, setIsScreenCapturing] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const videoRef = useRef(null);
-
   useEffect(() => {
-    socket.current = io('https://esportsappbackend.onrender.com/api/livestreaming');
+    socket.current = io(
+      "https://esportsappbackend.onrender.com/api/livestreaming"
+    );
 
-    socket.current.on('connect_error', () => {
-      console.error('Socket connection error');
-    });
+    if (isScreenCapturing && isLive) {
+      navigator.mediaDevices
+        .getDisplayMedia({ video: true })
+        .then((stream) => {
+          videoRef.current.srcObject = stream;
 
-    socket.current.on('stream', (stream) => {
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        startTimer();
-      }
-    });
+          const sendStreamWithDelay = () => {
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
 
-    socket.current.on('stopStream', () => {
-      stopTimer();
-    });
+            canvas.width = videoRef.current.videoWidth;
+            canvas.height = videoRef.current.videoHeight;
+
+            context.drawImage(
+              videoRef.current,
+              0,
+              0,
+              canvas.width,
+              canvas.height
+            );
+
+            const imageDataUrl = canvas.toDataURL("image/jpeg");
+
+            socket.emit("videoStream", imageDataUrl);
+
+            setTimeout(sendStreamWithDelay, 40);
+          };
+
+          sendStreamWithDelay();
+        })
+        .catch((error) => {
+          console.error("Error accessing webcam", error);
+        });
+    }
 
     return () => {
-      if (socket.current) {
-        socket.current.disconnect();
+      // Cleanup: Disconnect socket and stop webcam stream
+      if (socket) {
+        socket.disconnect();
       }
     };
+
+    // socket.current.on("connect_error", () => {
+    //   console.error("Socket connection error");
+    // });
+
+    // socket.current.on("stream", (stream) => {
+    //   if (videoRef.current) {
+    //     videoRef.current.srcObject = stream;
+    //     startTimer();
+    //   }
+    // });
+
+    // socket.current.on("stopStream", () => {
+    //   stopTimer();
+    // });
+
+    // return () => {
+    //   if (socket.current) {
+    //     socket.current.disconnect();
+    //   }
+    // };
   }, []);
 
   const timerRef = useRef(null);
@@ -57,7 +100,7 @@ const Streaming = () => {
   const startScreenCapture = () => {
     setIsLive(true);
     setIsScreenCapturing(true);
-    socket.current.emit('stream'); // You need to emit the 'stream' event without additional data
+    socket.current.emit("stream"); // You need to emit the 'stream' event without additional data
   };
 
   const stopScreenCapture = () => {
@@ -67,7 +110,7 @@ const Streaming = () => {
   const handleConfirmationYes = () => {
     setShowConfirmation(false);
     setIsScreenCapturing(false);
-    socket.current.emit('stopStream');
+    socket.current.emit("stopStream");
   };
 
   const handleConfirmationNo = () => {
