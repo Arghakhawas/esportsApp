@@ -80,7 +80,11 @@ function App() {
           {/* Admin Routes */}
           {isAuthenticated && isAdmin && (
             <>
-              <Route path="/admin/login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
+             <Route
+  path="/admin/login"
+  element={<AdminLogin onLoginSuccess={handleLoginSuccess} />}
+/>
+
               <Route path="/admin" element={<AdminPanel />} />
             </>
           )}
