@@ -3,37 +3,28 @@ import io from "socket.io-client";
 
 const VideoReceiver = () => {
   const [videoData, setVideoData] = useState(null);
-  let socket;
+  const socket = useRef(null);
 
   useEffect(() => {
-    // Connect to the socket.io server
-    socket = io("http://localhost:10000");
+    socket.current = io('http://localhost:10000');
 
-    // Listen for incoming video streams
-    socket.on("videoStream", (dataUrl) => {
-      // Set the received video data
+    socket.current.on('videoStream', (dataUrl) => {
       setVideoData(dataUrl);
     });
 
-    return () => {
-      // Cleanup: Disconnect socket
-      if (socket) {
-        socket.disconnect();
-      }
-    };
+    return cleanupSocket;
   }, []);
+
+  const cleanupSocket = () => {
+    if (socket.current) {
+      socket.current.disconnect();
+    }
+  };
 
   return (
     <div>
       {videoData && (
-        <>
-          <img
-            src={`${videoData}`}
-            alt="Base64 Image"
-            width="640px"
-            height="480px"
-          />
-        </>
+        <img src={`${videoData}`} alt="Base64 Image" width="640px" height="480px" />
       )}
     </div>
   );

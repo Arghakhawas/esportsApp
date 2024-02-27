@@ -37,6 +37,7 @@ const TournamentDetails = ({ tournament }) => {
       socket.off('sharedRoomId');
     };
   }, []);
+  
   useEffect(() => {
     const mockPointTable = [
       { team: "Team A", points: 3 },

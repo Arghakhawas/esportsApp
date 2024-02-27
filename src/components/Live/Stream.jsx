@@ -3,13 +3,11 @@ import io from "socket.io-client";
 
 const VideoStream = () => {
   const videoRef = useRef(null);
-  let socket;
+  const socket = useRef(null);
 
   useEffect(() => {
-    // Connect to the socket.io server
-    socket = io("http://localhost:10000");
+    socket.current = io('http://localhost:10000');
 
-    // Get access to the webcam stream
     navigator.mediaDevices
       .getDisplayMedia({ video: true })
       .then((stream) => {
@@ -47,19 +45,26 @@ const VideoStream = () => {
         console.error("Error accessing webcam:", error);
       });
 
-    return () => {
-      // Cleanup: Disconnect socket and stop webcam stream
-      if (socket) {
-        socket.disconnect();
+      return cleanupSocketAndStream;
+    }, []);
+  
+    const cleanupSocketAndStream = () => {
+      if (socket.current) {
+        socket.current.disconnect();
+      }
+  
+      // Stop the webcam stream
+      const tracks = videoRef.current?.srcObject?.getTracks();
+      if (tracks) {
+        tracks.forEach((track) => track.stop());
       }
     };
-  }, []);
-
-  return (
-    <div>
-      <video ref={videoRef} autoPlay playsInline width="640px" height="480px" />
-    </div>
-  );
-};
-
-export default VideoStream;
+  
+    return (
+      <div>
+        <video ref={videoRef} autoPlay playsInline width="640px" height="480px" />
+      </div>
+    );
+  };
+  
+  export default VideoStream;
