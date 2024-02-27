@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+// Client-Side: Live Viewer
+import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 
 const LiveViewer = () => {
@@ -6,10 +7,9 @@ const LiveViewer = () => {
   const socket = useRef(null);
 
   useEffect(() => {
-    const socket = useRef(io('https://esportsappbackend.onrender.com/api/livestreaming'));
+    socket.current = io("http://your-server-address");
 
-
-    socket.current.on('videoStream', (dataUrl) => {
+    socket.current.on("videoStream", (dataUrl) => {
       setVideoData(dataUrl);
     });
 
@@ -17,7 +17,7 @@ const LiveViewer = () => {
       if (socket.current) {
         socket.current.disconnect();
       }
-    };  
+    };
   }, []);
 
   return (
