@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
@@ -59,21 +61,10 @@ function App() {
             <>
               <Route path="/shopping-cart" element={<ShoppingCart />} />
               <Route path="/profile" element={<UserProfile />} />
-              <Route
-            path="/admin"
-            element={
-              isAuthenticated ? (
-                <AdminPanel />
-              ) : (
-                // Redirect to login if not authenticated
-                <Navigate to="/login" />
-              )
-            }
-          />
-          <Route
-            path="/admin-login"
-            element={<AdminLogin onLoginSuccess={handleLoginSuccess} />}
-          />
+              
+      <Route path="/admin" element={isAuthenticated ? <AdminPanel /> : <Navigate to="/login" />} />
+      <Route path="/admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
+      
               <Route path="/tournament" element={<Tournament />} />
               <Route
                 path="/ChangePasswordModel"
