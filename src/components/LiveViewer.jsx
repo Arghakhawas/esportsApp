@@ -1,9 +1,8 @@
 // LiveViewer.js
-import React, { useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import io from "socket.io-client";
 
 const LiveViewer = () => {
-  const videoRef = useRef(null);
   const [videoData, setVideoData] = useState(null);
 
   useEffect(() => {
