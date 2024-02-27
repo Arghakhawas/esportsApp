@@ -1,43 +1,43 @@
-import React, { useEffect, useState } from 'react';
-
-import PointsTable from './PointsTable';
-import './TournamentDetails.css'; // Import the CSS file
+import React, { useState, useEffect, useRef } from 'react';
+import io from 'socket.io-client';
 import { BiLeftArrowCircle } from "react-icons/bi";
+import Streaming from './Streaming';
+import PointsTable from './PointsTable';
+import ConfirmationDialog from './ConfirmationDialog';
+import './TournamentDetails.css';
 import cod from "../assets/cod.jpg";
 import efootball1 from "../assets/efootball1.jpg";
 import ffgarena from "../assets/ffgarena.jpg";
 import bgmi from "../assets/bgmi.png";
-import  io  from 'socket.io-client';
-
-import Streaming from './Streaming';
 
 const TournamentDetails = ({ tournament }) => {
-  const [sharedRoomIds, setSharedRoomIds] = useState([]);
-  const socket = io('https://esportsappbackend.onrender.com', {
-    withCredentials: true,
-  });
-  
-  const [roomIdInput, setRoomIdInput] = useState('');
+  const [sharedRoomIds, setSharedRoomIds] = useState({});
+  const [roomIdInput, setRoomIdInput] = useState({});
   const [pointTable, setPointTable] = useState([]);
   const [fixtures, setFixtures] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
   const [activeGameCategory, setActiveGameCategory] = useState(null);
   const [activeTournamentType, setActiveTournamentType] = useState(null);
   const [gameResults, setGameResults] = useState({});
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  
+  const socket = useRef(io('https://esportsappbackend.onrender.com', {
+    withCredentials: true,
+  }));
 
   useEffect(() => {
-    socket.on('sharedRoomId', ({ roomId, team1 }) => {
-      setSharedRoomIds((prevSharedRoomIds) => ({
+    socket.current.on('sharedRoomId', ({ roomId, team1 }) => {
+      setSharedRoomIds(prevSharedRoomIds => ({
         ...prevSharedRoomIds,
         [team1]: roomId,
       }));
     });
 
     return () => {
-      socket.off('sharedRoomId');
+      socket.current.off('sharedRoomId');
     };
   }, []);
-  
+
   useEffect(() => {
     const mockPointTable = [
       { team: "Team A", points: 3 },
@@ -425,16 +425,12 @@ const saveResults = async (team1, team2, roomId, gameResult) => {
   
   const renderContent = () => {
     if (!activeGameCategory && !activeTournamentType) {
-      // Display game categories
       return renderGameCategories();
     } else if (activeGameCategory && !activeTournamentType) {
-      // Display tournament types for the selected game category
       return renderTournamentTypes();
     } else if (activeGameCategory && activeTournamentType) {
-      // Display tournament details for the selected game category and tournament type
       return renderTournamentDetails();
     } else if (activeSection === 'streaming') {
-      // Display the Streaming component
       return <Streaming />;
     }
 
@@ -444,7 +440,7 @@ const saveResults = async (team1, team2, roomId, gameResult) => {
   return (
     <div className="tournament-details">
       <h2>{tournament ? tournament.category : ''} Details</h2>
-      <button className="back-button" onClick={() => handleBackButtonClick()}>
+      <button className="back-button" onClick={handleBackButtonClick}>
         <BiLeftArrowCircle />
       </button>
       {renderContent()}

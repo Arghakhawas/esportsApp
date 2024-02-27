@@ -1,5 +1,4 @@
-// LiveViewer.js
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 
 const LiveViewer = () => {
@@ -13,14 +12,12 @@ const LiveViewer = () => {
       setVideoData(dataUrl);
     });
 
-    return cleanupSocket;
+    return () => {
+      if (socket.current) {
+        socket.current.disconnect();
+      }
+    };
   }, []);
-
-  const cleanupSocket = () => {
-    if (socket.current) {
-      socket.current.disconnect();
-    }
-  };
 
   return (
     <div>
