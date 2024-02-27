@@ -1,5 +1,5 @@
 // Streaming.js
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import ConfirmationDialog from "./ConfirmationDialog"; // New component for confirmation dialog
 
@@ -78,7 +78,7 @@ const Streaming = () => {
     //     socket.current.disconnect();
     //   }
     // };
-  }, []);
+  }, [isLive, isScreenCapturing]);
 
   const timerRef = useRef(null);
 
@@ -98,9 +98,8 @@ const Streaming = () => {
   };
 
   const startScreenCapture = () => {
-    setIsLive(true);
-    setIsScreenCapturing(true);
-    socket.current.emit("stream"); // You need to emit the 'stream' event without additional data
+    startTimer();
+    // socket.current.emit("stream"); // You need to emit the 'stream' event without additional data
   };
 
   const stopScreenCapture = () => {
@@ -109,8 +108,8 @@ const Streaming = () => {
 
   const handleConfirmationYes = () => {
     setShowConfirmation(false);
-    setIsScreenCapturing(false);
-    socket.current.emit("stopStream");
+    stopTimer();
+    // socket.current.emit("stopStream");
   };
 
   const handleConfirmationNo = () => {
