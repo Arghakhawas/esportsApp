@@ -284,7 +284,7 @@
       const teams = [
      
          "Rit ghanti", "Souvrav gaming", "Amit", "Senu07",  "King thor", 
-        "Iconic pes gamer",  
+        "Iconic pes gamer",  "d-beast","venom",
       ];
     
       const rounds = Math.ceil(Math.log2(teams.length));
@@ -391,7 +391,7 @@ const handleShareRoomId = (team1, team2) => {
       
         const roundToDisplay = 1;
         const filteredFixtures = generatedKnockoutFixtures.filter((round) => round.round === roundToDisplay);
-      
+        
         return (
           <div className="fixtures">
             <h3>Fixtures</h3>
