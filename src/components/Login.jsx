@@ -76,7 +76,7 @@ const Login = ({ onLoginSuccess }) => {
           <button className="btnl" onClick={handleLoginSuccess}>
             Login
           </button>
-          <button className="btnl" onClick={handleChangePasswordMode}>
+          <button className="btnl2" onClick={handleChangePasswordMode}>
            Forget password
           </button>
           {loading && <div className="BoltLoader-container"></div>}
