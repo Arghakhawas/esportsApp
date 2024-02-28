@@ -25,19 +25,19 @@ const TournamentDetails = ({ tournament }) => {
   const socket = useRef(io('https://esportsappbackend.onrender.com/api/tournament/save-results', {
     withCredentials: true,
   }));
-
   useEffect(() => {
-    socket.current.on('sharedRoomId', ({ roomId, team1 }) => {
-      setSharedRoomIds(prevSharedRoomIds => ({
+    socket.current.on('sharedRoomId', ({ roomId, team1, team2 }) => {
+      setSharedRoomIds((prevSharedRoomIds) => ({
         ...prevSharedRoomIds,
         [team1]: roomId,
       }));
     });
-
+  
     return () => {
       socket.current.off('sharedRoomId');
     };
   }, []);
+  
 
   useEffect(() => {
     const mockPointTable = [
