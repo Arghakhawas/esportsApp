@@ -63,7 +63,8 @@ function Home({ isAuthenticated }) {
                 </div>
 
                 <address className="item-text">
-                  Address :
+                  Address : Kolkata,wesbengal
+                  support from :Esports.
                 </address>
               </li>
 
@@ -72,7 +73,7 @@ function Home({ isAuthenticated }) {
                   <ion-icon name="headset"></ion-icon>
                 </div>
 
-                <a href="tel:+241245654235" className="item-text">Phone : </a>
+                <a href="tel:+241245654235" className="item-text">Phone : 9073357827</a>
               </li>
 
               <li className="contact-item">
@@ -80,7 +81,7 @@ function Home({ isAuthenticated }) {
                   <ion-icon name="mail-open"></ion-icon>
                 </div>
 
-                <a href="mailto:info@exemple.com" className="item-text">Email : </a>
+                <a href="mailto:info@exemple.com" className="item-text">Email : esportsempires7@gmail.com</a>
               </li>
 
             </ul>
@@ -90,27 +91,27 @@ function Home({ isAuthenticated }) {
           <ul className="footer-list">
 
             <li>
-              <p className="footer-list-title">Products</p>
+              <p className="footer-list-title">Gaming Products</p>
             </li>
 
             <li>
-              <a href="#" className="footer-link">Graphics (26)</a>
+              <a href="#" className="footer-link">Graphics cards(30)</a>
             </li>
 
             <li>
-              <a href="#" className="footer-link">Backgrounds (11)</a>
+              <a href="#" className="footer-link">gaming pad (11)</a>
             </li>
 
             <li>
-              <a href="#" className="footer-link">Fonts (9)</a>
+              <a href="#" className="footer-link">Gaming Conttoler (9)</a>
             </li>
 
             <li>
-              <a href="#" className="footer-link">Music (3)</a>
+              <a href="#" className="footer-link">Store</a>
             </li>
 
             <li>
-              <a href="#" className="footer-link">Photography (3)</a>
+              <a href="#" className="footer-link">Tournament (17)</a>
             </li>
 
           </ul>

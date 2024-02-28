@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TournamentForm from './TournamentForm';
 import { useNavigate } from 'react-router-dom';
 import './Tournament.css';
+import TournamentRules from './TournamentRules/TournamentRules';
 import efootball from "../assets/efootball.png";
 import efootball1 from "../assets/efootball1.jpg";
 import ffgarena from "../assets/ffgarena.jpg";
@@ -9,6 +10,8 @@ import bgmi from "../assets/bgmi.png";
 import cod from "../assets/cod.jpg"
 
 const Tournament = () => {
+  const [showRules, setShowRules] = useState(false);
+
   const [step, setStep] = useState(1);
   const [selectedTournament, setSelectedTournament] = useState(null);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -19,7 +22,10 @@ const Tournament = () => {
     setSelectedTournament(tournament);
     setStep(2); // Move to step 2 (join form)
   };
-
+  const handleViewRulesClick = (rules) => {
+    setRulesToDisplay(rules);
+    setShowRules(true);
+  };
 
   const handleFormSubmit = async (formData) => {
     try {
@@ -201,7 +207,7 @@ const Tournament = () => {
             <p>Prize Money: {tournament.prize}</p>
             <p>Joining Fee: {tournament.joiningFee}</p>
             <button onClick={() => handleJoinClick(tournament)}>Join Tournament</button>
-            <button onClick={() => alert(tournament.rules)}>View Game Rules</button>
+            <button onClick={() => handleViewRulesClick(tournament.rules)}>View Game Rules</button>
           </div>
         ))}
       </div>
@@ -221,6 +227,12 @@ const Tournament = () => {
             <button onClick={handlePaymentSuccessClose}>Go to Home</button>
           </div>
         </div>
+      )}
+  {showRules && (
+        <TournamentRules
+          rules={rulesToDisplay}
+          onClose={() => setShowRules(false)}
+        />
       )}
     </div>
   );
