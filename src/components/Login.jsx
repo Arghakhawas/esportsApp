@@ -4,7 +4,8 @@ import './Login.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Loader from './loader';
-import ChangePasswordModal from './ChangePasswordModal'; 
+import ChangePasswordModal from "./components/ChangePasswordModel";
+
 
 const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
