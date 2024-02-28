@@ -25,19 +25,18 @@
     const socket = useRef(io('https://esportsappbackend.onrender.com/api/tournament/save-results', {
       withCredentials: true,
     }));
- 
-useEffect(() => {
-  socket.current.on('sharedRoomId', ({ roomId, team1, team2, gameResult }) => {
-   
-    console.log(`Received shared Room ID for ${team1} vs ${team2}: ${roomId}`);
-    console.log(`Game Result: ${gameResult}`);
-  });
-
-  return () => {
-    socket.current.off('sharedRoomId');
-  };
-}, []);
-
+    useEffect(() => {
+      socket.current.on('sharedRoomId', ({ roomId, team1, team2, gameResult }) => {
+        console.log(`Received shared Room ID for ${team1} vs ${team2}: ${roomId}`);
+        console.log(`Game Result: ${gameResult}`);
+        // You can update your local state with shared data if needed
+      });
+    
+      return () => {
+        socket.current.off('sharedRoomId');
+      };
+    }, []);
+    
     
 
     useEffect(() => {
@@ -50,18 +49,16 @@ useEffect(() => {
       setPointTable(mockPointTable);
       setFixtures(generatedKnockoutFixtures);
     }, []);
-    
     const saveResults = async (team1, team2, roomId, gameResult) => {
       try {
         const response = await fetch("https://esportsappbackend.onrender.com/api/tournament/save-results", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            // Include any necessary headers, such as authentication headers
           },
           body: JSON.stringify({ team1, team2, roomId, gameResult }),
         });
-
+    
         if (response.ok) {
           console.log("Results saved successfully");
           // Update your component state or perform any necessary actions
@@ -72,7 +69,7 @@ useEffect(() => {
         console.error("Error saving results:", error);
       }
     };
-
+    
     const handleBackButtonClick = () => {
       if (activeTournamentType) {
         setActiveTournamentType(null);
@@ -365,26 +362,31 @@ const handleShareRoomId = (team1, team2) => {
         [`${team1} vs ${team2}`]: result,
       }));
     };
-    const handleGameResultSubmit = async () => {
-      try {
-        const response = await fetch("https://esportsappbackend.onrender.com/api/tournament/save-results", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ team1: "TeamA", team2: "TeamB", roomId: "123", gameResult: "TeamA Wins" }),
-        });
-    
-        if (response.ok) {
-          console.log("Game results submitted successfully");
-          // Update your component state or perform any necessary actions
-        } else {
-          console.error("Failed to submit game results:", response.statusText);
+      const handleGameResultSubmit = async (team1, team2) => {
+        const roomId = roomIdInput[team1];
+        const gameResult = gameResults[`${team1} vs ${team2}`];
+      
+        try {
+          const response = await fetch("https://esportsappbackend.onrender.com/api/tournament/save-results", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ team1, team2, roomId, gameResult }),
+          });
+      
+          if (response.ok) {
+            console.log("Game results submitted successfully");
+            // Update your component state or perform any necessary actions
+          } else {
+            console.error("Failed to submit game results:", response.statusText);
+          }
+        } catch (error) {
+          console.error("Error submitting game results:", error);
         }
-      } catch (error) {
-        console.error("Error submitting game results:", error);
-      }
-    };
+      };
+      
+    
     
 
     const renderFixtures = () => {
@@ -426,7 +428,9 @@ const handleShareRoomId = (team1, team2) => {
                             onChange={(e) => handleGameResultUpdate(fixture.team1, fixture.team2, e.target.value)}
                           />
                         </label>
-                        <button onClick={handleGameResultSubmit}>Submit Game Results</button>
+                        <button onClick={() => handleGameResultSubmit(fixture.team1, fixture.team2)}>
+  Submit Game Results
+</button>
                       </div>
 
                       {/* Show Room IDs if they're shared by other users */}
