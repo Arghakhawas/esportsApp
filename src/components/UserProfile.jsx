@@ -18,8 +18,7 @@ const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [showAvatarSelection, setShowAvatarSelection] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState(avatarOptions[0]); // Set a default avatar
-
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
 
   const avatarOptions = [
     { src: bgmi, alt: 'BGMI AVATAR', id: 'bgmi' },
@@ -36,6 +35,7 @@ const UserProfile = () => {
     { src: sukunaevil, alt: 'SUKUNAEVIL AVATAR', id: 'sukunaevil' },
   ];
 
+  
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -51,42 +51,40 @@ const UserProfile = () => {
 
         const data = await response.json();
         setProfileData(data.user);
-        setSelectedAvatar(data.user.avatar); // Set selected avatar from profile data
+        setSelectedAvatar(avatarOptions.find(avatar => avatar.id === data.user.avatar));
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchUserProfile();
-  }, []);
+  }, [avatarOptions]);
 
- // Modify the saveSelectedAvatar function
- const saveSelectedAvatar = async () => {
-  try {
-    const response = await fetch('https://esportsappbackend.onrender.com/api/profile/avatar', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-      body: JSON.stringify({ avatar: selectedAvatar.id }), // Assuming the backend expects an avatar ID
-    });
+  const saveSelectedAvatar = async () => {
+    try {
+      const response = await fetch('https://esportsappbackend.onrender.com/api/profile/avatar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({ avatar: selectedAvatar.id }),
+      });
 
-    if (!response.ok) {
-      throw new Error('Failed to save avatar');
+      if (!response.ok) {
+        throw new Error('Failed to save avatar');
+      }
+
+      // Avatar saved successfully
+    } catch (error) {
+      console.error('Error saving avatar:', error);
     }
+  };
 
-    // Avatar saved successfully
-  } catch (error) {
-    console.error('Error saving avatar:', error);
-  }
-};
-
-
-const handleAvatarSelection = (avatar) => {
-  setSelectedAvatar(avatar);
-  setShowAvatarSelection(false);
-};
+  const handleAvatarSelection = (avatar) => {
+    setSelectedAvatar(avatar);
+    setShowAvatarSelection(false);
+  };
 
   const handleOpenChangePasswordModal = () => {
     setShowChangePasswordModal(true);
@@ -101,13 +99,12 @@ const handleAvatarSelection = (avatar) => {
       <h2 className="profile-heading">User Profile</h2>
       {profileData && (
         <div className="profile-details">
-      <img
-  src={selectedAvatar.src}
-  alt="Profile"
-  className="profile-picture"
-  onClick={() => setShowAvatarSelection(true)}
-/>
-
+          <img
+            src={selectedAvatar?.src}
+            alt="Profile"
+            className="profile-picture"
+            onClick={() => setShowAvatarSelection(true)}
+          />
 
           {/* Avatar selection section */}
           {showAvatarSelection && (
@@ -126,23 +123,20 @@ const handleAvatarSelection = (avatar) => {
 
           <div className="avatar-buttons">
             <button onClick={() => setShowAvatarSelection(true)}>Change Picture</button>
-       
             <button onClick={saveSelectedAvatar}>Save Avatar</button>
-
-         
           </div>
 
           <p className="profile-info">Name: {profileData.username}</p>
           <p className="profile-info">Email: {profileData.email}</p>
-          <p className="profile-info">Refer id: {profileData.referId}</p>
-          <p className="profile-info">Number: {profileData.number}</p>
-          <p className="profile-info">Tournament Matches Played: {profileData.tournamentMatchesPlayed}</p>
+          {/* ... (other profile info) */}
         </div>
       )}
-      
+
       <div className="avatar-buttons">
-     <button onClick={handleOpenChangePasswordModal}>Change Password</button>
-     <button onClick={handleCloseChangePasswordModal}>Cancel</button> </div>
+        <button onClick={handleOpenChangePasswordModal}>Change Password</button>
+        <button onClick={handleCloseChangePasswordModal}>Cancel</button>
+      </div>
+
       {/* Render the ChangePasswordModal when needed */}
       {showChangePasswordModal && (
         <ChangePasswordModal userId={profileData?._id} onClose={handleCloseChangePasswordModal} />
