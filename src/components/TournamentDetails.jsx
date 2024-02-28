@@ -283,9 +283,8 @@
     const generateKnockoutFixtures = () => {
       const teams = [
      
-        "Rakesh", "Rit ghanti", "Murshad Xi", "Amit", "Senu07", "paradox op", "King thor", "kenkani",
-        "Iconic pes gamer", "Koushik 02", "ujju", "D-beast", "Souvrav gaming", "magical leonal",  "Venom",
-        "Chanda",
+         "Rit ghanti", "Souvrav gaming", "Amit", "Senu07",  "King thor", 
+        "Iconic pes gamer",  
       ];
     
       const rounds = Math.ceil(Math.log2(teams.length));
@@ -302,7 +301,7 @@
           const team2 = teams[(match - 1) * 2 + 1];
     
           const matchTime = new Date(roundStartTime);
-          matchTime.setMinutes(matchTime.getMinutes() + (match - 1) * 15);
+          matchTime.setMinutes(matchTime.getMinutes() + (match - 1) *5);
     
           matches.push({
             team1,
@@ -390,10 +389,13 @@ const handleShareRoomId = (team1, team2) => {
       const renderFixtures = () => {
         const generatedKnockoutFixtures = generateKnockoutFixtures();
       
+        const roundToDisplay = 2;
+        const filteredFixtures = generatedKnockoutFixtures.filter((round) => round.round === roundToDisplay);
+      
         return (
           <div className="fixtures">
             <h3>Fixtures</h3>
-            {generatedKnockoutFixtures.map((round, roundIndex) => (
+            {filteredFixtures.map((round, roundIndex) => (
               <div key={roundIndex} className="round-fixtures">
                 <h4>Round {round.round}:</h4>
                 <ul>
