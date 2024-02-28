@@ -284,7 +284,7 @@
       const teams = [
      
          "Rit ghanti", "Amit", 
-        "Iconic pes gamer", "venom",
+        "Iconic pes gamer", "D-beast",
       ];
     
       const rounds = Math.ceil(Math.log2(teams.length));
