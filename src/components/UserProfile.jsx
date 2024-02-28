@@ -75,7 +75,7 @@ const UserProfile = () => {
         throw new Error('Failed to save avatar');
       }
 
-      // Avatar saved successfully
+     
     } catch (error) {
       console.error('Error saving avatar:', error);
     }
@@ -126,9 +126,15 @@ const UserProfile = () => {
             <button onClick={saveSelectedAvatar}>Save Avatar</button>
           </div>
 
+        
+
           <p className="profile-info">Name: {profileData.username}</p>
           <p className="profile-info">Email: {profileData.email}</p>
-          {/* ... (other profile info) */}
+          <p className="profile-info">Refer id: {profileData.referId}</p>
+          <p className="profile-info">Number: {profileData.number}</p>
+          <p className="profile-info">Tournament Matches Played: {profileData.tournamentMatchesPlayed}</p>
+        
+    
         </div>
       )}
 
