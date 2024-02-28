@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './UserProfile.css';
 import ChangePasswordModal from './ChangePasswordModel';
-import bgmi from "../assets/bgmi.png";
+
 import Cute from "../assets/Cute.png";
 import deathking from "../assets/deathking.png";
 import Itachiuchiha from "../assets/Itachiuchiha.png";
@@ -11,7 +11,6 @@ import onepiece from "../assets/onepiece.png";
 import sauske from "../assets/sauske.png";
 import sexy from "../assets/sexy.png";
 import sexy2 from "../assets/sexy2.png";
-import sukuna from "../assets/sukuna.png";
 import sukunaevil from "../assets/sukunaevil.png";
 
 const UserProfile = () => {
@@ -21,7 +20,6 @@ const UserProfile = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
 
   const avatarOptions = [
-    { src: bgmi, alt: 'BGMI AVATAR', id: 'bgmi' },
     { src: Cute, alt: 'CUTE AVATAR', id: 'Cute' },
     { src: deathking, alt: 'DEATHKING AVATAR', id: 'deathking' },
     { src: Itachiuchiha, alt: 'ITACHIUCHIHA AVATAR', id: 'Itachiuchiha' },
@@ -31,11 +29,9 @@ const UserProfile = () => {
     { src: sauske, alt: 'SAUSKE AVATAR', id: 'sauske' },
     { src: sexy, alt: 'SEXY AVATAR', id: 'sexy' },
     { src: sexy2, alt: 'SEXY2 AVATAR', id: 'sexy2' },
-    { src: sukuna, alt: 'SUKUNA AVATAR', id: 'sukuna' },
     { src: sukunaevil, alt: 'SUKUNAEVIL AVATAR', id: 'sukunaevil' },
   ];
 
-  
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -75,7 +71,7 @@ const UserProfile = () => {
         throw new Error('Failed to save avatar');
       }
 
-     
+      // Avatar saved successfully
     } catch (error) {
       console.error('Error saving avatar:', error);
     }
@@ -126,15 +122,11 @@ const UserProfile = () => {
             <button onClick={saveSelectedAvatar}>Save Avatar</button>
           </div>
 
-        
-
           <p className="profile-info">Name: {profileData.username}</p>
           <p className="profile-info">Email: {profileData.email}</p>
           <p className="profile-info">Refer id: {profileData.referId}</p>
           <p className="profile-info">Number: {profileData.number}</p>
           <p className="profile-info">Tournament Matches Played: {profileData.tournamentMatchesPlayed}</p>
-        
-    
         </div>
       )}
 
