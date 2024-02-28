@@ -387,22 +387,21 @@ const handleShareRoomId = (team1, team2) => {
           console.error("Error submitting game results:", error);
         }
       };
-    const renderFixtures = () => {
-      const generatedKnockoutFixtures = generateKnockoutFixtures();
-
-      return (
-        <div className="fixtures">
-          <h3>Fixtures</h3>
-          <ul>
+      const renderFixtures = () => {
+        const generatedKnockoutFixtures = generateKnockoutFixtures();
+      
+        return (
+          <div className="fixtures">
+            <h3>Fixtures</h3>
             {generatedKnockoutFixtures.map((round, roundIndex) => (
-              <li key={roundIndex}>
-                <strong>Round {round.round}:</strong>
+              <div key={roundIndex} className="round-fixtures">
+                <h4>Round {round.round}:</h4>
                 <ul>
                   {round.matches.map((fixture, index) => (
                     <li key={index}>
                       {fixture.team1} vs {fixture.team2} <div> {fixture.date} at {fixture.time}</div>
                       <br />
-
+      
                       <div>
                         <label>
                           Room ID for {fixture.team1}:
@@ -416,17 +415,21 @@ const handleShareRoomId = (team1, team2) => {
                           Share room ID
                         </button>
                       </div>
-
+      
                       <div>
                         <label>
                           Game Result:
                           <input
                             type="text"
                             value={gameResults[`${fixture.team1} vs ${fixture.team2}`] || ''}
-                            onChange={(e) => handleGameResultUpdate(fixture.team1, fixture.team2, e.target.value)}
+                            onChange={(e) =>
+                              handleGameResultUpdate(fixture.team1, fixture.team2, e.target.value)
+                            }
                           />
                         </label>
-                        <button onClick={() => handleGameResultSubmit(fixture.team1, fixture.team2)}>Submit Game Results</button>
+                        <button onClick={() => handleGameResultSubmit(fixture.team1, fixture.team2)}>
+                          Submit Game Results
+                        </button>
                       </div>
                       {/* Show Room IDs if they're shared by other users */}
                       {sharedRoomIds[fixture.team1] && (
@@ -438,12 +441,12 @@ const handleShareRoomId = (team1, team2) => {
                     </li>
                   ))}
                 </ul>
-              </li>
+              </div>
             ))}
-          </ul>
-        </div>
-      );
-    };
+          </div>
+        );
+      };
+      
     return (
       <div className="tournament-details">
         <div className="back-button" onClick={handleBackButtonClick}>
