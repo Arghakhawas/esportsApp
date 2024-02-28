@@ -283,14 +283,14 @@
     const generateKnockoutFixtures = () => {
       const teams = [
      
-         "Rit ghanti", "Souvrav gaming", "Amit", "Senu07",  "King thor", 
-        "Iconic pes gamer",  "d-beast","venom",
+         "Rit ghanti", "Amit", 
+        "Iconic pes gamer", "venom",
       ];
     
       const rounds = Math.ceil(Math.log2(teams.length));
     
       const fixtures = [];
-      const startTime = new Date("2024-02-28T22:45:00"); 
+      const startTime = new Date("2024-02-28T23:30:00"); 
 
       for (let round = 1; round <= rounds; round++) {
         const matches = [];
@@ -397,7 +397,7 @@ const handleShareRoomId = (team1, team2) => {
             <h3>Fixtures</h3>
             {filteredFixtures.map((round, roundIndex) => (
               <div key={roundIndex} className="round-fixtures">
-                <h4>Round {round.round}:</h4>
+                <h4>semifinal {round.round}:</h4>
                 <ul>
                   {round.matches.map((fixture, index) => (
                     <li key={index}>
