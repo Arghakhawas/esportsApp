@@ -277,20 +277,22 @@
       }
     };
 
+
+    // "Team18", "Team19", "Team20", "Team21", "Team22", "Team23", "Team24",
+    // "Team25", "Team26", "Team27", "Team28", "Team29", "Team30", "Team31", "Team32",
     const generateKnockoutFixtures = () => {
       const teams = [
-        // Replace the existing team names with your own
-        "Team1", "Team2", "Team3", "Team4", "Team5", "Team6", "Team7", "Team8",
-        "Team9", "Team10", "Team11", "Team12", "Team13", "Team14", "Team15", "Team16",
-        "Team17", "Team18", "Team19", "Team20", "Team21", "Team22", "Team23", "Team24",
-        "Team25", "Team26", "Team27", "Team28", "Team29", "Team30", "Team31", "Team32",
+     
+        "paradox op", "Rit ghanti", "Murshad Xi", "Amit", "Senu07", "Rakesh", "King thor", "kenkani",
+        "Iconic pes gamer", "Koushik 02", "ujju", "D-beast", "Souvrav gaming", "magical leonal",  "Venom",
+        "Chanda",
       ];
     
       const rounds = Math.ceil(Math.log2(teams.length));
     
       const fixtures = [];
-      const startTime = new Date("2024-02-25T16:15:00"); // Initial start time for the matches
-    
+      const startTime = new Date("2024-02-28T20:30:00"); 
+
       for (let round = 1; round <= rounds; round++) {
         const matches = [];
         const roundStartTime = new Date(startTime);
@@ -300,7 +302,7 @@
           const team2 = teams[(match - 1) * 2 + 1];
     
           const matchTime = new Date(roundStartTime);
-          matchTime.setMinutes(matchTime.getMinutes() + (match - 1) * 15); // Add 15 minutes for each match
+          matchTime.setMinutes(matchTime.getMinutes() + (match - 1) * 15);
     
           matches.push({
             team1,
@@ -385,10 +387,6 @@ const handleShareRoomId = (team1, team2) => {
           console.error("Error submitting game results:", error);
         }
       };
-      
-    
-    
-
     const renderFixtures = () => {
       const generatedKnockoutFixtures = generateKnockoutFixtures();
 
@@ -428,11 +426,8 @@ const handleShareRoomId = (team1, team2) => {
                             onChange={(e) => handleGameResultUpdate(fixture.team1, fixture.team2, e.target.value)}
                           />
                         </label>
-                        <button onClick={() => handleGameResultSubmit(fixture.team1, fixture.team2)}>
-  Submit Game Results
-</button>
+                        <button onClick={() => handleGameResultSubmit(fixture.team1, fixture.team2)}>Submit Game Results</button>
                       </div>
-
                       {/* Show Room IDs if they're shared by other users */}
                       {sharedRoomIds[fixture.team1] && (
                         <span>Shared Room ID for {fixture.team1}: {sharedRoomIds[fixture.team1]}</span>
