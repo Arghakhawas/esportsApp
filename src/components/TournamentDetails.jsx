@@ -290,7 +290,7 @@
       const rounds = Math.ceil(Math.log2(teams.length));
     
       const fixtures = [];
-      const startTime = new Date("2024-02-28T20:30:00"); 
+      const startTime = new Date("2024-02-28T22:45:00"); 
 
       for (let round = 1; round <= rounds; round++) {
         const matches = [];
