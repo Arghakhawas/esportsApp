@@ -11,7 +11,7 @@ import cod from "../assets/cod.jpg"
 
 const Tournament = () => {
   const [showRules, setShowRules] = useState(false);
-
+  const [rulesToDisplay, setRulesToDisplay] = useState([]);
   const [step, setStep] = useState(1);
   const [selectedTournament, setSelectedTournament] = useState(null);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -75,17 +75,38 @@ const Tournament = () => {
       category: 'EA Football 2024 - Knockout',
       prize: '₹200',
       joiningFee: '₹15',
-      Player:'Single',
-      rules: 'Game rules for EA Football Knockout...',
+      Player: 'Single',
+      rules: [
+        'Tournament will be in knockout mode.',
+        'Only one game will be played against an opponent in a round (There will be no home and away matches).',
+        'Participants must schedule the matches with their opponents only within the specified timeline.',
+        'If any player is not ready for the match before the deadline, then the opposition will be called the winner.',
+        'After every match, the player who won should send a screenshot to the group with the caption "won vs @mention(opposite player)".',
+        'The decision of the Organising core and Convenors will stand final.',
+        'Match Time: 8 min. Extra Time: On PK: On',
+        'No. 5 +1 Sub in Extra Time',
+        'Disconnections and technical problems: In the event of a tie break caused by a technical problem after the first umpire signal has been given, the match shall be replayed. In the absence of mutual agreement to replay a match, a new match shall be played with conditions recreated close to the time of the previous match stoppage. Conditions may be the number of goals, red cards, etc. and shall be determined by an administrator.',
+        'Player behaviour: All players are required to maintain and observe a certain level of sportsmanship. Any unsportsmanlike conduct, which may include but is not limited to racism, rude/violent actions, offensive remarks, and disrespect to the admin team will not be tolerated. Participants who do not meet these requirements are subject to penalties ranging from forfeiting a game, forfeit and suspension of the player in question, or other penalties deemed necessary by the organizers.',
+      ],
       image: efootball,
     },
-    
     {
       category: 'EA Football 2024 - Group Stages Cup',
       prize: '₹1000',
       joiningFee: '₹50',
       Player:'Single',
-      rules: 'Game rules for EA Football Group Stages Cup...',
+      rules: [
+        'Tournament will be in knockout mode.',
+        'Only one game will be played against an opponent in a round (There will be no home and away matches).',
+        'Participants must schedule the matches with their opponents only within the specified timeline.',
+        'If any player is not ready for the match before the deadline, then the opposition will be called the winner.',
+        'After every match, the player who won should send a screenshot to the group with the caption "won vs @mention(opposite player)".',
+        'The decision of the Organising core and Convenors will stand final.',
+        'Match Time: 8 min. Extra Time: On PK: On',
+        'No. 5 +1 Sub in Extra Time',
+        'Disconnections and technical problems: In the event of a tie break caused by a technical problem after the first umpire signal has been given, the match shall be replayed. In the absence of mutual agreement to replay a match, a new match shall be played with conditions recreated close to the time of the previous match stoppage. Conditions may be the number of goals, red cards, etc. and shall be determined by an administrator.',
+        'Player behaviour: All players are required to maintain and observe a certain level of sportsmanship. Any unsportsmanlike conduct, which may include but is not limited to racism, rude/violent actions, offensive remarks, and disrespect to the admin team will not be tolerated. Participants who do not meet these requirements are subject to penalties ranging from forfeiting a game, forfeit and suspension of the player in question, or other penalties deemed necessary by the organizers.',
+      ],
       image: efootball1, 
     },
     {
@@ -93,7 +114,18 @@ const Tournament = () => {
       prize: '₹97',
       joiningFee: '₹50',
       Player:'Single',
-      rules: 'Game rules for EA Football Singnal match...',
+      rules: [
+        'Tournament will be in knockout mode.',
+        'Only one game will be played against an opponent in a round (There will be no home and away matches).',
+        'Participants must schedule the matches with their opponents only within the specified timeline.',
+        'If any player is not ready for the match before the deadline, then the opposition will be called the winner.',
+        'After every match, the player who won should send a screenshot to the group with the caption "won vs @mention(opposite player)".',
+        'The decision of the Organising core and Convenors will stand final.',
+        'Match Time: 8 min. Extra Time: On PK: On',
+        'No. 5 +1 Sub in Extra Time',
+        'Disconnections and technical problems: In the event of a tie break caused by a technical problem after the first umpire signal has been given, the match shall be replayed. In the absence of mutual agreement to replay a match, a new match shall be played with conditions recreated close to the time of the previous match stoppage. Conditions may be the number of goals, red cards, etc. and shall be determined by an administrator.',
+        'Player behaviour: All players are required to maintain and observe a certain level of sportsmanship. Any unsportsmanlike conduct, which may include but is not limited to racism, rude/violent actions, offensive remarks, and disrespect to the admin team will not be tolerated. Participants who do not meet these requirements are subject to penalties ranging from forfeiting a game, forfeit and suspension of the player in question, or other penalties deemed necessary by the organizers.',
+      ],
       image: efootball,
     },
     {

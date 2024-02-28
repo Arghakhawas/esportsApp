@@ -1,4 +1,5 @@
 import React from 'react';
+import './TournamentRules.css';
 
 const TournamentRules = ({ rules, onClose }) => {
   return (
