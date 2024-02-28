@@ -4,7 +4,7 @@ import './Login.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Loader from './loader';
-import ChangePasswordModal from "./components/ChangePasswordModel";
+import ChangePasswordModal from './ChangePasswordModel';
 
 
 const Login = ({ onLoginSuccess }) => {
