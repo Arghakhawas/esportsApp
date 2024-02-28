@@ -283,14 +283,14 @@
     const generateKnockoutFixtures = () => {
       const teams = [
      
-         "Rit ghanti", "Amit", 
-        "Iconic pes gamer", "D-beast",
+          "Amit", 
+        "Iconic pes gamer", 
       ];
     
       const rounds = Math.ceil(Math.log2(teams.length));
     
       const fixtures = [];
-      const startTime = new Date("2024-02-28T23:30:00"); 
+      const startTime = new Date("2024-02-28T23:45:00"); 
 
       for (let round = 1; round <= rounds; round++) {
         const matches = [];
