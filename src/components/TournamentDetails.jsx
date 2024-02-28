@@ -283,7 +283,7 @@
     const generateKnockoutFixtures = () => {
       const teams = [
      
-        "paradox op", "Rit ghanti", "Murshad Xi", "Amit", "Senu07", "Rakesh", "King thor", "kenkani",
+        "Rakesh", "Rit ghanti", "Murshad Xi", "Amit", "Senu07", "paradox op", "King thor", "kenkani",
         "Iconic pes gamer", "Koushik 02", "ujju", "D-beast", "Souvrav gaming", "magical leonal",  "Venom",
         "Chanda",
       ];
