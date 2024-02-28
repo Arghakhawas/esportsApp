@@ -18,7 +18,8 @@ const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [showAvatarSelection, setShowAvatarSelection] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState(null); // Set a default avatar
+  const [selectedAvatar, setSelectedAvatar] = useState(avatarOptions[0]); // Set a default avatar
+
 
   const avatarOptions = [
     { src: bgmi, alt: 'BGMI AVATAR', id: 'bgmi' },
@@ -60,7 +61,7 @@ const UserProfile = () => {
   }, []);
 
  // Modify the saveSelectedAvatar function
-const saveSelectedAvatar = async () => {
+ const saveSelectedAvatar = async () => {
   try {
     const response = await fetch('https://esportsappbackend.onrender.com/api/profile/avatar', {
       method: 'POST',
@@ -68,7 +69,7 @@ const saveSelectedAvatar = async () => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
-      body: JSON.stringify({ avatar: selectedAvatar }), 
+      body: JSON.stringify({ avatar: selectedAvatar.id }), // Assuming the backend expects an avatar ID
     });
 
     if (!response.ok) {
@@ -82,10 +83,10 @@ const saveSelectedAvatar = async () => {
 };
 
 
-  const handleAvatarSelection = (avatar) => {
-    setSelectedAvatar(avatar);
-    setShowAvatarSelection(false);
-  };
+const handleAvatarSelection = (avatar) => {
+  setSelectedAvatar(avatar);
+  setShowAvatarSelection(false);
+};
 
   const handleOpenChangePasswordModal = () => {
     setShowChangePasswordModal(true);
@@ -100,12 +101,13 @@ const saveSelectedAvatar = async () => {
       <h2 className="profile-heading">User Profile</h2>
       {profileData && (
         <div className="profile-details">
-          <img
-            src={selectedAvatar.src}
-            alt="Profile"
-            className="profile-picture"
-            onClick={() => setShowAvatarSelection(true)}
-          />
+      <img
+  src={selectedAvatar.src}
+  alt="Profile"
+  className="profile-picture"
+  onClick={() => setShowAvatarSelection(true)}
+/>
+
 
           {/* Avatar selection section */}
           {showAvatarSelection && (
@@ -125,7 +127,8 @@ const saveSelectedAvatar = async () => {
           <div className="avatar-buttons">
             <button onClick={() => setShowAvatarSelection(true)}>Change Picture</button>
        
-            <button onClick={saveSelectedAvatar}>Save Avatar</button> {/* Added Save Avatar button */}
+            <button onClick={saveSelectedAvatar}>Save Avatar</button>
+
          
           </div>
 

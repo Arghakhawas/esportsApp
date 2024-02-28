@@ -281,46 +281,49 @@ const TournamentDetails = ({ tournament }) => {
 
   const generateKnockoutFixtures = () => {
     const teams = [
-      "Arijit Seal", "Akash khawas", "Sourav Rj", "D beast", "Kenifer", "Aghori g", "Akash Chaterjee", "Akash Karmakar",
-      "Koushik P", "Prithvi Debnath", "Mursad Sarder", "Ujjal Deb roy", "Souvik kar", "Gorden op", "AVay", "Aditya Karn",
+      // Replace the existing team names with your own
+      "Team1", "Team2", "Team3", "Team4", "Team5", "Team6", "Team7", "Team8",
+      "Team9", "Team10", "Team11", "Team12", "Team13", "Team14", "Team15", "Team16",
+      "Team17", "Team18", "Team19", "Team20", "Team21", "Team22", "Team23", "Team24",
+      "Team25", "Team26", "Team27", "Team28", "Team29", "Team30", "Team31", "Team32",
     ];
-
+  
     const rounds = Math.ceil(Math.log2(teams.length));
-
+  
     const fixtures = [];
     const startTime = new Date("2024-02-25T16:15:00"); // Initial start time for the matches
-
+  
     for (let round = 1; round <= rounds; round++) {
       const matches = [];
       const roundStartTime = new Date(startTime);
-
+  
       for (let match = 1; match <= teams.length / Math.pow(2, round); match++) {
         const team1 = teams[(match - 1) * 2];
         const team2 = teams[(match - 1) * 2 + 1];
-
+  
         const matchTime = new Date(roundStartTime);
         matchTime.setMinutes(matchTime.getMinutes() + (match - 1) * 15); // Add 15 minutes for each match
-
+  
         matches.push({
           team1,
           team2,
           date: "2024-02-25", // Update with actual date
           time: `${matchTime.getHours()}:${matchTime.getMinutes()}`,
-  
         });
       }
-
+  
       fixtures.push({
         round,
         matches,
       });
-
+  
       // Add 30 minutes break after each round
       startTime.setMinutes(startTime.getMinutes() + (teams.length / Math.pow(2, round)) * 15 + 30);
     }
-
+  
     return fixtures;
   };
+  
 
   const renderPointsTable = () => {
     return (
