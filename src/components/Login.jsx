@@ -4,7 +4,7 @@ import './Login.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Loader from './loader';
-import ChangePasswordModal from './ChangePasswordModal'; // Import the ChangePasswordModal component
+import ChangePasswordModal from './ChangePasswordModal'; 
 
 const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ const Login = ({ onLoginSuccess }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [changePasswordMode, setChangePasswordMode] = useState(false); // New state for change password mode
+  const [changePasswordMode, setChangePasswordMode] = useState(false);
   const navigate = useNavigate();
 
   const handleLoginSuccess = async () => {
@@ -34,7 +34,7 @@ const Login = ({ onLoginSuccess }) => {
       const data = await response.json();
       localStorage.setItem('token', data.token);
       onLoginSuccess(data.user);
-      navigate('/'); // Navigate to the home page after successful login
+      navigate('/'); 
     } catch (error) {
       setError(error.message);
     } finally {
