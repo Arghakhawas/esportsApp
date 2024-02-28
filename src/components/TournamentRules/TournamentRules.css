@@ -35,4 +35,41 @@
   .tournament-rules-content button:hover {
     background-color: #45a049;
   }
+  .tournament-rules-container {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    padding: 16px;
+    margin: 16px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tournament-rules-content {
+    text-align: left;
+  }
+  
+  .tournament-rules-content h3 {
+    color: #333;
+  }
+  
+  .tournament-rules-content ol {
+    padding-left: 20px;
+  }
+  
+  .tournament-rules-content li {
+    margin-bottom: 8px;
+  }
+  
+  .tournament-rules-content button {
+    margin-top: 16px;
+    padding: 8px 16px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .tournament-rules-content button:hover {
+    background-color: #45a049;
+  }
   
