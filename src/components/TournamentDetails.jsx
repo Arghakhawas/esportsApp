@@ -21,10 +21,10 @@
     const [activeTournamentType, setActiveTournamentType] = useState(null);
     const [gameResults, setGameResults] = useState({});
     const [showConfirmation, setShowConfirmation] = useState(false);
-    
-    const socket = useRef(io('https://esportsappbackend.onrender.com/api/tournament/save-results', {
+    const socket = useRef(io('https://esportsappbackend.onrender.com', {
       withCredentials: true,
     }));
+    
     useEffect(() => {
       socket.current.on('sharedRoomId', ({ roomId, team1, team2, gameResult }) => {
         console.log(`Received shared Room ID for ${team1} vs ${team2}: ${roomId}`);
@@ -145,7 +145,7 @@
     };
 
     const renderTournamentTypes = () => {
-      // Replace this with your actual tournament types for each game category
+     
       const tournamentTypes = {
         "Ea-football": ["Knockout", "League"],
         "Bgmi": ["Battle Ground", "TDM"],
@@ -400,7 +400,7 @@ const handleShareRoomId = (team1, team2) => {
                 <ul>
                   {round.matches.map((fixture, index) => (
                     <li key={index}>
-                      {fixture.team1} vs {fixture.team2} - {fixture.date} at {fixture.time}
+                      {fixture.team1} vs {fixture.team2} <div> {fixture.date} at {fixture.time}</div>
                       <br />
 
                       <div>

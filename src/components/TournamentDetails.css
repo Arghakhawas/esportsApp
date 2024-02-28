@@ -250,6 +250,7 @@
   input {
     width: 100%;
     border: 2px solid white;
+    color: #f0f0f0;
   }
   .fixtures li {
       padding: 8px;
