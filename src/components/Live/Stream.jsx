@@ -77,8 +77,9 @@ const VideoStream = () => {
     setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
 
     // Initialize Socket.IO connection
-    const socket = useRef(io('https://esportsappbackend.onrender.com/api/livestreaming', { withCredentials: true }));
-
+    socket.current = io("https://esportsappbackend.onrender.com/api/livestreaming", {
+      withCredentials: true,
+    });
 
     // Start WebRTC streaming if not a mobile device
     if (!isMobile) {
