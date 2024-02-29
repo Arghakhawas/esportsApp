@@ -21,9 +21,8 @@
     const [activeTournamentType, setActiveTournamentType] = useState(null);
     const [gameResults, setGameResults] = useState({});
     const [showConfirmation, setShowConfirmation] = useState(false);
-    const socket = useRef(io('https://esportsappbackend.onrender.com', {
-      withCredentials: true,
-    }));
+    const socket = useRef(io('https://esportsappbackend.onrender.com/api/livestreaming', { withCredentials: true }));
+
     
     useEffect(() => {
       socket.current.on('sharedRoomId', ({ roomId, team1, team2, gameResult }) => {

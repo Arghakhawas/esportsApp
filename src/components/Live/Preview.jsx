@@ -6,9 +6,8 @@
     const socket = useRef(null);
 
     useEffect(() => {
-      socket.current = io('https://esportsappbackend.onrender.com', {
-        withCredentials: true,
-      });
+    
+      const socket = useRef(io('https://esportsappbackend.onrender.com/api/livestreaming', { withCredentials: true }));
 
       socket.current.on('videoStream', (dataUrl) => {
         setVideoData(dataUrl);

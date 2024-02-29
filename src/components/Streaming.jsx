@@ -13,7 +13,8 @@
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); // Detect if the device is mobile
 
     useEffect(() => {
-      socket.current = io("https://esportsappbackend.onrender.com");
+      const socket = useRef(io('https://esportsappbackend.onrender.com/api/livestreaming', { withCredentials: true }));
+
 
       if (isScreenCapturing && isLive) {
         navigator.mediaDevices
