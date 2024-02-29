@@ -278,13 +278,11 @@
     };
 
 
-    // "Team18", "Team19", "Team20", "Team21", "Team22", "Team23", "Team24",
-    // "Team25", "Team26", "Team27", "Team28", "Team29", "Team30", "Team31", "Team32",
+
     const generateKnockoutFixtures = () => {
       const teams = [
-     
-          "Amit", 
-        "Iconic pes gamer", 
+     "Team18", "Team19", "Team20", "Team21", "Team22", "Team23", "Team24",
+    "Team25", "Team26", "Team27", "Team28", "Team29", "Team30", "Team31", "Team32",
       ];
     
       const rounds = Math.ceil(Math.log2(teams.length));
@@ -296,7 +294,7 @@
         const matches = [];
         const roundStartTime = new Date(startTime);
     
-        for (let match = 1; match <= teams.length / Math.pow(2, round); match++) {
+        for (let match = 1; match <= teams.length / Math.pow(2, round); match++) {  
           const team1 = teams[(match - 1) * 2];
           const team2 = teams[(match - 1) * 2 + 1];
     

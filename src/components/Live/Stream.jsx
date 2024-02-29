@@ -1,4 +1,4 @@
-// Import necessary modules
+// Frontend - VideoStream Component
 import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 
@@ -9,49 +9,12 @@ const VideoStream = () => {
   const peerConnection = useRef(null);
 
   useEffect(() => {
-    const startScreenSharing = async () => {
-      try {
-        if (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
-          const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-    
-          if (videoRef.current) {
-            videoRef.current.srcObject = stream;
-    
-            const sendStreamWithDelay = () => {
-              const canvas = document.createElement("canvas");
-              const context = canvas.getContext("2d");
-    
-              canvas.width = videoRef.current.videoWidth;
-              canvas.height = videoRef.current.videoHeight;
-    
-              context.drawImage(
-                videoRef.current,
-                0,
-                0,
-                canvas.width,
-                canvas.height
-              );
-    
-              const imageDataUrl = canvas.toDataURL("image/jpeg");
-    
-              socket.current.emit("videoStream", imageDataUrl);
-    
-              setTimeout(sendStreamWithDelay, 40);
-            };
-    
-            sendStreamWithDelay();
-          }
-        } else {
-          console.error("Screen sharing is not supported on this device or browser.");
-        }
-      } catch (error) {
-        console.error("Error starting screen sharing:", error);
-      }
-    };
-    
     const startWebRTC = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: true,
+        });
 
         // Set up the RTCPeerConnection
         peerConnection.current = new RTCPeerConnection();
@@ -80,14 +43,15 @@ const VideoStream = () => {
         socket.current.emit("offer", offer);
       } catch (error) {
         console.error("Error accessing camera:", error);
-        // Handle the error, display a message to the user, or retry
       }
     };
 
     // Function to handle incoming offer
     const handleOffer = async (offer, senderSocketId) => {
       // Set remote description
-      await peerConnection.current.setRemoteDescription(new RTCSessionDescription(offer));
+      await peerConnection.current.setRemoteDescription(
+        new RTCSessionDescription(offer)
+      );
 
       // Create an answer
       const answer = await peerConnection.current.createAnswer();
@@ -99,13 +63,13 @@ const VideoStream = () => {
 
     // Function to handle incoming answer
     const handleAnswer = async (answer) => {
-  
-      await peerConnection.current.setRemoteDescription(new RTCSessionDescription(answer));
+      await peerConnection.current.setRemoteDescription(
+        new RTCSessionDescription(answer)
+      );
     };
 
     // Function to handle incoming ICE candidate
     const handleIceCandidate = (candidate) => {
-
       peerConnection.current.addIceCandidate(new RTCIceCandidate(candidate));
     };
 
@@ -113,12 +77,14 @@ const VideoStream = () => {
     setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
 
     // Initialize Socket.IO connection
-    socket.current = io("https://esportsappbackend.onrender.com/api/livestreaming", {
+    socket.current = io("https://esportsappbackend.onrender.com", {
       withCredentials: true,
     });
 
-    // Start WebRTC streaming
-    startWebRTC();
+    // Start WebRTC streaming if not a mobile device
+    if (!isMobile) {
+      startWebRTC();
+    }
 
     return () => {
       // Clean up and disconnect Socket.IO
@@ -131,15 +97,53 @@ const VideoStream = () => {
         tracks.forEach((track) => track.stop());
       }
     };
-  }, []);
+  }, [isMobile]);
+
+  const startScreenSharing = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+
+        const sendStreamWithDelay = () => {
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+
+          canvas.width = videoRef.current.videoWidth;
+          canvas.height = videoRef.current.videoHeight;
+
+          context.drawImage(
+            videoRef.current,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+
+          const imageDataUrl = canvas.toDataURL("image/jpeg");
+
+          socket.current.emit("videoStream", imageDataUrl);
+
+          setTimeout(sendStreamWithDelay, 40);
+        };
+
+        sendStreamWithDelay();
+      }
+    } catch (error) {
+      console.error("Error starting screen sharing:", error);
+    }
+  };
 
   return (
     <div>
-      {isMobile && (
+      {isMobile ? (
         <button onClick={startScreenSharing}>Start Screen Sharing</button>
-
+      ) : (
+        <>
+          <video ref={videoRef} autoPlay playsInline width="640px" height="480px" className="responsive-video" />
+        </>
       )}
-      <video ref={videoRef} autoPlay playsInline width="640px" height="480px" className="responsive-video" />
     </div>
   );
 };
