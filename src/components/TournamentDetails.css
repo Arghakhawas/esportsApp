@@ -3,7 +3,7 @@
 /* Styles for the container of tournament details */
 .tournament-details {
   font-family: var(--ff-poppins), sans-serif;
-  background-color: var(--raisin-black-2);
+  background: url('/src/assets/ff2.png');
   padding: 20px;
   border-radius: 10px;
   box-shadow: var(--shadow-2);
@@ -352,7 +352,7 @@
   margin: 23px;
   width: 100%;
   text-align: center;
-  background: url('/src/assets/ff2.png');
+
   box-shadow: 0 4px 8px #0000001a;
   transition: transform .3s ease-in-out;
 
@@ -398,5 +398,6 @@
 @media (max-width: 768px) {
   .team-box {
     width: 100%;
+    background-position: center;
   }
 }

@@ -171,7 +171,9 @@ const TournamentDetails = ({ tournament }) => {
 
   const renderHundredTeamBox = () => {
     const teamData = [
-      { teamId: 1, players: ['Player 1', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3'] }
+      { teamId: 1, players: ['Player 1', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',, 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',, 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',, 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3'
+      , 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3'
+      , 'Player 1', 'Player 2', 'Player 3', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',] }
     ];
     return (
       <div className="container">
@@ -185,7 +187,7 @@ const TournamentDetails = ({ tournament }) => {
               <p>Players:</p>
               <ul>
                 {team.players.map((player, index) => (
-                  <li key={index}>{player}</li>
+                  <li className='battle' key={index}>{player}</li>
                 ))}
               </ul>
             </div>
