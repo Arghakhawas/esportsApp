@@ -137,7 +137,7 @@ const Tournament = () => {
       image: ffgarena, 
     },
     {
-      category: 'FreeFire - SIngle BR  ',
+      category: 'FreeFire - Single BR  ',
       prize: '₹450',
       joiningFee: '₹25'
       , Player:'Single',

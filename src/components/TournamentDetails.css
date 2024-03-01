@@ -333,11 +333,7 @@
     padding: 8px 12px; /* Further adjust padding for smaller screens */
   }
 }
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-}
+
 
 .room-id {
   font-size: 18px;
@@ -350,15 +346,16 @@
 }
 
 .team-box {
-  border: 2px solid #3498db;
+  border: 2px solid   #cfe412;
   border-radius: 10px;
   padding: 20px;
-  margin: 20px;
-  width: 200px;
+  margin: 23px;
+  width: 100%;
   text-align: center;
-  background-color: #f2f2f2;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
+  background: url('/src/assets/ff2.png');
+  box-shadow: 0 4px 8px #0000001a;
+  transition: transform .3s ease-in-out;
+
 
   &:hover {
     transform: scale(1.05);
@@ -375,6 +372,19 @@
   font-weight: bold;
 }
 
+.battle{
+  display: flex;
+    /* list-style: none; */
+    width: 50px;
+    margin: 2px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    /* text-align: center; */
+    justify-content: center;
+    border: 2px solid black;
+    background-color: black;
+}
 .players-list {
   list-style: none;
   padding: 0;
