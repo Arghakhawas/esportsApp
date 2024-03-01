@@ -337,66 +337,64 @@
   font-size: 18px;
 }
 
-.team-boxes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.team-box {
-  border: 2px solid   #cfe412;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 23px;
-  width: 100%;
-  text-align: center;
-  background: url('/src/assets/ff2.png');
-  box-shadow: 0 4px 8px #0000001a;
-  transition: transform .3s ease-in-out;
 
 
-  &:hover {
-    transform: scale(1.05);
-  }
-}
-
-.team-id {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.players-title {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.battle{
-  display: flex;
-    /* list-style: none; */
+  .battle {
     width: 50px;
-    
+    height: 50px; 
     margin: 2px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    /* justify-content: space-between; */
-    /* text-align: center; */
     justify-content: center;
     border: 2px solid black;
     background-color: black;
-}
-.players-list {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0;
-}
-
-.players-list li {
-  font-size: 14px;
-}
-
-@media (max-width: 768px) {
-  .team-box {
-    width: 100%;
-    background-position: center;
+    color: white; 
+    display: flex;
+    align-items: center; 
   }
-}
+
+  .team-box {
+    /* background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/src/assets/ff2.png');  */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+  }
+  
+  .team-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .players-title, .team-id {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .battleground {
+    text-align: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/src/assets/ff2.png'); 
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 40px;
+  }
+
+  .players-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+
+  .players-list li {
+    font-size: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .team-box {
+      width: 100%;
+    }
+  }
+

@@ -178,10 +178,11 @@ const TournamentDetails = ({ tournament }) => {
     return (
       <div className="Battle ground">
       
+       
+        <div className="team-boxes">
         <h3>Battle Ground Tournament - 100 Teams</h3>
         <p>Room ID: [Your Room ID]</p>
 
-        <div className="team-boxes">
           {teamData.map((team) => (
             <div key={team.teamId} className="team-box">
               <p>Team ID: {team.teamId}</p>
