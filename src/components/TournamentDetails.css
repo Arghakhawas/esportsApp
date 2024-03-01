@@ -333,3 +333,60 @@
     padding: 8px 12px; /* Further adjust padding for smaller screens */
   }
 }
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.room-id {
+  font-size: 18px;
+}
+
+.team-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.team-box {
+  border: 2px solid #3498db;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  width: 200px;
+  text-align: center;
+  background-color: #f2f2f2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.team-id {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.players-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.players-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.players-list li {
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .team-box {
+    width: 100%;
+  }
+}

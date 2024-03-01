@@ -140,7 +140,7 @@ const Tournament = () => {
       category: 'FreeFire - multiply BR  ',
       prize: '₹450',
       joiningFee: '₹25'
-      , Player:'Multiple',
+      , Player:'Single',
       rules: 'Game rules for BGMI Entry Fee ...',
       image: ffgarena, 
     },
