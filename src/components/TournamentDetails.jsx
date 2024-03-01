@@ -185,9 +185,9 @@ const TournamentDetails = ({ tournament }) => {
 
           {teamData.map((team) => (
             <div key={team.teamId} className="team-box">
-             <div> <p>Team ID: {team.teamId}</p></div>
+             <div className='teamp'> <p>Team ID: {team.teamId}</p></div>
            <div>   <p>Players:</p></div>
-          <div>    <ul>
+          <div classname='boxul'>    <ul>
             <div className='battle'>    {team.players.map((player, index) => (
                   <li  key={index}>{player}</li>
                 ))}</div>
