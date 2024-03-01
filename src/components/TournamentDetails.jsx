@@ -176,7 +176,13 @@ const TournamentDetails = ({ tournament }) => {
       , 'Player 1', 'Player 2', 'Player 3', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',] }
     ];
     return (
-      <div className="container">
+      <div className="Battle ground">
+        <div className="slider">
+      <div className="slide"></div>
+      <div className="slide"></div>
+      <div className="slide"></div>
+      <div className="slide"></div>
+      <div className="slide"></div>
         <h3>Battle Ground Tournament - 100 Teams</h3>
         <p>Room ID: [Your Room ID]</p>
 
@@ -193,7 +199,7 @@ const TournamentDetails = ({ tournament }) => {
             </div>
           ))}
         </div>
-      </div>
+        </div></div>
     );
   };
 
