@@ -133,7 +133,7 @@ const Tournament = () => {
       prize: '₹200',
       joiningFee: '₹15',
       Player:'Single',
-      rules: 'Game rules for BGMI Entry Fee ...',
+      rules: ['Game rules for BGMI Entry Fee ...'],
       image: ffgarena, 
     },
     {
@@ -141,7 +141,7 @@ const Tournament = () => {
       prize: '₹450',
       joiningFee: '₹25'
       , Player:'Single',
-      rules: 'Game rules for BGMI Entry Fee ...',
+      rules: ['Game rules for freefire  ...'],
       image: ffgarena, 
     },
     {
