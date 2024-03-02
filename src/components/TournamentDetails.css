@@ -104,7 +104,7 @@
 .tournament-types {
   display: flex;
   flex-wrap: wrap;
-  background: orange;
+  background-color: var(--marigold);
   gap: 10px;
   /* color: black; */
   border: 2px solid black;
@@ -172,7 +172,7 @@
 
 /* Styles for strong text in fixtures */
 .fixtures .grid li strong {
-  color: #e44d26;
+  background-color: var(--marigold);
 }
 
 /* Styles for div inside grid items */
@@ -364,7 +364,7 @@
     padding: 10px;
     border-radius: 10px;
     margin: 10px;
-    background: orange;
+    background-color: var(--marigold);
     box-shadow: 0 0 10px #0000004d;
 }
   .team-boxes {
@@ -412,12 +412,12 @@
 
     flex-flow: wrap;}
 .back-button{
-  background: orange;
+  background-color: var(--marigold);
   font-size: x-large;
   font-weight: bold;}
   .types-b{
     color: black;
-    background-color: orange;
+    background-color: var(--marigold);
     font-weight: 900;
     border-radius: 10px;
     border: 2px solid black;
