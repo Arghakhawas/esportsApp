@@ -171,7 +171,7 @@ const TournamentDetails = ({ tournament }) => {
 
   const renderHundredTeamBox = () => {
     const teamData = [
-      { teamId: 1, players: ['Player 1', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',, 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',, 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',, 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3'
+      { teamId: 50, players: ['Player 1', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',, 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',, 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',, 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3'
       , 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3'
       , 'Player 1', 'Player 2', 'Player 3', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',] }
     ];

@@ -18,6 +18,7 @@
   color: #1f1e1d;
   font-size: x-large;
   font-weight: 900;
+  background: var(--orange);
 }
 
 /* Section Buttons */
@@ -103,28 +104,32 @@
 .tournament-types {
   display: flex;
   flex-wrap: wrap;
+  background: orange;
   gap: 10px;
-  margin-top: 20px;
+  /* color: black; */
+  border: 2px solid black;
+  margin-top: 33px;
+  font-size: xx-large;
 }
 
 /* Styles for heading in tournament types */
 .tournament-types h3 {
-  color: var(--platinum);
+  color: hsla(222, 18%, 11%, .95);
   margin-bottom: 10px;
 }
 
-/* Styles for buttons inside tournament types */
 .tournament-types button {
   background-color: var(--primary-color);
-  color: var(--white);
-  border: none;
-  border-radius: 5px;
+  color: hsl(0deg 0% 0%);
+  border: 2px solid black;
+  border-radius: 10px;
+  margin: 2px;
   padding: 10px 15px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-right: 10px;
+  font-weight: 900;
+  transition: background-color .3s ease;
+  margin-right: 100px;
 }
-
 /* Hover effect for buttons inside tournament types */
 .tournament-types button:hover {
   background-color: var(--raisin-black-1);
@@ -243,7 +248,7 @@
   .tournament-types button,
   .game-category button,
   .section-buttons button {
-    font-size: 14px; /* Adjust font size for smaller screens */
+    font-size: 20px; /* Adjust font size for smaller screens */
     padding: 8px 12px; /* Further adjust padding for smaller screens */
   }
 
