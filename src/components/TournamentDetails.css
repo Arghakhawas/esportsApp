@@ -405,9 +405,12 @@
       display: ruby;
     }
   }
-.boxli{
-  display: ruby;
-}
+  .boxli {
+    /* display: ruby; */
+    display: flex;
+    justify-content: space-between;
+
+    flex-flow: wrap;}
 .back-button{
   background: orange;
   font-size: x-large;
