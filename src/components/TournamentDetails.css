@@ -352,16 +352,15 @@
   }
 
   .team-box {
-    /* background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/src/assets/ff2.png');  */
-    background-size: cover;
-    background-position: center;
-    color: white;
+  
+    
+    color: #1d1c1c;
     padding: 20px;
     border-radius: 10px;
     margin: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
-  }
-  
+    background: orange;
+    box-shadow: 0 0 10px #0000004d;
+}
   .team-boxes {
     display: flex;
     flex-wrap: wrap;
