@@ -134,7 +134,7 @@ const TournamentDetails = ({ tournament }) => {
               <p>Prize Pool: {category.prizePool}</p>
               <p>Timing: {category.timing}</p>
               <p>Rules: {category.rules}</p>
-              <button onClick={() => handleGameCategoryClick(category.name)}>
+              <button classname='types-b' onClick={() => handleGameCategoryClick(category.name)}>
                 Select
               </button>
             </div>
@@ -158,7 +158,7 @@ const TournamentDetails = ({ tournament }) => {
         <div className="tournament-types">
           <h3>Tournament Types</h3>
           {tournamentTypes[activeGameCategory].map((type) => (
-            <button key={type} onClick={() => handleTournamentTypeClick(type)}>
+            <button classname='types-b' key={type} onClick={() => handleTournamentTypeClick(type)}>
               {type}
             </button>
           ))}

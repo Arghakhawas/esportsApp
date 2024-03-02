@@ -15,8 +15,9 @@
 }
 
 .tournament-details p {
-  color: hsl(31deg 3.31% 11.72%);
-  font-size: large;
+  color: #1f1e1d;
+  font-size: x-large;
+  font-weight: 900;
 }
 
 /* Section Buttons */
@@ -56,7 +57,7 @@
 /* Styles for individual game categories */
 .game-category {
   position: relative;
-  background-color: var(--raisin-black-3);
+  background-color: var(--orange);
   padding: 30px;
   border-radius: 8px;
   box-shadow: var(--shadow-1);
@@ -399,3 +400,14 @@
 .boxul{
   display: ruby;
 }
+.back-button{
+  background: orange;
+  font-size: x-large;
+  font-weight: bold;}
+  .types-b{
+    color: black;
+    background-color: orange;
+    font-weight: 900;
+    border-radius: 10px;
+    border: 2px solid black;
+  }
