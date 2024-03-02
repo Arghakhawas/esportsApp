@@ -21,7 +21,7 @@ const TournamentDetails = ({ tournament }) => {
   const [activeTournamentType, setActiveTournamentType] = useState(null);
   const [gameResults, setGameResults] = useState({});
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const socket = useRef(io('https://esportsappbackend.onrender.com/api/livestreming', {
+  const socket = useRef(io('https://esportsappbackend.onrender.com', {
     withCredentials: true,
   }));
 
