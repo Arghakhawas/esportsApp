@@ -252,16 +252,19 @@
   }
 
   .tournament-types button,
-  .game-category button,
+  
   .section-buttons button {
     font-size: 12px; /* Adjust font size for smaller screens */
     padding: 8px 12px; /* Further adjust padding for smaller screens */
   }
-
+  .game-category button {-size: 13px;
+  padding: 8px 12px;
+  border: 2px solid black;
+  color: black;
   input {
     width: 100%;
     border: 2px solid white;
-    color: #f0f0f0;
+    color: #f0f0f0;}
   }
   .fixtures li {
     padding: 2px;
