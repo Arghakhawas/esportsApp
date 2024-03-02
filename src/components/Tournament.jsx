@@ -242,6 +242,13 @@ const Tournament = () => {
             <button onClick={() => handleViewRulesClick(tournament.rules)}>View Game Rules</button>
           </div>
         ))}
+          {showRules && (
+        <TournamentRules
+        className="top-rules-container"
+          rules={rulesToDisplay}
+          onClose={() => setShowRules(false)}
+        />
+      )}
       </div>
       {step === 2 && (
         <TournamentForm
@@ -260,13 +267,7 @@ const Tournament = () => {
           </div>
         </div>
       )}
-  {showRules && (
-        <TournamentRules
-        className="top-rules-container"
-          rules={rulesToDisplay}
-          onClose={() => setShowRules(false)}
-        />
-      )}
+
     </div>
   );
 };
