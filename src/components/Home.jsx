@@ -73,7 +73,7 @@ function Home({ isAuthenticated }) {
                   <ion-icon name="headset"></ion-icon>
                 </div>
 
-                <a href="tel:+241245654235" className="item-text">Phone : 9073357827</a>
+                <a href="tel:+919073069788" className="item-text">Phone : 9073069788/9073357827</a>
               </li>
 
               <li className="contact-item">
@@ -81,7 +81,7 @@ function Home({ isAuthenticated }) {
                   <ion-icon name="mail-open"></ion-icon>
                 </div>
 
-                <a href="mailto:info@exemple.com" className="item-text">Email : esportsempires7@gmail.com</a>
+                <a href="mailto: esportsempires7@gmail.com" className="item-text">Email : esportsempires7@gmail.com</a>
               </li>
 
             </ul>

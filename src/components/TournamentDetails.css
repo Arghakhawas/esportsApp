@@ -1,21 +1,22 @@
 
 .tournament-details {
   font-family: var(--ff-poppins), sans-serif;
-  
   padding: 20px;
   border-radius: 10px;
+  background: white;
   box-shadow: var(--shadow-2);
-  color: var(--platinum);
+  color: hsl(0deg 0% 3.39%);
 }
 
 /* Styles for the heading inside the tournament details */
 .tournament-details h2 {
   color: var(--platinum);
+  
 }
 
-/* Styles for paragraphs inside the tournament details */
 .tournament-details p {
-  color: var(--platinum);
+  color: hsl(31deg 3.31% 11.72%);
+  font-size: x-large;
 }
 
 /* Section Buttons */

@@ -396,7 +396,7 @@ const TournamentDetails = ({ tournament }) => {
 
       if (response.ok) {
         console.log("Game results submitted successfully");
-        // Update your component state or perform any necessary actions
+      
       } else {
         console.error("Failed to submit game results:", response.statusText);
       }
