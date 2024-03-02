@@ -131,9 +131,9 @@ const TournamentDetails = ({ tournament }) => {
             <img src={category.image} alt={category.name} />
             <div className="category-details">
               <h4>{category.name}</h4>
-              <p>Prize Pool: {category.prizePool}</p>
+             <div classname="gamep"> <p>Prize Pool: {category.prizePool}</p>
               <p>Timing: {category.timing}</p>
-              <p>Rules: {category.rules}</p>
+              <p>Rules: {category.rules}</p></div>
               <button classname='types-b' onClick={() => handleGameCategoryClick(category.name)}>
                 Select
               </button>

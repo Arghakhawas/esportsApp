@@ -63,7 +63,7 @@
 /* Styles for individual game categories */
 .game-category {
   position: relative;
-  background-color: var(--orange);
+  background-color: var(--marigold);
   padding: 30px;
   border-radius: 8px;
   box-shadow: var(--shadow-1);
@@ -352,8 +352,8 @@
 
 
 .battle {
-  width: 89px;
-  height: 89px;
+  width: 55px;
+  height: 51px;
   margin: 12px;
   justify-content: center;
   border: 2px solid black;
