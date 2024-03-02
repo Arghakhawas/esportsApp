@@ -17,7 +17,7 @@
   font-size: large;
   border: 2px solid black;
   font-weight: 900;
-  background: var(--orange);
+  background-color: var(--marigold);
 }
 .tournament-details p {
   color: #1f1e1d;
