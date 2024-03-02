@@ -24,7 +24,7 @@
     return (
       <div>
         {videoData && (
-          <img src={`${videoData}`} alt="Base64 Image" width="640px" height="480px" className="responsive-video" />
+          <img src={`${videoData}`} alt="Base64 Image" width="100px" height="480px" className="responsive-video" />
         )}
       </div>
     );
