@@ -272,14 +272,14 @@
     background: var(--marigold);
 }
 }
-/* Add responsive styling for mobile screens */
+
 @media only screen and (max-width: 600px) {
-  /* Adjust styles for smaller screens */
+  
   .video-container {
     width: 100%;
   }
 }
-/* Fixtures */
+
 
 .fixtures .grid {
   list-style: none;

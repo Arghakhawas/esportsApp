@@ -121,3 +121,14 @@
   padding: 4px;
   font-size: medium;
 }
+.top-rules-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--raisin-black-3);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000; /* Ensure it's above other elements */
+}

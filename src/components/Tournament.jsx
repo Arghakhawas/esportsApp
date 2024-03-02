@@ -262,6 +262,7 @@ const Tournament = () => {
       )}
   {showRules && (
         <TournamentRules
+        className="top-rules-container"
           rules={rulesToDisplay}
           onClose={() => setShowRules(false)}
         />
