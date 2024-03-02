@@ -188,9 +188,7 @@ const TournamentDetails = ({ tournament }) => {
              <div className='teamp'> <p>Team ID: {team.teamId}</p></div>
            <div>   <p>Players:</p></div>
           <div >    <ul>
-          <div classname="boxul" style="
-          display: ruby;
-      ">   {team.players.map((player, index) => (
+          <div className='boxli'>   {team.players.map((player, index) => (
                   <li className='battle' key={index}>{player}</li>
                 ))}</div>
               </ul></div>
