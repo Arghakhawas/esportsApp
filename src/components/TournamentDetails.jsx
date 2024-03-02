@@ -21,7 +21,7 @@ const TournamentDetails = ({ tournament }) => {
   const [activeTournamentType, setActiveTournamentType] = useState(null);
   const [gameResults, setGameResults] = useState({});
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const socket = useRef(io('https://esportsappbackend.onrender.com', {
+  const socket = useRef(io('https://esportsappbackend.onrender.com/api/livestreaming', {
     withCredentials: true,
   }));
 
@@ -158,7 +158,7 @@ const TournamentDetails = ({ tournament }) => {
         <div className="tournament-types">
           <h3>Tournament Types</h3>
           {tournamentTypes[activeGameCategory].map((type) => (
-            <button classname="types-b" key={type} onClick={() => handleTournamentTypeClick(type)}>
+            <button className="types-b" key={type} onClick={() => handleTournamentTypeClick(type)}>
               {type}
             </button>
           ))}

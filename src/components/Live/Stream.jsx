@@ -141,7 +141,7 @@ const VideoStream = () => {
         <button onClick={startScreenSharing}>Start Screen Sharing</button>
       ) : (
         <>
-          <video ref={videoRef} autoPlay playsInline width="100px" height="480px" className="responsive-video" />
+          <video ref={videoRef} autoPlay playsInline width="220px" height="480px" className="responsive-video" />
         </>
       )}
     </div>
