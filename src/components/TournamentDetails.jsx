@@ -177,7 +177,7 @@ const TournamentDetails = ({ tournament }) => {
     ];
     return (
       <div className="Battle ground">
-      
+    
        
         <div className="team-boxes">
         <h3>Battle Ground Tournament - 50 Teams</h3>
@@ -188,7 +188,9 @@ const TournamentDetails = ({ tournament }) => {
              <div className='teamp'> <p>Team ID: {team.teamId}</p></div>
            <div>   <p>Players:</p></div>
           <div >    <ul>
-            <div classname='boxul'>    {team.players.map((player, index) => (
+          <div classname="boxul" style="
+          display: ruby;
+      ">   {team.players.map((player, index) => (
                   <li className='battle' key={index}>{player}</li>
                 ))}</div>
               </ul></div>
