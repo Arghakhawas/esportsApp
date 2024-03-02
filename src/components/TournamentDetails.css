@@ -21,9 +21,10 @@
 }
 .tournament-details p {
   color: #1f1e1d;
-  font-size: x-large;
+  font-size: medium;
   font-weight: 900;
   background-color: var(--marigold);
+  border: 2px solid black;
 }
 
 /* Section Buttons */
@@ -263,10 +264,13 @@
     color: #f0f0f0;
   }
   .fixtures li {
-      padding: 8px;
-      border: 2px solid tomato;
-      background: black;
-  }
+    padding: 2px;
+    border: 4px solid #070707;
+  
+    font-weight: bolder;
+    font-size: medium;
+    background: var(--marigold);
+}
 }
 /* Add responsive styling for mobile screens */
 @media only screen and (max-width: 600px) {
