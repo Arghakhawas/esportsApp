@@ -401,6 +401,9 @@
     .team-box {
       width: 100%;
     }
+    .boxli{
+      display: ruby;
+    }
   }
 .boxli{
   display: ruby;
