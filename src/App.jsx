@@ -63,17 +63,7 @@ function App() {
               <Route path="/profile" element={<UserProfile />} />
               
       <Route path="/admin" element={isAuthenticated ? <AdminPanel /> : <Navigate to="/login" />} />
-      <Route
-  path="/admin"
-  element={
-    isAuthenticated && email === 'argha820@gmail.com' && password === '84206701' ? (
-      <AdminPanel />
-    ) : (
-      <Navigate to="/login" />
-    )
-  }
-/>
-
+      <Route path="/admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
       
               <Route path="/tournament" element={<Tournament />} />
               <Route
