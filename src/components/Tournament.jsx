@@ -8,9 +8,10 @@ import efootball1 from "../assets/efootball1.jpg";
 import ffgarena from "../assets/ffgarena.jpg";
 import bgmi from "../assets/bgmi.png";
 import cod from "../assets/cod.jpg"
-
+import TournamentCreationForm from './TournamentRules/TournamentCreationForm';
 const Tournament = () => {
   const [showRules, setShowRules] = useState(false);
+  const [showCreationForm, setShowCreationForm] = useState(false);
   const [rulesToDisplay, setRulesToDisplay] = useState([]);
   const [step, setStep] = useState(1);
   const [selectedTournament, setSelectedTournament] = useState(null);
@@ -18,6 +19,28 @@ const Tournament = () => {
   const [selectedGameCategory, setSelectedGameCategory] = useState(null);
   const navigate = useNavigate();
 
+  const handleCreateTournament = async (tournamentData) => {
+    try {
+      const response = await fetch('https://esportsappbackend.onrender.com/api/tournament/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify(tournamentData),
+      });
+  
+      if (response.ok) {
+        // Optionally, you can close the creation form after submission.
+        setShowCreationForm(false);
+      } else {
+        // Handle error scenarios, display an error message, etc.
+      }
+    } catch (error) {
+      console.error('Error creating tournament:', error);
+    }
+  };
+  
   const handleJoinClick = (tournament) => {
     setSelectedTournament(tournament);
     setStep(2); // Move to step 2 (join form)
@@ -149,7 +172,7 @@ const Tournament = () => {
       prize: '₹1000',
       Player:'Multiple',
       joiningFee: '₹50',
-      rules: 'Game rules for BGMI Entry Fee ...',
+      rules: 'Game rules for freefires Entry Fee ...',
       image: ffgarena, 
     },
     {
@@ -224,7 +247,10 @@ const Tournament = () => {
     <div className="tournament-container">
       <h2>Tournaments</h2>
       <div className="game-categories">
-      
+      <button onClick={() => setShowCreationForm(true)}>Create Tournament</button>
+      {showCreationForm && (
+        <TournamentCreationForm onSubmit={handleCreateTournament} />
+      )}
         <button className='btnall'  onClick={() => setSelectedGameCategory('EA Football')}>EA Football</button>
         <button className='btnall'  onClick={() => setSelectedGameCategory('FreeFire')}>FreeFire</button>
         <button className='btnall'  onClick={() => setSelectedGameCategory('BGMI')}>BGMI</button>
