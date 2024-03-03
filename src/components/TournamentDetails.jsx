@@ -302,8 +302,7 @@ const TournamentDetails = ({ tournament }) => {
   const generateKnockoutFixtures = () => {
     const teams = [
       "Amit",    
-      "chanda",
-       "Sanu",  
+      
  "nitai", 
 
     ];
