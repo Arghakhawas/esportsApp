@@ -301,10 +301,11 @@ const TournamentDetails = ({ tournament }) => {
 
   const generateKnockoutFixtures = () => {
     const teams = [
-      "Amit",  "Sourav Gaming","hasibur rehman", 'Pagool', "Arijit seal", "Fury Delta",
+      "Amit",  "Sourav Gaming","Aditya karn", 'Pagool', "Arijit seal", "Fury Delta",
       "Arjo", "Rit Ghanti", "Sourav Rj",  "jason12",
-      "Aritra Saho", "Abhishek p","Senu 07", "Sreyansh","chanda", "Pritam","jayusnu","rahul gupta",
-      "Premik", "Ujjal ujju",  "Mursad", , "ken kaneki", "Akash Karmakar","Arshad n","Rishi","nitai","souvik h pro",
+      "Aritra Saho", "Arshad n","Senu 07", "Sreyansh","chanda", "Pritam","jayusnu","rahul gupta",
+      "Premik", "Ujjal ujju",  "Mursad", , "ken kaneki", "Akash Karmakar","Rishi","nitai","souvik h pro",
+      "Kenifar","Zen","Jojo","Abhimamu","Ritesh","hasibur rehman",
 
     ];
 
