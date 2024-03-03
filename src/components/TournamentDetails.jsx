@@ -301,19 +301,17 @@ const TournamentDetails = ({ tournament }) => {
 
   const generateKnockoutFixtures = () => {
     const teams = [
-      "Amit",   "Pagool", "Arijit seal", 
-       "Rit Ghanti", "Senu 07", "chanda", 
-       "Sanu",  "Premik",   
-      "Kenifar","Zen","Abhimamu","rahul gupta","Sourav Rj",  "Arshad n",
-
-      "Akash Karmakar",  "nitai",
+      "Amit",    "Arshad n",
+      "chanda", "Abhimamu", 
+       "Sanu",   "Zen",
+ "nitai", "Rit Ghanti",
 
     ];
 
     const rounds = Math.ceil(Math.log2(teams.length));
 
     const fixtures = [];
-    const startTime = new Date("2024-03-03T19:30:00");
+    const startTime = new Date("2024-03-03T21:20:00");
 
     for (let round = 1; round <= rounds; round++) {
       const matches = [];
