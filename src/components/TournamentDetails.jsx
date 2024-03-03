@@ -301,10 +301,10 @@ const TournamentDetails = ({ tournament }) => {
 
   const generateKnockoutFixtures = () => {
     const teams = [
-      "Amit",    "Arshad n",
-      "chanda", "Abhimamu", 
-       "Sanu",   "Zen",
- "nitai", "Rit Ghanti",
+      "Amit",    
+      "chanda",
+       "Sanu",  
+ "nitai", 
 
     ];
 
