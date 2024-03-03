@@ -1,46 +1,55 @@
 // TournamentHistory.jsx
 
 import React from "react";
+import "./TournamentHistory.css"; // Import CSS file
 
 const TournamentHistory = () => {
   const tournamentWinners = [
     {
-      tournamentName: "Tournament 1",
-      winnerName: "John Doe",
-      prizeMoney: "$1000",
-      userId: "123",
+      tournamentName: "E-football 1",
+      winnerName: "Sourav gaming",
+      prizeMoney: "450",
+      userId: "Sourav gaming",
       photo: "winner1.jpg",
-      gameName: "Game 1",
+      gameName: "E-Football Knockout stages",
     },
     {
-      tournamentName: "Tournament 1",
-      winnerName: "John Doe",
-      prizeMoney: "$1000",
-      userId: "123",
+      tournamentName: "Freefire 1",
+      winnerName: "rishi Ox",
+      prizeMoney: "200",
+      userId: "Rishi231",
       photo: "winner1.jpg",
-      gameName: "Game 1",
+      gameName: "Freefire-solo",
+    },
+    
+    {
+      tournamentName: "E-Footbal 3",
+      winnerName: "Messi Magic",
+      prizeMoney: "200",
+      userId: "Arijit seal",
+      photo: "winner1.jpg",
+      gameName: "Knockout",
     },
     {
-      tournamentName: "Tournament 1",
-      winnerName: "John Doe",
-      prizeMoney: "$1000",
-      userId: "123",
+      tournamentName: "E_Football-4",
+      winnerName: "Amit",
+      prizeMoney: "200",
+      userId: "Amit",
       photo: "winner1.jpg",
-      gameName: "Game 1",
+      gameName: "knockout",
     },
     {
-      tournamentName: "Tournament 1",
-      winnerName: "John Doe",
-      prizeMoney: "$1000",
-      userId: "123",
+      tournamentName: "Freefie Knockout stages",
+      winnerName: "rahul Gupta",
+      prizeMoney: "1000",
+      userId: "Teamrx",
       photo: "winner1.jpg",
-      gameName: "Game 1",
+      gameName: "knockout",
     },
-
   ];
 
   return (
-    <div>
+    <div className="tournament-history-container"> {/* Apply CSS class */}
       <h2>Tournament Winners History</h2>
       <ul>
         {tournamentWinners.map((winner, index) => (
