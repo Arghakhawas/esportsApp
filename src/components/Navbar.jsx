@@ -79,6 +79,11 @@ function Navbar({  onLogout, isAuthenticated }) {
 </Link>
                   </li>
                   <li className="navbar-item">
+                  <Link to="/tournament-history" className="navbar-link skewBg" data-nav-link data-tooltip="TournamentHistory">
+  Winners
+</Link>
+                  </li>
+                  <li className="navbar-item">
               <Link to="/tournament-details" className="navbar-link skewBg" data-nav-link data-tooltip="Tournament Details">
   <GiConsoleController />
 </Link>

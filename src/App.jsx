@@ -64,7 +64,7 @@ function App() {
               
       <Route path="/admin" element={isAuthenticated ? <AdminPanel /> : <Navigate to="/login" />} />
       <Route path="/admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
-      
+      <Route path="/tournament-history" element={<TournamentHistory />} />
               <Route path="/tournament" element={<Tournament />} />
               <Route
                 path="/ChangePasswordModel"
