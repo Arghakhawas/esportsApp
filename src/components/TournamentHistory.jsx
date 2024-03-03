@@ -51,7 +51,7 @@ const TournamentHistory = () => {
   return (
     <div className="tournament-history-container"> {/* Apply CSS class */}
       <h2>Tournament Winners History</h2>
-      <ul>
+      <ul className="tul">
         {tournamentWinners.map((winner, index) => (
           <li key={index}>
             <strong>Tournament Name:</strong> {winner.tournamentName}<br />
