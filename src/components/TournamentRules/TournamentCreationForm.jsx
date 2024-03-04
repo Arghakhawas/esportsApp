@@ -7,18 +7,29 @@ const TournamentCreationForm = ({ onSubmit }) => {
   const [entryFee, setEntryFee] = useState('');
   const [prizeDistribution, setPrizeDistribution] = useState('');
   const [registrationDeadline, setRegistrationDeadline] = useState('');
+  const [image, setImage] = useState(null); // Added state for image
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    const tournamentData = {
-      gameCategory,
-      gameMode,
-      map,
-      entryFee,
-      prizeDistribution,
-      registrationDeadline,
-    };
-    onSubmit(tournamentData);
+    
+    // Create a FormData object to handle file uploads
+    const formData = new FormData();
+    formData.append('gameCategory', gameCategory);
+    formData.append('gameMode', gameMode);
+    formData.append('map', map);
+    formData.append('entryFee', entryFee);
+    formData.append('prizeDistribution', prizeDistribution);
+    formData.append('registrationDeadline', registrationDeadline);
+    formData.append('image', image); // Append the image to FormData
+
+    // Pass FormData to the onSubmit function
+    onSubmit(formData);
+  };
+
+  // Function to handle image selection
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0];
+    setImage(selectedImage);
   };
 
   return (
@@ -75,6 +86,15 @@ const TournamentCreationForm = ({ onSubmit }) => {
             type="datetime-local"
             value={registrationDeadline}
             onChange={(e) => setRegistrationDeadline(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Tournament Image:
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
             required
           />
         </label>
