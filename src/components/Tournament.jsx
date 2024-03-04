@@ -50,10 +50,10 @@ const Tournament = () => {
         },
         body: JSON.stringify(tournamentData),
       });
-
+  
       if (response.ok) {
         const newTournament = await response.json();
-        setTournaments([...tournaments, newTournament]);
+        setTournaments((prevTournaments) => [...prevTournaments, newTournament]);
         setShowCreationForm(false);
       } else {
         // Handle error response
@@ -62,6 +62,7 @@ const Tournament = () => {
       console.error('Error creating tournament:', error);
     }
   };
+  
 
   const handleJoinClick = (tournament) => {
     setSelectedTournament(tournament);
