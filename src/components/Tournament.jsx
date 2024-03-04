@@ -99,7 +99,7 @@ const handleCreateTournament = async (tournamentData) => {
 
     {
       category: 'EA Football 2024 - Group Stages Cup',
-      prize: '₹1000',
+      prize: '600',
       joiningFee: '₹50',
       Player:'Single',
       rules: [

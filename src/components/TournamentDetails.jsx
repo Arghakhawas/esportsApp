@@ -352,21 +352,19 @@ const TournamentDetails = ({ tournament }) => {
       </div>
     );
   };
-  // Frontend: handleShareRoomId function
-  const handleShareRoomId = (team1, team2) => {
+ const handleShareRoomId = (team1, team2) => {
     const sharedRoomId = roomIdInput[team1];
     const gameResult = gameResults[`${team1} vs ${team2}`];
 
     if (sharedRoomId) {
       // Emit an event to the server to share the room ID
-      socket.current.emit('shareRoomId', sharedRoomId, team1, team2, gameResult);
+      socket.current.emit('shareRoomId', { roomId: sharedRoomId, team1, team2, gameResult });
 
       // No need to save results here, as it's handled in the backend
     } else {
       alert(`Room ID for ${team1} is not available`);
     }
   };
-
 
   const handleRoomIdChange = (team, value) => {
     // Update the room ID input for the specific team
@@ -375,7 +373,7 @@ const TournamentDetails = ({ tournament }) => {
       [team]: value,
     }));
   };
-
+  
 
   const handleGameResultUpdate = (team1, team2, result) => {
     setGameResults((prevResults) => ({
@@ -383,6 +381,7 @@ const TournamentDetails = ({ tournament }) => {
       [`${team1} vs ${team2}`]: result,
     }));
   };
+
   const handleGameResultSubmit = async (team1, team2) => {
     const roomId = roomIdInput[team1];
     const gameResult = gameResults[`${team1} vs ${team2}`];
@@ -398,7 +397,8 @@ const TournamentDetails = ({ tournament }) => {
 
       if (response.ok) {
         console.log("Game results submitted successfully");
-      
+
+        // Optionally, you can update local state or perform other actions
       } else {
         console.error("Failed to submit game results:", response.statusText);
       }

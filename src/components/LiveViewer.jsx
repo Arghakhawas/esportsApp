@@ -1,3 +1,4 @@
+// Frontend - LiveViewer Component
 import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 
@@ -24,7 +25,6 @@ const LiveViewer = () => {
     <div>
       <h1>Live Screen</h1>
       <img src={`${videoData}`} alt="Base64 Image" />
-
     </div>
   );
 };

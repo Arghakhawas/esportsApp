@@ -76,6 +76,7 @@ const Streaming = () => {
     setShowConfirmation(false);
   };
 
+  
   return (
     <div>
       <h1>Live Streaming</h1>

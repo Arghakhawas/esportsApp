@@ -11,7 +11,7 @@ const TournamentCreationForm = ({ onSubmit }) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    
+
     // Create a FormData object to handle file uploads
     const formData = new FormData();
     formData.append('gameCategory', gameCategory);
