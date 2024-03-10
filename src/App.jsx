@@ -39,7 +39,6 @@ function App() {
     setIsAuthenticated(true);
     setUser(userData.user);
   };
-
   return (
     <BrowserRouter>
       <div>
