@@ -55,8 +55,7 @@ function App() {
           />
           <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
           <Route path="/shop" element={<Shop />} />
-          
-          <Route path="/preview" element={<Preview />} />
+
           {isAuthenticated && (
             <>
               <Route path="/shopping-cart" element={<ShoppingCart />} />
