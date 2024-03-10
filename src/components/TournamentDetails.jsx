@@ -309,15 +309,15 @@ const TournamentDetails = ({ tournament }) => {
   const generateKnockoutFixtures = () => {
     const teams = [
       "Amit", "nitai", 
-      "Aditya karn", "Krishnendu Dutta", "Senu 07", "Aritra sahoo",
-      "Akash Karmakar", "Ujjal", "Swastik", "Kenifer",
-      "Souvik", "Abhi xi"
+      "Aditya karn",  "Kenifer","Krishnendu Dutta","Souvik","Senu 07", "Aritra sahoo",
+      "Akash Karmakar", "Ujjal", "Swastik",
+ "Abhi xi"
     ];
   
     const rounds = Math.ceil(Math.log2(teams.length));
   
     const fixtures = [];
-    const startTime = new Date("2024-03-03T21:20:00");
+    const startTime = new Date("2024-03-10T11:00:00");
   
     for (let round = 1; round <= rounds; round++) {
       const matches = [];
