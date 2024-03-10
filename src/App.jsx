@@ -16,10 +16,10 @@ import SceneCapture from "./components/Live/ScreenCapture";
 import ChangePasswordModal from "./components/ChangePasswordModel";
 import ShoppingCart from "./components/ShoppingCart";
 
-import Preview from "./components/Live/Preview";
 import TournamentHistory from "./components/TournamentHistory";// Import the AdminPanel component
 import AdminPanel from "./components/Admin/AdminPanel";
 import AdminLogin from "./components/Admin/Adminlogin";
+import LiveSceneViewer from "./components/Live/LiveSceneViewer";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -63,6 +63,7 @@ function App() {
               <Route path="/profile" element={<UserProfile />} />
               <Route path="/scene-capture" element={<SceneCapture />} />
           <Route path="/scene-viewer" element={<SceneViewer />} />
+          <Route path="/livesceneviewer" element={<LiveSceneViewer/>} />
       <Route path="/admin" element={isAuthenticated ? <AdminPanel /> : <Navigate to="/login" />} />
       <Route path="/admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
       <Route path="/tournament-history" element={<TournamentHistory />} />
