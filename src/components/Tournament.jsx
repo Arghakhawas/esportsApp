@@ -51,9 +51,11 @@ const handleCreateTournament = async (tournamentData) => {
     setRulesToDisplay(rules);
     setShowRules(true);
   };
-
   const handleFormSubmit = async (formData) => {
     try {
+      // Include the selected game category in the form data
+      formData.selectedGameCategory = selectedGameCategory;
+  
       const response = await fetch('https://esportsappbackend.onrender.com/api/tournament/join', {
         method: 'POST',
         headers: {
@@ -62,14 +64,17 @@ const handleCreateTournament = async (tournamentData) => {
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
-        setStep(2); 
+        setStep(2); // Move to the next step
       }
     } catch (error) {
       console.error('Error submitting form:', error);
     }
   };
+  
+  
+  
 
   const handlePaymentSubmit = async (paymentData) => {
     try {
@@ -219,7 +224,10 @@ const handleCreateTournament = async (tournamentData) => {
       <div className="game-categories">
       <button onClick={() => setShowCreationForm(true)}>Create Tournament</button>
       {showCreationForm && (
-        <TournamentCreationForm onSubmit={handleCreateTournament} />
+      <TournamentCreationForm
+      onSubmit={(tournamentData) => handleCreateTournament(tournamentData, selectedGameCategory)}
+    />
+    
       )}
         <button className='btnall'  onClick={() => setSelectedGameCategory('EA Football')}>EA Football</button>
         <button className='btnall'  onClick={() => setSelectedGameCategory('FreeFire')}>FreeFire</button>
