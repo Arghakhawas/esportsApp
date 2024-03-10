@@ -17,7 +17,8 @@ const SceneCapture = () => {
         console.log("Peer ID:", id);
         setPeer(peer);
 
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        navigator.mediaDevices
+          .getUserMedia({ video: true, audio: true })
           .then((userStream) => {
             setStream(userStream);
 
@@ -29,7 +30,9 @@ const SceneCapture = () => {
               setStream(null);
             });
           })
-          .catch((error) => console.error("Error accessing user media:", error));
+          .catch((error) =>
+            console.error("Error accessing user media:", error)
+          );
       });
 
       peer.on("error", (err) => {
@@ -53,10 +56,16 @@ const SceneCapture = () => {
     };
   }, []);
 
+  const handleStopStream = () => {
+    // Emit event to stop the stream
+    socket.current.emit("stopStream");
+  };
+
   return (
     <div>
       <h2>Scene Capture</h2>
       {stream && <video ref={(ref) => (ref.srcObject = stream)} autoPlay playsInline />}
+      <button onClick={handleStopStream}>Stop Stream</button>
     </div>
   );
 };

@@ -1,7 +1,6 @@
 // LiveSceneViewer.jsx
 
 import React, { useEffect, useRef } from "react";
-import io from "socket.io-client";
 
 const LiveSceneViewer = ({ remoteStreams }) => {
   const videoRefs = useRef([]);

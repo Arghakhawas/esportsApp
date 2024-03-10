@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Peer from "peerjs";
 import io from "socket.io-client";
+import LiveSceneViewer from "./LiveSceneViewer";
 
 const SceneViewer = () => {
   const [peer, setPeer] = useState(null);
@@ -49,9 +50,11 @@ const SceneViewer = () => {
   return (
     <div>
       <h2>Scene Viewer</h2>
-      {remoteStreams.map((stream, index) => (
-        <video key={index} ref={(ref) => (ref.srcObject = stream)} autoPlay playsInline />
-      ))}
+      {remoteStreams.length > 0 ? (
+        <LiveSceneViewer remoteStreams={remoteStreams} />
+      ) : (
+        <p>No live streams available</p>
+      )}
     </div>
   );
 };
