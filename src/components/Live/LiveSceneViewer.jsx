@@ -7,8 +7,9 @@ const LiveSceneViewer = ({ remoteStreams }) => {
   const videoRefs = useRef([]);
 
   useEffect(() => {
+    console.log("remoteStreams in useEffect 1:", remoteStreams);
     videoRefs.current = remoteStreams.map(() => React.createRef());
-
+  
     return () => {
       // Cleanup
       videoRefs.current.forEach((ref) => {
@@ -18,14 +19,16 @@ const LiveSceneViewer = ({ remoteStreams }) => {
       });
     };
   }, [remoteStreams]);
-
+  
   useEffect(() => {
+    console.log("remoteStreams in useEffect 2:", remoteStreams);
     remoteStreams.forEach((stream, index) => {
       if (videoRefs.current[index].current) {
         videoRefs.current[index].current.srcObject = stream;
       }
     });
   }, [remoteStreams]);
+  
 
   return (
     <div>

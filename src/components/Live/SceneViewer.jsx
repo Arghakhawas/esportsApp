@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Peer from "peerjs";
 import io from "socket.io-client";
-import LiveSceneViewer from "./LiveSceneViewer";
+import LiveSceneViewer from "./LiveSceneViewer"; // Import the LiveSceneViewer component
 
 const SceneViewer = () => {
   const [peer, setPeer] = useState(null);
@@ -45,13 +45,13 @@ const SceneViewer = () => {
       }
       socket.current.disconnect();
     };
-  }, [peer]); // Include peer in the dependency array
+  }, [peer]);
 
   return (
     <div>
       <h2>Scene Viewer</h2>
       {remoteStreams.length > 0 ? (
-        <LiveSceneViewer remoteStreams={remoteStreams} />
+        <LiveSceneViewer remoteStreams={remoteStreams} /> 
       ) : (
         <p>No live streams available</p>
       )}
