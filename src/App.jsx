@@ -11,10 +11,11 @@ import Shop from "./components/Shop";
 import Tournament from "./components/Tournament";
 import TournamentDetails from "./components/TournamentDetails";
 import UserProfile from "./components/UserProfile";
-import LiveViewer from "./components/LiveViewer";
+import SceneViewer from "./components/Live/SceneViewer";
+import SceneCapture from "./components/Live/ScreenCapture";
 import ChangePasswordModal from "./components/ChangePasswordModel";
 import ShoppingCart from "./components/ShoppingCart";
-import Live from "./components/Live/Stream";
+
 import Preview from "./components/Live/Preview";
 import TournamentHistory from "./components/TournamentHistory";// Import the AdminPanel component
 import AdminPanel from "./components/Admin/AdminPanel";
@@ -54,13 +55,14 @@ function App() {
           />
           <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/live" element={<Live />} />
+          
           <Route path="/preview" element={<Preview />} />
           {isAuthenticated && (
             <>
               <Route path="/shopping-cart" element={<ShoppingCart />} />
               <Route path="/profile" element={<UserProfile />} />
-              
+              <Route path="/scene-capture" element={<SceneCapture />} />
+          <Route path="/scene-viewer" element={<SceneViewer />} />
       <Route path="/admin" element={isAuthenticated ? <AdminPanel /> : <Navigate to="/login" />} />
       <Route path="/admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
       <Route path="/tournament-history" element={<TournamentHistory />} />
@@ -73,7 +75,7 @@ function App() {
                 path="/tournament-details"
                 element={<TournamentDetails />}
               />
-              <Route path="/liveviewer" element={<LiveViewer />} />
+              
             </>
           )}
         </Routes>

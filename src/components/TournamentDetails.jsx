@@ -1,19 +1,17 @@
-// TournamentDetails.js
-import React, { useState, useEffect, useRef } from 'react';
-import io from 'socket.io-client';
+import React, { useState, useEffect } from 'react';
 import { BiLeftArrowCircle } from "react-icons/bi";
-import Streaming from './Streaming';
 import PointsTable from './PointsTable';
 import ConfirmationDialog from './ConfirmationDialog';
 import './TournamentDetails.css';
 import cod from "../assets/cod.jpg";
+import io from 'socket.io-client' // Import the socket.io-client library
+
 import efootball1 from "../assets/efootball1.jpg";
 import ffgarena from "../assets/ffgarena.jpg";
 import bgmi from "../assets/bgmi.png";
-
+import LiveSceneViewer from './Live/LiveSceneViewer';
 const TournamentDetails = ({ tournament }) => {
-  const [sharedRoomIds, setSharedRoomIds] = useState({});
-  const [roomIdInput, setRoomIdInput] = useState({});
+  
   const [pointTable, setPointTable] = useState([]);
   const [fixtures, setFixtures] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
@@ -21,24 +19,59 @@ const TournamentDetails = ({ tournament }) => {
   const [activeTournamentType, setActiveTournamentType] = useState(null);
   const [gameResults, setGameResults] = useState({});
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const socket = useRef(io('https://esportsappbackend.onrender.com/api/livestreaming', {
-    withCredentials: true,
-  }));
-
+  const [remoteStreams, setRemoteStreams] = useState([]);
+  const [showLiveSceneViewer, setShowLiveSceneViewer] = useState(false);
+  const socket = useRef(null);
+  const localStream = useRef(null);
   useEffect(() => {
-    socket.current.on('sharedRoomId', ({ roomId, team1, team2, gameResult }) => {
-      console.log(`Received shared Room ID for ${team1} vs ${team2}: ${roomId}`);
-      console.log(`Game Result: ${gameResult}`);
-      // You can update your local state with shared data if needed
+    socket.current = io.connect('https://esportsappbackend.onrender.com'); // Connect to the server
+    socket.current.on('connect', () => {
+      console.log('Connected to server');
     });
 
     return () => {
-      socket.current.off('sharedRoomId');
+      socket.current.disconnect(); // Disconnect from the server on unmount
     };
   }, []);
 
 
+  const handleLiveStreamToggle = async () => {
+    try {
+      if (!showLiveSceneViewer) {
+        const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+        localStream.current = stream;
+        // Start live stream
+        socket.current.emit('startLiveStream');
+      } else {
+        // Stop live stream
+        socket.current.emit('stopLiveStream');
+        localStream.current.getTracks().forEach((track) => track.stop());
+      }
+  
+      setShowLiveSceneViewer(!showLiveSceneViewer);
+    } catch (error) {
+      console.error('Error accessing screen:', error);
+    }
+  };
+  
+  useEffect(() => {
+    // Listen for startLiveStream and stopLiveStream events
+    socket.current.on("startLiveStream", () => {
+      // Implement logic to start capturing phone screens
+      setRemoteStreams(prevStreams => [...prevStreams, localStream.current]);
+    });
 
+    socket.current.on("stopLiveStream", () => {
+      // Implement logic to stop capturing phone screens
+      setRemoteStreams([]);
+    });
+
+    // Clean up function
+    return () => {
+      socket.current.off("startLiveStream");
+      socket.current.off("stopLiveStream");
+    };
+  }, [showLiveSceneViewer])
   useEffect(() => {
     const mockPointTable = [
       { team: "Team A", points: 3 },
@@ -49,27 +82,7 @@ const TournamentDetails = ({ tournament }) => {
     setPointTable(mockPointTable);
     setFixtures(generatedKnockoutFixtures);
   }, []);
-  const saveResults = async (team1, team2, roomId, gameResult) => {
-    try {
-      const response = await fetch("https://esportsappbackend.onrender.com/api/tournament/save-results", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ team1, team2, roomId, gameResult }),
-      });
-
-      if (response.ok) {
-        console.log("Results saved successfully");
-        // Update your component state or perform any necessary actions
-      } else {
-        console.error("Failed to save results:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error saving results:", error);
-    }
-  };
-
+ 
   const handleBackButtonClick = () => {
     if (activeTournamentType) {
       setActiveTournamentType(null);
@@ -134,7 +147,7 @@ const TournamentDetails = ({ tournament }) => {
              <div > <p>Prize Pool: {category.prizePool}</p>
               <p>Timing: {category.timing}</p>
               <p>Rules: {category.rules}</p></div>
-              <button classname="typesb" onClick={() => handleGameCategoryClick(category.name)}>
+              <button className="typesb" onClick={() => handleGameCategoryClick(category.name)}>
                 Select
               </button>
             </div>
@@ -171,9 +184,7 @@ const TournamentDetails = ({ tournament }) => {
 
   const renderHundredTeamBox = () => {
     const teamData = [
-      { teamId: 50, players: ['Player 1', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',, 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',, 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',, 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3'
-      , 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3'
-      , 'Player 1', 'Player 2', 'Player 3', 'Player 2', 'Player 3', 'Player 1', 'Player 2', 'Player 3',] }
+      { teamId: 50, players: ["Player1","players2","Player1","players2","Player1","players2","Player1","players2","Player1","players2","Player1","players2","Player1","players2"] }
     ];
     return (
       <div className="Battle ground">
@@ -244,10 +255,7 @@ const TournamentDetails = ({ tournament }) => {
           return (
             <div>
               {renderFixtures()}
-              <div className="streaming-section">
-                <h3>Live Streaming</h3>
-                <Streaming />
-              </div>
+             
             </div>
           );
         } else if (activeTournamentType === "League") {
@@ -267,7 +275,7 @@ const TournamentDetails = ({ tournament }) => {
             </div>
           );
         } else if (activeTournamentType === "TDM") {
-          return <div>{renderTDMBox(4, 2)}</div>; {/* Render TDM box with 4-player teams and 2 teams */ }
+          return <div>{renderTDMBox(4, 2)}</div>; 
         }
         break;
       case "Call of Duty":
@@ -278,7 +286,7 @@ const TournamentDetails = ({ tournament }) => {
             </div>
           );
         } else if (activeTournamentType === "TDM") {
-          return <div>{renderTDMBox(5, 2)}</div>; {/* Render TDM box with 5-player teams and 2 teams */ }
+          return <div>{renderTDMBox(5, 2)}</div>; 
         }
         break;
       case "FreeFire":
@@ -289,7 +297,7 @@ const TournamentDetails = ({ tournament }) => {
             </div>
           );
         } else if (activeTournamentType === "TDM") {
-          return <div>{renderTDMBox(4, 2)}</div>; {/* Render TDM box with 4-player teams and 2 teams */ }
+          return <div>{renderTDMBox(4, 2)}</div>; 
         }
         break;
       default:
@@ -352,28 +360,7 @@ const TournamentDetails = ({ tournament }) => {
       </div>
     );
   };
- const handleShareRoomId = (team1, team2) => {
-    const sharedRoomId = roomIdInput[team1];
-    const gameResult = gameResults[`${team1} vs ${team2}`];
-
-    if (sharedRoomId) {
-      // Emit an event to the server to share the room ID
-      socket.current.emit('shareRoomId', { roomId: sharedRoomId, team1, team2, gameResult });
-
-      // No need to save results here, as it's handled in the backend
-    } else {
-      alert(`Room ID for ${team1} is not available`);
-    }
-  };
-
-  const handleRoomIdChange = (team, value) => {
-    // Update the room ID input for the specific team
-    setRoomIdInput((prevRoomIdInput) => ({
-      ...prevRoomIdInput,
-      [team]: value,
-    }));
-  };
-  
+ 
 
   const handleGameResultUpdate = (team1, team2, result) => {
     setGameResults((prevResults) => ({
@@ -382,30 +369,7 @@ const TournamentDetails = ({ tournament }) => {
     }));
   };
 
-  const handleGameResultSubmit = async (team1, team2) => {
-    const roomId = roomIdInput[team1];
-    const gameResult = gameResults[`${team1} vs ${team2}`];
-
-    try {
-      const response = await fetch("https://esportsappbackend.onrender.com/api/tournament/save-results", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ team1, team2, roomId, gameResult }),
-      });
-
-      if (response.ok) {
-        console.log("Game results submitted successfully");
-
-        // Optionally, you can update local state or perform other actions
-      } else {
-        console.error("Failed to submit game results:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error submitting game results:", error);
-    }
-  };
+  
   const renderFixtures = () => {
     const generatedKnockoutFixtures = generateKnockoutFixtures();
 
@@ -429,11 +393,10 @@ const TournamentDetails = ({ tournament }) => {
                       Room ID for {fixture.team1}:
                       <input
                         type="text"
-                        value={roomIdInput[fixture.team1] || ''}
-                        onChange={(e) => handleRoomIdChange(fixture.team1, e.target.value)}
+                    
                       />
                     </label>
-                    <button onClick={() => handleShareRoomId(fixture.team1, fixture.team2)}>
+                    <button >
                       Share room ID
                     </button>
                   </div>
@@ -449,17 +412,11 @@ const TournamentDetails = ({ tournament }) => {
                         }
                       />
                     </label>
-                    <button onClick={() => handleGameResultSubmit(fixture.team1, fixture.team2)}>
+                    <button>
                       Submit Game Results
                     </button>
                   </div>
-                  {/* Show Room IDs if they're shared by other users */}
-                  {sharedRoomIds[fixture.team1] && (
-                    <span>Shared Room ID for {fixture.team1}: {sharedRoomIds[fixture.team1]}</span>
-                  )}
-                  {gameResults[`${fixture.team1} vs ${fixture.team2}`] && (
-                    <span>Game Result: {gameResults[`${fixture.team1} vs ${fixture.team2}`]}</span>
-                  )}
+         
                 </li>
               ))}
             </ul>
@@ -478,6 +435,10 @@ const TournamentDetails = ({ tournament }) => {
       {activeSection === null && renderGameCategories()}
       {activeSection === 'tournamentTypes' && renderTournamentTypes()}
       {activeSection === 'streaming' && renderTournamentDetails()}
+      <button onClick={handleLiveStreamToggle}>
+        {showLiveSceneViewer ? "Stop Live" : "Start Live"}
+      </button>
+      {showLiveSceneViewer && <LiveSceneViewer remoteStreams={remoteStreams} />}
       {showConfirmation && (
         <ConfirmationDialog
           message="Are you sure you want to stop the live stream?"
