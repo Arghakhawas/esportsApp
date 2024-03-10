@@ -54,7 +54,7 @@ const SceneCapture = () => {
       }
       socket.current.disconnect();
     };
-  }, []);
+  }, [peer, stream]); // Include peer and stream in the dependency array
 
   const handleStopStream = () => {
     // Emit event to stop the stream

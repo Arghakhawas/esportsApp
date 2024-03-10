@@ -1,6 +1,7 @@
 // LiveSceneViewer.jsx
 
 import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types"; // Import PropTypes
 
 const LiveSceneViewer = ({ remoteStreams }) => {
   const videoRefs = useRef([]);
@@ -34,6 +35,11 @@ const LiveSceneViewer = ({ remoteStreams }) => {
       ))}
     </div>
   );
+};
+
+// Add prop-types validation
+LiveSceneViewer.propTypes = {
+  remoteStreams: PropTypes.array.isRequired,
 };
 
 export default LiveSceneViewer;

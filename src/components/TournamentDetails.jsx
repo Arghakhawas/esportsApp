@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useRef} from 'react';
 import { BiLeftArrowCircle } from "react-icons/bi";
 import PointsTable from './PointsTable';
 import ConfirmationDialog from './ConfirmationDialog';
 import './TournamentDetails.css';
 import cod from "../assets/cod.jpg";
 import io from 'socket.io-client' // Import the socket.io-client library
-
+import PropTypes from 'prop-types';
 import efootball1 from "../assets/efootball1.jpg";
 import ffgarena from "../assets/ffgarena.jpg";
 import bgmi from "../assets/bgmi.png";
@@ -449,5 +449,7 @@ const TournamentDetails = ({ tournament }) => {
     </div>
   );
 };
-
+TournamentDetails.propTypes = {
+  tournament: PropTypes.object.isRequired,
+};
 export default TournamentDetails;

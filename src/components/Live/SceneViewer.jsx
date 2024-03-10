@@ -45,7 +45,7 @@ const SceneViewer = () => {
       }
       socket.current.disconnect();
     };
-  }, []);
+  }, [peer]); // Include peer in the dependency array
 
   return (
     <div>
