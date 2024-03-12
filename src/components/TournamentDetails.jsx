@@ -11,7 +11,6 @@ import ffgarena from "../assets/ffgarena.jpg";
 import bgmi from "../assets/bgmi.png";
 import LiveSceneViewer from './Live/LiveSceneViewer';
 const TournamentDetails = ({ tournament }) => {
-  
   const [pointTable, setPointTable] = useState([]);
   const [fixtures, setFixtures] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
@@ -380,7 +379,7 @@ const TournamentDetails = ({ tournament }) => {
   const renderFixtures = () => {
     const generatedKnockoutFixtures = generateKnockoutFixtures();
 
-    const roundToDisplay = 1;
+    const roundToDisplay = 2;
     const filteredFixtures = generatedKnockoutFixtures.filter((round) => round.round === roundToDisplay);
 
     return (
@@ -388,7 +387,7 @@ const TournamentDetails = ({ tournament }) => {
         <h3>Fixtures</h3>
         {filteredFixtures.map((round, roundIndex) => (
           <div key={roundIndex} className="round-fixtures">
-            <h4>semifinal {round.round}:</h4>
+            <h4>Match {round.round}:</h4>
             <ul>
               {round.matches.map((fixture, index) => (
                 <li key={index}>
