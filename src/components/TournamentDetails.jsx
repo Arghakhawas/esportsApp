@@ -379,7 +379,7 @@ const TournamentDetails = ({ tournament }) => {
   const renderFixtures = () => {
     const generatedKnockoutFixtures = generateKnockoutFixtures();
 
-    const roundToDisplay = 2;
+    const roundToDisplay = 1;
     const filteredFixtures = generatedKnockoutFixtures.filter((round) => round.round === roundToDisplay);
 
     return (
