@@ -9,7 +9,7 @@ const teamsData = [
   { name: 'Souvik',  mp: 2, w: 1, d: 1, l: 0, gd: 2, pts: 4 },
   { name: 'Amit',  mp: 2, w: 1, d: 0, l: 1, gd: 4, pts: 3 },
   { name: 'Nitai', mp: 2, w: 1, d: 0, l: 1, gd: -4, pts: 0 },
-  { name: 'krishnendu Dutta', mp: 2, w: 0, d: 1, l: 1, gd: -3, pts: 1 },
+  { name: 'krishnendu Dutta', mp: 2, w: 0, d: 1, l: 1, gd: -3, pts: -2 },
 
   { name: 'Ujjal', mp: 2, w: 0, d: 0, l: 0, gd: 0, pts: 0 },
 
