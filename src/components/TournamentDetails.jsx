@@ -308,8 +308,8 @@ const TournamentDetails = ({ tournament }) => {
   const generateKnockoutFixtures = () => {
     const teams = [
       
-      "nitai",  "Akash Karmakar",         "Amit", "Senu 07",         "Ujjal",  "Swastik",   
-                    "Abhi xi","Aritra sahoo",          "Souvik",   "Kenifer",     "Krishnendu Dutta", "Aditya karn", 
+      "nitai","Souvik",           "Amit","Akash Karmakar",     "Krishnendu Dutta", "Ujjal",  
+      "Senu 07","Abhi xi",            "Kenifer","Swastik",          "Aditya karn", "Aritra sahoo", 
     ];
   
     const rounds = Math.ceil(Math.log2(teams.length));
@@ -386,7 +386,7 @@ const TournamentDetails = ({ tournament }) => {
         <h3>Fixtures</h3>
         {filteredFixtures.map((round, roundIndex) => (
           <div key={roundIndex} className="round-fixtures">
-            <h4>Match {round.round}:3</h4>
+            <h4>Match {round.round}:5</h4>
             <ul>
               {round.matches.map((fixture, index) => (
                 <li key={index}>
