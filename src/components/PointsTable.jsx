@@ -2,18 +2,20 @@
 import React from 'react';
 import './PointsTable.css'; 
 const teamsData = [
-  { name: 'Senu 07', mp: 6, w: 6, d: 0, l: 0, gd: 19, pts: 18 },
-  { name: 'Akash Karmakar', mp: 6, w: 5, d: 0, l: 1, gd: 3, pts: 15 },
-  { name: 'Abhi xi',  mp: 6, w: 5, d: 0, l: 1, gd: 3, pts: 15},
-  { name: 'Kenifer', mp: 6, w: 5, d: 0, l: 1, gd: 4, pts: 15 },
-  { name: 'Amit',  mp: 6, w: 4, d: 0, l: 2, gd: 9, pts: 12 },
-  { name: 'Souvik',  mp: 6, w: 3, d: 1, l: 0, gd: 7, pts: 10 },
-  { name: 'Nitai', mp: 6, w:3, d: 0, l: 3, gd: -5, pts: 9 },
-  { name: 'Aritra sahoo',  mp: 6, w: 2, d: 0, l: 4, gd: -11, pts: 6 },
-  { name: 'Aditya ',  mp: 6, w: 1, d: 0, l: 5, gd: -6, pts: 3 },
-  { name: 'krishnendu Dutta', mp: 6, w: 0, d: 1, l: 5, gd: -9, pts: 1 },
-  { name: 'Swastik',  mp: 6, w: 0, d: 0, l: 6, gd: -6, pts: 0 },
-  { name: 'Ujjal', mp: 6, w: 0, d: 0, l: 6, gd: -12, pts: 0 },
+  { name: 'Senu 07', mp: 12, w: 10, d: 0, l: 2, gd: 25, pts: 30 },
+  { name: 'Amit',  mp: 12, w: 9, d: 1, l: 2, gd: 17, pts: 28 },
+  { name: 'Abhi xi',  mp: 12, w: 8, d: 0, l: 4, gd: -2, pts: 24},
+  { name: 'Kenifer', mp: 12, w: 7, d: 2, l: 3, gd: 11, pts: 23 },
+  { name: 'Akash Karmakar', mp: 12, w: 7, d: 1, l: 4, gd: -11, pts: 21 },
+  { name: 'Souvik',  mp: 12, w: 6, d: 2, l: 6, gd: 13, pts: 20 },
+  { name: 'Aditya ',  mp: 12, w: 4, d: 2, l: 6, gd: 0, pts: 14},
+  { name: 'krishnendu Dutta', mp: 12, w: 5, d: 1, l: 6, gd: -8, pts: 16 },
+  { name: 'Nitai', mp: 12, w:4, d: 0, l: 8, gd: -13, pts: 12 },
+
+  { name: 'Swastik',  mp: 12, w: 2, d: 2, l: 8, gd: -16, pts: 8 },
+  { name: 'Ujjal', mp: 12, w: 1, d: 2, l: 9, gd: -12, pts:5 },
+
+  { name: 'Aritra sahoo',  mp: 12, w: 2, d: 2, l: 8, gd: -20, pts: 8},
 
  
 ];
