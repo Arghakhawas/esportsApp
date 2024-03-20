@@ -1,15 +1,16 @@
-import React, { useState, useEffect ,useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BiLeftArrowCircle } from "react-icons/bi";
 import PointsTable from './PointsTable';
 import ConfirmationDialog from './ConfirmationDialog';
 import './TournamentDetails.css';
 import cod from "../assets/cod.jpg";
-import io from 'socket.io-client' // Import the socket.io-client library
+import io from 'socket.io-client';
 import PropTypes from 'prop-types';
 import efootball1 from "../assets/efootball1.jpg";
 import ffgarena from "../assets/ffgarena.jpg";
 import bgmi from "../assets/bgmi.png";
 import LiveSceneViewer from './Live/LiveSceneViewer';
+
 const TournamentDetails = ({ tournament }) => {
   const [pointTable, setPointTable] = useState([]);
   const [fixtures, setFixtures] = useState([]);
@@ -17,82 +18,82 @@ const TournamentDetails = ({ tournament }) => {
   const [activeGameCategory, setActiveGameCategory] = useState(null);
   const [activeTournamentType, setActiveTournamentType] = useState(null);
   const [gameResults, setGameResults] = useState({});
-  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [chatMessages, setChatMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
   const [remoteStreams, setRemoteStreams] = useState([]);
   const [showLiveSceneViewer, setShowLiveSceneViewer] = useState(false);
+  const [roomId, setRoomId] = useState('');
+  const [opponent, setOpponent] = useState('');
   const socket = useRef(null);
   const localStream = useRef(null);
+
   useEffect(() => {
-    socket.current = io.connect('https://esportsappbackend.onrender.com'); // Connect to the server
+    socket.current = io.connect('https://esportsappbackend.onrender.com');
     socket.current.on('connect', () => {
       console.log('Connected to server');
     });
 
+    socket.current.on('roomID', (roomId) => {
+      setRoomId(roomId);
+    });
+
+    socket.current.on('gameResult', ({ team1, team2, result }) => {
+      setGameResults((prevResults) => ({
+        ...prevResults,
+        [`${team1} vs ${team2}`]: result,
+      }));
+    });
+
+    socket.current.on('chatMessage', (message) => {
+      setChatMessages([...chatMessages, { text: message, sender: 'opponent' }]);
+    });
+
+    socket.current.on("startLiveStream", () => {
+      setRemoteStreams(prevStreams => [...prevStreams, localStream.current]);
+    });
+
+    socket.current.on("stopLiveStream", () => {
+      setRemoteStreams([]);
+    });
+
     return () => {
-      socket.current.disconnect(); // Disconnect from the server on unmount
+      socket.current.disconnect();
     };
   }, []);
-  const handleFormSubmit = async (formData, userName) => {
-    try {
-      // Include the selected game category and user name in the form data
-      formData.selectedGameCategory = selectedGameCategory;
-      formData.userName = userName;
-  
-      // Add logic to save the user's name based on the selected game category
-      switch (selectedGameCategory) {
-        case "Ea-football":
-          // Save user's name for EA Football fixtures or leagues
-          break;
-        case "BGMI":
-          // Save user's name for BGMI fixtures or battle grounds
-          break;
-        case "COD":
-          // Save user's name for COD fixtures or TDM matches
-          break;
-        case "FreeFire":
-          // Save user's name for FreeFire fixtures or battle grounds
-          break;
-        default:
-          break;
-      }
-  
-      const response = await fetch('https://esportsappbackend.onrender.com/api/tournament/join', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-        body: JSON.stringify(formData),
-      });
-  
-      if (response.ok) {
-        setStep(2); // Move to the next step
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
-  };
-  
 
+  const sendChatMessage = () => {
+    socket.current.emit('chatMessage', newMessage);
+    setChatMessages([...chatMessages, { text: newMessage, sender: 'me' }]);
+    setNewMessage('');
+  };
+
+  const handleRoomIdShare = () => {
+    socket.current.emit('shareRoomID', { roomId, opponent });
+  };
+
+  const handleGameResultSubmit = (team1, team2) => {
+    socket.current.emit('submitGameResult', { team1, team2, result: gameResults[`${team1} vs ${team2}`] });
+  };
 
   const handleLiveStreamToggle = async () => {
     try {
       if (!showLiveSceneViewer) {
         const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
         localStream.current = stream;
-        // Start live stream
         socket.current.emit('startLiveStream');
       } else {
-        // Stop live stream
         socket.current.emit('stopLiveStream');
         localStream.current.getTracks().forEach((track) => track.stop());
       }
-  
+
       setShowLiveSceneViewer(!showLiveSceneViewer);
     } catch (error) {
       console.error('Error accessing screen:', error);
     }
   };
+
+
+
   
   useEffect(() => {
     // Listen for startLiveStream and stopLiveStream events
@@ -460,6 +461,24 @@ const TournamentDetails = ({ tournament }) => {
                     <button>
                       Submit Game Results
                     </button>
+                    <div className="chat-container">
+  <div className="chat-messages">
+    {chatMessages.map((msg, index) => (
+      <div key={index} className={`message ${msg.sender}`}>
+        {msg.text}
+      </div>
+    ))}
+  </div>
+  <div className="chat-input">
+    <input
+      type="text"
+      placeholder="Type your message..."
+      value={newMessage}
+      onChange={(e) => setNewMessage(e.target.value)}
+    />
+    <button onClick={sendChatMessage}>Send</button>
+  </div>
+</div>
                   </div>
          
                 </li>
@@ -484,13 +503,7 @@ const TournamentDetails = ({ tournament }) => {
         {showLiveSceneViewer ? "Stop Live" : "Start Live"}
       </button>
       {showLiveSceneViewer && <LiveSceneViewer remoteStreams={remoteStreams} />}
-      {showConfirmation && (
-        <ConfirmationDialog
-          message="Are you sure you want to stop the live stream?"
-          onYes={() => setShowConfirmation(false)}
-          onNo={() => setShowConfirmation(false)}
-        />
-      )}
+   
     </div>
   );
 };
