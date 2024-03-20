@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BiLeftArrowCircle } from "react-icons/bi";
 import PointsTable from './PointsTable';
-import ConfirmationDialog from './ConfirmationDialog';
-import './TournamentDetails.css';
-import cod from "../assets/cod.jpg";
+import LiveSceneViewer from './Live/LiveSceneViewer';
 import io from 'socket.io-client';
 import PropTypes from 'prop-types';
 import efootball1 from "../assets/efootball1.jpg";
 import ffgarena from "../assets/ffgarena.jpg";
+import cod from "../assets/cod.jpg";
 import bgmi from "../assets/bgmi.png";
-import LiveSceneViewer from './Live/LiveSceneViewer';
+
+import './TournamentDetails.css';
 
 const TournamentDetails = ({ tournament }) => {
   const [pointTable, setPointTable] = useState([]);
@@ -92,27 +92,21 @@ const TournamentDetails = ({ tournament }) => {
     }
   };
 
-
-
-  
   useEffect(() => {
-    // Listen for startLiveStream and stopLiveStream events
     socket.current.on("startLiveStream", () => {
-      // Implement logic to start capturing phone screens
       setRemoteStreams(prevStreams => [...prevStreams, localStream.current]);
     });
 
     socket.current.on("stopLiveStream", () => {
-      // Implement logic to stop capturing phone screens
       setRemoteStreams([]);
     });
 
-    // Clean up function
     return () => {
       socket.current.off("startLiveStream");
       socket.current.off("stopLiveStream");
     };
-  }, [showLiveSceneViewer])
+  }, [showLiveSceneViewer]);
+
   useEffect(() => {
     const mockPointTable = [
       { team: "Team A", points: 3 },
@@ -123,7 +117,7 @@ const TournamentDetails = ({ tournament }) => {
     setPointTable(mockPointTable);
     setFixtures(generatedKnockoutFixtures);
   }, []);
- 
+    
   const handleBackButtonClick = () => {
     if (activeTournamentType) {
       setActiveTournamentType(null);
@@ -463,9 +457,14 @@ const TournamentDetails = ({ tournament }) => {
                     </button>
                     <div className="chat-container">
   <div className="chat-messages">
-    {chatMessages.map((msg, index) => (
-      <div key={index} className={`message ${msg.sender}`}>
-        {msg.text}
+    {chatMessages.me && chatMessages.me.map((msg, index) => (
+      <div key={index} className="message me">
+        {msg}
+      </div>
+    ))}
+    {chatMessages.opponent && chatMessages.opponent.map((msg, index) => (
+      <div key={index} className="message opponent">
+        {msg}
       </div>
     ))}
   </div>
@@ -479,6 +478,7 @@ const TournamentDetails = ({ tournament }) => {
     <button onClick={sendChatMessage}>Send</button>
   </div>
 </div>
+
                   </div>
          
                 </li>
