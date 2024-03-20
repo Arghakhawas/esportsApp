@@ -19,6 +19,8 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
   });
 
   const handleFormSubmit = async (event) => {
+    handleFormSubmit(formData, userName);
+
     event.preventDefault();
 
     const playerData = {

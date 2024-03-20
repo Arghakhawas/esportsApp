@@ -32,6 +32,47 @@ const TournamentDetails = ({ tournament }) => {
       socket.current.disconnect(); // Disconnect from the server on unmount
     };
   }, []);
+  const handleFormSubmit = async (formData, userName) => {
+    try {
+      // Include the selected game category and user name in the form data
+      formData.selectedGameCategory = selectedGameCategory;
+      formData.userName = userName;
+  
+      // Add logic to save the user's name based on the selected game category
+      switch (selectedGameCategory) {
+        case "Ea-football":
+          // Save user's name for EA Football fixtures or leagues
+          break;
+        case "BGMI":
+          // Save user's name for BGMI fixtures or battle grounds
+          break;
+        case "COD":
+          // Save user's name for COD fixtures or TDM matches
+          break;
+        case "FreeFire":
+          // Save user's name for FreeFire fixtures or battle grounds
+          break;
+        default:
+          break;
+      }
+  
+      const response = await fetch('https://esportsappbackend.onrender.com/api/tournament/join', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        setStep(2); // Move to the next step
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+  
 
 
   const handleLiveStreamToggle = async () => {

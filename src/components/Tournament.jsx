@@ -51,10 +51,11 @@ const handleCreateTournament = async (tournamentData) => {
     setRulesToDisplay(rules);
     setShowRules(true);
   };
-  const handleFormSubmit = async (formData) => {
+  const handleFormSubmit = async (formData, userName) => {
     try {
-      // Include the selected game category in the form data
+      // Include the selected game category and user name in the form data
       formData.selectedGameCategory = selectedGameCategory;
+      formData.userName = userName;
   
       const response = await fetch('https://esportsappbackend.onrender.com/api/tournament/join', {
         method: 'POST',
@@ -72,8 +73,6 @@ const handleCreateTournament = async (tournamentData) => {
       console.error('Error submitting form:', error);
     }
   };
-  
-  
   
 
   const handlePaymentSubmit = async (paymentData) => {
