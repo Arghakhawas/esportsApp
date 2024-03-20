@@ -20,8 +20,8 @@ const SceneCapture = () => {
           .then((userStream) => {
             setStream(userStream);
 
-            // Emit the stream to others
-            socket.current.emit("stream", userStream);
+            // Emit the stream to the server
+            socket.current.emit("mobile-stream", userStream);
           })
           .catch((error) =>
             console.error("Error accessing user media:", error)
