@@ -421,7 +421,7 @@ const TournamentDetails = ({ tournament }) => {
         <h3>Fixtures</h3>
         {filteredFixtures.map((round, roundIndex) => (
           <div key={roundIndex} className="round-fixtures">
-            <h4>Match {round.round}:5</h4>
+            <h4>Match {round.round}:8</h4>
             <ul>
               {round.matches.map((fixture, index) => (
                 <li key={index}>
