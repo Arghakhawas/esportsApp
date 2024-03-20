@@ -6,8 +6,9 @@ const teamsData = [
   { name: 'Amit',  mp: 12, w: 9, d: 1, l: 2, gd: 17, pts: 28 },
   { name: 'Abhi xi',  mp: 12, w: 8, d: 0, l: 4, gd: -2, pts: 24},
   { name: 'Kenifer', mp: 12, w: 7, d: 2, l: 3, gd: 11, pts: 23 },
+  { name: 'Souvik',  mp: 12, w: 6, d: 3, l: 3, gd: 13, pts: 21 },
   { name: 'Akash Karmakar', mp: 12, w: 7, d: 1, l: 4, gd: -11, pts: 21 },
-  { name: 'Souvik',  mp: 12, w: 6, d: 2, l: 6, gd: 13, pts: 20 },
+ 
   { name: 'Aditya ',  mp: 12, w: 4, d: 2, l: 6, gd: 0, pts: 14},
   { name: 'krishnendu Dutta', mp: 12, w: 5, d: 1, l: 6, gd: -8, pts: 16 },
   { name: 'Nitai', mp: 12, w:4, d: 0, l: 8, gd: -13, pts: 12 },

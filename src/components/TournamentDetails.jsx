@@ -306,8 +306,8 @@ const TournamentDetails = ({ tournament }) => {
 
   const generateKnockoutFixtures = () => {
     const teams = [      
-  "Souvik",   "Abhi xi",      "Aritra sahoo", "Amit",    "Akash Karmakar","Ujjal", 
-  "Senu 07", "Aditya karn",          "nitai", "Kenifer",             "Krishnendu Dutta","Swastik",  
+  "Souvik",  "Senu 07",        "Amit", "Abhi xi",        "Akash Karmakar", "Krishnendu Dutta",
+   "Aditya karn", "Kenifer",        "Swastik", "nitai",            "Aritra sahoo", "Ujjal",  
     ];
   
     const rounds = Math.ceil(Math.log2(teams.length));
