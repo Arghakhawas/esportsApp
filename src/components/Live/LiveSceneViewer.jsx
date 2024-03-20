@@ -1,5 +1,3 @@
-// LiveSceneViewer.jsx
-
 import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
@@ -8,8 +6,10 @@ const LiveSceneViewer = ({ remoteStreams }) => {
 
   useEffect(() => {
     console.log("remoteStreams in useEffect 1:", remoteStreams);
-    videoRefs.current = remoteStreams.map(() => React.createRef());
-  
+    if (remoteStreams) {
+      videoRefs.current = remoteStreams.map(() => React.createRef());
+    }
+
     return () => {
       // Cleanup
       videoRefs.current.forEach((ref) => {
@@ -22,11 +22,13 @@ const LiveSceneViewer = ({ remoteStreams }) => {
   
   useEffect(() => {
     console.log("remoteStreams in useEffect 2:", remoteStreams);
-    remoteStreams.forEach((stream, index) => {
-      if (videoRefs.current[index].current) {
-        videoRefs.current[index].current.srcObject = stream;
-      }
-    });
+    if (remoteStreams) {
+      remoteStreams.forEach((stream, index) => {
+        if (videoRefs.current[index].current) {
+          videoRefs.current[index].current.srcObject = stream;
+        }
+      });
+    }
   }, [remoteStreams]);
   
 
