@@ -1,5 +1,3 @@
-// SceneCapture.jsx
-
 import React, { useState, useEffect, useRef } from "react";
 import Peer from "peerjs";
 import io from "socket.io-client";
@@ -24,11 +22,6 @@ const SceneCapture = () => {
 
             // Emit the stream to others
             socket.current.emit("stream", userStream);
-
-            // Listen for stopStream event
-            socket.current.on("stopStream", () => {
-              setStream(null);
-            });
           })
           .catch((error) =>
             console.error("Error accessing user media:", error)
@@ -54,7 +47,7 @@ const SceneCapture = () => {
       }
       socket.current.disconnect();
     };
-  }, [peer, stream]); // Include peer and stream in the dependency array
+  }, []);
 
   const handleStopStream = () => {
     // Emit event to stop the stream

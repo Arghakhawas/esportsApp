@@ -314,7 +314,7 @@ const TournamentDetails = ({ tournament }) => {
 
   
     const fixtures = [];
-    const startTime = new Date("2024-03-17T22:00:00");
+    const startTime = new Date("2024-03-20T22:00:00");
   
     for (let round = 1; round <= rounds; round++) {
       const matches = [];
