@@ -1,25 +1,20 @@
-import React, { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.css';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Shop from './components/Shop';
+import Tournament from './components/Tournament';
+import ProductListing from './components/ProductListing';
 
-import "./App.css";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Shop from "./components/Shop";
-import Tournament from "./components/Tournament";
-import TournamentDetails from "./components/TournamentDetails";
-import UserProfile from "./components/UserProfile";
-import SceneViewer from "./components/Live/SceneViewer";
-import SceneCapture from "./components/Live/ScreenCapture";
-import ChangePasswordModal from "./components/ChangePasswordModel";
-import ShoppingCart from "./components/ShoppingCart";
+import TournamentDetails from './components/TournamentDetails';
 
-import TournamentHistory from "./components/TournamentHistory";// Import the AdminPanel component
-import AdminPanel from "./components/Admin/AdminPanel";
-import AdminLogin from "./components/Admin/Adminlogin";
-import LiveSceneViewer from "./components/Live/LiveSceneViewer";
+import UserProfile from './components/UserProfile';
+import LiveViewer from './components/LiveViewer';
+import ChangePasswordModal from './components/ChangePasswordModel';
+import ShoppingCart from './components/ShoppingCart';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -39,43 +34,31 @@ function App() {
     setIsAuthenticated(true);
     setUser(userData.user);
   };
+
   return (
     <BrowserRouter>
       <div>
         <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
         <Routes>
-          <Route
-            path="/"
-            element={<Home isAuthenticated={isAuthenticated} />}
-          />
-          <Route
-            path="/login"
-            element={<Login onLoginSuccess={handleLoginSuccess} />}
-          />
+          <Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
+          <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
           <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
-          <Route path="/shop" element={<Shop />} />
-
-
+          <Route path="/shop" element={<Shop token={user?.token} />} />
           {isAuthenticated && (
             <>
-              <Route path="/shopping-cart" element={<ShoppingCart />} />
+
+          <Route path="/shopping-cart" element={<ShoppingCart token={user?.token} />} />
+          <Route path="/product-listing" element={<ProductListing token={user?.token} />} />
               <Route path="/profile" element={<UserProfile />} />
-              <Route path="/scene-capture" element={<SceneCapture />} />
-          <Route path="/scene-viewer" element={<SceneViewer />} />
-          <Route path="/livesceneviewer" element={<LiveSceneViewer/>} />
-      <Route path="/admin" element={isAuthenticated ? <AdminPanel /> : <Navigate to="/login" />} />
-      <Route path="/admin-login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
-      <Route path="/tournament-history" element={<TournamentHistory />} />
+              {/* <AdminRoute
+                path="/admin"
+                element={<AdminDashboard />}
+                isAuthenticated={isAuthenticated}
+              /> */}
               <Route path="/tournament" element={<Tournament />} />
-              <Route
-                path="/ChangePasswordModel"
-                element={<ChangePasswordModal />}
-              />
-              <Route
-                path="/tournament-details"
-                element={<TournamentDetails />}
-              />
-              
+              <Route path="/ChangePasswordModel" element={<ChangePasswordModal />} />
+              <Route path="/tournament-details" element={<TournamentDetails />} />
+              <Route path="/liveviewer" element={<LiveViewer />} />
             </>
           )}
         </Routes>

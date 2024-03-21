@@ -6,7 +6,7 @@ const ProductListing = ({ token }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`/api/products`);
+        const response = await fetch(`https://esportsappbackend.onrender.com/api/products`);
         if (response.ok) {
           const productsData = await response.json();
           setProducts(productsData);
@@ -23,7 +23,7 @@ const ProductListing = ({ token }) => {
 
   const addToCart = async (productId) => {
     try {
-      const response = await fetch(`/api/cart/add`, {
+      const response = await fetch(`https://esportsappbackend.onrender.com/api/cart/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
