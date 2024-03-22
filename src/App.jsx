@@ -12,9 +12,10 @@ import ProductListing from './components/ProductListing';
 import TournamentDetails from './components/TournamentDetails';
 
 import UserProfile from './components/UserProfile';
-
+import TournamentHistory from './components/TournamentHistory';
 import ChangePasswordModal from './components/ChangePasswordModel';
 import ShoppingCart from './components/ShoppingCart';
+import LiveSceneViewer from './components/Live/LiveSceneViewer';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -58,7 +59,8 @@ function App() {
               <Route path="/tournament" element={<Tournament />} />
               <Route path="/ChangePasswordModel" element={<ChangePasswordModal />} />
               <Route path="/tournament-details" element={<TournamentDetails />} />
-          
+              <Route path="/tournament-history" element={<TournamentHistory />} />
+              <Route path="/livesceneviewer" element={<LiveSceneViewer/>}/>
             </>
           )}
         </Routes>
