@@ -12,7 +12,7 @@ import ProductListing from './components/ProductListing';
 import TournamentDetails from './components/TournamentDetails';
 
 import UserProfile from './components/UserProfile';
-import LiveViewer from './components/LiveViewer';
+
 import ChangePasswordModal from './components/ChangePasswordModel';
 import ShoppingCart from './components/ShoppingCart';
 
@@ -58,7 +58,7 @@ function App() {
               <Route path="/tournament" element={<Tournament />} />
               <Route path="/ChangePasswordModel" element={<ChangePasswordModal />} />
               <Route path="/tournament-details" element={<TournamentDetails />} />
-              <Route path="/liveviewer" element={<LiveViewer />} />
+          
             </>
           )}
         </Routes>
