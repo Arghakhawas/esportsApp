@@ -342,8 +342,8 @@ const TournamentDetails = ({ tournament }) => {
 
   const generateKnockoutFixtures = () => {
     const teams = [      
-  "Souvik",  "Senu 07",          "Akash Karmakar","Abhi xi",        "Kenifer","Aritra sahoo", 
-      "Amit","Krishnendu Dutta",    "nitai", "Swastik",            "Ujjal","Aditya karn",  
+  "Senu 07","Kenifer",          "Abhi xi","Amit",        "Aritra sahoo","Souvik", 
+  "Akash Karmakar", "Krishnendu Dutta",        "nitai","Ujjal",             "Swastik","Aditya karn",  
     ];
   
     const rounds = Math.ceil(Math.log2(teams.length));
@@ -367,7 +367,7 @@ const TournamentDetails = ({ tournament }) => {
           {
             team1,
             team2,
-            date: "2024-02-25", // Update with actual date
+            date: "2024-03-22", // Update with actual date
             time: `${matchTime.getHours()}:${matchTime.getMinutes()}`,
           },
           // Add another match for the same teams
