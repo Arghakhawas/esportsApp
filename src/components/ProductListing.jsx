@@ -1,4 +1,6 @@
+// ProductListing.jsx
 import React, { useState, useEffect } from 'react';
+import AddToCart from './AddToCart';
 
 const ProductListing = ({ token }) => {
   const [products, setProducts] = useState([]);
@@ -17,30 +19,9 @@ const ProductListing = ({ token }) => {
         console.error('Error:', error);
       }
     };
-  
+
     fetchProducts();
   }, []);
-
-  const addToCart = async (productId) => {
-    try {
-      const response = await fetch(`https://esportsappbackend.onrender.com/api/cart/add`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({ productId, quantity: 1 }),
-      });
-
-      if (response.ok) {
-        console.log('Item added to the cart');
-      } else {
-        console.error('Failed to add item to the cart');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
 
   return (
     <div>
@@ -50,7 +31,34 @@ const ProductListing = ({ token }) => {
           <h3>{product.name}</h3>
           <p>{product.description}</p>
           <p>${product.price}</p>
-          <button onClick={() => addToCart(product._id)}>Add to Cart</button>
+          {product.type === 'monitor' && (
+            <div>
+              <p>Customize Monitor Size:</p>
+              <select>
+                {product.customizationOptions && product.customizationOptions.sizes.map((size, index) => (
+                  <option key={index}>{size}</option>
+                ))}
+              </select>
+            </div>
+          )}
+          {product.type === 'desktop' && (
+            <div>
+              <p>Customize RAM:</p>
+              <select>
+                {product.customizationOptions && product.customizationOptions.ram.map((ramOption, index) => (
+                  <option key={index}>{ramOption}</option>
+                ))}
+              </select>
+              <p>Customize Hard Disk:</p>
+              <select>
+                {product.customizationOptions && product.customizationOptions.hardDisk.map((diskOption, index) => (
+                  <option key={index}>{diskOption}</option>
+                ))}
+              </select>
+              {/* Add more customization options as needed */}
+            </div>
+          )}
+          <AddToCart productId={product._id} productName={product.name} productPrice={product.price} token={token} />
         </div>
       ))}
     </div>
