@@ -1,4 +1,3 @@
-// AdminLogin Component
 import React, { useState } from 'react';
 
 const AdminLogin = ({ onLoginSuccess }) => {
@@ -7,16 +6,18 @@ const AdminLogin = ({ onLoginSuccess }) => {
 
   const handleLogin = async () => {
     try {
-      // Check if email and password match the admin credentials
-      if (email === 'admin@example.com' && password === 'adminpassword') {
-        // Mocking token generation for simplicity
-        const token = 'mocked-token';
-        // Store JWT token securely (e.g., in local storage)
-        localStorage.setItem('adminToken', token);
-        // Call the onLoginSuccess callback to indicate successful login
+      const response = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('adminToken', data.token);
         onLoginSuccess();
       } else {
-        // Handle invalid credentials
         console.error('Invalid credentials');
       }
     } catch (error) {

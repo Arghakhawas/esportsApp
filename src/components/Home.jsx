@@ -24,11 +24,19 @@ function Home({ isAuthenticated }) {
             Join the First Step to Esports Gamer and Win Prizes
           </p>
           {!isAuthenticated && (
-            <>
-        <div>      <Link to="/signup" className="btn skewBg">Signup/Register</Link></div>
-         <div>  <Link to="/login" className="btn skewBg">Login</Link></div>   
-            </>
-          )}
+              <>
+                <div>
+                  <Link to="/signup" className="btn skewBg">Signup/Register</Link>
+                </div>
+                <div>
+                  <Link to="/login" className="btn skewBg">Login</Link>
+                </div>
+                <div>
+                  {/* Add a link/button for admin login */}
+                  <Link to="/admin/login" className="btn skewBg">Admin Login</Link>
+                </div>
+              </>
+            )}
           {isAuthenticated && (
                 <p>
                 <Link to="/tournament" className="btn skewBg">Tournament Registraion</Link>

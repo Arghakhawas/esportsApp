@@ -10,13 +10,13 @@ import Tournament from './components/Tournament';
 import ProductListing from './components/ProductListing';
 
 import TournamentDetails from './components/TournamentDetails';
-
+import AdminLogin from './components/Admin/Adminlogin';
 import UserProfile from './components/UserProfile';
 import TournamentHistory from './components/TournamentHistory';
 import ChangePasswordModal from './components/ChangePasswordModel';
 import ShoppingCart from './components/ShoppingCart';
 import LiveSceneViewer from './components/Live/LiveSceneViewer';
-
+import AdminPanel from './components/Admin/AdminPanel';
 function App() {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -51,11 +51,9 @@ function App() {
           <Route path="/shopping-cart" element={<ShoppingCart token={user?.token} />} />
           <Route path="/product-listing" element={<ProductListing token={user?.token} />} />
               <Route path="/profile" element={<UserProfile />} />
-              {/* <AdminRoute
-                path="/admin"
-                element={<AdminDashboard />}
-                isAuthenticated={isAuthenticated}
-              /> */}
+              <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/panel" element={<AdminPanel />} />
+
               <Route path="/tournament" element={<Tournament />} />
               <Route path="/ChangePasswordModel" element={<ChangePasswordModal />} />
               <Route path="/tournament-details" element={<TournamentDetails />} />
