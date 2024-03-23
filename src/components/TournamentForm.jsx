@@ -19,24 +19,24 @@ const TournamentForm = ({ onSubmit, onPaymentSubmit, onClose, selectedTournament
   });
 
   const handleFormSubmit = async (event) => {
-    handleFormSubmit(formData, userName);
-
     event.preventDefault();
-
+  
     const playerData = {
       gameId,
       userName,
       phoneNumber,
       ...formData,
+      selectedGameCategory: selectedTournament.category // Add selected game category
     };
-
+  
     try {
-      await onSubmit(playerData);
+      await onSubmit(playerData, userName); // Call onSubmit with correct arguments
       setStep(2); // Move to step 2 (payment)
     } catch (error) {
       console.error('Error submitting form:', error);
     }
   };
+  
 
   const handlePaymentSubmit = async (event) => {
     event.preventDefault();

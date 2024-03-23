@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import './Shop.css';
 import ProductListing from './ProductListing';
-import AddToCart from './AddToCart';
-
 const Shop = ({ token }) => {
   const [products, setProducts] = useState([]);
 
@@ -25,6 +23,27 @@ const Shop = ({ token }) => {
     fetchProducts();
   }, []);
 
+  const addToCart = async (productId) => {
+    try {
+      const response = await fetch(`https://esportsappbackend.onrender.com/api/cart/add`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ productId, quantity: 1 }),
+      });
+
+      if (response.ok) {
+        console.log('Item added to the cart');
+      } else {
+        console.error('Failed to add item to the cart');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <section className="section shop" id="shop">
       <div className="container">
@@ -42,13 +61,16 @@ const Shop = ({ token }) => {
                     <a href="#" className="card-title">{product.name}</a>
                   </h3>
                   <div className="card-wrapper">
-                    <p className="card-price">${product.price}</p>
-                    <ion-icon name="basket"></ion-icon> Add to Cart  <AddToCart productId={product._id} productName={product.name} productPrice={product.price} token={token} />
+                    <p className="card-price">9${product.price}</p>
+                    <button className="card-btn" onClick={() => addToCart(product._id)}>
+                      <ion-icon name="basket"></ion-icon> Add to Cart
+                    </button>
                   </div>
                 </div>
               </div>
             </li>
           ))}
+          
         </ul>
       </div>
     </section>
@@ -56,5 +78,3 @@ const Shop = ({ token }) => {
 };
 
 export default Shop;
-                      
-             
