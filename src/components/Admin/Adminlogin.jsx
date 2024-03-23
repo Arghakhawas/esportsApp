@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const AdminLogin = ({ onLoginSuccess }) => {
+const AdminLogin = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,7 +18,8 @@ const AdminLogin = ({ onLoginSuccess }) => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('adminToken', data.token);
-        onLoginSuccess();
+        // Redirect to admin panel after successful login
+        navigate('/admin/panel');
       } else {
         console.error('Invalid credentials');
       }
