@@ -1,3 +1,4 @@
+// AdminLogin Component
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,15 +14,14 @@ const AdminLogin = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password }), // Send email and password in the request body
       });
+      const data = await response.json();
       if (response.ok) {
-        const data = await response.json();
         localStorage.setItem('adminToken', data.token);
-        // Redirect to admin panel after successful login
         navigate('/admin/panel');
       } else {
-        console.error('Invalid credentials');
+        console.error(data.message); // Log error message from the backend
       }
     } catch (error) {
       console.error('Error logging in:', error);
