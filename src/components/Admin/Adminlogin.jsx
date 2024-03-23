@@ -1,3 +1,4 @@
+// AdminLogin.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,7 +9,7 @@ const AdminLogin = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('https://esportsappbackend.onrender.com/api/admin/login', {
+      const response = await fetch('https://esportsappbackend.onrender.com/api/admin/login', { // Replace with your actual backend URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -17,9 +18,8 @@ const AdminLogin = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        // Store token and isAdmin flag in local storage
+        // Store token in local storage
         localStorage.setItem('adminToken', data.token);
-        localStorage.setItem('isAdmin', true);
         // Redirect to admin panel after successful login
         navigate('/admin/panel');
       } else {
