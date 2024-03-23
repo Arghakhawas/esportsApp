@@ -12,7 +12,7 @@ import TournamentDetails from './components/TournamentDetails';
 import AdminLogin from './components/Admin/Adminlogin';
 import UserProfile from './components/UserProfile';
 import TournamentHistory from './components/TournamentHistory';
-import ChangePasswordModal from './components/ChangePasswordModal'; // Corrected import
+import ChangePasswordModal from './components/ChangePasswordModel';
 import ShoppingCart from './components/ShoppingCart';
 import LiveSceneViewer from './components/Live/LiveSceneViewer';
 import AdminPanel from './components/Admin/AdminPanel'; // Corrected import
