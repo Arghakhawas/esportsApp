@@ -129,7 +129,7 @@ const AdminPanel = () => {
         </ul>
       </div>
     </div>
-  );
+  );  
 };
 
 export default AdminPanel;
