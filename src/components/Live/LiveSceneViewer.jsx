@@ -1,17 +1,18 @@
-import React, { useEffect, useRef } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 const LiveSceneViewer = ({ remoteStreams }) => {
+  // Ref for video elements
   const videoRefs = useRef([]);
 
   useEffect(() => {
-    console.log("remoteStreams in useEffect 1:", remoteStreams);
+    // Update video references when remoteStreams change
     if (remoteStreams) {
       videoRefs.current = remoteStreams.map(() => React.createRef());
     }
 
+    // Cleanup
     return () => {
-      // Cleanup
       videoRefs.current.forEach((ref) => {
         if (ref.current) {
           ref.current.srcObject = null;
@@ -19,9 +20,9 @@ const LiveSceneViewer = ({ remoteStreams }) => {
       });
     };
   }, [remoteStreams]);
-  
+
   useEffect(() => {
-    console.log("remoteStreams in useEffect 2:", remoteStreams);
+    // Set srcObject for video elements
     if (remoteStreams) {
       remoteStreams.forEach((stream, index) => {
         if (videoRefs.current[index].current) {
@@ -30,7 +31,6 @@ const LiveSceneViewer = ({ remoteStreams }) => {
       });
     }
   }, [remoteStreams]);
-  
 
   return (
     <div>
@@ -46,9 +46,10 @@ const LiveSceneViewer = ({ remoteStreams }) => {
   );
 };
 
-// Add prop-types validation
+// Prop types validation
 LiveSceneViewer.propTypes = {
   remoteStreams: PropTypes.array.isRequired,
 };
 
+// Export the component
 export default LiveSceneViewer;

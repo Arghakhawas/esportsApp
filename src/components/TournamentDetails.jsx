@@ -78,34 +78,40 @@ const TournamentDetails = ({ tournament }) => {
   const handleLiveStreamToggle = async () => {
     try {
       if (!showLiveSceneViewer) {
-        const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-        localStream.current = stream;
+        // Start live stream
         socket.current.emit('startLiveStream');
       } else {
+        // Stop live stream
         socket.current.emit('stopLiveStream');
-        localStream.current.getTracks().forEach((track) => track.stop());
       }
-
-      setShowLiveSceneViewer(!showLiveSceneViewer);
     } catch (error) {
       console.error('Error accessing screen:', error);
     }
   };
 
   useEffect(() => {
+    socket.current = io.connect('https://esportsappbackend.onrender.com');
+    socket.current.on('connect', () => {
+      console.log('Connected to server');
+    });
+
     socket.current.on("startLiveStream", () => {
-      setRemoteStreams(prevStreams => [...prevStreams, localStream.current]);
+      setShowLiveSceneViewer(true);
     });
 
     socket.current.on("stopLiveStream", () => {
+      setShowLiveSceneViewer(false);
       setRemoteStreams([]);
     });
 
+    socket.current.on("mobile-stream", (remoteStream) => {
+      setRemoteStreams((prevStreams) => [...prevStreams, remoteStream]);
+    });
+
     return () => {
-      socket.current.off("startLiveStream");
-      socket.current.off("stopLiveStream");
+      socket.current.disconnect();
     };
-  }, [showLiveSceneViewer]);
+  }, []);
 
   useEffect(() => {
     const mockPointTable = [
@@ -503,7 +509,6 @@ const TournamentDetails = ({ tournament }) => {
         {showLiveSceneViewer ? "Stop Live" : "Start Live"}
       </button>
       {showLiveSceneViewer && <LiveSceneViewer remoteStreams={remoteStreams} />}
-   
     </div>
   );
 };

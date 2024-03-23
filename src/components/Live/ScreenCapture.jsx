@@ -6,48 +6,40 @@ const SceneCapture = () => {
   const [peer, setPeer] = useState(null);
   const [stream, setStream] = useState(null);
   const socket = useRef(null);
-
   useEffect(() => {
+    // Function to initialize Peer
     const initPeer = async () => {
-      const peer = new Peer(undefined, { host: "/", path: "/peerjs" });
+      const peer = new Peer(undefined, { host: '/', path: '/peerjs' });
 
-      peer.on("open", (id) => {
-        console.log("Peer ID:", id);
+      peer.on('open', (id) => {
+        console.log('Peer ID:', id);
         setPeer(peer);
 
-        navigator.mediaDevices
-          .getUserMedia({ video: true, audio: true })
+        // Get user media and emit stream to the server
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
           .then((userStream) => {
             setStream(userStream);
-
-            // Emit the stream to the server
-            socket.current.emit("mobile-stream", userStream);
+            socket.current.emit('mobile-stream', userStream);
           })
-          .catch((error) =>
-            console.error("Error accessing user media:", error)
-          );
+          .catch((error) => console.error('Error accessing user media:', error));
       });
 
-      peer.on("error", (err) => {
-        console.error("Peer error:", err);
-      });
+      peer.on('error', (err) => console.error('Peer error:', err));
     };
+    // Connect to Socket.io server
+    socket.current = io('https://esportsappbackend.onrender.com');
 
-    // Connect to the Socket.io server
-    socket.current = io("https://esportsappbackend.onrender.com");
-
+    // Initialize Peer
     initPeer();
 
+    // Cleanup
     return () => {
-      if (peer) {
-        peer.destroy();
-      }
-      if (stream) {
-        stream.getTracks().forEach((track) => track.stop());
-      }
-      socket.current.disconnect();
-    };
-  }, []);
+      if (peer) peer.destroy();
+      if (stream) stream.getTracks().forEach((track) => track.stop
+
+
+
+
 
   const handleStopStream = () => {
     // Emit event to stop the stream
