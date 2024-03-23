@@ -67,9 +67,6 @@ const TournamentDetails = ({ tournament }) => {
     setNewMessage('');
   };
 
-  const handleRoomIdShare = () => {
-    socket.current.emit('shareRoomID', { roomId, opponent });
-  };
 
   const handleGameResultSubmit = (team1, team2) => {
     socket.current.emit('submitGameResult', { team1, team2, result: gameResults[`${team1} vs ${team2}`] });
@@ -428,19 +425,7 @@ const TournamentDetails = ({ tournament }) => {
                   {fixture.team1} vs {fixture.team2} <div> {fixture.date} at {fixture.time}</div>
                   <br />
 
-                  <div>
-                    <label>
-                      Room ID for {fixture.team1}:
-                      <input
-                        type="text"
-                    
-                      />
-                    </label>
-                    <button >
-                      Share room ID
-                    </button>
-                  </div>
-
+      
                   <div>
                     <label>
                       Game Result:
@@ -455,16 +440,12 @@ const TournamentDetails = ({ tournament }) => {
                     <button>
                       Submit Game Results
                     </button>
-                    <div className="chat-container">
+                   
+<div className="chat-container">
   <div className="chat-messages">
-    {chatMessages.me && chatMessages.me.map((msg, index) => (
-      <div key={index} className="message me">
-        {msg}
-      </div>
-    ))}
-    {chatMessages.opponent && chatMessages.opponent.map((msg, index) => (
-      <div key={index} className="message opponent">
-        {msg}
+    {chatMessages.map((message, index) => (
+      <div key={index} className={`message ${message.sender}`}>
+        {message.text}
       </div>
     ))}
   </div>
