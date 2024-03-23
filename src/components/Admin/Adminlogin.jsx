@@ -1,4 +1,3 @@
-// AdminLogin.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,7 +17,9 @@ const AdminLogin = () => {
       });
       if (response.ok) {
         const data = await response.json();
+        // Store token and isAdmin flag in local storage
         localStorage.setItem('adminToken', data.token);
+        localStorage.setItem('isAdmin', true);
         // Redirect to admin panel after successful login
         navigate('/admin/panel');
       } else {

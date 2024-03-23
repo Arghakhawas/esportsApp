@@ -312,7 +312,10 @@ body {
 .skewBg::before {
   content: "";
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 7px;
+  left: 0;
   transform: skewX(var(--skewX, -16deg));
   background-color: var(--bg, var(--marigold));
   z-index: -1;
