@@ -8,15 +8,14 @@ import Signup from './components/Signup';
 import Shop from './components/Shop';
 import Tournament from './components/Tournament';
 import ProductListing from './components/ProductListing';
-
 import TournamentDetails from './components/TournamentDetails';
 import AdminLogin from './components/Admin/Adminlogin';
 import UserProfile from './components/UserProfile';
 import TournamentHistory from './components/TournamentHistory';
-import ChangePasswordModal from './components/ChangePasswordModel';
+import ChangePasswordModal from './components/ChangePasswordModal'; // Corrected import
 import ShoppingCart from './components/ShoppingCart';
 import LiveSceneViewer from './components/Live/LiveSceneViewer';
-import AdminPanel from './components/Admin/AdminPanel';
+import AdminPanel from './components/Admin/AdminPanel'; // Corrected import
 
 function App() {
   const [user, setUser] = useState(null);
@@ -48,19 +47,19 @@ function App() {
           <Route path="/shop" element={<Shop token={user?.token} />} />
           {/* Add the admin login route */}
           <Route path="/admin/login" element={<AdminLogin />} />
-          {isAuthenticated && (
-            <>
-              <Route path="/shopping-cart" element={<ShoppingCart token={user?.token} />} />
-              <Route path="/product-listing" element={<ProductListing token={user?.token} />} />
-              <Route path="/profile" element={<UserProfile />} />
-              <Route path="/admin/panel" element={<AdminPanel />} />
-              <Route path="/tournament" element={<Tournament />} />
-              <Route path="/ChangePasswordModel" element={<ChangePasswordModal />} />
-              <Route path="/tournament-details" element={<TournamentDetails />} />
-              <Route path="/tournament-history" element={<TournamentHistory />} />
-              <Route path="/livesceneviewer" element={<LiveSceneViewer />} />
-            </>
+          {/* Protect admin panel route */}
+          {isAuthenticated && user?.isAdmin && (
+            <Route path="/admin/panel" element={<AdminPanel />} />
           )}
+          {/* Other routes */}
+          <Route path="/shopping-cart" element={<ShoppingCart token={user?.token} />} />
+          <Route path="/product-listing" element={<ProductListing token={user?.token} />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/tournament" element={<Tournament />} />
+          <Route path="/change-password" element={<ChangePasswordModal />} />
+          <Route path="/tournament-details" element={<TournamentDetails />} />
+          <Route path="/tournament-history" element={<TournamentHistory />} />
+          <Route path="/live-scene-viewer" element={<LiveSceneViewer />} />
         </Routes>
       </div>
     </BrowserRouter>
