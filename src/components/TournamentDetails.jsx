@@ -336,54 +336,38 @@ const TournamentDetails = ({ tournament }) => {
 
   const generateKnockoutFixtures = () => {
     const teams = [      
-  "Senu 07","Kenifer",          "Abhi xi","Amit",        "Aritra sahoo","Souvik", 
-  "Akash Karmakar", "Krishnendu Dutta",        "nitai","Ujjal",             "Swastik","Aditya karn",  
+      "Senu 07", "Kenifer", "Abhi xi", "Amit", "Aritra sahoo", "Souvik", 
+      "Akash Karmakar", "Krishnendu Dutta", "nitai", "Ujjal", "Swastik", "Aditya karn",  
     ];
   
-    const rounds = Math.ceil(Math.log2(teams.length));
-
-
     const fixtures = [];
-    const startTime = new Date("2024-03-20T22:00:00");
+    const startTimeRound10 = new Date("2024-03-23T00:00:00");
+    const startTimeRound11 = new Date("2024-03-24T00:00:00");
   
-    for (let round = 1; round <= rounds; round++) {
-      const matches = [];
-      const roundStartTime = new Date(startTime);
+    const matchesRound10 = [
+      { team1: teams[8], team2: teams[7], date: "2024-03-23", time: "12:00" },
+      { team1: teams[9], team2: teams[4], date: "2024-03-23", time: "12:10" },
+      { team1: teams[11], team2: teams[6], date: "2024-03-23", time: "12:20" },
+      { team1: teams[10], team2: teams[5], date: "2024-03-23", time: "12:30" },
+      { team1: teams[2], team2: teams[1], date: "2024-03-23", time: "12:40" },
+      { team1: teams[3], team2: teams[0], date: "2024-03-23", time: "12:50" },
+    ];
   
-      for (let match = 1; match <= teams.length / Math.pow(2, round); match++) {
-        const team1 = teams[(match - 1) * 2];
-        const team2 = teams[(match - 1) * 2 + 1];
+    const matchesRound11 = [
+      { team1: teams[1], team2: teams[9], date: "2024-03-24", time: "12:00" },
+      { team1: teams[2], team2: teams[8], date: "2024-03-24", time: "12:10" },
+      { team1: teams[3], team2: teams[7], date: "2024-03-24", time: "12:20" },
+      { team1: teams[0], team2: teams[6], date: "2024-03-24", time: "12:30" },
+      { team1: teams[0], team2: teams[10], date: "2024-03-24", time: "12:40" },
+      { team1: teams[11], team2: teams[5], date: "2024-03-24", time: "12:50" },
+    ];
   
-        const matchTime = new Date(roundStartTime);
-        matchTime.setMinutes(matchTime.getMinutes() + (match - 1) * 10);
+    fixtures.push({ round: 10, matches: matchesRound10 });
+    fixtures.push({ round: 11, matches: matchesRound11 });
   
-        matches.push(
-          {
-            team1,
-            team2,
-            date: "2024-03-22", // Update with actual date
-            time: `${matchTime.getHours()}:${matchTime.getMinutes()}`,
-          },
-        
-          {
-            team1,
-            team2,
-            date: "2024-02-25", // Update with actual date
-            time: `${matchTime.getHours() + 1}:${matchTime.getMinutes()}`, // Adjust time as needed
-          }
-        );
-      }
-  
-      fixtures.push({
-        round,
-        matches,
-      });
-  
-      // Add
-      startTime.setMinutes(startTime.getMinutes() + (teams.length / Math.pow(2, round)) * 15 + 30);
-    }
     return fixtures;
   };
+  
 
   const renderPointsTable = () => {
     return (
