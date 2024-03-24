@@ -335,39 +335,39 @@ const TournamentDetails = ({ tournament }) => {
   };
   const generateKnockoutFixtures = () => {
     const teams = [
-      "Senu 07", "Kenifer", "Abhi xi", "Amit", "Aritra sahoo", "Souvik", 
+      "Senu 07", "Kenifer", "Abhi xi", "Amit", "Aritra sahoo", "Souvik",
       "Akash Karmakar", "Krishnendu Dutta", "nitai", "Ujjal", "Swastik", "Aditya karn",
     ];
   
     const fixtures = [];
   
-    // Define fixtures for match 10
-    const match10Fixtures = [
-      { team1: teams[8], team2: teams[7], date: "2024-03-23", time: "12:00" },
-      { team1: teams[9], team2: teams[4], date: "2024-03-23", time: "12:15" },
-      { team1: teams[11], team2: teams[6], date: "2024-03-23", time: "12:30" },
-      { team1: teams[10], team2: teams[5], date: "2024-03-23", time: "12:45" },
-      { team1: teams[2], team2: teams[1], date: "2024-03-23", time: "13:00" },
-      { team1: teams[3], team2: teams[0], date: "2024-03-23", time: "13:15" },
+    // Define match 10
+    const match10 = [
+      { team1: teams[8], team2: teams[7], date: "2024-03-23", time: "12:00" }, // nitai vs krisnendu
+      { team1: teams[9], team2: teams[4], date: "2024-03-23", time: "12:10" }, // ujjal vs aritra
+      { team1: teams[11], team2: teams[6], date: "2024-03-23", time: "12:20" }, // adtiya vs akash
+      { team1: teams[10], team2: teams[5], date: "2024-03-23", time: "12:30" }, // swastik vs souvik
+      { team1: teams[2], team2: teams[1], date: "2024-03-23", time: "12:40" }, // abhi vs kenifer
+      { team1: teams[3], team2: teams[4], date: "2024-03-23", time: "12:50" }, // amit vs aritra
     ];
   
-    // Define fixtures for match 11
-    const match11Fixtures = [
-      { team1: teams[1], team2: teams[9], date: "2024-03-24", time: "12:00" },
-      { team1: teams[2], team2: teams[8], date: "2024-03-24", time: "12:15" },
-      { team1: teams[3], team2: teams[7], date: "2024-03-24", time: "12:30" },
-      { team1: teams[0], team2: teams[6], date: "2024-03-24", time: "12:45" },
-      { team1: teams[4], team2: teams[10], date: "2024-03-24", time: "13:00" },
-      { team1: teams[5], team2: teams[11], date: "2024-03-24", time: "13:15" },
+    // Define match 11
+    const match11 = [
+      { team1: teams[1], team2: teams[9], date: "2024-03-23", time: "13:00" }, // kenifer vs ujjal
+      { team1: teams[2], team2: teams[8], date: "2024-03-23", time: "13:10" }, // abhi vs krisnendu
+      { team1: teams[3], team2: teams[5], date: "2024-03-23", time: "13:20" }, // amit vs souvik
+      { team1: teams[0], team2: teams[6], date: "2024-03-23", time: "13:30" }, // senu vs akash
+      { team1: teams[0], team2: teams[10], date: "2024-03-23", time: "13:40" }, // senu vs swastik
+      { team1: teams[8], team2: teams[11], date: "2024-03-23", time: "13:50" }, // nitai vs aditya
     ];
   
-    // Push fixtures for match 10 and match 11
-    fixtures.push({ round: 10, matches: match10Fixtures });
-    fixtures.push({ round: 11, matches: match11Fixtures });
+    fixtures.push({ round: 5, matches: match10 });
+    fixtures.push({ round: 5, matches: match11 });
   
     return fixtures;
   };
   
+
 
   const renderPointsTable = () => {
     return (
@@ -398,7 +398,7 @@ const TournamentDetails = ({ tournament }) => {
         <h3>Fixtures</h3>
         {filteredFixtures.map((round, roundIndex) => (
           <div key={roundIndex} className="round-fixtures">
-            <h4>Match {round.round}:</h4>
+            <h4>Match {round.round}:8</h4>
             <ul>
               {round.matches.map((fixture, index) => (
                 <li key={index}>
