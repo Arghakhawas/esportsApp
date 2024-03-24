@@ -336,36 +336,90 @@ const TournamentDetails = ({ tournament }) => {
 
   const generateKnockoutFixtures = () => {
     const teams = [
-        "Senu 07", "Kenifer", "Abhi xi", "Amit", "Aritra sahoo", "Souvik",
-        "Akash Karmakar", "Krishnendu Dutta", "nitai", "Ujjal", "Swastik", "Aditya karn",
+      "Senu 07", "Kenifer", "Abhi xi", "Amit", "Aritra sahoo", "Souvik",
+      "Akash Karmakar", "Krishnendu Dutta", "nitai", "Ujjal", "Swastik", "Aditya karn"
     ];
-
-    const fixtures = [];
-
-    // Round 10
-    const round10Matches = [
-        { team1: "nitai", team2: "Krishnendu Dutta", date: "2024-03-23", time: "12:00" },
-        { team1: "Ujjal", team2: "Aritra sahoo", date: "2024-03-23", time: "12:15" },
-        { team1: "Aditya karn", team2: "Akash Karmakar", date: "2024-03-23", time: "12:30" },
-        { team1: "Swastik", team2: "Souvik", date: "2024-03-23", time: "12:45" },
-        { team1: "Abhi xi", team2: "Kenifer", date: "2024-03-23", time: "13:00" },
-        { team1: "Amit", team2: "Aritra sahoo", date: "2024-03-23", time: "13:15" },
+  
+    const matches = [
+      // Match 10
+      {
+        team1: "nitai",
+        team2: "Krishnendu Dutta",
+        date: "2024-03-23",
+        time: "00:00"
+      },
+      {
+        team1: "Ujjal",
+        team2: "Aritra sahoo",
+        date: "2024-03-23",
+        time: "01:00"
+      },
+      {
+        team1: "Aditya karn",
+        team2: "Akash Karmakar",
+        date: "2024-03-23",
+        time: "02:00"
+      },
+      {
+        team1: "Swastik",
+        team2: "Souvik",
+        date: "2024-03-23",
+        time: "03:00"
+      },
+      {
+        team1: "Abhi xi",
+        team2: "Kenifer",
+        date: "2024-03-23",
+        time: "04:00"
+      },
+      {
+        team1: "Amit",
+        team2: "Aritra sahoo",
+        date: "2024-03-23",
+        time: "05:00"
+      },
+      // Match 11
+      {
+        team1: "Kenifer",
+        team2: "Ujjal",
+        date: "2024-03-24",
+        time: "00:00"
+      },
+      {
+        team1: "Abhi xi",
+        team2: "Krishnendu Dutta",
+        date: "2024-03-24",
+        time: "01:00"
+      },
+      {
+        team1: "Amit",
+        team2: "Souvik",
+        date: "2024-03-24",
+        time: "02:00"
+      },
+      {
+        team1: "Senu 07",
+        team2: "Akash Karmakar",
+        date: "2024-03-24",
+        time: "03:00"
+      },
+      {
+        team1: "Senu 07",
+        team2: "Swastik",
+        date: "2024-03-24",
+        time: "04:00"
+      },
+      {
+        team1: "nitai",
+        team2: "Aditya karn",
+        date: "2024-03-24",
+        time: "05:00"
+      },
     ];
-    fixtures.push({ round: 10, matches: round10Matches });
-
-    // Round 11
-    const round11Matches = [
-        { team1: "Kenifer", team2: "Ujjal", date: "2024-03-24", time: "12:00" },
-        { team1: "Abhi xi", team2: "Krishnendu Dutta", date: "2024-03-24", time: "12:15" },
-        { team1: "Amit", team2: "Souvik", date: "2024-03-24", time: "12:30" },
-        { team1: "Senu 07", team2: "Akash Karmakar", date: "2024-03-24", time: "12:45" },
-        { team1: "Senu 07", team2: "Swastik", date: "2024-03-24", time: "13:00" },
-        { team1: "nitai", team2: "Aditya karn", date: "2024-03-24", time: "13:15" },
-    ];
-    fixtures.push({ round: 11, matches: round11Matches });
-
-    return fixtures;
-};
+  
+    return [{ round: 5, matches }];
+  };
+  
 
   const renderPointsTable = () => {
     return (
