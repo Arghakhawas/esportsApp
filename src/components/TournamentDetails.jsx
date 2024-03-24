@@ -33,9 +33,6 @@ const TournamentDetails = ({ tournament }) => {
       console.log('Connected to server');
     });
 
-    socket.current.on('roomID', (roomId) => {
-      setRoomId(roomId);
-    });
 
     socket.current.on('gameResult', ({ team1, team2, result }) => {
       setGameResults((prevResults) => ({
@@ -336,58 +333,102 @@ const TournamentDetails = ({ tournament }) => {
         return null;
     }
   };
-
   const generateKnockoutFixtures = () => {
-    const teams = [      
-  "Senu 07","Kenifer",          "Abhi xi","Amit",        "Aritra sahoo","Souvik", 
-  "Akash Karmakar", "Krishnendu Dutta",        "nitai","Ujjal",             "Swastik","Aditya karn",  
-    ];
-  
-    const rounds = Math.ceil(Math.log2(teams.length));
+    const teams = ["Senu 07", "Kenifer", "Abhi xi", "Amit", "Aritra sahoo", "Souvik", "Akash Karmakar", "Krishnendu Dutta", "nitai", "Ujjal", "Swastik", "Aditya karn"];
 
-  
     const fixtures = [];
-    const startTime = new Date("2024-03-20T22:00:00");
-  
-    for (let round = 1; round <= rounds; round++) {
-      const matches = [];
-      const roundStartTime = new Date(startTime);
-  
-      for (let match = 1; match <= teams.length / Math.pow(2, round); match++) {
-        const team1 = teams[(match - 1) * 2];
-        const team2 = teams[(match - 1) * 2 + 1];
-  
-        const matchTime = new Date(roundStartTime);
-        matchTime.setMinutes(matchTime.getMinutes() + (match - 1) * 10);
-  
-        matches.push(
-          {
-            team1,
-            team2,
-            date: "2024-03-22", // Update with actual date
-            time: `${matchTime.getHours()}:${matchTime.getMinutes()}`,
-          },
-          // Add another match for the same teams
-          {
-            team1,
-            team2,
-            date: "2024-02-25", // Update with actual date
-            time: `${matchTime.getHours() + 1}:${matchTime.getMinutes()}`, // Adjust time as needed
-          }
-        );
-      }
-  
-      fixtures.push({
-        round,
-        matches,
-      });
-  
-      // Add 30 minutes break after each round
-      startTime.setMinutes(startTime.getMinutes() + (teams.length / Math.pow(2, round)) * 15 + 30);
-    }
-  
+
+    // Add match 10
+    const match10 = {
+        round: 4, // Assuming it's the fourth round
+        matches: [
+            {
+                team1: teams[8], // nitai
+                team2: teams[7], // Krishnendu Dutta
+                date: "2024-03-23", // Match 10 date
+                time: "12:00", // Match 10 start time
+            },
+            {
+                team1: teams[9], // Ujjal
+                team2: teams[4], // Aritra sahoo
+                date: "2024-03-23", // Match 10 date
+                time: "12:30", // Match 10 start time
+            },
+            {
+                team1: teams[11], // Aditya karn
+                team2: teams[6], // Akash Karmakar
+                date: "2024-03-23", // Match 10 date
+                time: "13:00", // Match 10 start time
+            },
+            {
+                team1: teams[10], // Swastik
+                team2: teams[5], // Souvik
+                date: "2024-03-23", // Match 10 date
+                time: "13:30", // Match 10 start time
+            },
+            {
+                team1: teams[2], // Abhi xi
+                team2: teams[1], // Kenifer
+                date: "2024-03-23", // Match 10 date
+                time: "14:00", // Match 10 start time
+            },
+            {
+                team1: teams[3], // Amit
+                team2: teams[4], // Aritra sahoo
+                date: "2024-03-23", // Match 10 date
+                time: "14:30", // Match 10 start time
+            },
+        ]
+    };
+    fixtures.push(match10);
+
+    // Add match 11
+    const match11 = {
+        round: 4, // Assuming it's the fourth round
+        matches: [
+            {
+                team1: teams[1], // Kenifer
+                team2: teams[9], // Ujjal
+                date: "2024-03-23", // Match 11 date
+                time: "15:00", // Match 11 start time
+            },
+            {
+                team1: teams[2], // Abhi xi
+                team2: teams[7], // Krishnendu Dutta
+                date: "2024-03-23", // Match 11 date
+                time: "15:30", // Match 11 start time
+            },
+            {
+                team1: teams[3], // Amit
+                team2: teams[5], // Souvik
+                date: "2024-03-23", // Match 11 date
+                time: "16:00", // Match 11 start time
+            },
+            {
+                team1: teams[0], // Senu 07
+                team2: teams[6], // Akash Karmakar
+                date: "2024-03-23", // Match 11 date
+                time: "16:30", // Match 11 start time
+            },
+            {
+                team1: teams[0], // Senu 07
+                team2: teams[10], // Swastik
+                date: "2024-03-23", // Match 11 date
+                time: "17:00", // Match 11 start time
+            },
+            {
+                team1: teams[8], // nitai
+                team2: teams[11], // Aditya karn
+                date: "2024-03-23", // Match 11 date
+                time: "17:30", // Match 11 start time
+            },
+        ]
+    };
+    fixtures.push(match11);
+
     return fixtures;
-  };
+};
+
 
   const renderPointsTable = () => {
     return (
