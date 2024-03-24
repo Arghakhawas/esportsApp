@@ -335,39 +335,53 @@ const TournamentDetails = ({ tournament }) => {
   };
 
   const generateKnockoutFixtures = () => {
-    const teams = [
-      "Senu 07", "Kenifer", "Abhi xi", "Amit", "Aritra sahoo", "Souvik",
-      "Akash Karmakar", "Krishnendu Dutta", "nitai", "Ujjal", "Swastik", "Aditya karn",
+    const teams = [      
+      "Krishnendu Dutta", "Abhi xi",   
+      "Krishnendu Dutta","nitai",  
+      "nitai",   "Aditya karn",   
+      "Akash Karmakar", "Aditya karn",  
+      "Senu 07","Akash Karmakar",
+      "Senu 07","Swastik",  
+          "Souvik",  "Swastik", 
+          "Amit",  "Souvik", 
+       "Amit","Aritra sahoo",
+       "Ujjal", "Aritra sahoo",
+       "Ujjal","Kenifer", 
+   "Kenifer",  "Abhi xi",   
+                
     ];
   
-    const rounds = 11; // Total rounds including the new rounds 10 and 11
-  
+    const rounds = Math.ceil(Math.log2(teams.length));
+
+
     const fixtures = [];
-    const startTime = new Date("2024-03-23T00:00:00"); // Start datetime for the fixtures
+    const startTime = new Date("2024-03-23T00:00:00");
   
     for (let round = 1; round <= rounds; round++) {
       const matches = [];
       const roundStartTime = new Date(startTime);
   
-      if (round === 10) {
-        // Matches for round 10
+      for (let match = 1; match <= teams.length / Math.pow(2, round); match++) {
+        const team1 = teams[(match - 1) * 2];
+        const team2 = teams[(match - 1) * 2 + 1];
+  
+        const matchTime = new Date(roundStartTime);
+        matchTime.setMinutes(matchTime.getMinutes() + (match - 1) * 10);
+  
         matches.push(
-          { team1: "nitai", team2: "Krishnendu Dutta", date: "2024-03-23", time: "12:00" },
-          { team1: "Ujjal", team2: "Aritra sahoo", date: "2024-03-23", time: "12:10" },
-          { team1: "Aditya karn", team2: "Akash Karmakar", date: "2024-03-23", time: "12:20" },
-          { team1: "Swastik", team2: "Souvik", date: "2024-03-23", time: "12:30" },
-          { team1: "Abhi xi", team2: "Kenifer", date: "2024-03-23", time: "12:40" },
-          { team1: "Amit", team2: "Aritra sahoo", date: "2024-03-23", time: "12:50" }
-        );
-      } else if (round === 11) {
-        // Matches for round 11
-        matches.push(
-          { team1: "Kenifer", team2: "Ujjal", date: "2024-03-24", time: "00:00" },
-          { team1: "Abhi xi", team2: "Krishnendu Dutta", date: "2024-03-24", time: "00:10" },
-          { team1: "Amit", team2: "Souvik", date: "2024-03-24", time: "00:20" },
-          { team1: "Senu 07", team2: "Akash Karmakar", date: "2024-03-24", time: "00:30" },
-          { team1: "Senu 07", team2: "Swastik", date: "2024-03-24", time: "00:40" },
-          { team1: "nitai", team2: "Aditya karn", date: "2024-03-24", time: "00:50" }
+          {
+            team1,
+            team2,
+            date: "2024-03-22", // Update with actual date
+            time: `${matchTime.getHours()}:${matchTime.getMinutes()}`,
+          },
+        
+          {
+            team1,
+            team2,
+            date: "2024-02-25", // Update with actual date
+            time: `${matchTime.getHours() + 1}:${matchTime.getMinutes()}`, // Adjust time as needed
+          }
         );
       }
   
@@ -376,13 +390,11 @@ const TournamentDetails = ({ tournament }) => {
         matches,
       });
   
-      // Add 30 minutes break after each round
+      // Add
       startTime.setMinutes(startTime.getMinutes() + (teams.length / Math.pow(2, round)) * 15 + 30);
     }
-  
     return fixtures;
   };
-  
 
   const renderPointsTable = () => {
     return (
@@ -413,7 +425,7 @@ const TournamentDetails = ({ tournament }) => {
         <h3>Fixtures</h3>
         {filteredFixtures.map((round, roundIndex) => (
           <div key={roundIndex} className="round-fixtures">
-            <h4>Match {round.round}:8</h4>
+            <h4>Match :10 and 11</h4>
             <ul>
               {round.matches.map((fixture, index) => (
                 <li key={index}>
