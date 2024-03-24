@@ -57,22 +57,6 @@ const TournamentDetails = ({ tournament }) => {
       socket.current.disconnect();
     };
   }, []);
-  useEffect(() => {
-    const fetchFixtures = async () => {
-      try {
-        const response = await fetch('https://esportsappbackend.onrender.com/api/fixtures');
-        if (response.ok) {
-          const data = await response.json();
-          setFixtures(data);
-        }
-      } catch (error) {
-        console.error('Error fetching fixtures:', error);
-      }
-    };
-  
-    fetchFixtures();
-  }, []);
-  
 
   const sendChatMessage = () => {
     socket.current.emit('chatMessage', newMessage);
@@ -349,41 +333,121 @@ const TournamentDetails = ({ tournament }) => {
         return null;
     }
   };
+
   const generateKnockoutFixtures = () => {
     const teams = [
       "Senu 07", "Kenifer", "Abhi xi", "Amit", "Aritra sahoo", "Souvik",
       "Akash Karmakar", "Krishnendu Dutta", "nitai", "Ujjal", "Swastik", "Aditya karn",
     ];
   
+    const rounds = 11; // Update the total number of rounds to include round 10 and 11
+  
     const fixtures = [];
+    const startTime = new Date("2024-03-23T00:00:00"); // Start datetime for round 10
   
-    // Define match 10
-    const match10 = [
-      { team1: teams[8], team2: teams[7], date: "2024-03-23", time: "12:00" }, // nitai vs krisnendu
-      { team1: teams[9], team2: teams[4], date: "2024-03-23", time: "12:10" }, // ujjal vs aritra
-      { team1: teams[11], team2: teams[6], date: "2024-03-23", time: "12:20" }, // adtiya vs akash
-      { team1: teams[10], team2: teams[5], date: "2024-03-23", time: "12:30" }, // swastik vs souvik
-      { team1: teams[2], team2: teams[1], date: "2024-03-23", time: "12:40" }, // abhi vs kenifer
-      { team1: teams[3], team2: teams[4], date: "2024-03-23", time: "12:50" }, // amit vs aritra
-    ];
+    for (let round = 10; round <= rounds; round++) {
+      const matches = [];
+      const roundStartTime = new Date(startTime);
   
-    // Define match 11
-    const match11 = [
-      { team1: teams[1], team2: teams[9], date: "2024-03-23", time: "13:00" }, // kenifer vs ujjal
-      { team1: teams[2], team2: teams[8], date: "2024-03-23", time: "13:10" }, // abhi vs krisnendu
-      { team1: teams[3], team2: teams[5], date: "2024-03-23", time: "13:20" }, // amit vs souvik
-      { team1: teams[0], team2: teams[6], date: "2024-03-23", time: "13:30" }, // senu vs akash
-      { team1: teams[0], team2: teams[10], date: "2024-03-23", time: "13:40" }, // senu vs swastik
-      { team1: teams[8], team2: teams[11], date: "2024-03-23", time: "13:50" }, // nitai vs aditya
-    ];
+      switch (round) {
+        case 10:
+          // Match 10
+          matches.push(
+            {
+              team1: teams[8],
+              team2: teams[7],
+              date: "2024-03-23", // Date for match 10
+              time: `${roundStartTime.getHours()}:${roundStartTime.getMinutes()}`,
+            },
+            {
+              team1: teams[9],
+              team2: teams[4],
+              date: "2024-03-23", // Date for match 10
+              time: `${roundStartTime.getHours() + 1}:${roundStartTime.getMinutes()}`,
+            },
+            {
+              team1: teams[11],
+              team2: teams[6],
+              date: "2024-03-23", // Date for match 10
+              time: `${roundStartTime.getHours() + 2}:${roundStartTime.getMinutes()}`,
+            },
+            {
+              team1: teams[10],
+              team2: teams[5],
+              date: "2024-03-23", // Date for match 10
+              time: `${roundStartTime.getHours() + 3}:${roundStartTime.getMinutes()}`,
+            },
+            {
+              team1: teams[2],
+              team2: teams[1],
+              date: "2024-03-23", // Date for match 10
+              time: `${roundStartTime.getHours() + 4}:${roundStartTime.getMinutes()}`,
+            },
+            {
+              team1: teams[3],
+              team2: teams[0],
+              date: "2024-03-23", // Date for match 10
+              time: `${roundStartTime.getHours() + 5}:${roundStartTime.getMinutes()}`,
+            }
+          );
+          break;
+        case 11:
+          // Match 11
+          matches.push(
+            {
+              team1: teams[1],
+              team2: teams[9],
+              date: "2024-03-24", // Date for match 11
+              time: `${roundStartTime.getHours()}:${roundStartTime.getMinutes()}`,
+            },
+            {
+              team1: teams[2],
+              team2: teams[8],
+              date: "2024-03-24", // Date for match 11
+              time: `${roundStartTime.getHours() + 1}:${roundStartTime.getMinutes()}`,
+            },
+            {
+              team1: teams[3],
+              team2: teams[5],
+              date: "2024-03-24", // Date for match 11
+              time: `${roundStartTime.getHours() + 2}:${roundStartTime.getMinutes()}`,
+            },
+            {
+              team1: teams[0],
+              team2: teams[6],
+              date: "2024-03-24", // Date for match 11
+              time: `${roundStartTime.getHours() + 3}:${roundStartTime.getMinutes()}`,
+            },
+            {
+              team1: teams[7],
+              team2: teams[10],
+              date: "2024-03-24", // Date for match 11
+              time: `${roundStartTime.getHours() + 4}:${roundStartTime.getMinutes()}`,
+            },
+            {
+              team1: teams[8],
+              team2: teams[11],
+              date: "2024-03-24", // Date for match 11
+              time: `${roundStartTime.getHours() + 5}:${roundStartTime.getMinutes()}`,
+            }
+          );
+          break;
+        default:
+          break;
+      }
   
-    fixtures.push({ round: 5, matches: match10 });
-    fixtures.push({ round: 5, matches: match11 });
+      fixtures.push({
+        round,
+        matches,
+      });
+  
+      // Add 30 minutes break after each round
+      startTime.setMinutes(startTime.getMinutes() + (teams.length / Math.pow(2, round)) * 10 + 30);
+    }
   
     return fixtures;
   };
   
-
 
   const renderPointsTable = () => {
     return (
@@ -402,13 +466,19 @@ const TournamentDetails = ({ tournament }) => {
     }));
   };
 
+  
   const renderFixtures = () => {
+    const generatedKnockoutFixtures = generateKnockoutFixtures();
+
+    const roundToDisplay = 1;
+    const filteredFixtures = generatedKnockoutFixtures.filter((round) => round.round === roundToDisplay);
+
     return (
       <div className="fixtures">
         <h3>Fixtures</h3>
-        {fixtures.map((round, roundIndex) => (
+        {filteredFixtures.map((round, roundIndex) => (
           <div key={roundIndex} className="round-fixtures">
-            <h4>Match {roundIndex + 1}</h4>
+            <h4>Match {round.round}:8</h4>
             <ul>
               {round.matches.map((fixture, index) => (
                 <li key={index}>
@@ -470,7 +540,6 @@ const TournamentDetails = ({ tournament }) => {
       {activeSection === null && renderGameCategories()}
       {activeSection === 'tournamentTypes' && renderTournamentTypes()}
       {activeSection === 'streaming' && renderTournamentDetails()}
-      {activeSection === 'streaming' && renderFixtures()}
       <button onClick={handleLiveStreamToggle}>
         {showLiveSceneViewer ? "Stop Live" : "Start Live"}
       </button>
