@@ -333,94 +333,42 @@ const TournamentDetails = ({ tournament }) => {
         return null;
     }
   };
-
   const generateKnockoutFixtures = () => {
     const teams = [
-      "Senu 07", "Kenifer", "Abhi xi", "Amit", "Aritra sahoo", "Souvik",
-      "Akash Karmakar", "Krishnendu Dutta", "nitai", "Ujjal", "Swastik", "Aditya karn"
+      "nitai", "krisnendu", "ujjal", "aritra", "aditya", "akash", "swastik", "souvik", "abhi", "kenifer", "amit", "aritra"
     ];
   
-    const matches = [
-      // Match 10
-      {
-        team1: "nitai",
-        team2: "Krishnendu Dutta",
-        date: "2024-03-23",
-        time: "00:00"
-      },
-      {
-        team1: "Ujjal",
-        team2: "Aritra sahoo",
-        date: "2024-03-23",
-        time: "01:00"
-      },
-      {
-        team1: "Aditya karn",
-        team2: "Akash Karmakar",
-        date: "2024-03-23",
-        time: "02:00"
-      },
-      {
-        team1: "Swastik",
-        team2: "Souvik",
-        date: "2024-03-23",
-        time: "03:00"
-      },
-      {
-        team1: "Abhi xi",
-        team2: "Kenifer",
-        date: "2024-03-23",
-        time: "04:00"
-      },
-      {
-        team1: "Amit",
-        team2: "Aritra sahoo",
-        date: "2024-03-23",
-        time: "05:00"
-      },
-      // Match 11
-      {
-        team1: "Kenifer",
-        team2: "Ujjal",
-        date: "2024-03-24",
-        time: "00:00"
-      },
-      {
-        team1: "Abhi xi",
-        team2: "Krishnendu Dutta",
-        date: "2024-03-24",
-        time: "01:00"
-      },
-      {
-        team1: "Amit",
-        team2: "Souvik",
-        date: "2024-03-24",
-        time: "02:00"
-      },
-      {
-        team1: "Senu 07",
-        team2: "Akash Karmakar",
-        date: "2024-03-24",
-        time: "03:00"
-      },
-      {
-        team1: "Senu 07",
-        team2: "Swastik",
-        date: "2024-03-24",
-        time: "04:00"
-      },
-      {
-        team1: "nitai",
-        team2: "Aditya karn",
-        date: "2024-03-24",
-        time: "05:00"
-      },
-    ];
+    const fixtures = [];
   
-    return [{ round: 5, matches }];
+    const rounds = teams.length / 2;
+  
+    for (let round = 1; round <= rounds; round++) {
+      const matches = [];
+  
+      for (let match = 0; match < teams.length / 2; match++) {
+        const team1 = teams[match];
+        const team2 = teams[teams.length - 1 - match];
+  
+        matches.push({
+          team1,
+          team2,
+          date: "2024-03-22", // Update with actual date
+          time: "18:00", // Update with actual time
+        });
+      }
+  
+      fixtures.push({
+        round,
+        matches,
+      });
+  
+      // Rotate teams for the next round
+      teams.unshift(teams.pop());
+    }
+  
+    return fixtures;
   };
   
-
   const renderPointsTable = () => {
     return (
       <div className="points-table">
