@@ -57,6 +57,19 @@ const TournamentDetails = ({ tournament }) => {
       socket.current.disconnect();
     };
   }, []);
+  const fetchFixtures = async () => {
+    try {
+      const response = await fetch('https://esportsappbackend.onrender.com/api/fixtures');
+      if (response.ok) {
+        const data = await response.json();
+        setFixtures(data);
+      }
+    } catch (error) {
+      console.error('Error fetching fixtures:', error);
+    }
+  };
+
+  fetchFixtures();
 
   const sendChatMessage = () => {
     socket.current.emit('chatMessage', newMessage);
@@ -386,19 +399,13 @@ const TournamentDetails = ({ tournament }) => {
     }));
   };
 
-  
   const renderFixtures = () => {
-    const generatedKnockoutFixtures = generateKnockoutFixtures();
-
-    const roundToDisplay = 1;
-    const filteredFixtures = generatedKnockoutFixtures.filter((round) => round.round === roundToDisplay);
-
     return (
       <div className="fixtures">
         <h3>Fixtures</h3>
-        {filteredFixtures.map((round, roundIndex) => (
+        {fixtures.map((round, roundIndex) => (
           <div key={roundIndex} className="round-fixtures">
-            <h4>Match {round.round}:8</h4>
+            <h4>Match {roundIndex + 1}</h4>
             <ul>
               {round.matches.map((fixture, index) => (
                 <li key={index}>
