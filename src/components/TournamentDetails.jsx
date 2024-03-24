@@ -335,105 +335,43 @@ const TournamentDetails = ({ tournament }) => {
   };
 
   const generateKnockoutFixtures = () => {
-    const teams = [
-      "Senu 07", "Kenifer", "Abhi xi", "Amit", "Aritra sahoo", "Souvik",
-      "Akash Karmakar", "Krishnendu Dutta", "nitai", "Ujjal", "Swastik", "Aditya karn",
+    const teams = [      
+  "Senu 07","Kenifer",          "Abhi xi","Amit",        "Aritra sahoo","Souvik", 
+  "Akash Karmakar", "Krishnendu Dutta",        "nitai","Ujjal",             "Swastik","Aditya karn",  
     ];
   
-    const rounds = 11; // Update the total number of rounds to include round 10 and 11
-  
+    const rounds = Math.ceil(Math.log2(teams.length));
+
+
     const fixtures = [];
-    const startTime = new Date("2024-03-23T00:00:00"); // Start datetime for round 10
+    const startTime = new Date("2024-03-20T22:00:00");
   
-    for (let round = 10; round <= rounds; round++) {
+    for (let round = 1; round <= rounds; round++) {
       const matches = [];
       const roundStartTime = new Date(startTime);
   
-      switch (round) {
-        case 10:
-          // Match 10
-          matches.push(
-            {
-              team1: teams[8],
-              team2: teams[7],
-              date: "2024-03-23", // Date for match 10
-              time: `${roundStartTime.getHours()}:${roundStartTime.getMinutes()}`,
-            },
-            {
-              team1: teams[9],
-              team2: teams[4],
-              date: "2024-03-23", // Date for match 10
-              time: `${roundStartTime.getHours() + 1}:${roundStartTime.getMinutes()}`,
-            },
-            {
-              team1: teams[11],
-              team2: teams[6],
-              date: "2024-03-23", // Date for match 10
-              time: `${roundStartTime.getHours() + 2}:${roundStartTime.getMinutes()}`,
-            },
-            {
-              team1: teams[10],
-              team2: teams[5],
-              date: "2024-03-23", // Date for match 10
-              time: `${roundStartTime.getHours() + 3}:${roundStartTime.getMinutes()}`,
-            },
-            {
-              team1: teams[2],
-              team2: teams[1],
-              date: "2024-03-23", // Date for match 10
-              time: `${roundStartTime.getHours() + 4}:${roundStartTime.getMinutes()}`,
-            },
-            {
-              team1: teams[3],
-              team2: teams[0],
-              date: "2024-03-23", // Date for match 10
-              time: `${roundStartTime.getHours() + 5}:${roundStartTime.getMinutes()}`,
-            }
-          );
-          break;
-        case 11:
-          // Match 11
-          matches.push(
-            {
-              team1: teams[1],
-              team2: teams[9],
-              date: "2024-03-24", // Date for match 11
-              time: `${roundStartTime.getHours()}:${roundStartTime.getMinutes()}`,
-            },
-            {
-              team1: teams[2],
-              team2: teams[8],
-              date: "2024-03-24", // Date for match 11
-              time: `${roundStartTime.getHours() + 1}:${roundStartTime.getMinutes()}`,
-            },
-            {
-              team1: teams[3],
-              team2: teams[5],
-              date: "2024-03-24", // Date for match 11
-              time: `${roundStartTime.getHours() + 2}:${roundStartTime.getMinutes()}`,
-            },
-            {
-              team1: teams[0],
-              team2: teams[6],
-              date: "2024-03-24", // Date for match 11
-              time: `${roundStartTime.getHours() + 3}:${roundStartTime.getMinutes()}`,
-            },
-            {
-              team1: teams[7],
-              team2: teams[10],
-              date: "2024-03-24", // Date for match 11
-              time: `${roundStartTime.getHours() + 4}:${roundStartTime.getMinutes()}`,
-            },
-            {
-              team1: teams[8],
-              team2: teams[11],
-              date: "2024-03-24", // Date for match 11
-              time: `${roundStartTime.getHours() + 5}:${roundStartTime.getMinutes()}`,
-            }
-          );
-          break;
-        default:
-          break;
+      for (let match = 1; match <= teams.length / Math.pow(2, round); match++) {
+        const team1 = teams[(match - 1) * 2];
+        const team2 = teams[(match - 1) * 2 + 1];
+  
+        const matchTime = new Date(roundStartTime);
+        matchTime.setMinutes(matchTime.getMinutes() + (match - 1) * 10);
+  
+        matches.push(
+          {
+            team1,
+            team2,
+            date: "2024-03-22", // Update with actual date
+            time: `${matchTime.getHours()}:${matchTime.getMinutes()}`,
+          },
+        
+          {
+            team1,
+            team2,
+            date: "2024-02-25", // Update with actual date
+            time: `${matchTime.getHours() + 1}:${matchTime.getMinutes()}`, // Adjust time as needed
+          }
+        );
       }
   
       fixtures.push({
@@ -441,13 +379,11 @@ const TournamentDetails = ({ tournament }) => {
         matches,
       });
   
-      // Add 30 minutes break after each round
-      startTime.setMinutes(startTime.getMinutes() + (teams.length / Math.pow(2, round)) * 10 + 30);
+      // Add
+      startTime.setMinutes(startTime.getMinutes() + (teams.length / Math.pow(2, round)) * 15 + 30);
     }
-  
     return fixtures;
   };
-  
 
   const renderPointsTable = () => {
     return (
