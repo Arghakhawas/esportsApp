@@ -470,6 +470,7 @@ const TournamentDetails = ({ tournament }) => {
       {activeSection === null && renderGameCategories()}
       {activeSection === 'tournamentTypes' && renderTournamentTypes()}
       {activeSection === 'streaming' && renderTournamentDetails()}
+      {activeSection === 'streaming' && renderFixtures()}
       <button onClick={handleLiveStreamToggle}>
         {showLiveSceneViewer ? "Stop Live" : "Start Live"}
       </button>
