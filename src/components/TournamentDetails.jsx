@@ -57,19 +57,22 @@ const TournamentDetails = ({ tournament }) => {
       socket.current.disconnect();
     };
   }, []);
-  const fetchFixtures = async () => {
-    try {
-      const response = await fetch('https://esportsappbackend.onrender.com/api/fixtures');
-      if (response.ok) {
-        const data = await response.json();
-        setFixtures(data);
+  useEffect(() => {
+    const fetchFixtures = async () => {
+      try {
+        const response = await fetch('https://esportsappbackend.onrender.com/api/fixtures');
+        if (response.ok) {
+          const data = await response.json();
+          setFixtures(data);
+        }
+      } catch (error) {
+        console.error('Error fetching fixtures:', error);
       }
-    } catch (error) {
-      console.error('Error fetching fixtures:', error);
-    }
-  };
-
-  fetchFixtures();
+    };
+  
+    fetchFixtures();
+  }, []);
+  
 
   const sendChatMessage = () => {
     socket.current.emit('chatMessage', newMessage);
