@@ -333,28 +333,42 @@ const TournamentDetails = ({ tournament }) => {
         return null;
     }
   };
+
   const generateKnockoutFixtures = () => {
     const teams = [
-      "nitai", "krisnendu", "ujjal", "aritra", "aditya", "akash", "swastik", "souvik", "abhi", "kenifer", "amit", "aritra"
+      "Senu 07", "Kenifer", "Abhi xi", "Amit", "Aritra sahoo", "Souvik",
+      "Akash Karmakar", "Krishnendu Dutta", "nitai", "Ujjal", "Swastik", "Aditya karn",
     ];
   
-    const fixtures = [];
+    const rounds = 11; // Total rounds including the new rounds 10 and 11
   
-    const rounds = teams.length / 2;
+    const fixtures = [];
+    const startTime = new Date("2024-03-23T00:00:00"); // Start datetime for the fixtures
   
     for (let round = 1; round <= rounds; round++) {
       const matches = [];
+      const roundStartTime = new Date(startTime);
   
-      for (let match = 0; match < teams.length / 2; match++) {
-        const team1 = teams[match];
-        const team2 = teams[teams.length - 1 - match];
-  
-        matches.push({
-          team1,
-          team2,
-          date: "2024-03-22", // Update with actual date
-          time: "18:00", // Update with actual time
-        });
+      if (round === 10) {
+        // Matches for round 10
+        matches.push(
+          { team1: "nitai", team2: "Krishnendu Dutta", date: "2024-03-23", time: "12:00" },
+          { team1: "Ujjal", team2: "Aritra sahoo", date: "2024-03-23", time: "12:10" },
+          { team1: "Aditya karn", team2: "Akash Karmakar", date: "2024-03-23", time: "12:20" },
+          { team1: "Swastik", team2: "Souvik", date: "2024-03-23", time: "12:30" },
+          { team1: "Abhi xi", team2: "Kenifer", date: "2024-03-23", time: "12:40" },
+          { team1: "Amit", team2: "Aritra sahoo", date: "2024-03-23", time: "12:50" }
+        );
+      } else if (round === 11) {
+        // Matches for round 11
+        matches.push(
+          { team1: "Kenifer", team2: "Ujjal", date: "2024-03-24", time: "00:00" },
+          { team1: "Abhi xi", team2: "Krishnendu Dutta", date: "2024-03-24", time: "00:10" },
+          { team1: "Amit", team2: "Souvik", date: "2024-03-24", time: "00:20" },
+          { team1: "Senu 07", team2: "Akash Karmakar", date: "2024-03-24", time: "00:30" },
+          { team1: "Senu 07", team2: "Swastik", date: "2024-03-24", time: "00:40" },
+          { team1: "nitai", team2: "Aditya karn", date: "2024-03-24", time: "00:50" }
+        );
       }
   
       fixtures.push({
@@ -362,13 +376,14 @@ const TournamentDetails = ({ tournament }) => {
         matches,
       });
   
-      // Rotate teams for the next round
-      teams.unshift(teams.pop());
+      // Add 30 minutes break after each round
+      startTime.setMinutes(startTime.getMinutes() + (teams.length / Math.pow(2, round)) * 15 + 30);
     }
   
     return fixtures;
   };
   
+
   const renderPointsTable = () => {
     return (
       <div className="points-table">
