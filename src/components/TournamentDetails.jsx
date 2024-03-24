@@ -335,39 +335,37 @@ const TournamentDetails = ({ tournament }) => {
   };
 
   const generateKnockoutFixtures = () => {
-    const teams = [      
-      "Senu 07", "Kenifer", "Abhi xi", "Amit", "Aritra sahoo", "Souvik", 
-      "Akash Karmakar", "Krishnendu Dutta", "nitai", "Ujjal", "Swastik", "Aditya karn",  
+    const teams = [
+        "Senu 07", "Kenifer", "Abhi xi", "Amit", "Aritra sahoo", "Souvik",
+        "Akash Karmakar", "Krishnendu Dutta", "nitai", "Ujjal", "Swastik", "Aditya karn",
     ];
-  
+
     const fixtures = [];
-    const startTimeRound10 = new Date("2024-03-23T00:00:00");
-    const startTimeRound11 = new Date("2024-03-24T00:00:00");
-  
-    const matchesRound10 = [
-      { team1: teams[8], team2: teams[7], date: "2024-03-23", time: "12:00" },
-      { team1: teams[9], team2: teams[4], date: "2024-03-23", time: "12:10" },
-      { team1: teams[11], team2: teams[6], date: "2024-03-23", time: "12:20" },
-      { team1: teams[10], team2: teams[5], date: "2024-03-23", time: "12:30" },
-      { team1: teams[2], team2: teams[1], date: "2024-03-23", time: "12:40" },
-      { team1: teams[3], team2: teams[0], date: "2024-03-23", time: "12:50" },
+
+    // Round 10
+    const round10Matches = [
+        { team1: "nitai", team2: "Krishnendu Dutta", date: "2024-03-23", time: "12:00" },
+        { team1: "Ujjal", team2: "Aritra sahoo", date: "2024-03-23", time: "12:15" },
+        { team1: "Aditya karn", team2: "Akash Karmakar", date: "2024-03-23", time: "12:30" },
+        { team1: "Swastik", team2: "Souvik", date: "2024-03-23", time: "12:45" },
+        { team1: "Abhi xi", team2: "Kenifer", date: "2024-03-23", time: "13:00" },
+        { team1: "Amit", team2: "Aritra sahoo", date: "2024-03-23", time: "13:15" },
     ];
-  
-    const matchesRound11 = [
-      { team1: teams[1], team2: teams[9], date: "2024-03-24", time: "12:00" },
-      { team1: teams[2], team2: teams[8], date: "2024-03-24", time: "12:10" },
-      { team1: teams[3], team2: teams[7], date: "2024-03-24", time: "12:20" },
-      { team1: teams[0], team2: teams[6], date: "2024-03-24", time: "12:30" },
-      { team1: teams[0], team2: teams[10], date: "2024-03-24", time: "12:40" },
-      { team1: teams[11], team2: teams[5], date: "2024-03-24", time: "12:50" },
+    fixtures.push({ round: 10, matches: round10Matches });
+
+    // Round 11
+    const round11Matches = [
+        { team1: "Kenifer", team2: "Ujjal", date: "2024-03-24", time: "12:00" },
+        { team1: "Abhi xi", team2: "Krishnendu Dutta", date: "2024-03-24", time: "12:15" },
+        { team1: "Amit", team2: "Souvik", date: "2024-03-24", time: "12:30" },
+        { team1: "Senu 07", team2: "Akash Karmakar", date: "2024-03-24", time: "12:45" },
+        { team1: "Senu 07", team2: "Swastik", date: "2024-03-24", time: "13:00" },
+        { team1: "nitai", team2: "Aditya karn", date: "2024-03-24", time: "13:15" },
     ];
-  
-    fixtures.push({ round: 10, matches: matchesRound10 });
-    fixtures.push({ round: 11, matches: matchesRound11 });
-  
+    fixtures.push({ round: 11, matches: round11Matches });
+
     return fixtures;
-  };
-  
+};
 
   const renderPointsTable = () => {
     return (
