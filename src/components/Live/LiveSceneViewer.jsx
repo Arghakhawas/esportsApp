@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import './LiveSceneViewer.css'; // Import CSS for styling
+
 
 const LiveSceneViewer = ({ remoteStreams }) => {
   const videoRefs = useRef([]);
