@@ -1,3 +1,4 @@
+// SceneCapture.js
 import React, { useState, useEffect, useRef } from "react";
 import Peer from "peerjs";
 import io from "socket.io-client";

@@ -33,7 +33,6 @@ const TournamentDetails = ({ tournament }) => {
       console.log('Connected to server');
     });
 
-
     socket.current.on('gameResult', ({ team1, team2, result }) => {
       setGameResults((prevResults) => ({
         ...prevResults,
@@ -64,7 +63,6 @@ const TournamentDetails = ({ tournament }) => {
     setNewMessage('');
   };
 
-
   const handleGameResultSubmit = (team1, team2) => {
     socket.current.emit('submitGameResult', { team1, team2, result: gameResults[`${team1} vs ${team2}`] });
   };
@@ -87,14 +85,6 @@ const TournamentDetails = ({ tournament }) => {
   };
 
   useEffect(() => {
-    socket.current.on("startLiveStream", () => {
-      setRemoteStreams(prevStreams => [...prevStreams, localStream.current]);
-    });
-
-    socket.current.on("stopLiveStream", () => {
-      setRemoteStreams([]);
-    });
-
     return () => {
       socket.current.off("startLiveStream");
       socket.current.off("stopLiveStream");
