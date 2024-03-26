@@ -13,6 +13,7 @@ import sexy from "../assets/sexy.png";
 import sexy2 from "../assets/sexy2.png";
 import sukunaevil from "../assets/sukunaevil.png";
 
+
 const UserProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
@@ -31,10 +32,10 @@ const UserProfile = () => {
     { src: sexy2, alt: 'SEXY2 AVATAR', id: 'sexy2' },
     { src: sukunaevil, alt: 'SUKUNAEVIL AVATAR', id: 'sukunaevil' },
   ];
-
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
+        // Fetch user profile data from the backend
         const response = await fetch('https://esportsappbackend.onrender.com/api/profile', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -47,6 +48,7 @@ const UserProfile = () => {
 
         const data = await response.json();
         setProfileData(data.user);
+        // Set selected avatar based on profile data
         setSelectedAvatar(avatarOptions.find(avatar => avatar.id === data.user.avatar));
       } catch (error) {
         console.error(error);
@@ -58,6 +60,7 @@ const UserProfile = () => {
 
   const saveSelectedAvatar = async () => {
     try {
+      // Send request to backend to update user avatar
       const response = await fetch('https://esportsappbackend.onrender.com/api/profile/avatar', {
         method: 'POST',
         headers: {
@@ -70,14 +73,13 @@ const UserProfile = () => {
       if (!response.ok) {
         throw new Error('Failed to save avatar');
       }
-
-
     } catch (error) {
       console.error('Error saving avatar:', error);
     }
   };
 
   const handleAvatarSelection = (avatar) => {
+    // Set selected avatar
     setSelectedAvatar(avatar);
     setShowAvatarSelection(false);
   };
@@ -89,6 +91,7 @@ const UserProfile = () => {
   const handleCloseChangePasswordModal = () => {
     setShowChangePasswordModal(false);
   };
+
 
   return (
     <div className="user-profile-container">
