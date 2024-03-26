@@ -1,15 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-
 const LiveSceneViewer = ({ remoteStreams }) => {
+  // Ref for video elements
   const videoRefs = useRef([]);
 
   useEffect(() => {
+    // Update video references when remoteStreams change
     if (remoteStreams) {
       videoRefs.current = remoteStreams.map(() => React.createRef());
     }
 
+    // Cleanup
     return () => {
       videoRefs.current.forEach((ref) => {
         if (ref.current) {
@@ -20,6 +22,7 @@ const LiveSceneViewer = ({ remoteStreams }) => {
   }, [remoteStreams]);
 
   useEffect(() => {
+    
     if (remoteStreams) {
       remoteStreams.forEach((stream, index) => {
         if (videoRefs.current[index].current) {
@@ -30,25 +33,23 @@ const LiveSceneViewer = ({ remoteStreams }) => {
   }, [remoteStreams]);
 
   return (
-    <div className="live-scene-container">
+    <div>
       <h2>Live Scene Viewer</h2>
-      <div className="video-grid">
-        {remoteStreams && remoteStreams.length > 0 ? (
-          remoteStreams.map((stream, index) => (
-            <div key={index} className="video-wrapper">
-              <video ref={videoRefs.current[index]} autoPlay playsInline className="responsive-video" />
-            </div>
-          ))
-        ) : (
-          <p>No live streams available</p>
-        )}
-      </div>
+      {remoteStreams && remoteStreams.length > 0 ? (
+        remoteStreams.map((stream, index) => (
+          <video key={index} ref={videoRefs.current[index]} autoPlay playsInline />
+        ))
+      ) : (
+        <p>No live streams available</p>
+      )}
     </div>
   );
 };
 
+// Prop types validation
 LiveSceneViewer.propTypes = {
   remoteStreams: PropTypes.array.isRequired,
 };
 
+// Export the component
 export default LiveSceneViewer;

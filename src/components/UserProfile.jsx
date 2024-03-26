@@ -71,7 +71,7 @@ const UserProfile = () => {
         throw new Error('Failed to save avatar');
       }
 
-      // Avatar saved successfully
+
     } catch (error) {
       console.error('Error saving avatar:', error);
     }
