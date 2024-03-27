@@ -327,11 +327,10 @@ const TournamentDetails = ({ tournament }) => {
   const generateKnockoutFixtures = () => {
     const teams = [      
   "nitai",  
-     
-      "Senu 07",
+    
           "Amit",  
        
-  
+          "Senu 07",
    "Kenifer",    
                 
     ];
