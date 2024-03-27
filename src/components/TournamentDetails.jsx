@@ -326,18 +326,13 @@ const TournamentDetails = ({ tournament }) => {
 
   const generateKnockoutFixtures = () => {
     const teams = [      
-      "Krishnendu Dutta", "Abhi xi",   
-      "Krishnendu Dutta","nitai",  
-      "nitai",   "Aditya karn",   
-      "Akash Karmakar", "Aditya karn",  
-      "Senu 07","Akash Karmakar",
-      "Senu 07","Swastik",  
-          "Souvik",  "Swastik", 
-          "Amit",  "Souvik", 
-       "Amit","Aritra sahoo",
-       "Ujjal", "Aritra sahoo",
-       "Ujjal","Kenifer", 
-   "Kenifer",  "Abhi xi",   
+  "nitai",  
+     
+      "Senu 07",
+          "Amit",  
+       
+  
+   "Kenifer",    
                 
     ];
   
